@@ -1,19 +1,30 @@
 # Releases
 
-## Table of Contents
+Release notes that staff write per app version in the admin panel and that any client reads from one public endpoint.
 
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Enabling](#enabling)
 - [Managing Releases](#managing-releases)
 - [List Releases](#list-releases)
-  - [Response](#response)
-  - [Rules](#rules)
 - [Configuration](#configuration)
 - [Overriding the Actions](#overriding-the-actions)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
 
-## <a name="introduction"></a>Introduction
+| Item | Value |
+|:-----|:------|
+| Feature | `Features::releases()`, then `php artisan magic-starter:install --features=releases` and `php artisan migrate`. |
+| Endpoint | `GET {prefix}/releases`, no authentication, 60 requests a minute per IP. |
+| Answer | Published releases newest first, at most `releases.limit` (50 by default), and `meta.latest_build` for `ios` and `android`. |
+| Staff | A Releases resource in the admin panel, under the key `releases`. |
+| Override | `CreatesAppReleases`, `UpdatesAppReleases` and `DeletesAppReleases`. |
+
+<a name="introduction"></a>
+## Introduction
 
 The releases module lets staff write the release notes of each app version and lets any client read the published ones. A mobile app can show "What's new" after an update, and compare its own build number with the latest one to decide whether to suggest an update.
 
@@ -21,7 +32,8 @@ Staff curate releases in the [admin panel](admin-panel.md). Clients read them fr
 
 ---
 
-## <a name="enabling"></a>Enabling
+<a name="enabling"></a>
+## Enabling
 
 Releases are opt-in:
 
@@ -54,7 +66,8 @@ The migration creates `app_releases`:
 
 ---
 
-## <a name="managing-releases"></a>Managing Releases
+<a name="managing-releases"></a>
+## Managing Releases
 
 With the feature on, the admin panel mounts a Releases resource under the key `releases`. Staff create, edit and delete releases there, and each one is either a draft or published.
 
@@ -74,7 +87,8 @@ See [Admin Panel](admin-panel.md#configuring-the-plugin) for the other plugin op
 
 ---
 
-## <a name="list-releases"></a>List Releases
+<a name="list-releases"></a>
+## List Releases
 
 **`GET /releases`**
 
@@ -123,7 +137,8 @@ The route is throttled to 60 requests per minute per IP (the `magic-starter-rele
 
 ---
 
-## <a name="configuration"></a>Configuration
+<a name="configuration"></a>
+## Configuration
 
 ```php
 // config/magic-starter.php
@@ -138,7 +153,8 @@ The route is throttled to 60 requests per minute per IP (the `magic-starter-rele
 
 ---
 
-## <a name="overriding-the-actions"></a>Overriding the Actions
+<a name="overriding-the-actions"></a>
+## Overriding the Actions
 
 The panel writes releases through three contracts. Bind your own to change what a create, an update or a delete does:
 
@@ -154,3 +170,22 @@ $this->app->bind(CreatesAppReleases::class, \App\Actions\CreateAppRelease::class
 ```
 
 Bind in `register()`, not `boot()`. The default update action validates through the default create action, so bind both when you change the rules.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Treating a web deploy as a release | Only a version you ship to a store belongs here. |
+| Expecting a draft on the endpoint | A draft is never returned. Publish it first. |
+| Scheduling a release with a future `published_at` | It is refused; a release is visible from the moment it is published. |
+| Reading `meta.latest_build` as the newest entry of `data` | It holds the highest build across every published release, not only the ones in `data`. |
+| Binding the action contracts in `boot()` | Bind in `register()`. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Admin Panel](./admin-panel.md): mounting, swapping or dropping the Releases resource.
+- [Profile](./profile.md): the settings endpoint that reports `features.releases`.
+- [Configuration](../getting-started/configuration.md): the `releases` feature toggle.
+- [Action Contracts](../architecture/action-contracts.md): how a binding replaces a default action.

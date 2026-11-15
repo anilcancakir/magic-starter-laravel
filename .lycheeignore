@@ -1,0 +1,27 @@
+# URL patterns lychee skips when checking links in doc/, llms.txt and *.md.
+# Every line is a REGULAR EXPRESSION, not a glob.
+#
+# Add a host here only when it is auth-walled, rate-limited, or a placeholder in
+# a code sample. Real rot belongs in the report, not in this file.
+
+# GitHub auth wall: the login redirect answers with a 404 to an unauthenticated
+# CI runner.
+^https://github\.com/login
+
+# A private vulnerability report needs a signed-in session.
+^https://github\.com/anilcancakir/magic-starter-laravel/security/advisories/new
+
+# Placeholder hosts inside example code.
+^https?://([a-z0-9-]+\.)*example\.com
+^https?://localhost
+^https?://127\.0\.0\.1
+
+# 2026-11-16: the docs site serves doc/ only from a release tag, so the landing
+# and every docs page answer 404 until the first tag (1.0.0) is synced. Remove
+# this line once https://anilcancakir.com/magic-starter-laravel answers 200.
+^https://anilcancakir\.com/magic-starter-laravel
+
+# 2026-11-16: Packagist has no anilcancakir/magic-starter-laravel package until
+# the first release is submitted. Remove this line once the package page answers
+# 200.
+^https://packagist\.org/packages/anilcancakir/magic-starter-laravel

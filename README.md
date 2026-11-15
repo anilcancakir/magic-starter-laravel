@@ -60,10 +60,10 @@ Stop rebuilding authentication, profile management, and team features from scrat
 | :desktop_computer: | **Sessions** | Active session listing and revocation |
 | :credit_card: | **Billing** | Entitlement columns on the subject you bill, a user or a team, plus one guarded write path so more than one payment rail can claim a tier without racing |
 | :rocket: | **Releases** | Staff write the release notes of each app version in the admin panel; clients read the published ones, with the latest iOS and Android build, from a public cached endpoint |
-| :robot: | **AI Runs** | Opt-in (`ai-runs`) log of the model calls your app makes: one run per call with its provider attempts, token usage, cost and masked bodies, pruned hourly and read-only in the admin panel. See [AI Run Log](doc/ai-runs.md) |
-| :memo: | **AI Prompts** | Opt-in (`ai-prompts`) prompt overrides: register a prompt in code with its boundary and required phrases, and staff tune its body in the admin panel, with a diff against the code default and a stale check when the default changes. See [AI Prompt Overrides](doc/ai-prompts.md) |
-| :toolbox: | **Support AI Tools** | `SupportTool` contract and `SupportToolRegistry` for the reads your support AI may make about the customer's own account: the team is decided in code, tenant text goes through `UntrustedText`, and no AI SDK is imported. See [Support AI Tools](doc/support-tools.md) |
-| :ballot_box_with_check: | **Support Proposals** | Opt-in (`support-proposals`) subscription changes the support AI can ask for through `ProposeBillingChangeTool`: the account owner asks, a staff member approves or rejects in the admin panel, and only the approval extends a trial, cancels at the period's end or resumes. See [Support Proposals](doc/support-proposals.md) |
+| :robot: | **AI Runs** | Opt-in (`ai-runs`) log of the model calls your app makes: one run per call with its provider attempts, token usage, cost and masked bodies, pruned hourly and read-only in the admin panel. See [AI Run Log](doc/guides/ai-runs.md) |
+| :memo: | **AI Prompts** | Opt-in (`ai-prompts`) prompt overrides: register a prompt in code with its boundary and required phrases, and staff tune its body in the admin panel, with a diff against the code default and a stale check when the default changes. See [AI Prompt Overrides](doc/guides/ai-prompts.md) |
+| :toolbox: | **Support AI Tools** | `SupportTool` contract and `SupportToolRegistry` for the reads your support AI may make about the customer's own account: the team is decided in code, tenant text goes through `UntrustedText`, and no AI SDK is imported. See [Support AI Tools](doc/basics/support-tools.md) |
+| :ballot_box_with_check: | **Support Proposals** | Opt-in (`support-proposals`) subscription changes the support AI can ask for through `ProposeBillingChangeTool`: the account owner asks, a staff member approves or rejects in the admin panel, and only the approval extends a trial, cancels at the period's end or resumes. See [Support Proposals](doc/basics/support-proposals.md) |
 | :scroll: | **Audit Trail** | Every model create, update and delete recorded after commit with the actor and request, secrets redacted, pruned on a schedule |
 | :control_knobs: | **Admin Panel** | Optional Filament plugin: users, teams, subscriptions, newsletter and audits, plus Horizon, Pulse and Telescope behind one gate. Every write goes through the action contracts |
 
@@ -257,11 +257,11 @@ Request → Route (feature-gated, rate-limited)
 | [Sign-in Handoff](doc/basics/sign-in-handoff.md) | Minting and exchanging a one-time sign-in code, `next` validation, security properties, browser use |
 | [Admin Panel](doc/basics/admin-panel.md) | Filament plugin, access gate, custom resources, eject, operations tools |
 | [Audit Trail](doc/basics/audit.md) | Recording, redaction, exclusion, pruning, what is not captured |
-| [AI Run Log](doc/ai-runs.md) | Recording model calls and cache hits, tokens and cost, secret masking, pruning, the admin view |
-| [AI Prompt Overrides](doc/ai-prompts.md) | Registering and resolving prompts, the admin workbench, staleness, the boundary, failure mode |
-| [Support AI Tools](doc/support-tools.md) | Writing and registering a `SupportToolRegistry` tool, wiring it into your SDK, customer text, security notes |
-| [Mail on OneSignal](doc/mail-onesignal.md) | The `onesignal` and router transports, routing a mail class, the failover, send records and the doctor, limits |
-| [Support Proposals](doc/support-proposals.md) | Registering `ProposeBillingChangeTool`, the three actions, the lifecycle, the owner and billing gates, the ordering guarantee, what staff and the customer see |
+| [AI Run Log](doc/guides/ai-runs.md) | Recording model calls and cache hits, tokens and cost, secret masking, pruning, the admin view |
+| [AI Prompt Overrides](doc/guides/ai-prompts.md) | Registering and resolving prompts, the admin workbench, staleness, the boundary, failure mode |
+| [Support AI Tools](doc/basics/support-tools.md) | Writing and registering a `SupportToolRegistry` tool, wiring it into your SDK, customer text, security notes |
+| [Mail on OneSignal](doc/guides/mail-onesignal.md) | The `onesignal` and router transports, routing a mail class, the failover, send records and the doctor, limits |
+| [Support Proposals](doc/basics/support-proposals.md) | Registering `ProposeBillingChangeTool`, the three actions, the lifecycle, the owner and billing gates, the ordering guarantee, what staff and the customer see |
 | [Service Provider](https://magic.fluttersdk.com/packages/starter-laravel/architecture/service-provider) | Contract bindings, route registration, rate limiters |
 | [Action Contracts](https://magic.fluttersdk.com/packages/starter-laravel/architecture/action-contracts) | Overriding business logic via singleton binding |
 | [Models](https://magic.fluttersdk.com/packages/starter-laravel/architecture/models) | Dynamic resolution, UUID support, traits |

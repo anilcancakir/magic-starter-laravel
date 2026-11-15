@@ -1,5 +1,8 @@
 # Two-Factor Authentication
 
+The TOTP second factor: enrolling a user, confirming the code, recovery codes and the challenge that finishes a sign-in.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Enable 2FA](#enable-2fa)
 - [Confirm 2FA](#confirm-2fa)
@@ -12,23 +15,38 @@
   - [Verify with Recovery Code](#verify-with-recovery-code)
 - [TwoFactorAuthenticatable Trait](#twofactorauthenticatable-trait)
 - [Configuration](#configuration)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
 
-## <a name="introduction"></a>Introduction
+Enable the `two-factor-authentication` feature, then use these endpoints under `{prefix}`, the `route_prefix` config value (`api/v1` by default).
+
+| Endpoint | Auth | Does |
+|:---------|:-----|:-----|
+| `POST {prefix}/two-factor-authentication` | `auth:sanctum` | Generates a secret and recovery codes and returns the QR code. Not active until confirmed. |
+| `POST {prefix}/two-factor-authentication/confirm` | `auth:sanctum` | Confirms the first TOTP code and activates 2FA. |
+| `DELETE {prefix}/two-factor-authentication` | `auth:sanctum` | Turns 2FA off. |
+| `POST {prefix}/two-factor-recovery-codes/show` | `auth:sanctum` | Lists the recovery codes; a `POST` because it carries the password. |
+| `POST {prefix}/two-factor-recovery-codes` | `auth:sanctum` | Replaces every recovery code with a new set. |
+| `POST {prefix}/auth/two-factor-challenge` | the `two_factor_token` | Exchanges the token and a TOTP or recovery code for a Sanctum token. |
+
+<a name="introduction"></a>
+## Introduction
 
 Magic Starter provides TOTP-based (Time-based One-Time Password) two-factor authentication. The feature is disabled by default and must be explicitly opted in via the feature flag.
 
 When 2FA is enabled, the login flow becomes a two-step process: the normal credential check returns a short-lived `two_factor_token` instead of a Sanctum token, and the client then exchanges that token (plus a TOTP code or recovery code) for the actual Sanctum bearer token.
 
-The TOTP implementation uses `pragmarx/google2fa` under the hood. QR codes are rendered as inline SVG using `bacon/bacon-qr-code` — no external image service is involved.
+The TOTP implementation uses `pragmarx/google2fa` under the hood. QR codes are rendered as inline SVG using `bacon/bacon-qr-code`, so no external image service is involved.
 
 **Enabling the feature:**
 
 ```php
 // config/magic-starter.php
 'features' => [
-    \FlutterSdk\MagicStarter\Features::twoFactorAuthentication(),
+    \AnilcanCakir\MagicStarter\Features::twoFactorAuthentication(),
 ],
 ```
 
@@ -36,9 +54,10 @@ All 2FA management endpoints (`POST/DELETE two-factor-authentication`, `POST two
 
 ---
 
-## <a name="enable-2fa"></a>Enable 2FA
+<a name="enable-2fa"></a>
+## Enable 2FA
 
-Initiates 2FA setup for the authenticated user. Generates a TOTP secret, a set of recovery codes, and returns a QR code SVG ready to display to the user. 2FA is not yet active until confirmed — see [Confirm 2FA](#confirm-2fa).
+Initiates 2FA setup for the authenticated user. Generates a TOTP secret, a set of recovery codes, and returns a QR code SVG ready to display to the user. 2FA is not yet active until confirmed; see [Confirm 2FA](#confirm-2fa).
 
 **Endpoint**
 
@@ -76,7 +95,7 @@ None required.
 
 | Field            | Description                                                                 |
 |------------------|-----------------------------------------------------------------------------|
-| `secret`         | The base32-encoded TOTP secret. Store securely — show once.                 |
+| `secret`         | The base32-encoded TOTP secret. Store securely and show it once.                 |
 | `qr_url`         | The `otpauth://` URI. Can be used to generate a custom QR code client-side. |
 | `qr_svg`         | Inline SVG QR code (192 px). Render directly in the UI without any dependencies. |
 | `recovery_codes` | One-time-use backup codes. Show to the user and prompt them to save securely. |
@@ -86,7 +105,8 @@ None required.
 
 ---
 
-## <a name="confirm-2fa"></a>Confirm 2FA
+<a name="confirm-2fa"></a>
+## Confirm 2FA
 
 Activates 2FA by verifying the first TOTP code from the authenticator app. Until this endpoint is called successfully, `hasEnabledTwoFactorAuthentication()` returns `false` and the 2FA challenge is not enforced during login.
 
@@ -130,7 +150,8 @@ POST /api/v1/two-factor-authentication/confirm
 
 ---
 
-## <a name="disable-2fa"></a>Disable 2FA
+<a name="disable-2fa"></a>
+## Disable 2FA
 
 Disables two-factor authentication for the authenticated user. Clears the stored secret, recovery codes, and confirmation timestamp.
 
@@ -162,9 +183,10 @@ None required.
 
 ---
 
-## <a name="recovery-codes"></a>Recovery Codes
+<a name="recovery-codes"></a>
+## Recovery Codes
 
-Recovery codes are one-time-use backup codes generated when 2FA is enabled. Each code can only be used once — after use it is replaced with a newly generated random code in the stored set.
+Recovery codes are one-time-use backup codes generated when 2FA is enabled. Each code can only be used once: after use it is replaced with a newly generated random code in the stored set.
 
 Both recovery code endpoints require password confirmation (sudo mode) in the request body to prevent unauthorized access.
 
@@ -213,7 +235,7 @@ POST /api/v1/two-factor-recovery-codes/show
 }
 ```
 
-**Response `403 Forbidden`** — when 2FA is not enabled:
+**Response `403 Forbidden`**, when 2FA is not enabled:
 
 ```json
 {
@@ -268,9 +290,10 @@ POST /api/v1/two-factor-recovery-codes
 
 ---
 
-## <a name="2fa-challenge"></a>2FA Challenge
+<a name="2fa-challenge"></a>
+## 2FA Challenge
 
-When a user with confirmed 2FA enabled logs in, the login endpoint returns a `two_factor_token` instead of a Sanctum bearer token. The client must exchange this token — together with either a TOTP code or a recovery code — for the actual session token.
+When a user with confirmed 2FA enabled logs in, the login endpoint returns a `two_factor_token` instead of a Sanctum bearer token. The client must exchange this token, together with either a TOTP code or a recovery code, for the actual session token.
 
 The challenge token is a short-lived encrypted payload. Its TTL is controlled by `magic-starter.two_factor.challenge_token_ttl` (default: 5 minutes).
 
@@ -288,7 +311,7 @@ POST /api/v1/auth/two-factor-challenge
 | `Content-Type` | `application/json` |
 
 > [!NOTE]
-> This endpoint does not require `Authorization` — authentication is established by the `two_factor_token` itself. The endpoint is rate-limited by the `magic-starter-2fa-challenge` limiter.
+> This endpoint does not require `Authorization`: authentication is established by the `two_factor_token` itself. The endpoint is rate-limited by the `magic-starter-2fa-challenge` limiter.
 
 ### <a name="verify-with-totp-code"></a>Verify with TOTP Code
 
@@ -322,7 +345,7 @@ POST /api/v1/auth/two-factor-challenge
 }
 ```
 
-**Response `200 OK`** — same shape as the normal login response:
+**Response `200 OK`**, same shape as the normal login response:
 
 ```json
 {
@@ -347,12 +370,13 @@ POST /api/v1/auth/two-factor-challenge
 
 ---
 
-## <a name="twofactorauthenticatable-trait"></a>TwoFactorAuthenticatable Trait
+<a name="twofactorauthenticatable-trait"></a>
+## TwoFactorAuthenticatable Trait
 
 Add this trait to your `User` model to provide the 2FA capabilities the package relies on.
 
 ```php
-use FlutterSdk\MagicStarter\Traits\TwoFactorAuthenticatable;
+use AnilcanCakir\MagicStarter\Traits\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {
@@ -381,11 +405,12 @@ class User extends Authenticatable
 | `twoFactorQrCodeSvg()`                  | `string`           | Returns an inline SVG QR code (192 px) as a string.             |
 
 > [!NOTE]
-> `twoFactorSecret()` and `recoveryCodes()` decrypt values stored in the database. Ensure `APP_KEY` is stable — rotating the application key without re-encrypting these columns will break 2FA for all users.
+> `twoFactorSecret()` and `recoveryCodes()` decrypt values stored in the database. Ensure `APP_KEY` is stable: rotating the application key without re-encrypting these columns will break 2FA for all users.
 
 ---
 
-## <a name="configuration"></a>Configuration
+<a name="configuration"></a>
+## Configuration
 
 All 2FA settings live under the `two_factor` key in `config/magic-starter.php`.
 
@@ -407,3 +432,22 @@ All 2FA settings live under the `two_factor` key in `config/magic-starter.php`.
 
 > [!NOTE]
 > `company_name` controls what the user sees in Google Authenticator, Authy, or any other TOTP app. Set it to your product name rather than leaving it as the default `Laravel`.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Expecting 2FA to be enforced after enabling it | The challenge applies only once the first code is confirmed at `two-factor-authentication/confirm`. |
+| Calling enable twice before confirming | The second call overwrites the unconfirmed secret and the recovery codes, so the first QR code stops working. |
+| Sending the `two_factor_token` as a bearer token | It is not a Sanctum token. Post it, with a code, to `auth/two-factor-challenge`. |
+| Showing the recovery codes once and discarding the new set after a regeneration | Regenerating invalidates every earlier code at once. Present the new set before the user leaves the screen. |
+| Rotating `APP_KEY` without re-encrypting the 2FA columns | The secret and recovery codes are stored encrypted, so every enrolled user would be locked out of the second factor. |
+| Taking a long time to submit the challenge | The `two_factor_token` expires after `two_factor.challenge_token_ttl` minutes (5 by default). |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Authentication](./authentication.md): the login that returns the `two_factor_token`.
+- [Configuration](../getting-started/configuration.md): the `two_factor` settings.
+- [Models](../architecture/models.md): the `TwoFactorAuthenticatable` trait.

@@ -1,5 +1,8 @@
 # Support Desk
 
+Customer conversations the package records and staff answer from the admin panel, with an optional AI desk, a knowledge base, ratings, feedback and attachments.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Enabling](#enabling)
 - [Endpoints](#endpoints)
@@ -15,13 +18,28 @@
 - [Answering from the Panel](#answering-from-the-panel)
 - [Events](#events)
 - [Overriding the Actions](#overriding-the-actions)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+| Item | Value |
+|:-----|:------|
+| Feature | `Features::support()`, then `php artisan magic-starter:install --features=support` and `php artisan migrate`. |
+| Signed in | `GET` and `POST {prefix}/support/conversations`, `GET {prefix}/support/conversations/{conversation}`, `POST` to its `messages` and `seen`. |
+| Visitor | `POST {prefix}/support/public/conversations`, then the thread at `{prefix}/support/public/thread/{token}`. |
+| Opening a conversation | A `topic` from `support.topics` and a `body`. |
+| Staff | Answer from the admin panel; the reply action does not authorize its staff argument, the panel gate does. |
+| AI desk | Off until the host binds `RespondsToSupport`. |
+| Override | `RepliesToSupport` and `ChangesSupportConversations`. |
+
+The optional features sit on top of `support` and are off by default: `support-csat`, `support-feedback`, `support-attachments`, `support-client-context` and `support-proposals`.
 
 <a name="introduction"></a>
 ## Introduction
 
-With the support feature on, every customer contact becomes a recorded conversation and staff answer it from the [admin panel](basics/admin-panel.md). A conversation has one opener, and only the opener reads it: a team mate cannot, whatever the team. A visitor with no account follows the thread through a link mailed to them.
+With the support feature on, every customer contact becomes a recorded conversation and staff answer it from the [admin panel](admin-panel.md). A conversation has one opener, and only the opener reads it: a team mate cannot, whatever the team. A visitor with no account follows the thread through a link mailed to them.
 
 Throughout this document `{prefix}` is `config('magic-starter.route_prefix')`.
 
@@ -53,7 +71,7 @@ Five further features sit on top of it and are off by default; each needs `suppo
 ],
 ```
 
-Run `php artisan magic-starter:install --features=support` for the seven migrations (`create_support_conversations_table`, `create_support_messages_table`, `add_ai_columns_to_support_tables`, `add_ai_summary_to_support_conversations_table`, `add_feedback_columns_to_support_conversations_table`, `create_support_message_attachments_table` and `create_support_feedback_table`), then `php artisan migrate`. The last three are for the rating, attachment and feedback features and are installed with `support` whichever of those you turn on. A host that installed support earlier publishes the missing ones by hand from `vendor/fluttersdk/magic-starter-laravel/database/migrations/`; they are additive and guarded by `hasColumn` or `hasTable`, so a second run changes nothing. Run it in the same deploy as the package update: opening a conversation and posting a customer message write its columns whether or not a responder is bound.
+Run `php artisan magic-starter:install --features=support` to publish the support migrations (`create_support_conversations_table`, `create_support_messages_table`, `add_ai_columns_to_support_tables`, `add_ai_summary_to_support_conversations_table`, `add_feedback_columns_to_support_conversations_table`, `create_support_message_attachments_table`, `create_support_feedback_table`, `create_support_proposals_table` and `create_support_articles_table`), then `php artisan migrate`. The rating, attachment, feedback, proposal and knowledge base migrations are installed with `support` whichever of those features you turn on. A host that installed support earlier publishes the missing ones by hand from `vendor/anilcancakir/magic-starter-laravel/database/migrations/`; they are additive and guarded by `hasColumn` or `hasTable`, so a second run changes nothing. Run it in the same deploy as the package update: opening a conversation and posting a customer message write its columns whether or not a responder is bound.
 
 ---
 
@@ -169,7 +187,7 @@ A long thread outgrows `support.ai.history_messages`. The conversation can carry
 - The summary is untrusted model output derived from customer text. The host puts it in the prompt behind a fence, as data and never as instructions, like every body in the turn.
 - Staff see `ai_summary` read-only in the support conversation view; nothing edits it. It is left out of audit rows, so the text never lands in the audit trail.
 
-A host that published its migrations adds `add_ai_summary_to_support_conversations_table.php` (`magic-starter:install` or copy it from `vendor/fluttersdk/magic-starter-laravel/database/migrations/`). It adds `ai_summary` (text, nullable) and `ai_summary_through_id` (nullable pointer, no foreign key), so a second run changes nothing and a conversation without a summary behaves as before.
+A host that published its migrations adds `add_ai_summary_to_support_conversations_table.php` (`magic-starter:install` or copy it from `vendor/anilcancakir/magic-starter-laravel/database/migrations/`). It adds `ai_summary` (text, nullable) and `ai_summary_through_id` (nullable pointer, no foreign key), so a second run changes nothing and a conversation without a summary behaves as before.
 
 ### Eligibility
 
@@ -458,3 +476,24 @@ $this->app->bind(RepliesToSupport::class, MyReplyToSupport::class);
 `RespondsToSupport` and `AssistsSupportStaff` are the two AI contracts and ship unbound; see [The AI Desk](#the-ai-desk). `DescribesSupportCustomer` ships unbound too; see [Answering from the Panel](#answering-from-the-panel). So does `DescribesSupportPage`; see [Page Context](#page-context).
 
 The reply action does not authorize its `$staff` argument: the panel gate is the authorization. A replacement that is called from anywhere else has to check access itself.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Expecting a team mate to read a conversation | Only the opener reads it, whatever the team. |
+| Replying to a visitor before `support.public.thread_url` is set | The reply is refused, because the reply mail carries the link. Set it first. |
+| Keeping a published `config/magic-starter.php` and expecting new `support` keys | The config merges shallowly, so a published `support` block hides keys added later. Copy the new keys in. |
+| Expecting the AI desk to answer without a responder | It stays off until the host binds `RespondsToSupport`; the package ships no model and no prompt. |
+| Putting staff notes in a prompt | Read the thread through `customerVisible()`, which leaves them out. |
+| Reading the per-email public limit as a lock on the visitor | Anyone who knows an address can use up its 3 conversations a day. The owner can still write from the app. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Support AI Tools](./support-tools.md): the tools the AI desk can call.
+- [Support Proposals](./support-proposals.md): billing changes the AI desk records for staff.
+- [Admin Panel](./admin-panel.md): where staff answer.
+- [AI Run Log](../guides/ai-runs.md): the record of every model call.
+- [AI Prompt Overrides](../guides/ai-prompts.md): tuning prompts from the panel.

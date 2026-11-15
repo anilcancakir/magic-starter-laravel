@@ -1,6 +1,7 @@
 ---
-path: "src/Models/**/*.php"
-alsoApplyTo: "src/Traits/**/*.php"
+paths:
+  - "src/Models/**/*.php"
+  - "src/Traits/**/*.php"
 ---
 
 # Models & Traits
@@ -13,7 +14,7 @@ alsoApplyTo: "src/Traits/**/*.php"
 - Use `casts()` method (Laravel 11+ syntax), not `$casts` property
 - Resolve related models dynamically: `MagicStarter::userModel()` in relation definitions
 - BelongsToMany pivot: always chain `->using(MagicStarter::membershipModel())` and `->withPivot('role')`
-- No soft deletes in `src/Models` — use `cascadeOnDelete()` on foreign keys instead. The one opt-in exception is the published Team stub (`stubs/models/Team.php`), which uses `SoftDeletes` for the restorable team delete (`Features::restorableTeams()`); the shipped `Team` model must stay free of the trait so a consumer without the `deleted_at` column keeps working
+- No soft deletes in `src/Models`: use `cascadeOnDelete()` on foreign keys instead. The one opt-in exception is the published Team stub (`stubs/models/Team.php`), which uses `SoftDeletes` for the restorable team delete (`Features::restorableTeams()`); the shipped `Team` model must stay free of the trait so a consumer without the `deleted_at` column keeps working
 - `$fillable` array for mass assignment, not `$guarded`
 
 ## Traits
@@ -22,4 +23,4 @@ alsoApplyTo: "src/Traits/**/*.php"
 - Return typed morphMany/morphTo: `MorphMany<NotificationSetting, $this>`
 - HasProfilePhoto: `null` when no photo is stored; the client draws its own initials, never a generated third-party image
 - HasNotifications: `prefers()` returns true by default if notification type not in registry
-- HasNotifications: `routeNotificationForOneSignal()` returns `['external_id' => ['user_'.$this->getKey()]]` for OneSignal v5 alias targeting; channel driver is `FlutterSdk\MagicStarter\Notifications\Channels\OneSignalChannel`
+- HasNotifications: `routeNotificationForOneSignal()` returns `['external_id' => ['user_'.$this->getKey()]]` for OneSignal v5 alias targeting; channel driver is `AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel`

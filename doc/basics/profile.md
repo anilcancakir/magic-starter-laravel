@@ -1,24 +1,46 @@
 # Profile Management
 
-Magic Starter provides a full suite of profile management endpoints covering user profile updates, password changes, account deletion, profile photos, email verification, session management, newsletter subscriptions, and a public settings API. All endpoints are JSON-only (no views or redirects) and respect the configured route prefix.
+The JSON endpoints a signed-in user manages their own profile with: details, password, photo, account deletion, email verification, sessions and the newsletter, plus the public settings API.
 
-## Table of Contents
+- [Quick Reference](#quick-reference)
+- [Update Profile](#update-profile)
+- [Update Password](#update-password)
+- [Delete Account](#delete-account)
+- [Profile Photo](#profile-photo)
+- [HasProfilePhoto Trait](#has-profile-photo-trait)
+- [Email Verification](#email-verification)
+- [Settings API](#settings-api)
+- [Newsletter Subscription](#newsletter)
+  - [Consent Record](#newsletter-consent)
+  - [Confirmation Mail](#newsletter-confirmation)
+  - [One-Click Unsubscribe](#newsletter-unsubscribe)
+  - [Marketing Audience](#newsletter-audience)
+  - [Email Changes and Deletion](#newsletter-email-changes)
+- [Session Management](#session-management)
+- [Extended Profile](#extended-profile)
+- [Publishing Your Own Columns](#publishing-your-own-columns)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
-- <a name="toc-update-profile"></a>[Update Profile](#update-profile)
-- <a name="toc-update-password"></a>[Update Password](#update-password)
-- <a name="toc-delete-account"></a>[Delete Account](#delete-account)
-- <a name="toc-profile-photo"></a>[Profile Photo](#profile-photo)
-- <a name="toc-has-profile-photo-trait"></a>[HasProfilePhoto Trait](#has-profile-photo-trait)
-- <a name="toc-email-verification"></a>[Email Verification](#email-verification)
-- <a name="toc-settings-api"></a>[Settings API](#settings-api)
-- <a name="toc-newsletter"></a>[Newsletter Subscription](#newsletter)
-- <a name="toc-session-management"></a>[Session Management](#session-management)
-- <a name="toc-extended-profile"></a>[Extended Profile](#extended-profile)
-- <a name="toc-publishing-your-own-columns"></a>[Publishing Your Own Columns](#publishing-your-own-columns)
+<a name="quick-reference"></a>
+## Quick Reference
 
----
+All endpoints are JSON-only (no views or redirects) and sit under the configured route prefix. Every one needs `auth:sanctum` unless the table says otherwise.
 
-## <a name="update-profile"></a>Update Profile
+| Method and URI | Needs | Does |
+|:---------------|:------|:-----|
+| `PUT user/profile` | | Updates the profile fields. |
+| `PUT user/password` | | Changes the password. |
+| `POST` or `DELETE user` | | Schedules the account for deletion. |
+| `POST user/profile-photo`, `DELETE user/profile-photo` | `profile-photos` | Uploads or removes the photo. |
+| `GET email/verify/{id}/{hash}` | `email-verification`, no auth | Verifies the address through a signed link. |
+| `POST email/verification-notification` | `email-verification` | Sends a new verification link. |
+| `GET settings` | no auth | The public settings the client reads before sign-in. |
+| `GET user/newsletter`, `PUT user/newsletter` | `newsletter-subscription` | Reads or changes the subscription. |
+| `GET sessions`, `DELETE sessions/{token}`, `DELETE sessions/other` | `sessions` | Lists and revokes sessions. |
+
+<a name="update-profile"></a>
+## Update Profile
 
 Updates the authenticated user's profile information.
 
@@ -41,7 +63,7 @@ Updates the authenticated user's profile information.
 | `timezone` | string | Nullable, valid IANA timezone (requires `extended-profile` or `timezones` feature) |
 | `locale` | string | Nullable, must be in `magic-starter.supported_locales` (requires `extended-profile` feature) |
 
-Guest users may additionally pass `password` and `password_confirmation` to upgrade their account in a single call. The password must be at least 8 characters with letters, numbers, and mixed case. When a guest provides an email/phone and a password, they are automatically converted to a full user (`is_guest` becomes `false`). The conversion dispatches `FlutterSdk\MagicStarter\Events\GuestConverted` once, after the transaction commits, from this endpoint or from a guest setting a first password; listen to it for anything a host does for a new registered account, such as a welcome message.
+Guest users may additionally pass `password` and `password_confirmation` to upgrade their account in a single call. The password must be at least 8 characters with letters, numbers, and mixed case. When a guest provides an email/phone and a password, they are automatically converted to a full user (`is_guest` becomes `false`). The conversion dispatches `AnilcanCakir\MagicStarter\Events\GuestConverted` once, after the transaction commits, from this endpoint or from a guest setting a first password; listen to it for anything a host does for a new registered account, such as a welcome message.
 
 When the email changes and the `email-verification` feature is enabled, `email_verified_at` is reset to `null` and a new verification notification is sent.
 
@@ -84,7 +106,8 @@ Content-Type: application/json
 
 ---
 
-## <a name="update-password"></a>Update Password
+<a name="update-password"></a>
+## Update Password
 
 Updates the authenticated user's password.
 
@@ -131,7 +154,8 @@ Content-Type: application/json
 
 ---
 
-## <a name="delete-account"></a>Delete Account
+<a name="delete-account"></a>
+## Delete Account
 
 Schedules the authenticated user's account for deletion. Nothing is deleted in the request: every token is revoked now and the account is purged after the grace period, and signing in again before then cancels it. With `immediately: true` the purge is queued at once instead. See [Account Deletion](account-deletion.md) for the pipeline.
 
@@ -173,7 +197,8 @@ Content-Type: application/json
 
 ---
 
-## <a name="profile-photo"></a>Profile Photo
+<a name="profile-photo"></a>
+## Profile Photo
 
 Available when the `profile-photos` feature is enabled in `config/magic-starter.php`.
 
@@ -238,9 +263,10 @@ Authorization: Bearer {token}
 
 ---
 
-## <a name="has-profile-photo-trait"></a>HasProfilePhoto Trait
+<a name="has-profile-photo-trait"></a>
+## HasProfilePhoto Trait
 
-The `HasProfilePhoto` trait (`FlutterSdk\MagicStarter\Traits\HasProfilePhoto`) provides the `profile_photo_url` accessor used by `UserResource`.
+The `HasProfilePhoto` trait (`AnilcanCakir\MagicStarter\Traits\HasProfilePhoto`) provides the `profile_photo_url` accessor used by `UserResource`.
 
 ### profilePhotoUrl Accessor
 
@@ -259,7 +285,8 @@ When no photo is stored it returns `null`, and the client draws its own initials
 
 ---
 
-## <a name="email-verification"></a>Email Verification
+<a name="email-verification"></a>
+## Email Verification
 
 Available when the `email-verification` feature is enabled.
 
@@ -313,7 +340,8 @@ Authorization: Bearer {token}
 
 ---
 
-## <a name="settings-api"></a>Settings API
+<a name="settings-api"></a>
+## Settings API
 
 A public, unauthenticated endpoint that exposes feature flags and locale/timezone defaults for client bootstrapping.
 
@@ -360,7 +388,8 @@ This endpoint intentionally does not require authentication. It only exposes all
 
 ---
 
-## <a name="newsletter"></a>Newsletter Subscription
+<a name="newsletter"></a>
+## Newsletter Subscription
 
 Available when the `newsletter-subscription` feature is enabled.
 
@@ -484,7 +513,7 @@ The `POST` accepts any body (`List-Unsubscribe=One-Click` included), is idempote
 `NewsletterSubscriber::marketable()` is the only audience a sender may use. It selects rows that are active, have a `consented_at`, have no `unsubscribed_at` and belong to a user:
 
 ```php
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
 
 NewsletterSubscriber::query()->marketable()->each(function (NewsletterSubscriber $subscriber): void {
     // send, with $subscriber->unsubscribe_token in the footer link
@@ -501,7 +530,8 @@ A row written by address alone, as the previous release did, is claimed by the u
 
 ---
 
-## <a name="session-management"></a>Session Management
+<a name="session-management"></a>
+## Session Management
 
 Available when the `sessions` feature is enabled. Sessions are Sanctum personal access tokens.
 
@@ -647,7 +677,8 @@ Content-Type: application/json
 
 ---
 
-## <a name="extended-profile"></a>Extended Profile
+<a name="extended-profile"></a>
+## Extended Profile
 
 When the `extended-profile` feature is enabled in `config/magic-starter.php`, the profile update endpoint (`PUT user/profile`) accepts additional fields:
 
@@ -674,12 +705,13 @@ Enable the feature in `config/magic-starter.php`:
 'supported_locales' => ['en', 'tr', 'de'],
 ```
 
-## <a name="publishing-your-own-columns"></a>Publishing Your Own Columns
+<a name="publishing-your-own-columns"></a>
+## Publishing Your Own Columns
 
 `UserResource` is not resolved through the container, so an application that adds a column to `users` cannot swap the resource to expose it. Register the extra fields instead, from `AppServiceProvider::boot()`:
 
 ```php
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarter;
 
 MagicStarter::serializeUserUsing(fn ($user, $request) => [
     'subscription_tier' => $user->subscription_tier,
@@ -691,3 +723,23 @@ The callback receives the user being serialised and the current request, and its
 A key of yours that collides with one of the package's wins, so a value you own is yours to correct. The callback must return an array; anything else is refused by name rather than fataling inside the resource.
 
 `MagicStarter::reset()` clears it, which matters in a test suite.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Expecting `DELETE user` to remove the account at once | It schedules the purge and revokes every token. Send `immediately: true` to queue the purge now. |
+| Subscribing an account that has no email to the newsletter | The endpoint answers `400`. Collect an email first. |
+| Sending extended profile fields with the feature off | `UserResource` always carries `locale`, `timezone` and `phone`, but the update endpoint accepts them only when the feature is on. |
+| Adding a column to `users` and expecting `UserResource` to publish it | Register it with `MagicStarter::serializeUserUsing()`; its array is merged over the package fields. |
+| Rendering a generated image for `profile_photo_url: null` | `null` means no photo is stored. The client draws its own initials. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Account Deletion](./account-deletion.md): the grace period, the purge and the refusals.
+- [Authentication](./authentication.md): the user payload every sign-in returns.
+- [Notifications](./notifications.md): the preference matrix and mail branding.
+- [Configuration](../getting-started/configuration.md): photo disks, `defaults.*` and the feature flags.
+- [Models](../architecture/models.md): the `HasProfilePhoto` and `NewsletterSubscriber` internals.

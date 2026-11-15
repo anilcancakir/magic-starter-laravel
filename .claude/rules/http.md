@@ -1,5 +1,6 @@
 ---
-path: "src/Http/**/*.php"
+paths:
+  - "src/Http/**/*.php"
 ---
 
 # HTTP Layer
@@ -7,7 +8,7 @@ path: "src/Http/**/*.php"
 ## Controllers
 
 - Inject contracts via `app(ContractClass::class)`, not constructor type-hinting
-- Return `JsonResponse` — never return views or redirects (API-only package). One exception: `PublicNewsletterUnsubscribeController` renders an HTML page, because a mail link and an RFC 8058 one-click POST both need a page, never a redirect
+- Return `JsonResponse`: never return views or redirects (API-only package). One exception: `PublicNewsletterUnsubscribeController` renders an HTML page, because a mail link and an RFC 8058 one-click POST both need a page, never a redirect
 - Wrap external calls (Socialite, cache) in try-catch with `report($exception)`:
   ```php
   try {
@@ -26,7 +27,7 @@ path: "src/Http/**/*.php"
 
 ## Requests
 
-- `authorize()` always returns `true` — auth handled by middleware, not form requests
+- `authorize()` always returns `true`: auth handled by middleware, not form requests
 - Build rules dynamically based on feature flags:
   - `Features::emailIdentity()` / `Features::phoneIdentity()` for login field rules
   - `required_without:phone` / `required_without:email` for dual-identity

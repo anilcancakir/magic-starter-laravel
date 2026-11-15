@@ -1,5 +1,8 @@
 # Account Deletion
 
+How an account is deleted: a request that only schedules and locks it, a grace period that a sign-in cancels, and a scheduled purge that removes it for good.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Requesting Deletion](#requesting-deletion)
 - [Immediate Deletion](#immediate-deletion)
@@ -9,11 +12,24 @@
 - [Handing On Shared Teams](#handing-on-shared-teams)
 - [Releasing Billing](#releasing-billing)
 - [Scheduling the Purge](#scheduling-the-purge)
-- [Team Deletion Guard](#team-deletion-guard)
 - [Lifecycle Events](#lifecycle-events)
+- [Team Deletion Guard](#team-deletion-guard)
 - [Customization](#customization)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+| Item | Value |
+|:-----|:------|
+| Request | `DELETE {prefix}/user` (`POST` works too), `auth:sanctum`, answers `202`. |
+| Proof | `password`, or a TOTP `code` or `confirmation_token` for a password-less account. A guest without a password sends no proof. |
+| Grace period | `grace_days` days; a sign-in during it cancels the deletion, except an orphan's, see [Grace Period](#grace-period). |
+| Immediate | `immediately: true` queues the purge at once. |
+| Purge | `php artisan magic-starter:purge-deleted-users`; the host schedules it. |
+| Events | `UserDeletionScheduled` and `UserDeletionCancelled`. |
+| Override | `SchedulesUserDeletion`, `ReleasesUserBilling` and `DeletesUsers`. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -291,8 +307,8 @@ The package locks only what it owns. A host that runs work on the user's behalf 
 | `Events\UserDeletionCancelled` | When a sign-in during the grace period clears the schedule, and when the purge un-schedules an account whose team gained a member. | `user` |
 
 ```php
-use FlutterSdk\MagicStarter\Events\UserDeletionCancelled;
-use FlutterSdk\MagicStarter\Events\UserDeletionScheduled;
+use AnilcanCakir\MagicStarter\Events\UserDeletionCancelled;
+use AnilcanCakir\MagicStarter\Events\UserDeletionScheduled;
 use Illuminate\Support\Facades\Event;
 
 Event::listen(UserDeletionScheduled::class, fn (UserDeletionScheduled $event) => /* pause */);
@@ -314,7 +330,7 @@ Event::listen(UserDeletionCancelled::class, fn (UserDeletionCancelled $event) =>
 Each rail refuses with its own sentence, as a 422 validation error on the `team` field. The guard runs before the parent action detaches any member, so a refused team is left whole.
 
 > [!NOTE]
-> A host that bound or extended this action under its earlier, store-only class name has to switch to `SubscriptionGuardedDeleteTeam`. See the changelog.
+> A host that bound or extended this action under its earlier, store-only class name has to switch to `SubscriptionGuardedDeleteTeam`. The changelog names the earlier class.
 
 ---
 
@@ -330,3 +346,23 @@ Both halves are contract bindings, so a host can swap either:
 | `DeletesUsers` | `Actions\DeleteUser` | The irreversible end, run by the purge. |
 
 See [Action Contracts](../architecture/action-contracts.md) for how bindings work.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Not scheduling `magic-starter:purge-deleted-users` | The package registers the command and does not schedule it, so nothing is ever deleted. Add `Schedule::command('magic-starter:purge-deleted-users')->daily()`. |
+| Running an immediate deletion on the `sync` queue | The purge then runs inside the request and a large team cascade can outlast it. Run a real queue worker. |
+| Scheduling a deletion before the columns exist | `deletion_scheduled_at` and `orphaned_at` ship in a core migration; without them scheduling throws and names the missing column. |
+| Looking for a cancel endpoint | There is none. A sign-in during the grace period cancels the deletion. |
+| Writing a non-idempotent `UserDeletionScheduled` listener | The event fires again when an already scheduled account is scheduled once more. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Profile](./profile.md): the `user` endpoint in the profile reference.
+- [Social Login](./social-login.md): the step-up proof a password-less account sends.
+- [Teams](./teams.md): handing on a shared team and restoring one.
+- [Billing](./billing.md): what releasing billing does to a subscription.
+- [Action Contracts](../architecture/action-contracts.md): `SchedulesUserDeletion`, `ReleasesUserBilling` and `DeletesUsers`.

@@ -1,9 +1,8 @@
 # Models Architecture
 
-This document describes the model layer of the `magic-starter-laravel` package: how models are resolved at runtime, how primary key types are toggled between UUID and integer, and the purpose and structure of each built-in model and user-model trait.
+How the package resolves its model classes at runtime, how primary keys switch between UUID and integer, and what each built-in model and user-model trait does.
 
-## Table of Contents
-
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [MagicStarter Registry](#magicstarter-registry)
   - [Resolution Priority](#resolution-priority)
@@ -30,10 +29,27 @@ This document describes the model layer of the `magic-starter-laravel` package: 
   - [MustVerifyEmail](#mustverifyemail)
 - [Relationship Typing Conventions](#relationship-typing-conventions)
 - [PHPDoc Conventions](#phpdoc-conventions)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
 
-## <a name="introduction"></a>Introduction
+```php
+use AnilcanCakir\MagicStarter\MagicStarter;
+
+MagicStarter::useUserModel(\App\Models\User::class);
+MagicStarter::teamModel(); // the class the package resolves for a team
+```
+
+| Concern | Where |
+|:--------|:------|
+| Resolve a model class | `MagicStarter::userModel()`, `teamModel()`, `membershipModel()` and `teamInvitationModel()`. Never hardcode an `App\Models` name. |
+| Override a model | `MagicStarter::use*Model()` or `magic-starter.models.*`. |
+| UUID or integer keys | `magic-starter.use_uuids`, read by `ConditionallyUsesUuids` and `MigrationHelper`. |
+| Migration columns | `MigrationHelper::primaryKey()`, `foreignKey()` and `morphColumns()`. |
+
+<a name="introduction"></a>
+## Introduction
 
 The package never hardcodes `App\Models\*` class names anywhere in its own code. All model references go through the `MagicStarter` static registry, which resolves the correct class at runtime based on configuration, consumer overrides, and auto-published stubs.
 
@@ -41,9 +57,10 @@ Primary key type (UUID vs. auto-incrementing integer) is a single config flag (`
 
 ---
 
-## <a name="magicstarter-registry"></a>MagicStarter Registry
+<a name="magicstarter-registry"></a>
+## MagicStarter Registry
 
-`FlutterSdk\MagicStarter\MagicStarter` is a static service-locator for model class names. It exposes four public resolution methods:
+`AnilcanCakir\MagicStarter\MagicStarter` is a static service-locator for model class names. It exposes these resolution methods for the user and team models:
 
 | Method | Config key | Fallback |
 |---|---|---|
@@ -52,7 +69,7 @@ Primary key type (UUID vs. auto-incrementing integer) is a single config flag (`
 | `membershipModel()` | `magic-starter.models.membership` | - |
 | `teamInvitationModel()` | `magic-starter.models.team_invitation` | - |
 
-All four throw `RuntimeException` when the resolved value is `null` or an empty string.
+Each of them throws `RuntimeException` when the resolved value is `null` or an empty string.
 
 ### <a name="resolution-priority"></a>Resolution Priority
 
@@ -94,9 +111,10 @@ Call `MagicStarter::reset()` in `tearDown()` to clear all overrides and the `ign
 
 ---
 
-## <a name="conditionallyusesuuids-trait"></a>ConditionallyUsesUuids Trait
+<a name="conditionallyusesuuids-trait"></a>
+## ConditionallyUsesUuids Trait
 
-`FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids` is applied to every package model. It conditionally activates UUID primary key behavior based on `MigrationHelper::usesUuids()`.
+`AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids` is applied to every package model. It conditionally activates UUID primary key behavior based on `MigrationHelper::usesUuids()`.
 
 **Boot phase** (`bootConditionallyUsesUuids`): when UUIDs are enabled, registers a `creating` observer that populates the primary key with an ordered UUID if it is empty. This replicates the core behavior of Laravel's `HasUuids` trait without statically `use`-ing it (which cannot be done conditionally).
 
@@ -117,9 +135,10 @@ Call `MagicStarter::reset()` in `tearDown()` to clear all overrides and the `ign
 
 ---
 
-## <a name="migrationhelper"></a>MigrationHelper
+<a name="migrationhelper"></a>
+## MigrationHelper
 
-`FlutterSdk\MagicStarter\Support\MigrationHelper` centralizes the UUID/integer switch for all package migrations. The single source of truth is:
+`AnilcanCakir\MagicStarter\Support\MigrationHelper` centralizes the UUID/integer switch for all package migrations. The single source of truth is:
 
 ```php
 public static function usesUuids(): bool
@@ -172,13 +191,14 @@ Used for polymorphic relations such as `notifiable` on `notification_settings` a
 
 ---
 
-## <a name="package-models"></a>Package Models
+<a name="package-models"></a>
+## Package Models
 
-All package models live in `FlutterSdk\MagicStarter\Models\`. Every model uses `ConditionallyUsesUuids` and the Laravel 11+ `casts()` method syntax (not the `$casts` property).
+All package models live in `AnilcanCakir\MagicStarter\Models\`. Every model uses `ConditionallyUsesUuids` and the Laravel 11+ `casts()` method syntax (not the `$casts` property).
 
 ### <a name="team"></a>Team
 
-`FlutterSdk\MagicStarter\Models\Team`
+`AnilcanCakir\MagicStarter\Models\Team`
 
 Represents a team (workspace). Teams can be personal (created automatically for each user) or shared.
 
@@ -205,7 +225,7 @@ Represents a team (workspace). Teams can be personal (created automatically for 
 
 ### <a name="teamuser-pivot"></a>TeamUser (Pivot)
 
-`FlutterSdk\MagicStarter\Models\TeamUser`
+`AnilcanCakir\MagicStarter\Models\TeamUser`
 
 Pivot model for the `team_user` join table. Extends `Illuminate\Database\Eloquent\Relations\Pivot` (not `Model`).
 
@@ -224,7 +244,7 @@ Pivot model for the `team_user` join table. Extends `Illuminate\Database\Eloquen
 
 ### <a name="teaminvitation"></a>TeamInvitation
 
-`FlutterSdk\MagicStarter\Models\TeamInvitation`
+`AnilcanCakir\MagicStarter\Models\TeamInvitation`
 
 Stores pending invitations to join a team, identified by a unique token sent to the invitee's email address.
 
@@ -253,7 +273,7 @@ Stores pending invitations to join a team, identified by a unique token sent to 
 
 ### <a name="notificationsetting"></a>NotificationSetting
 
-`FlutterSdk\MagicStarter\Models\NotificationSetting`
+`AnilcanCakir\MagicStarter\Models\NotificationSetting`
 
 Stores per-user overrides for notification delivery preferences. Each row represents a single `(user, notification_type, channel)` combination.
 
@@ -277,7 +297,7 @@ Stores per-user overrides for notification delivery preferences. Each row repres
 
 ### <a name="newslettersubscriber"></a>NewsletterSubscriber
 
-`FlutterSdk\MagicStarter\Models\NewsletterSubscriber`
+`AnilcanCakir\MagicStarter\Models\NewsletterSubscriber`
 
 A user's newsletter subscription and the consent it rests on. The row belongs to a user, not to an address: `email` is a copy kept in step with the user's. Use `NewsletterSubscriber::forUser()`, `subscribeUser()` and `unsubscribe()` rather than writing the columns, and read recipients through `marketable()` only.
 
@@ -316,7 +336,7 @@ See [Newsletter Subscription](../basics/profile.md#newsletter) for the endpoints
 
 ### <a name="personalaccesstoken"></a>PersonalAccessToken
 
-`FlutterSdk\MagicStarter\Models\PersonalAccessToken`
+`AnilcanCakir\MagicStarter\Models\PersonalAccessToken`
 
 Extends `Laravel\Sanctum\PersonalAccessToken` with device-tracking columns. This model is registered as the Sanctum token model in the service provider, replacing the default Sanctum implementation.
 
@@ -336,9 +356,10 @@ Uses `ConditionallyUsesUuids` - the `tokenable_id` column type is kept in sync w
 
 ---
 
-## <a name="user-traits"></a>User Traits
+<a name="user-traits"></a>
+## User Traits
 
-These traits are mixed into the consumer's `User` model. They are all located in `FlutterSdk\MagicStarter\Traits\`.
+These traits are mixed into the consumer's `User` model. They are all located in `AnilcanCakir\MagicStarter\Traits\`.
 
 ### <a name="hasteams"></a>HasTeams
 
@@ -391,7 +412,7 @@ Resolution order:
 
 **`notificationPreferenceMatrix(): array`** - returns the full preference state for all registered notification types. DB overrides use slug-based keys (not FQCNs) to ensure a stable API response shape regardless of how types were registered.
 
-**`routeNotificationForOneSignal(): array`**: returns `['external_id' => [MagicStarter::onesignalExternalIdPrefix() . $this->getKey()]]` for v5 SDK alias-based routing. The payload is passed to `FlutterSdk\MagicStarter\Notifications\Channels\OneSignalChannel`, which applies the aliases to the notification via `setIncludeAliases()`. A prefix is required because OneSignal rejects simple numeric values such as `0` or `1` as external IDs, and because the id has to match the one the Flutter client registered. Both sides read it from config (`magic-starter.onesignal.external_id_prefix` here, `magic_starter.notifications.external_id_prefix` there), defaulting to the same `user_`; a mismatch is silent, since OneSignal accepts a send to an alias no device carries.
+**`routeNotificationForOneSignal(): array`**: returns `['external_id' => [MagicStarter::onesignalExternalIdPrefix() . $this->getKey()]]` for v5 SDK alias-based routing. The payload is passed to `AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel`, which applies the aliases to the notification via `setIncludeAliases()`. A prefix is required because OneSignal rejects simple numeric values such as `0` or `1` as external IDs, and because the id has to match the one the Flutter client registered. Both sides read it from config (`magic-starter.onesignal.external_id_prefix` here, `magic_starter.notifications.external_id_prefix` there), defaulting to the same `user_`; a mismatch is silent, since OneSignal accepts a send to an alias no device carries.
 
 **Boot hook (`bootHasNotifications()`)**: keeps the OneSignal SMS subscription in step with `phone`. A `saving` hook clears `sms_registered_at` when an existing model's phone is dirty and the column is loaded, so the next SMS send reconciles again. An `updated` hook queues `PruneSmsSubscriptions` through `DB::afterCommit` when the old phone was non-empty and OneSignal is provisioned, so a rolled-back change sends nothing. `initializeHasNotifications()` merges the `sms_registered_at` datetime cast.
 
@@ -449,7 +470,8 @@ The guard is an instance property, never a static keyed by id: a static would su
 
 ---
 
-## <a name="relationship-typing-conventions"></a>Relationship Typing Conventions
+<a name="relationship-typing-conventions"></a>
+## Relationship Typing Conventions
 
 All relationship return types use the generic syntax introduced in Laravel 11 / PHPStan-aware stubs:
 
@@ -478,7 +500,8 @@ The concrete type parameter for user-model relations is `Model` (not a specific 
 
 ---
 
-## <a name="phpdoc-conventions"></a>PHPDoc Conventions
+<a name="phpdoc-conventions"></a>
+## PHPDoc Conventions
 
 Every model class carries PHPDoc block annotations above the class declaration:
 
@@ -503,3 +526,11 @@ Key rules:
 - Type the `id` column as `string` even in integer mode - Eloquent casts it to string in PHP; document the PHP-visible type, not the SQL type.
 - Use `Carbon|null` for nullable timestamp columns, not `string`.
 - Collections are typed with their item type: `Collection<int, TeamInvitation>`.
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Configuration](../getting-started/configuration.md): `use_uuids` and the `models.*` keys.
+- [Teams](../basics/teams.md): the team endpoints these models back.
+- [Notifications](../basics/notifications.md): `NotificationSetting` and `HasNotifications` in use.
+- [Service Provider](./service-provider.md): where the Sanctum token model and the team policy are wired.

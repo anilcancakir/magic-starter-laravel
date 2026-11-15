@@ -1,5 +1,8 @@
 # Social Login
 
+Sign in with Google, Apple, GitHub and Microsoft through a backend-hosted browser flow or a native ID token, and connect or disconnect a provider from a signed-in profile.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Provider Setup](#provider-setup)
@@ -7,14 +10,33 @@
 - [Browser Flow](#browser-flow)
 - [Native Token Endpoint](#native-token-endpoint)
 - [Accounts and Identity](#accounts-and-identity)
+  - [Provisional links](#provisional-links)
 - [Connect a Provider](#connect-a-provider)
 - [Disconnect a Provider](#disconnect-a-provider)
 - [Set a Password](#set-a-password)
 - [Step-Up Confirmation](#step-up-confirmation)
 - [Apple Notifications](#apple-notifications)
 - [Error Codes](#error-codes)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+Enable `Features::socialLogin()`; no route below exists while it is off. `{prefix}` is the `route_prefix` config value.
+
+| Endpoint | Auth | Does |
+|:---------|:-----|:-----|
+| `GET {prefix}/auth/social/{provider}/redirect` | none | Starts the browser flow. |
+| `GET\|POST /magic-starter/social/{provider}/callback` | none | The fixed callback you register in each provider console. It has no route prefix. |
+| `POST {prefix}/auth/social/exchange` | none | Trades the one-time code for a session. |
+| `POST {prefix}/auth/social/{provider}/token` | none, or a bearer for `connect` | Signs in, connects or confirms with a native ID token. |
+| `POST {prefix}/user/social-accounts/link-ticket` | `auth:sanctum` | Mints the single-use ticket that connects a provider. |
+| `DELETE {prefix}/user/social-accounts/{provider}` | `auth:sanctum` | Disconnects a provider. |
+| `POST {prefix}/user/password/set` | `auth:sanctum` | Sets a first password on a password-less account. |
+| `POST /magic-starter/social/apple/notifications` | Apple's signed payload | Receives Apple's server-to-server notifications. |
+
+A refusal carries a machine `code` such as `social_email_taken`; see [Error Codes](#error-codes).
 
 <a name="introduction"></a>
 ## Introduction
@@ -36,8 +58,8 @@ Every flow ends the way a password sign-in does: a Sanctum token response, or a 
 The user model needs two traits:
 
 ```php
-use FlutterSdk\MagicStarter\Traits\HasSocialAccounts;
-use FlutterSdk\MagicStarter\Traits\NormalizesEmail;
+use AnilcanCakir\MagicStarter\Traits\HasSocialAccounts;
+use AnilcanCakir\MagicStarter\Traits\NormalizesEmail;
 
 class User extends Authenticatable
 {
@@ -48,7 +70,7 @@ class User extends Authenticatable
 
 `HasSocialAccounts` adds the `socialAccounts()` relation and `hasPassword()`. `NormalizesEmail` lower-cases an email on assignment, so `Bob@x.io` and `bob@x.io` cannot become two accounts. Add a `lower(email)` unique index as well, so the database refuses what the application missed.
 
-Every lookup compares the lower-cased address, so rows stored before the package normalized them must be lower-cased too, or their owners can no longer sign in. The core migration `lowercase_user_emails.php` does that for `users`, `team_invitations` and `newsletter_subscribers`, and refuses with the colliding addresses when two rows differ only in case. An existing install copies it from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` under a new timestamp and runs it before upgrading, see the [changelog](../../CHANGELOG.md).
+Every lookup compares the lower-cased address, so rows stored before the package normalised them must be lower-cased too, or their owners can no longer sign in. The core migration `lowercase_user_emails.php` does that for `users`, `team_invitations` and `newsletter_subscribers`, and refuses with the colliding addresses when two rows differ only in case. An existing install copies it from `vendor/anilcancakir/magic-starter-laravel/database/migrations/` under a new timestamp and runs it before upgrading; the changelog entry of the release that introduced it says more.
 
 Install the feature with `magic-starter:install --features=social-login`. It publishes two migrations: `make_password_nullable_on_users_table.php` (a social-only account has no password) and `create_social_accounts_table.php`. The deletion columns ship with the core migrations, see [Account Deletion](account-deletion.md).
 
@@ -482,3 +504,23 @@ Every code is a key of `lang/en/social.php`, and its sentence is translated. A c
 | `subscription_active` | Account deletion refused while a subscription bills the user directly. |
 | `deletion_scheduled` | The account is scheduled for deletion; signing in again within the grace period cancels it. |
 | `deletion_cancelled` | A sign-in cancelled a scheduled deletion. |
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Sending a provider access token | It is never accepted. Send an ID token checked against your configured audiences, or an authorization code. |
+| Registering the callback under the route prefix | The callback is `/magic-starter/social/{provider}/callback` with no prefix, so it never moves with a deploy. |
+| Leaving `HasSocialAccounts` or `NormalizesEmail` off the user model | Add both; the social flows need the relation and the lower-cased email. |
+| Upgrading with two accounts whose emails differ only in case | `lowercase_user_emails.php` refuses and names the colliding addresses. Merge them first. |
+| Calling `PUT user/password` on a social-only account | It answers `422 password_not_set`. Use `POST user/password/set`. |
+| Switching on the error `message` | Switch on the machine `code`. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Authentication](./authentication.md): the token response and the two-factor challenge every flow ends in.
+- [Account Deletion](./account-deletion.md): the refusals and the grace period behind the deletion codes.
+- [Sign-in Handoff](./sign-in-handoff.md): carrying a session into a browser.
+- [Configuration](../getting-started/configuration.md): the `features` array and the user model.

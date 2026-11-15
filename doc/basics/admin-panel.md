@@ -1,7 +1,8 @@
 # Admin Panel
 
-## Table of Contents
+The optional Filament plugin that gives your own staff a back office over users, teams, subscriptions, newsletter subscribers and the audit trail.
 
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Who Can Enter](#who-can-enter)
@@ -13,8 +14,27 @@
 - [Guarding Your Resources in Tests](#guarding-your-resources-in-tests)
 - [Operations Tools](#operations-tools)
 - [Limits](#limits)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+```bash
+composer require filament/filament
+php artisan magic-starter:filament:install
+```
+
+```dotenv
+MAGIC_STARTER_ADMIN_EMAILS=you@example.com,colleague@example.com
+MAGIC_STARTER_ADMIN_HOST=admin.example.com
+```
+
+| Setting | Meaning |
+|:--------|:--------|
+| `magic-starter.admin.emails` | The allowlist (`MAGIC_STARTER_ADMIN_EMAILS`). An empty list admits nobody. |
+| `magic-starter.admin.host` | Optional host (`MAGIC_STARTER_ADMIN_HOST`); empty serves the panel on `/admin`. |
+| `FilamentUser` and `AuthorizesAdminPanel` | The interface and trait your user model adds. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -39,7 +59,7 @@ The command never touches your user model, because it is your own file. Add the 
 
 ```php
 use Filament\Models\Contracts\FilamentUser;
-use FlutterSdk\MagicStarter\Filament\Concerns\AuthorizesAdminPanel;
+use AnilcanCakir\MagicStarter\Filament\Concerns\AuthorizesAdminPanel;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -87,7 +107,7 @@ A code is accepted once: after it signs in, through the API or the panel, that c
 
 The panel never writes a secret. Two-factor is turned on in the app. It is turned off there, or by an admin with "Reset two-factor" on the Users resource, which also removes that user's panel challenge.
 
-The plugin mounts this challenge (`FlutterSdk\MagicStarter\Filament\Auth\TwoFactorAuthentication`) only when the panel has no multi-factor setup of its own while it is being built. A Closure provider list counts as a setup only if it returns providers at that point, before any request is authenticated. To combine the challenge with Filament's providers, or to require a second factor, configure the panel yourself before `->plugin()`:
+The plugin mounts this challenge (`AnilcanCakir\MagicStarter\Filament\Auth\TwoFactorAuthentication`) only when the panel has no multi-factor setup of its own while it is being built. A Closure provider list counts as a setup only if it returns providers at that point, before any request is authenticated. To combine the challenge with Filament's providers, or to require a second factor, configure the panel yourself before `->plugin()`:
 
 ```php
 ->multiFactorAuthentication([TwoFactorAuthentication::make()], isRequired: true)
@@ -192,8 +212,8 @@ When a contract refuses with a validation error, the panel shows it as a notific
 Extend `MagicStarterResource` instead of Filament's `Resource`, then send every write through a contract.
 
 ```php
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
 
 class ProjectResource extends MagicStarterResource
 {
@@ -248,7 +268,7 @@ The copy still extends `MagicStarterResource` and still calls the contracts. An 
 Filament's stock actions write straight to the model and skip the contracts. Add one test to catch them:
 
 ```php
-use FlutterSdk\MagicStarter\Testing\AssertsAdminWritesUseContracts;
+use AnilcanCakir\MagicStarter\Testing\AssertsAdminWritesUseContracts;
 
 public function test_admin_writes_use_contracts(): void
 {
@@ -291,3 +311,23 @@ Each tool has one global auth closure, so with more than one panel the last to e
 - No bulk delete on Users or Teams. An account leaves through scheduled deletion, a team through `DeletesTeams`.
 - No direct model writes where a contract exists.
 - A custom `RemovesTeamMembers` or `UpdatesTeamMemberRoles` binding must keep the team-owner guards (`RemoveTeamMember::ensureRemovable()`, `UpdateTeamMemberRole::ensureAssignable()`). The API controllers enforce them whatever is bound; the panel calls only the contract. A custom `RemovesTeamMembers` also owns clearing the removed member's `current_team_id` when it points at the team, as the default action does; the leave endpoint no longer does it.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Leaving `FilamentUser` off the user model | The plugin refuses to register and throws a `LogicException`. Implement the interface and add `AuthorizesAdminPanel`. |
+| Expecting an empty `MAGIC_STARTER_ADMIN_EMAILS` to admit everyone | An empty list admits nobody, and an unverified address never passes. |
+| Chaining plugin options after `->plugin()` | Filament registers the plugin the moment it is passed in, so a later option is ignored. Set every option first. |
+| Re-running `magic-starter:filament:install` to refresh the provider | It changes nothing unless you pass `--force`, which overwrites the provider. |
+| Pointing Horizon, Pulse or Telescope at an empty path | The panel owns the host's root. Give each tool its own path. |
+| Using a Filament release below the floor | The package conflicts with Filament 4 and 5 releases below `4.13.3` and `5.8.3`. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Audit Trail](./audit.md): the admin actions the panel records.
+- [Billing](./billing.md): the Billing tab and manual grants.
+- [Account Deletion](./account-deletion.md): why the panel has no bulk delete.
+- [Action Contracts](../architecture/action-contracts.md): the contracts every panel write goes through.
