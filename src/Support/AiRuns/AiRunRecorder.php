@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiRuns;
+namespace AnilcanCakir\MagicStarter\Support\AiRuns;
 
+use AnilcanCakir\MagicStarter\Contracts\RecordsAiRuns;
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\AiRun;
+use AnilcanCakir\MagicStarter\Models\AiRunAttempt;
 use Closure;
-use FlutterSdk\MagicStarter\Contracts\RecordsAiRuns;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\AiRun;
-use FlutterSdk\MagicStarter\Models\AiRunAttempt;
 use Illuminate\Database\DeadlockException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\JsonEncodingException;

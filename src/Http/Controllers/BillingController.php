@@ -1,34 +1,34 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
+use AnilcanCakir\MagicStarter\Actions\SubscriptionGuardedDeleteTeam;
+use AnilcanCakir\MagicStarter\Contracts\ReportsUsage;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesBillingCurrency;
+use AnilcanCakir\MagicStarter\Enums\BillingChannel;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Enums\ProductType;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Resources\SubscriptionResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Models\Campaign;
+use AnilcanCakir\MagicStarter\Policies\BillingPolicy;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
+use AnilcanCakir\MagicStarter\Support\BillingEventRecorder;
+use AnilcanCakir\MagicStarter\Support\BillingLog;
+use AnilcanCakir\MagicStarter\Support\CampaignFeed;
+use AnilcanCakir\MagicStarter\Support\JsonObject;
+use AnilcanCakir\MagicStarter\Support\PriceTable;
+use AnilcanCakir\MagicStarter\Support\ReadsBillableAttributes;
+use AnilcanCakir\MagicStarter\Support\StripeBillingState;
+use AnilcanCakir\MagicStarter\Support\StripeSubscriptionState;
+use AnilcanCakir\MagicStarter\Support\StripeTestMode;
+use AnilcanCakir\MagicStarter\Support\TrialEligibility;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Actions\SubscriptionGuardedDeleteTeam;
-use FlutterSdk\MagicStarter\Contracts\ReportsUsage;
-use FlutterSdk\MagicStarter\Contracts\ResolvesBillingCurrency;
-use FlutterSdk\MagicStarter\Enums\BillingChannel;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Enums\ProductType;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Resources\SubscriptionResource;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Models\Campaign;
-use FlutterSdk\MagicStarter\Policies\BillingPolicy;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
-use FlutterSdk\MagicStarter\Support\BillingEventRecorder;
-use FlutterSdk\MagicStarter\Support\BillingLog;
-use FlutterSdk\MagicStarter\Support\CampaignFeed;
-use FlutterSdk\MagicStarter\Support\JsonObject;
-use FlutterSdk\MagicStarter\Support\PriceTable;
-use FlutterSdk\MagicStarter\Support\ReadsBillableAttributes;
-use FlutterSdk\MagicStarter\Support\StripeBillingState;
-use FlutterSdk\MagicStarter\Support\StripeSubscriptionState;
-use FlutterSdk\MagicStarter\Support\StripeTestMode;
-use FlutterSdk\MagicStarter\Support\TrialEligibility;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -1427,7 +1427,7 @@ class BillingController
      *
      * The cost of that choice, stated because it is a REGRESSION in one case
      * rather than merely a limitation: nothing in this package heals a local row
-     * that Stripe has moved past. {@see \FlutterSdk\MagicStarter\Console\ReconcileBillingEntitlements} re-reads
+     * that Stripe has moved past. {@see \AnilcanCakir\MagicStarter\Console\ReconcileBillingEntitlements} re-reads
      * the local subscription and never calls the Stripe API, so a dropped
      * `customer.subscription.deleted` leaves `stripe_status = 'active'` here
      * forever. Before this guard existed that customer could simply buy again;

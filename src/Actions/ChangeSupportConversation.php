@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Audit\Auditor;
-use FlutterSdk\MagicStarter\Contracts\ChangesSupportConversations;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportPriority;
-use FlutterSdk\MagicStarter\Events\SupportConversationUpdated;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Notifications\SupportCsatInvitationNotification;
-use FlutterSdk\MagicStarter\Support\SupportStaffRecipients;
-use FlutterSdk\MagicStarter\Support\SupportThreadToken;
+use AnilcanCakir\MagicStarter\Audit\Auditor;
+use AnilcanCakir\MagicStarter\Contracts\ChangesSupportConversations;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportPriority;
+use AnilcanCakir\MagicStarter\Events\SupportConversationUpdated;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Notifications\SupportCsatInvitationNotification;
+use AnilcanCakir\MagicStarter\Support\SupportStaffRecipients;
+use AnilcanCakir\MagicStarter\Support\SupportThreadToken;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;

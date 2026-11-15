@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament\Ops;
+namespace AnilcanCakir\MagicStarter\Tests\Filament\Ops;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Ops\TelescopeRedaction;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Models\Team;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamInvitation;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\HasTeams;
-use FlutterSdk\MagicStarter\Traits\TwoFactorAuthenticatable;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Ops\TelescopeRedaction;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Models\Team;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamInvitation;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\HasTeams;
+use AnilcanCakir\MagicStarter\Traits\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Schema\Blueprint;

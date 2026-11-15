@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\ReleasesUserBilling;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Support\BillingLog;
-use FlutterSdk\MagicStarter\Support\BillingReleaseFailed;
-use FlutterSdk\MagicStarter\Support\ReadsBillableAttributes;
-use FlutterSdk\MagicStarter\Support\TrialCardGateway;
+use AnilcanCakir\MagicStarter\Contracts\ReleasesUserBilling;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Support\BillingLog;
+use AnilcanCakir\MagicStarter\Support\BillingReleaseFailed;
+use AnilcanCakir\MagicStarter\Support\ReadsBillableAttributes;
+use AnilcanCakir\MagicStarter\Support\TrialCardGateway;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Cashier\Subscription;

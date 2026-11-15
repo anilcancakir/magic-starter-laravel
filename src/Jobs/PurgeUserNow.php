@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Jobs;
+namespace AnilcanCakir\MagicStarter\Jobs;
 
-use FlutterSdk\MagicStarter\Actions\ScheduleUserDeletion;
-use FlutterSdk\MagicStarter\Console\PurgeDeletedUsersCommand;
-use FlutterSdk\MagicStarter\Contracts\DeletesUsers;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Actions\ScheduleUserDeletion;
+use AnilcanCakir\MagicStarter\Console\PurgeDeletedUsersCommand;
+use AnilcanCakir\MagicStarter\Contracts\DeletesUsers;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Queue\Queueable;

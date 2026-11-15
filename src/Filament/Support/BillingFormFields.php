@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Support;
+namespace AnilcanCakir\MagicStarter\Filament\Support;
 
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
 use Carbon\CarbonImmutable;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
 
 /**
  * The form fields a billing write asks for, shared by the Billing tab and the

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
 use Filament\Resources\Pages\ViewRecord;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
 
 class ViewBillingEvent extends ViewRecord
 {

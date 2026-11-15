@@ -1,25 +1,25 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
+use AnilcanCakir\MagicStarter\Actions\SubscriptionGuardedDeleteTeam;
+use AnilcanCakir\MagicStarter\Contracts\ReportsUsage;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Events\Billing\BillingOutcome;
+use AnilcanCakir\MagicStarter\Events\Billing\PortalOpened;
+use AnilcanCakir\MagicStarter\Events\Billing\RequestRefused;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\BillingController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Models\Team;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Actions\SubscriptionGuardedDeleteTeam;
-use FlutterSdk\MagicStarter\Contracts\ReportsUsage;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Events\Billing\BillingOutcome;
-use FlutterSdk\MagicStarter\Events\Billing\PortalOpened;
-use FlutterSdk\MagicStarter\Events\Billing\RequestRefused;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\BillingController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Models\Team;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -118,7 +118,7 @@ class BillingControllerTest extends TestCase
             ],
             'magic-starter.models.user' => BillingTestUser::class,
             'magic-starter.models.team' => BillingTestTeam::class,
-            'magic-starter.models.membership' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            'magic-starter.models.membership' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
             'magic-starter.route_prefix' => '',
             // The adopter's ranking, cheapest first. `free` being index 0 is
             // what makes `pro` a PAID tier to the shared floor reader.
@@ -1977,11 +1977,11 @@ trait BillingTestBillable
 
 class BillingTestUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
     use BillingTestBillable;
     use ConditionallyUsesUuids;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
 
     protected $table = 'users';
 

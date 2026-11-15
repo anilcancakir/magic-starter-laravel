@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi\Tools;
 
-use FlutterSdk\MagicStarter\Enums\SupportAudience;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Enums\SupportAudience;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
 use Illuminate\Database\Eloquent\Model;
 
 /**

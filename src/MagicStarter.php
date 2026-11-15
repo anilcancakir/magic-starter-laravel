@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter;
+namespace AnilcanCakir\MagicStarter;
 
-use FlutterSdk\MagicStarter\Models\SocialAccount;
-use FlutterSdk\MagicStarter\Models\Team;
-use FlutterSdk\MagicStarter\Models\TeamInvitation;
-use FlutterSdk\MagicStarter\Models\TeamUser;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Models\Team;
+use AnilcanCakir\MagicStarter\Models\TeamInvitation;
+use AnilcanCakir\MagicStarter\Models\TeamUser;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use RuntimeException;

@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Subscriptions\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Subscriptions\Pages;
 
+use AnilcanCakir\MagicStarter\Console\ReconcileBillingEntitlements;
+use AnilcanCakir\MagicStarter\Filament\Actions\GrantPlanAction;
+use AnilcanCakir\MagicStarter\Filament\Resources\Subscriptions\SubscriptionResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Console\ReconcileBillingEntitlements;
-use FlutterSdk\MagicStarter\Filament\Actions\GrantPlanAction;
-use FlutterSdk\MagicStarter\Filament\Resources\Subscriptions\SubscriptionResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
 use Illuminate\Support\Facades\Artisan;
 
 class ListSubscriptions extends ListRecords

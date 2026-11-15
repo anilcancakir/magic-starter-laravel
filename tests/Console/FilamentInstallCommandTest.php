@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Tests\Filament\FilamentTestCase;
+use AnilcanCakir\MagicStarter\Tests\Filament\FilamentTestCase;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 

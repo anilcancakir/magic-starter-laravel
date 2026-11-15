@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Enums\BillingChannel;
-use FlutterSdk\MagicStarter\Enums\ProductType;
+use AnilcanCakir\MagicStarter\Enums\BillingChannel;
+use AnilcanCakir\MagicStarter\Enums\ProductType;
 use stdClass;
 
 /**

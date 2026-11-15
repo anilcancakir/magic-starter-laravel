@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi\Tools;
 
-use FlutterSdk\MagicStarter\Contracts\ResolvesSupportArticlePlaceholders;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesSupportArticlePlaceholders;
 use Illuminate\Contracts\Config\Repository;
 
 /**

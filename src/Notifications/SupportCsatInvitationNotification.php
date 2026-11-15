@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Notifications;
+namespace AnilcanCakir\MagicStarter\Notifications;
 
-use FlutterSdk\MagicStarter\Actions\ChangeSupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\FrontendUrl;
+use AnilcanCakir\MagicStarter\Actions\ChangeSupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\FrontendUrl;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;

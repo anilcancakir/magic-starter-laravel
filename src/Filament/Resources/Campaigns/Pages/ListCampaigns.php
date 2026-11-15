@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
 
 class ListCampaigns extends ListRecords
 {

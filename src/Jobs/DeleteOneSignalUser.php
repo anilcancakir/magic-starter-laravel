@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Jobs;
+namespace AnilcanCakir\MagicStarter\Jobs;
 
-use FlutterSdk\MagicStarter\Support\OneSignalSubscriptions;
+use AnilcanCakir\MagicStarter\Support\OneSignalSubscriptions;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 

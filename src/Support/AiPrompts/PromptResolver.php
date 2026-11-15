@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiPrompts;
+namespace AnilcanCakir\MagicStarter\Support\AiPrompts;
 
-use FlutterSdk\MagicStarter\Contracts\ResolvesPrompts;
-use FlutterSdk\MagicStarter\Enums\AiPromptSource;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesPrompts;
+use AnilcanCakir\MagicStarter\Enums\AiPromptSource;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

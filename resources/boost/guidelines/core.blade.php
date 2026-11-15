@@ -1,5 +1,5 @@
 {{-- magic-starter-laravel AI guidelines --}}
-{{-- Source: fluttersdk/magic-starter-laravel --}}
+{{-- Source: anilcancakir/magic-starter-laravel --}}
 
 ## magic-starter-laravel
 
@@ -108,7 +108,7 @@ Both are optional. Read `references/admin-panel.md` and `references/audit.md` of
 public function register(): void
 {
     $this->app->singleton(
-        \FlutterSdk\MagicStarter\Contracts\CreatesUsers::class,
+        \AnilcanCakir\MagicStarter\Contracts\CreatesUsers::class,
         \App\Actions\CustomCreateUser::class,
     );
 }

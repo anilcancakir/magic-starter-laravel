@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Rules;
+namespace AnilcanCakir\MagicStarter\Tests\Rules;
 
-use FlutterSdk\MagicStarter\Rules\E164Phone;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Rules\E164Phone;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
 final class E164PhoneTest extends TestCase

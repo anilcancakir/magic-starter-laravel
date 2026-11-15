@@ -1,22 +1,22 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament\Users;
+namespace AnilcanCakir\MagicStarter\Tests\Filament\Users;
 
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\Pages\EditUser;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers\PushDevicesRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers\SocialAccountsRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers\TeamsRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers\TokensRelationManager;
+use AnilcanCakir\MagicStarter\Jobs\PurgeUserNow;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Tests\Filament\FilamentTestCase;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
 use Filament\Notifications\Notification;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\Pages\EditUser;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers\PushDevicesRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers\SocialAccountsRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers\TeamsRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers\TokensRelationManager;
-use FlutterSdk\MagicStarter\Jobs\PurgeUserNow;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\PushDevice;
-use FlutterSdk\MagicStarter\Models\SocialAccount;
-use FlutterSdk\MagicStarter\Tests\Filament\FilamentTestCase;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;

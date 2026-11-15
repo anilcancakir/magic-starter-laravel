@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Traits\HasGuestSupport;
-use FlutterSdk\MagicStarter\Traits\HasNotifications;
-use FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-use FlutterSdk\MagicStarter\Traits\HasTeams;
-use FlutterSdk\MagicStarter\Traits\MustVerifyEmail;
-use FlutterSdk\MagicStarter\Traits\TwoFactorAuthenticatable;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Traits\HasGuestSupport;
+use AnilcanCakir\MagicStarter\Traits\HasNotifications;
+use AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+use AnilcanCakir\MagicStarter\Traits\HasTeams;
+use AnilcanCakir\MagicStarter\Traits\MustVerifyEmail;
+use AnilcanCakir\MagicStarter\Traits\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements MustVerifyEmailContract
 {
     // Billing with the user as the billable subject: opt in to `entitled()`, `onTier()` and `tierAtLeast()`
-    // reads that answer for every rail by importing `FlutterSdk\MagicStarter\Traits\HasEntitlement`
+    // reads that answer for every rail by importing `AnilcanCakir\MagicStarter\Traits\HasEntitlement`
     // and adding `use HasEntitlement;` here. Under team billing it belongs on the Team model instead.
     use ConditionallyUsesUuids;
     use HasApiTokens;

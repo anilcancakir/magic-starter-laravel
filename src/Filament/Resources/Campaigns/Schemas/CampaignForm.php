@@ -1,7 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Schemas;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Schemas;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
+use AnilcanCakir\MagicStarter\Models\Campaign;
 use Closure;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DateTimePicker;
@@ -10,8 +12,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
-use FlutterSdk\MagicStarter\Models\Campaign;
 use Illuminate\Database\Eloquent\Model;
 
 /**

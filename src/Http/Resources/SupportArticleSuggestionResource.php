@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Resources;
+namespace AnilcanCakir\MagicStarter\Http\Resources;
 
-use FlutterSdk\MagicStarter\Models\SupportArticle;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportArticleText;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportArticleText;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * One knowledge-base article suggested to a customer, as plain text.
  *
- * Wraps an entry of {@see \FlutterSdk\MagicStarter\Contracts\SearchesSupportArticles::search()}. The Markdown body
+ * Wraps an entry of {@see \AnilcanCakir\MagicStarter\Contracts\SearchesSupportArticles::search()}. The Markdown body
  * never leaves: `magic_starter` has no Markdown renderer, so the app gets an
  * excerpt with images reduced to their alt text and links to their label, and
  * a `url` to the public page of the requested locale to read the whole article on.

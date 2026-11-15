@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
-use FlutterSdk\MagicStarter\Support\RequestLocaleDetector;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Support\RequestLocaleDetector;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Arr;

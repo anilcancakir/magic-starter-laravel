@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Users\Tables;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Users\Tables;
 
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\UserResource;
 use Filament\Actions\Action;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\UserResource;
 use Illuminate\Database\Eloquent\Model;
 
 /**

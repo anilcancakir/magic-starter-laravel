@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
+use AnilcanCakir\MagicStarter\Enums\SupportAttachmentOrigin;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Support\SupportAttachmentResponse;
+use AnilcanCakir\MagicStarter\Support\SupportAttachmentRules;
 use ErrorException;
-use FlutterSdk\MagicStarter\Enums\SupportAttachmentOrigin;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
-use FlutterSdk\MagicStarter\Support\SupportAttachmentResponse;
-use FlutterSdk\MagicStarter\Support\SupportAttachmentRules;
 use GdImage;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;

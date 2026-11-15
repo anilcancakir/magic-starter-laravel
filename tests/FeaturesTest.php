@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests;
+namespace AnilcanCakir\MagicStarter\Tests;
 
-use FlutterSdk\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Features;
 
 class FeaturesTest extends TestCase
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use BackedEnum;
 use Carbon\CarbonInterface;
 use Carbon\Exceptions\InvalidFormatException;
 use DateTimeInterface;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\MagicStarter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -25,7 +25,7 @@ use Laravel\Cashier\Subscription;
  * legitimate and every reader in this package has to answer the same for either.
  *
  * Every reader here was a `protected` method on {@see
- * \FlutterSdk\MagicStarter\Actions\WriteEntitlement}, which is where each rule
+ * \AnilcanCakir\MagicStarter\Actions\WriteEntitlement}, which is where each rule
  * was first needed and the wrong place for it to live: a controller, a resource,
  * a job or a command cannot reach a protected method on an action, so each of
  * them would have grown its own copy. Two copies of a decode rule are free to
@@ -178,7 +178,7 @@ trait ReadsBillableAttributes
      * Whether a valid Cashier subscription is billing this subject right now.
      *
      * The card-rail half of "is anybody paying for this", beside the store half
-     * on {@see \FlutterSdk\MagicStarter\Actions\SubscriptionGuardedDeleteTeam::storeIsBilling()}.
+     * on {@see \AnilcanCakir\MagicStarter\Actions\SubscriptionGuardedDeleteTeam::storeIsBilling()}.
      * It reads Cashier's own subscription rows rather than `plan_provider`,
      * because the provenance column survives a subscription ending and Cashier's
      * rows are what Stripe's webhooks keep current. `valid()` is the definition:
@@ -252,7 +252,7 @@ trait ReadsBillableAttributes
      * entry is the consuming application's, including whatever a tier caps.
      * Validating those here would mean owning a schema for product knowledge
      * this package does not have, which is the same reason counting left
-     * through {@see \FlutterSdk\MagicStarter\Contracts\ReportsUsage}.
+     * through {@see \AnilcanCakir\MagicStarter\Contracts\ReportsUsage}.
      *
      * @return list<array<string, mixed>>
      */

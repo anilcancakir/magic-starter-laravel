@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events;
+namespace AnilcanCakir\MagicStarter\Events;
 
-use FlutterSdk\MagicStarter\Actions\TrashTeam;
+use AnilcanCakir\MagicStarter\Actions\TrashTeam;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
 /**

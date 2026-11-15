@@ -1,7 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Auth;
+namespace AnilcanCakir\MagicStarter\Filament\Auth;
 
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Support\TwoFactorAuthenticationProvider;
 use Closure;
 use Filament\Actions\Action;
 use Filament\Auth\MultiFactor\Contracts\MultiFactorAuthenticationProvider;
@@ -10,8 +12,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Support\TwoFactorAuthenticationProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 use SensitiveParameter;
 

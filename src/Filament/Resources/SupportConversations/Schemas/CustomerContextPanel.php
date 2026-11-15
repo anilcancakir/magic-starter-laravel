@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\Schemas;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\Schemas;
 
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Contracts\DescribesSupportCustomer;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
 use Filament\Infolists\Components\ViewEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Support\Facades\FilamentTimezone;
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Contracts\DescribesSupportCustomer;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\PushDevice;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Throwable;

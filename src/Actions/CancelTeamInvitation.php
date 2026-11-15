@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\CancelsTeamInvitations;
+use AnilcanCakir\MagicStarter\Contracts\CancelsTeamInvitations;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 

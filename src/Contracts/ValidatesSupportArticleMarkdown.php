@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Enums\SupportArticleVisibility;
+use AnilcanCakir\MagicStarter\Enums\SupportArticleVisibility;
 
 /**
  * Contract for the host's check of an article body, on top of the package's own.

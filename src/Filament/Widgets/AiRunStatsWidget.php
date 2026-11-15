@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Widgets;
+namespace AnilcanCakir\MagicStarter\Filament\Widgets;
 
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
+use AnilcanCakir\MagicStarter\Models\AiRun;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
-use FlutterSdk\MagicStarter\Models\AiRun;
 use stdClass;
 
 /**

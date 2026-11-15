@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Models;
+namespace AnilcanCakir\MagicStarter\Tests\Models;
 
-use FlutterSdk\MagicStarter\Enums\AiCostSource;
-use FlutterSdk\MagicStarter\Enums\AiPromptSource;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Models\AiRun;
-use FlutterSdk\MagicStarter\Models\AiRunAttempt;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\AiCostSource;
+use AnilcanCakir\MagicStarter\Enums\AiPromptSource;
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Models\AiRun;
+use AnilcanCakir\MagicStarter\Models\AiRunAttempt;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Carbon;

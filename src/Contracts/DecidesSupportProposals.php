@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
+use AnilcanCakir\MagicStarter\Models\SupportProposal;
+use AnilcanCakir\MagicStarter\Support\BillingAdministrationRefused;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Models\SupportProposal;
-use FlutterSdk\MagicStarter\Support\BillingAdministrationRefused;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Validation\ValidationException;
 

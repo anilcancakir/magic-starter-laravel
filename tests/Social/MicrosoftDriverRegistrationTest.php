@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Social;
+namespace AnilcanCakir\MagicStarter\Tests\Social;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Laravel\Socialite\Facades\Socialite;
 use SocialiteProviders\Manager\ServiceProvider as SocialiteProvidersServiceProvider;
 use SocialiteProviders\Microsoft\Provider as MicrosoftProvider;

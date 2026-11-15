@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources;
+namespace AnilcanCakir\MagicStarter\Filament\Resources;
 
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Support\MigrationHelper;
 use Closure;
 use Filament\Resources\Resource;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Support\MigrationHelper;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -73,7 +73,7 @@ abstract class MagicStarterResource extends Resource
 
     /**
      * The one group the application named for every package resource, else the
-     * resource's own ({@see \FlutterSdk\MagicStarter\Filament\AdminNavigationGroup}).
+     * resource's own ({@see \AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup}).
      */
     public static function getNavigationGroup(): string|UnitEnum|null
     {

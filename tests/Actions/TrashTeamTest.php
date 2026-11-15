@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\SubscriptionGuardedTrashTeam;
-use FlutterSdk\MagicStarter\Actions\TrashTeam;
-use FlutterSdk\MagicStarter\Contracts\TrashesTeams;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\BuildsRestorableTeamSchema;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\RestorableTeam;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\SubscriptionGuardedTrashTeam;
+use AnilcanCakir\MagicStarter\Actions\TrashTeam;
+use AnilcanCakir\MagicStarter\Contracts\TrashesTeams;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\BuildsRestorableTeamSchema;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\RestorableTeam;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;

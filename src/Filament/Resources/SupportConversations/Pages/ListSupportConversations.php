@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
 use Filament\Resources\Pages\ListRecords;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
 
 class ListSupportConversations extends ListRecords
 {

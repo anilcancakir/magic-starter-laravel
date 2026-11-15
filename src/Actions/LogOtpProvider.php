@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\SendsOtpCodes;
+use AnilcanCakir\MagicStarter\Contracts\SendsOtpCodes;
 use Illuminate\Support\Facades\Log;
 
 /**

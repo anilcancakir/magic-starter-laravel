@@ -1,19 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http;
+namespace AnilcanCakir\MagicStarter\Tests\Http;
 
-use FlutterSdk\MagicStarter\Actions\AddTeamMember;
-use FlutterSdk\MagicStarter\Http\Controllers\AuthController;
-use FlutterSdk\MagicStarter\Http\Controllers\PasswordResetController;
-use FlutterSdk\MagicStarter\Http\Controllers\ProfileController;
-use FlutterSdk\MagicStarter\Http\Controllers\TeamInvitationController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Notifications\TeamInvitationNotification;
-use FlutterSdk\MagicStarter\Policies\TeamPolicy;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\NormalizesEmail;
+use AnilcanCakir\MagicStarter\Actions\AddTeamMember;
+use AnilcanCakir\MagicStarter\Http\Controllers\AuthController;
+use AnilcanCakir\MagicStarter\Http\Controllers\PasswordResetController;
+use AnilcanCakir\MagicStarter\Http\Controllers\ProfileController;
+use AnilcanCakir\MagicStarter\Http\Controllers\TeamInvitationController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Notifications\TeamInvitationNotification;
+use AnilcanCakir\MagicStarter\Policies\TeamPolicy;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\NormalizesEmail;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 use Illuminate\Contracts\Auth\CanResetPassword;

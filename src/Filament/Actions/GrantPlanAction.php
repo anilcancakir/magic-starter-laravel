@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Actions;
+namespace AnilcanCakir\MagicStarter\Filament\Actions;
 
+use AnilcanCakir\MagicStarter\Contracts\AdministersBilling;
+use AnilcanCakir\MagicStarter\Filament\Support\BillingAuthorization;
+use AnilcanCakir\MagicStarter\Filament\Support\BillingFormFields;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Support\MigrationHelper;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Select;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Contracts\AdministersBilling;
-use FlutterSdk\MagicStarter\Filament\Support\BillingAuthorization;
-use FlutterSdk\MagicStarter\Filament\Support\BillingFormFields;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Support\MigrationHelper;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

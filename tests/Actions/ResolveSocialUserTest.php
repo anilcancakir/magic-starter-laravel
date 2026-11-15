@@ -1,17 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\CreateUserFromProvider;
-use FlutterSdk\MagicStarter\Contracts\ConnectsSocialAccounts;
-use FlutterSdk\MagicStarter\Contracts\CreatesUsersFromProvider;
-use FlutterSdk\MagicStarter\Contracts\ResolvesSocialUsers;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\SocialAccount;
-use FlutterSdk\MagicStarter\Social\SocialSignInRefused;
-use FlutterSdk\MagicStarter\Social\VerifiedIdentity;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\CreateUserFromProvider;
+use AnilcanCakir\MagicStarter\Contracts\ConnectsSocialAccounts;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsersFromProvider;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesSocialUsers;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Social\SocialSignInRefused;
+use AnilcanCakir\MagicStarter\Social\VerifiedIdentity;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;

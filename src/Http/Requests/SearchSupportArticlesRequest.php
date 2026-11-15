@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

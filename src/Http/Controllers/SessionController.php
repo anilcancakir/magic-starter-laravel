@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Requests\ConfirmPasswordRequest;
-use FlutterSdk\MagicStarter\Http\Requests\DestroyOtherSessionsRequest;
-use FlutterSdk\MagicStarter\Http\Resources\SessionResource;
+use AnilcanCakir\MagicStarter\Http\Requests\ConfirmPasswordRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\DestroyOtherSessionsRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\SessionResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;

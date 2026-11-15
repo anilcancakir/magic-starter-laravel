@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Notifications;
+namespace AnilcanCakir\MagicStarter\Tests\Notifications;
 
-use FlutterSdk\MagicStarter\Notifications\VerifyEmailNotification;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Notifications\VerifyEmailNotification;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Routing\Router;

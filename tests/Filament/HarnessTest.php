@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
 class HarnessTest extends FilamentTestCase
 {

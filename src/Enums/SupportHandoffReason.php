@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Enums;
+namespace AnilcanCakir\MagicStarter\Enums;
 
 /**
  * Why a conversation went from the AI desk to staff, as `support_conversations.handoff_reason` stores it.

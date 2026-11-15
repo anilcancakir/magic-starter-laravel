@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament\Teams;
+namespace AnilcanCakir\MagicStarter\Tests\Filament\Teams;
 
+use AnilcanCakir\MagicStarter\Contracts\DeletesTeams;
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\Pages\EditTeam;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\Pages\ListTeams;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Filament\FilamentTestCase;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Facades\Filament;
 use Filament\Notifications\Notification;
-use FlutterSdk\MagicStarter\Contracts\DeletesTeams;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\Pages\EditTeam;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\Pages\ListTeams;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Filament\FilamentTestCase;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;

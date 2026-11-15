@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
-use FlutterSdk\MagicStarter\Enums\Role;
-use FlutterSdk\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
+use AnilcanCakir\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTeamInvitationRequest extends FormRequest

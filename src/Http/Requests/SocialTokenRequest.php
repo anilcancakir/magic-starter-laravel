@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
-use FlutterSdk\MagicStarter\Http\Middleware\RequireTokenAbility;
-use FlutterSdk\MagicStarter\Http\Requests\Concerns\ConfirmsIdentity;
-use FlutterSdk\MagicStarter\Social\SocialFlowStore;
+use AnilcanCakir\MagicStarter\Http\Middleware\RequireTokenAbility;
+use AnilcanCakir\MagicStarter\Http\Requests\Concerns\ConfirmsIdentity;
+use AnilcanCakir\MagicStarter\Social\SocialFlowStore;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

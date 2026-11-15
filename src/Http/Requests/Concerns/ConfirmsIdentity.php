@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests\Concerns;
+namespace AnilcanCakir\MagicStarter\Http\Requests\Concerns;
 
-use FlutterSdk\MagicStarter\Social\StepUpConfirmations;
-use FlutterSdk\MagicStarter\Support\TwoFactorAuthenticationProvider;
-use FlutterSdk\MagicStarter\Support\UserPassword;
+use AnilcanCakir\MagicStarter\Social\StepUpConfirmations;
+use AnilcanCakir\MagicStarter\Support\TwoFactorAuthenticationProvider;
+use AnilcanCakir\MagicStarter\Support\UserPassword;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;

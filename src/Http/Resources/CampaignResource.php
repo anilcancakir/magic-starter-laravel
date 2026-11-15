@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Resources;
+namespace AnilcanCakir\MagicStarter\Http\Resources;
 
-use FlutterSdk\MagicStarter\Enums\CampaignDiscountType;
-use FlutterSdk\MagicStarter\Models\Campaign;
+use AnilcanCakir\MagicStarter\Enums\CampaignDiscountType;
+use AnilcanCakir\MagicStarter\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

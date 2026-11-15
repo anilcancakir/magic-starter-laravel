@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\DisconnectsSocialAccounts;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\SocialAccount;
-use FlutterSdk\MagicStarter\Social\AppleProviderFactory;
-use FlutterSdk\MagicStarter\Social\SocialSignInRefused;
-use FlutterSdk\MagicStarter\Support\UserPassword;
+use AnilcanCakir\MagicStarter\Contracts\DisconnectsSocialAccounts;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Social\AppleProviderFactory;
+use AnilcanCakir\MagicStarter\Social\SocialSignInRefused;
+use AnilcanCakir\MagicStarter\Support\UserPassword;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;

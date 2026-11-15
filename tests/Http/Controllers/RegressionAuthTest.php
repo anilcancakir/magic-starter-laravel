@@ -1,19 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Actions\UpdateUserPassword;
-use FlutterSdk\MagicStarter\Actions\UpdateUserProfile;
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserPasswords;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserProfiles;
-use FlutterSdk\MagicStarter\Http\Controllers\AuthController;
-use FlutterSdk\MagicStarter\Http\Controllers\ProfileController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\UpdateUserPassword;
+use AnilcanCakir\MagicStarter\Actions\UpdateUserProfile;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserPasswords;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles;
+use AnilcanCakir\MagicStarter\Http\Controllers\AuthController;
+use AnilcanCakir\MagicStarter\Http\Controllers\ProfileController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Hash;

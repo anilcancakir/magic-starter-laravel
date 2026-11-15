@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Requests;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
-use FlutterSdk\MagicStarter\Http\Controllers\AuthController;
-use FlutterSdk\MagicStarter\Http\Controllers\PasswordResetController;
-use FlutterSdk\MagicStarter\Http\Controllers\SocialExchangeController;
-use FlutterSdk\MagicStarter\Http\Controllers\SocialRedirectController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Http\Controllers\AuthController;
+use AnilcanCakir\MagicStarter\Http\Controllers\PasswordResetController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SocialExchangeController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SocialRedirectController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -38,7 +38,7 @@ final class AuthRequestsTest extends TestCase
             'auth.providers.users.model' => AuthRequestsTestUser::class,
             'magic-starter.models.user' => AuthRequestsTestUser::class,
             'magic-starter.models.team' => AuthRequestsTestTeam::class,
-            'magic-starter.models.membership' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            'magic-starter.models.membership' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
         ]);
         \call_user_func('config', [
             'magic-starter.supported_locales' => [
@@ -118,7 +118,7 @@ final class AuthRequestsTest extends TestCase
 
         Gate::policy(
             AuthRequestsTestTeam::class,
-            \FlutterSdk\MagicStarter\Policies\TeamPolicy::class,
+            \AnilcanCakir\MagicStarter\Policies\TeamPolicy::class,
         );
 
         \call_user_func('app', 'router')->post('/auth/register', [AuthController::class, 'register']);
@@ -591,10 +591,10 @@ final class AuthRequestsTest extends TestCase
 
 final class AuthRequestsTestUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
     use HasUuids;
 
     protected $table = 'users';
@@ -632,7 +632,7 @@ final class AuthRequestsTestUser extends Model implements AuthenticatableContrac
     }
 }
 
-final class AuthRequestsTestTeam extends \FlutterSdk\MagicStarter\Models\Team
+final class AuthRequestsTestTeam extends \AnilcanCakir\MagicStarter\Models\Team
 {
     protected $table = 'teams';
 
@@ -645,7 +645,7 @@ final class AuthRequestsTestTeam extends \FlutterSdk\MagicStarter\Models\Team
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(AuthRequestsTestUser::class, 'team_user', 'team_id', 'user_id')
-            ->using(\FlutterSdk\MagicStarter\MagicStarter::membershipModel())
+            ->using(\AnilcanCakir\MagicStarter\MagicStarter::membershipModel())
             ->withPivot('role')
             ->withTimestamps();
     }

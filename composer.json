@@ -1,21 +1,21 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "fluttersdk/magic-starter-laravel",
-    "description": "Magic Framework Laravel backend starter package.",
+    "name": "anilcancakir/magic-starter-laravel",
+    "description": "The Laravel JSON API behind the Magic Starter Flutter app: email, phone, social and guest sign-in, two-factor, teams, profiles, sessions, notifications and billing. Sanctum tokens, UUID or integer keys, every action swappable through a contract, optional Filament admin panel.",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "FlutterSdk",
-            "email": "hello@fluttersdk.com"
+            "name": "Anılcan Çakır",
+            "email": "anilcan.cakir@gmail.com"
         }
     ],
     "keywords": ["laravel", "auth", "teams", "profile", "starter", "sanctum", "jetstream"],
-    "homepage": "https://magic.fluttersdk.com/starter",
+    "homepage": "https://anilcancakir.com/magic-starter-laravel",
     "support": {
-        "docs": "https://magic.fluttersdk.com/packages/starter-laravel/getting-started/installation",
-        "issues": "https://github.com/fluttersdk/magic-starter-laravel/issues",
-        "source": "https://github.com/fluttersdk/magic-starter-laravel"
+        "docs": "https://anilcancakir.com/magic-starter-laravel/docs/getting-started/installation",
+        "issues": "https://github.com/anilcancakir/magic-starter-laravel/issues",
+        "source": "https://github.com/anilcancakir/magic-starter-laravel"
     },
     "require": {
         "php": "^8.2",
@@ -64,19 +64,19 @@
     },
     "autoload": {
         "psr-4": {
-            "FlutterSdk\\MagicStarter\\": "src/"
+            "AnilcanCakir\\MagicStarter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "FlutterSdk\\MagicStarter\\Tests\\": "tests/",
-            "FlutterSdk\\MagicStarter\\Database\\Factories\\": "database/factories/"
+            "AnilcanCakir\\MagicStarter\\Tests\\": "tests/",
+            "AnilcanCakir\\MagicStarter\\Database\\Factories\\": "database/factories/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "FlutterSdk\\MagicStarter\\MagicStarterServiceProvider"
+                "AnilcanCakir\\MagicStarter\\MagicStarterServiceProvider"
             ]
         }
     },

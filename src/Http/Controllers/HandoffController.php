@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\ExchangesHandoffCodes;
-use FlutterSdk\MagicStarter\Contracts\IssuesHandoffCodes;
-use FlutterSdk\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
-use FlutterSdk\MagicStarter\Http\Requests\ExchangeHandoffRequest;
-use FlutterSdk\MagicStarter\Http\Requests\IssueHandoffRequest;
+use AnilcanCakir\MagicStarter\Contracts\ExchangesHandoffCodes;
+use AnilcanCakir\MagicStarter\Contracts\IssuesHandoffCodes;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
+use AnilcanCakir\MagicStarter\Http\Requests\ExchangeHandoffRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\IssueHandoffRequest;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;

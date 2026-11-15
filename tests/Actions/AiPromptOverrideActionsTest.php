@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\DeleteAiPromptOverride;
-use FlutterSdk\MagicStarter\Actions\SaveAiPromptOverride;
-use FlutterSdk\MagicStarter\Contracts\DeletesAiPromptOverrides;
-use FlutterSdk\MagicStarter\Contracts\SavesAiPromptOverrides;
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptRegistry;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\DeleteAiPromptOverride;
+use AnilcanCakir\MagicStarter\Actions\SaveAiPromptOverride;
+use AnilcanCakir\MagicStarter\Contracts\DeletesAiPromptOverrides;
+use AnilcanCakir\MagicStarter\Contracts\SavesAiPromptOverrides;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptRegistry;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Validation\ValidationException;
 
 /**

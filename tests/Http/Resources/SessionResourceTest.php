@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Resources;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Resources;
 
-use FlutterSdk\MagicStarter\Http\Resources\SessionResource;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Http\Resources\SessionResource;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
@@ -13,10 +13,10 @@ use Illuminate\Support\Str;
  * Tests for the enhanced SessionResource, which should include agent and location fields.
  *
  * The `agent` and `location` fields are RED until `SessionAgent` and `SessionLocation`
- * are implemented in `FlutterSdk\MagicStarter\Support\`.
+ * are implemented in `AnilcanCakir\MagicStarter\Support\`.
  *
  * Expected failure for agent/location tests:
- * `Class "FlutterSdk\MagicStarter\Support\SessionAgent" not found`
+ * `Class "AnilcanCakir\MagicStarter\Support\SessionAgent" not found`
  */
 final class SessionResourceTest extends TestCase
 {

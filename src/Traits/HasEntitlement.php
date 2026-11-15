@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Traits;
+namespace AnilcanCakir\MagicStarter\Traits;
 
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
+use AnilcanCakir\MagicStarter\Support\ReadsBillableAttributes;
 use Carbon\Exceptions\InvalidFormatException;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
-use FlutterSdk\MagicStarter\Support\ReadsBillableAttributes;
 
 /**
  * Cashier-style reads on the billable model that answer for every rail.

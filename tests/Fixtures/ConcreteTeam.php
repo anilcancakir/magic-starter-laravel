@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Fixtures;
+namespace AnilcanCakir\MagicStarter\Tests\Fixtures;
 
-use FlutterSdk\MagicStarter\Models\Team;
+use AnilcanCakir\MagicStarter\Models\Team;
 
 class ConcreteTeam extends Team
 {

@@ -1,25 +1,25 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AiPrompts;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts;
 
+use AnilcanCakir\MagicStarter\Contracts\SavesAiPromptOverrides;
+use AnilcanCakir\MagicStarter\Enums\AiPromptOverrideStatus;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Pages\CreateAiPromptOverride;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Pages\EditAiPromptOverride;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Pages\ListAiPromptOverrides;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Schemas\AiPromptOverrideForm;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptDefinition;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptRegistry;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\RequiredPhrases;
 use BackedEnum;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\SavesAiPromptOverrides;
-use FlutterSdk\MagicStarter\Enums\AiPromptOverrideStatus;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Pages\CreateAiPromptOverride;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Pages\EditAiPromptOverride;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Pages\ListAiPromptOverrides;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Schemas\AiPromptOverrideForm;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptDefinition;
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptRegistry;
-use FlutterSdk\MagicStarter\Support\AiPrompts\RequiredPhrases;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use UnitEnum;

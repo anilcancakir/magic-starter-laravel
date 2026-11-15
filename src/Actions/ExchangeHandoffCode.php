@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\ExchangesHandoffCodes;
-use FlutterSdk\MagicStarter\Handoff\HandoffStore;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Contracts\ExchangesHandoffCodes;
+use AnilcanCakir\MagicStarter\Handoff\HandoffStore;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Database\Eloquent\Model;
 
 /**

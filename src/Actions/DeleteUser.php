@@ -1,22 +1,22 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Contracts\DeletesTeams;
-use FlutterSdk\MagicStarter\Contracts\DeletesUsers;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Jobs\DeleteOneSignalUser;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
-use FlutterSdk\MagicStarter\Models\NotificationSetting;
-use FlutterSdk\MagicStarter\Models\PushDevice;
-use FlutterSdk\MagicStarter\Models\SocialAccount;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessageAttachment;
-use FlutterSdk\MagicStarter\Social\AppleProviderFactory;
-use FlutterSdk\MagicStarter\Support\OneSignalSubscriptions;
-use FlutterSdk\MagicStarter\Support\OwnedTeams;
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Contracts\DeletesTeams;
+use AnilcanCakir\MagicStarter\Contracts\DeletesUsers;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Jobs\DeleteOneSignalUser;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Models\NotificationSetting;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessageAttachment;
+use AnilcanCakir\MagicStarter\Social\AppleProviderFactory;
+use AnilcanCakir\MagicStarter\Support\OneSignalSubscriptions;
+use AnilcanCakir\MagicStarter\Support\OwnedTeams;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\DatabaseNotification;

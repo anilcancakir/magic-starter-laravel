@@ -1,4 +1,4 @@
-@php($brand = \FlutterSdk\MagicStarter\Support\MailBrand::current())
+@php($brand = \AnilcanCakir\MagicStarter\Support\MailBrand::current())
 @props(['url'])
 {{-- The name comes from the brand, so the slot the message passes in is ignored. --}}
 <tr>

@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Jobs;
+namespace AnilcanCakir\MagicStarter\Jobs;
 
-use FlutterSdk\MagicStarter\Console\ReconcileBillingEntitlements;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\TrialRefusalReason;
-use FlutterSdk\MagicStarter\Http\Controllers\StripeWebhookController;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Notifications\TrialRefusedNotification;
-use FlutterSdk\MagicStarter\Support\BillingEventRecorder;
-use FlutterSdk\MagicStarter\Support\BillingLog;
-use FlutterSdk\MagicStarter\Support\TrialCardGateway;
+use AnilcanCakir\MagicStarter\Console\ReconcileBillingEntitlements;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\TrialRefusalReason;
+use AnilcanCakir\MagicStarter\Http\Controllers\StripeWebhookController;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Notifications\TrialRefusedNotification;
+use AnilcanCakir\MagicStarter\Support\BillingEventRecorder;
+use AnilcanCakir\MagicStarter\Support\BillingLog;
+use AnilcanCakir\MagicStarter\Support\TrialCardGateway;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -620,7 +620,7 @@ class CheckTrialCard implements ShouldQueue
      * Through the reconciler's own Stripe arm for one subject rather than a
      * claim assembled here: it reads the subject's `default` row (now the
      * survivor), maps the price through the catalogue, writes through
-     * {@see \FlutterSdk\MagicStarter\Contracts\WritesEntitlement} as a
+     * {@see \AnilcanCakir\MagicStarter\Contracts\WritesEntitlement} as a
      * projection, and only on a disagreement, so the ordering rules that
      * guard every other write guard this one too. It is a local read; nothing
      * here calls Stripe.

@@ -2,7 +2,7 @@
 
 namespace App\Actions\MagicStarter;
 
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserPasswords;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserPasswords;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**

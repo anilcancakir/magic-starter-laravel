@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Concerns;
+namespace AnilcanCakir\MagicStarter\Filament\Concerns;
 
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
 
 /**
  * Panel access for the user model: the gate in front of every admin write.

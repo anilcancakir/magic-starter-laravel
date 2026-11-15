@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Tests\Support\SupportAi\Tools;
 
-use FlutterSdk\MagicStarter\Contracts\RecordsSupportProposals;
-use FlutterSdk\MagicStarter\Contracts\SupportTool;
-use FlutterSdk\MagicStarter\Enums\SupportProposalAction;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\ProposeBillingChangeTool;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\RecordsSupportProposals;
+use AnilcanCakir\MagicStarter\Contracts\SupportTool;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalAction;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\ProposeBillingChangeTool;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
@@ -18,7 +18,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * the trigger from the turn's own conversation instance, and answers a refusal
  * sentence rather than throwing for anything the model sent.
  *
- * The contract is faked: {@see \FlutterSdk\MagicStarter\Tests\Actions\RecordSupportProposalTest}
+ * The contract is faked: {@see \AnilcanCakir\MagicStarter\Tests\Actions\RecordSupportProposalTest}
  * owns what recording does.
  */
 class ProposeBillingChangeToolTest extends TestCase

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Jobs;
+namespace AnilcanCakir\MagicStarter\Jobs;
 
-use FlutterSdk\MagicStarter\Models\PushDevice;
-use FlutterSdk\MagicStarter\Support\OneSignalSubscriptions;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
+use AnilcanCakir\MagicStarter\Support\OneSignalSubscriptions;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Queue\Queueable;

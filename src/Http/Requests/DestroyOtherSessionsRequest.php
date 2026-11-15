@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
 /**
  * Validates the password before revoking all other sessions.

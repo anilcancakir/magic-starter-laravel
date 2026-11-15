@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\ConnectsSocialAccounts;
-use FlutterSdk\MagicStarter\Contracts\CreatesUsersFromProvider;
-use FlutterSdk\MagicStarter\Contracts\ResolvesSocialUsers;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Social\SocialSignInRefused;
-use FlutterSdk\MagicStarter\Social\VerifiedIdentity;
+use AnilcanCakir\MagicStarter\Contracts\ConnectsSocialAccounts;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsersFromProvider;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesSocialUsers;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Social\SocialSignInRefused;
+use AnilcanCakir\MagicStarter\Social\VerifiedIdentity;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\Request;

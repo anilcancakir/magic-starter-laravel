@@ -2,7 +2,7 @@
 
 namespace App\Actions\MagicStarter;
 
-use FlutterSdk\MagicStarter\Contracts\RemovesTeamMembers;
+use AnilcanCakir\MagicStarter\Contracts\RemovesTeamMembers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +24,7 @@ class RemoveTeamMember implements RemovesTeamMembers
         // Example: check authorization, cannot remove owner, detach from team pivot, then null the
         // member's current_team_id when it points at this team (the default action does).
         // Keep the owner guard the admin panel and the purge command rely on:
-        // \FlutterSdk\MagicStarter\Actions\RemoveTeamMember::ensureRemovable($team, $teamMember, leaving: false);
+        // \AnilcanCakir\MagicStarter\Actions\RemoveTeamMember::ensureRemovable($team, $teamMember, leaving: false);
         throw new \RuntimeException('RemoveTeamMember action not implemented. Publish and implement this stub.');
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Notifications;
+namespace AnilcanCakir\MagicStarter\Notifications;
 
-use FlutterSdk\MagicStarter\Actions\ReplyToSupportConversation;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Resources\NotificationResource;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Actions\ReplyToSupportConversation;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Resources\NotificationResource;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeEncrypted;
 use Illuminate\Contracts\Queue\ShouldQueue;

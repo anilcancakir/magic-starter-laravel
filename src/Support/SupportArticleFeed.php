@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Enums\SupportAudience;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Enums\SupportAudience;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 

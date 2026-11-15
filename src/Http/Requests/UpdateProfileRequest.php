@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
+use AnilcanCakir\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
+use AnilcanCakir\MagicStarter\Rules\E164Phone;
 use DateTimeZone;
-use FlutterSdk\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
-use FlutterSdk\MagicStarter\Rules\E164Phone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -30,7 +30,7 @@ class UpdateProfileRequest extends FormRequest
     {
         $user = $this->user();
         $isGuest = $user && (bool) ($user->is_guest ?? false);
-        $userTable = (new (\FlutterSdk\MagicStarter\MagicStarter::userModel()))->getTable();
+        $userTable = (new (\AnilcanCakir\MagicStarter\MagicStarter::userModel()))->getTable();
 
         $rules = [
             'name' => [

@@ -1,20 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\Billing\RelationManagers\BillingRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Subscriptions\Pages\ListSubscriptions;
+use AnilcanCakir\MagicStarter\Filament\Resources\Subscriptions\SubscriptionResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\Subscription;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\BillableTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Facades\Filament;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\Billing\RelationManagers\BillingRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Subscriptions\Pages\ListSubscriptions;
-use FlutterSdk\MagicStarter\Filament\Resources\Subscriptions\SubscriptionResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\Subscription;
-use FlutterSdk\MagicStarter\Tests\Fixtures\BillableTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Subscription as CashierSubscription;
 use Laravel\Cashier\SubscriptionItem as CashierSubscriptionItem;

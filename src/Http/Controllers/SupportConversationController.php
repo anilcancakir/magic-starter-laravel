@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Actions\StoreSupportAttachments;
-use FlutterSdk\MagicStarter\Contracts\OpensSupportConversations;
-use FlutterSdk\MagicStarter\Contracts\PostsCustomerSupportMessages;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Requests\StoreSupportConversationRequest;
-use FlutterSdk\MagicStarter\Http\Requests\StoreSupportMessageRequest;
-use FlutterSdk\MagicStarter\Http\Resources\SupportConversationResource;
-use FlutterSdk\MagicStarter\Http\Resources\SupportMessageResource;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportPageContext;
-use FlutterSdk\MagicStarter\Support\TeamKey;
+use AnilcanCakir\MagicStarter\Actions\StoreSupportAttachments;
+use AnilcanCakir\MagicStarter\Contracts\OpensSupportConversations;
+use AnilcanCakir\MagicStarter\Contracts\PostsCustomerSupportMessages;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Requests\StoreSupportConversationRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\StoreSupportMessageRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\SupportConversationResource;
+use AnilcanCakir\MagicStarter\Http\Resources\SupportMessageResource;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportPageContext;
+use AnilcanCakir\MagicStarter\Support\TeamKey;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
