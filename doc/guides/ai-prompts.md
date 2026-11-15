@@ -1,5 +1,8 @@
 # AI Prompt Overrides
 
+How staff tune the body of an AI prompt from the admin panel while the code keeps the default, the boundary block and the phrases a body has to contain.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Enabling](#enabling)
 - [Registering a Prompt](#registering-a-prompt)
@@ -7,8 +10,25 @@
 - [The Workbench](#the-workbench)
 - [Staleness and the Boundary](#staleness-and-the-boundary)
 - [Failure Mode](#failure-mode)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+```php
+$prompts->define(key: 'incident.analysis', label: 'Incident analysis', body: fn (): string => '...');
+
+$prompt = app(ResolvesPrompts::class)->resolve('incident.analysis');
+```
+
+| Item | Value |
+|:-----|:------|
+| Feature | `Features::aiPrompts()`, then `php artisan magic-starter:install --features=ai-prompts` and `php artisan migrate`. |
+| Register | `PromptRegistry::define()` in a service provider's `boot()`. |
+| Resolve | `ResolvesPrompts::resolve($key)` answers `text`, `source`, `hash` and `defaultHash`. |
+| Overridable | The body only; the boundary and the required phrases stay in code. |
+| Stale | An override ignored once the code default changes, until staff review it. |
+| Panel | `AiPromptOverrideResource`, under the key `ai_prompts`. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -52,7 +72,7 @@ Register every prompt in a service provider's `boot()`, through `PromptRegistry:
 ```php
 namespace App\Providers;
 
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptRegistry;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptRegistry;
 use Illuminate\Support\ServiceProvider;
 
 class AiPromptServiceProvider extends ServiceProvider
@@ -96,14 +116,14 @@ Registration is unconditional. It runs the same whether the feature is on or off
 <a name="resolving-a-prompt"></a>
 ## Resolving a Prompt
 
-`FlutterSdk\MagicStarter\Contracts\ResolvesPrompts` has one method, `resolve(string $key): ResolvedPrompt`. Put `text` in the call's instructions, and record `source` and `hash` on the run:
+`AnilcanCakir\MagicStarter\Contracts\ResolvesPrompts` has one method, `resolve(string $key): ResolvedPrompt`. Put `text` in the call's instructions, and record `source` and `hash` on the run:
 
 ```php
 namespace App\Services;
 
-use FlutterSdk\MagicStarter\Contracts\RecordsAiRuns;
-use FlutterSdk\MagicStarter\Contracts\ResolvesPrompts;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunStart;
+use AnilcanCakir\MagicStarter\Contracts\RecordsAiRuns;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesPrompts;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunStart;
 
 class IncidentAnalyst
 {
@@ -148,7 +168,7 @@ An unknown key throws an `InvalidArgumentException`; `PromptRegistry::find()` an
 <a name="the-workbench"></a>
 ## The Workbench
 
-With the [admin panel](basics/admin-panel.md) installed and the feature on, the plugin adds `AiPromptOverrideResource` behind the panel's own access gate. It is registered under the key `ai_prompts`, so `MagicStarterPlugin::make()->withoutResources(['ai_prompts'])` drops it like any other.
+With the [admin panel](../basics/admin-panel.md) installed and the feature on, the plugin adds `AiPromptOverrideResource` behind the panel's own access gate. It is registered under the key `ai_prompts`, so `MagicStarterPlugin::make()->withoutResources(['ai_prompts'])` drops it like any other.
 
 The flow is four steps:
 
@@ -159,7 +179,7 @@ The flow is four steps:
 
 The list shows each override with a badge: `current`, `stale`, `incomplete` or `orphaned`. `incomplete` is an override that matches the code default but lacks a required phrase, so the resolver ignores it; like a stale row it asks for the review tick before it can be saved. There is no bulk action, because a bulk delete would skip the contract.
 
-Saving and deleting go through two contracts, `SavesAiPromptOverrides` and `DeletesAiPromptOverrides`, which you can swap like any other [action contract](architecture/action-contracts.md). The default save refuses an unknown key, a blank body, a body that lacks a required phrase, and a body edited against a code default that has since changed. The panel shows a refusal other than a missing phrase as a danger notification; a missing phrase is a message on the body field.
+Saving and deleting go through two contracts, `SavesAiPromptOverrides` and `DeletesAiPromptOverrides`, which you can swap like any other [action contract](../architecture/action-contracts.md). The default save refuses an unknown key, a blank body, a body that lacks a required phrase, and a body edited against a code default that has since changed. The panel shows a refusal other than a missing phrase as a danger notification; a missing phrase is a message on the body field.
 
 ---
 
@@ -187,3 +207,10 @@ Required phrases are checked again at resolve time, not only at save. An overrid
 A prompt must not stop a model call. When the database cannot answer, `resolve()` answers the code default, and the first failure in a process logs one warning with the reason `ai_prompt_overrides_unreadable`. A `PDOException` is the trigger, and a `QueryException` is one, so a missing table (an upgrade that has not migrated yet) and a lost connection are both covered.
 
 A database failure includes a database-backed cache store, whose failure is a `QueryException` too, so it answers the code default as well. A failure of any other cache store, or of anything that is not a database failure, is a bug and propagates. A failed read is not cached, so the next call reads the database again. The read runs in its own transaction, a savepoint inside yours, so on PostgreSQL a failed read does not abort a transaction your code has open.
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [AI Run Log](./ai-runs.md): record `source` and `hash` on every run, so a change in output ties to a change in wording.
+- [Admin Panel](../basics/admin-panel.md): the panel that hosts the workbench.
+- [Action Contracts](../architecture/action-contracts.md): swapping the save and delete actions.

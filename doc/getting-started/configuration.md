@@ -1,5 +1,8 @@
 # Configuration
 
+Every setting in `config/magic-starter.php`: the feature toggles, authentication identity, route prefix, storage disks, UUID mode, model resolution, billing and the scheduled task times.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Publishing the Config File](#publishing-the-config-file)
 - [Feature Toggles](#feature-toggles)
@@ -12,7 +15,29 @@
 - [Model Resolution](#model-resolution)
 - [Two-Factor Authentication Settings](#two-factor-authentication-settings)
 - [Billing](#billing)
+- [Scheduled Task Times](#scheduled-task-times)
 - [Environment Variables](#environment-variables)
+- [Related Documentation](#related-documentation)
+
+<a name="quick-reference"></a>
+## Quick Reference
+
+```php
+// config/magic-starter.php
+'features' => [
+    \AnilcanCakir\MagicStarter\Features::teams(),
+    \AnilcanCakir\MagicStarter\Features::twoFactorAuthentication(),
+],
+```
+
+| Key | Default | Controls |
+|:----|:--------|:---------|
+| `features` | `[]` | Which feature routes and logic exist. A feature left out registers no routes. |
+| `use_uuids` | `true` | UUID or auto-incrementing primary keys. Plan it before the first migration. |
+| `route_prefix` | `'api/v1'` | Prefix of every package route (`MAGIC_STARTER_ROUTE_PREFIX`). |
+| `frontend_url` | `env('MAGIC_STARTER_FRONTEND_URL')` | Base URL of the frontend in email links. |
+| `models.*` | package models | Which user, team, membership and invitation classes the package resolves. |
+| `auth.email`, `auth.phone` | `true`, `false` | Which identifiers a login or registration accepts. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -22,7 +47,7 @@ Magic Starter is configured via a single file at `config/magic-starter.php`. Thi
 All configuration keys support environment variable overrides where noted, making it straightforward to manage per-environment settings without modifying the config file directly.
 
 > [!TIP]
-> For a full walkthrough of installation and initial setup, see the [Installation Guide](https://magic.fluttersdk.com/packages/starter-laravel/getting-started/installation).
+> For a full walkthrough of installation and initial setup, see the [Installation Guide](./installation.md).
 
 <a name="publishing-the-config-file"></a>
 ## Publishing the Config File
@@ -42,18 +67,18 @@ Features follow a toggle pattern inspired by Jetstream. Enable features by addin
 
 ```php
 'features' => [
-    \FlutterSdk\MagicStarter\Features::teams(),
-    \FlutterSdk\MagicStarter\Features::profilePhotos(),
-    \FlutterSdk\MagicStarter\Features::sessions(),
-    \FlutterSdk\MagicStarter\Features::socialLogin(),
-    \FlutterSdk\MagicStarter\Features::newsletterSubscription(),
-    \FlutterSdk\MagicStarter\Features::extendedProfile(),
-    \FlutterSdk\MagicStarter\Features::notifications(),
-    \FlutterSdk\MagicStarter\Features::twoFactorAuthentication(),
-    \FlutterSdk\MagicStarter\Features::emailVerification(),
-    \FlutterSdk\MagicStarter\Features::guestAuth(),
-    \FlutterSdk\MagicStarter\Features::phoneOtp(),
-    \FlutterSdk\MagicStarter\Features::timezones(),
+    \AnilcanCakir\MagicStarter\Features::teams(),
+    \AnilcanCakir\MagicStarter\Features::profilePhotos(),
+    \AnilcanCakir\MagicStarter\Features::sessions(),
+    \AnilcanCakir\MagicStarter\Features::socialLogin(),
+    \AnilcanCakir\MagicStarter\Features::newsletterSubscription(),
+    \AnilcanCakir\MagicStarter\Features::extendedProfile(),
+    \AnilcanCakir\MagicStarter\Features::notifications(),
+    \AnilcanCakir\MagicStarter\Features::twoFactorAuthentication(),
+    \AnilcanCakir\MagicStarter\Features::emailVerification(),
+    \AnilcanCakir\MagicStarter\Features::guestAuth(),
+    \AnilcanCakir\MagicStarter\Features::phoneOtp(),
+    \AnilcanCakir\MagicStarter\Features::timezones(),
 ],
 ```
 
@@ -85,7 +110,7 @@ The main features and their toggle methods:
 Use the `Features` class to check feature status at runtime in your application code, controllers, or service providers:
 
 ```php
-use FlutterSdk\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Features;
 
 // Generic check by feature key string
 Features::enabled('teams');                          // bool
@@ -104,7 +129,7 @@ Features::hasGuestAuthFeatures();                    // bool
 Features::hasPhoneOtpFeatures();                     // bool
 Features::hasTimezoneFeatures();                     // bool
 
-// Composite check — true when either timezones or extended profile is enabled
+// Composite check: true when either timezones or extended profile is enabled
 Features::hasTimezoneOrExtendedProfileFeatures();    // bool
 
 // Authentication identity checks
@@ -210,10 +235,10 @@ When both are enabled, the validation rules use `required_without` constraints s
 Check identity status programmatically:
 
 ```php
-use FlutterSdk\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Features;
 
-Features::emailIdentity();   // bool — whether email identity is enabled
-Features::phoneIdentity();   // bool — whether phone identity is enabled
+Features::emailIdentity();   // bool: whether email identity is enabled
+Features::phoneIdentity();   // bool: whether phone identity is enabled
 ```
 
 Override via environment variables:
@@ -325,22 +350,22 @@ The `use_uuids` key determines the primary key strategy for all package migratio
 | `false` | `id()` auto-incrementing | `foreignId()` references | Integer-based polymorphic columns |
 
 > [!NOTE]
-> `notifications.id` is a UUID in both modes, because Laravel's `database` channel writes the notification's own UUID there; only its `notifiable` morph columns follow `use_uuids`. An install that migrated before this was true has an auto-incrementing id the channel cannot write to: copy `vendor/fluttersdk/magic-starter-laravel/database/migrations/rekey_notifications_table_by_uuid.php` into `database/migrations/` under a timestamp later than your notifications migration, then run `php artisan migrate`. Re-running `magic-starter:install` is not the way to get it, because the installer also rewrites the users migration and the feature list. The same goes for `convert_notifications_data_to_json.php` on PostgreSQL, which turns a text `data` column into JSON so Filament's database notifications can query it; copy it under a timestamp later than the rekey.
+> `notifications.id` is a UUID in both modes, because Laravel's `database` channel writes the notification's own UUID there; only its `notifiable` morph columns follow `use_uuids`. An install that migrated before this was true has an auto-incrementing id the channel cannot write to: copy `vendor/anilcancakir/magic-starter-laravel/database/migrations/rekey_notifications_table_by_uuid.php` into `database/migrations/` under a timestamp later than your notifications migration, then run `php artisan migrate`. Re-running `magic-starter:install` is not the way to get it, because the installer also rewrites the users migration and the feature list. The same goes for `convert_notifications_data_to_json.php` on PostgreSQL, which turns a text `data` column into JSON so Filament's database notifications can query it; copy it under a timestamp later than the rekey.
 
 This value is set automatically during installation based on your existing database schema. All package models include the `ConditionallyUsesUuids` trait, which reads this config at runtime to determine key behavior.
 
 In migrations, always use the `MigrationHelper` methods instead of raw Laravel column methods:
 
 ```php
-use FlutterSdk\MagicStarter\Support\MigrationHelper;
+use AnilcanCakir\MagicStarter\Support\MigrationHelper;
 
-// Primary key — uses uuid() or id() based on config
+// Primary key: uses uuid() or id() based on config
 MigrationHelper::primaryKey($table);
 
-// Foreign key — uses foreignUuid() or foreignId() based on config
+// Foreign key: uses foreignUuid() or foreignId() based on config
 MigrationHelper::foreignKey($table, 'user_id')->constrained()->cascadeOnDelete();
 
-// Morph columns — handles UUID/integer polymorphism
+// Morph columns: handles UUID/integer polymorphism
 MigrationHelper::morphColumns($table, 'notifiable');
 ```
 
@@ -379,7 +404,7 @@ Or set them directly in the config file:
 You can also override model resolution programmatically in your `AppServiceProvider`:
 
 ```php
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarter;
 
 MagicStarter::useUserModel(\App\Models\User::class);
 MagicStarter::useTeamModel(\App\Models\Team::class);
@@ -388,7 +413,7 @@ MagicStarter::useTeamModel(\App\Models\Team::class);
 > [!NOTE]
 > A stale Composer classmap can cause `class_exists()` to return incorrect results. Run `composer dump-autoload` if model auto-resolution is not picking up your custom models.
 
-`MagicStarter::serializeUserUsing()` belongs to the same family: it registers extra fields for `UserResource` to publish, which is how an application exposes a column it added to `users`. See [Publishing Your Own Columns](https://magic.fluttersdk.com/packages/starter-laravel/basics/profile#publishing-your-own-columns).
+`MagicStarter::serializeUserUsing()` belongs to the same family: it registers extra fields for `UserResource` to publish, which is how an application exposes a column it added to `users`. See [Publishing Your Own Columns](../basics/profile.md#publishing-your-own-columns).
 
 <a name="two-factor-authentication-settings"></a>
 ## Two-Factor Authentication Settings
@@ -446,14 +471,14 @@ With the `billing` feature on, `config('magic-starter.billing')` holds one catal
 The Stripe price id of a product is read from `CASHIER_PRICE_<KEY>`, the product key uppercased: `pro_monthly` reads `CASHIER_PRICE_PRO_MONTHLY`. The RevenueCat keys are `webhook_secret` (the HMAC signing secret), `secret_api_key` (reads subscribers), and `api_v2_key` with `project_id` (read by `billing:doctor --remote` only; neither is needed to sell).
 
 > [!WARNING]
-> `plans`, `prices` and `store_products` were removed. A config that still carries one, even empty, stops boot with a message naming where its content moved. See the [changelog](../../CHANGELOG.md).
+> `plans`, `prices` and `store_products` were removed. A config that still carries one, even empty, stops boot with a message naming where its content moved. The changelog records each move.
 
 The full reference, including the refusals and the webhook, is in [Billing](../basics/billing.md).
 
 <a name="scheduled-task-times"></a>
 ## Scheduled Task Times
 
-The package puts six maintenance tasks on the scheduler: the daily `magic-starter:audit:prune`, `mail:prune-sends`, `billing:prune` and `support-articles:prune-images`, and the hourly `magic-starter:ai-runs:prune` and `billing:expire-grants`. They all start at 00:00 or at minute 0, which collides with a shared box that runs its database dumps at midnight or its own spike on the hour. `config('magic-starter.schedule')` takes one cron expression per task, so a host moves each of them:
+The package puts these maintenance tasks on the scheduler: the daily `magic-starter:audit:prune`, `mail:prune-sends`, `billing:prune` and `support-articles:prune-images`, and the hourly `magic-starter:ai-runs:prune` and `billing:expire-grants`. They all start at 00:00 or at minute 0, which collides with a shared box that runs its database dumps at midnight or its own spike on the hour. `config('magic-starter.schedule')` takes one cron expression per task, so a host moves each of them:
 
 ```php
 'schedule' => [
@@ -510,3 +535,11 @@ All environment variables recognized by the package:
 | `MAGIC_STARTER_SCHEDULE_SUPPORT_ARTICLE_IMAGES_PRUNE` | `schedule.support_article_images_prune` | `'0 0 * * *'` | Cron expression for `magic-starter:support-articles:prune-images` |
 | `MAGIC_STARTER_SCHEDULE_AI_RUNS_PRUNE` | `schedule.ai_runs_prune` | `'0 * * * *'` | Cron expression for `magic-starter:ai-runs:prune` |
 | `MAGIC_STARTER_SCHEDULE_BILLING_EXPIRE_GRANTS` | `schedule.billing_expire_grants` | `'0 * * * *'` | Cron expression for `magic-starter:billing:expire-grants` |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Installation](./installation.md): requirements, the install command and the `User` model traits.
+- [Models](../architecture/models.md): model resolution and `MigrationHelper` in depth.
+- [Billing](../basics/billing.md): the catalogue behind `billing.*`.
+- [Service Provider](../architecture/service-provider.md): how the config is merged and the routes are gated.

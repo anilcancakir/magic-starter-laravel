@@ -1,7 +1,8 @@
 # Teams
 
-## Table of Contents
+The team endpoints: creating and deleting teams, members and roles, invitations, team photos and switching the current team.
 
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Team CRUD](#team-crud)
   - [List Teams](#list-teams)
@@ -36,8 +37,27 @@
   - [TeamInvitation](#teaminvitation-model)
 - [Roles](#roles)
 - [HasTeams Trait](#hasteams-trait)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+Enable `Features::teams()`. Every endpoint needs `auth:sanctum` and sits under the configured route prefix.
+
+| Method and URI | Needs | Does |
+|:---------------|:------|:-----|
+| `GET teams`, `POST teams` | | Lists the teams you belong to, or creates one. |
+| `GET teams/{team}`, `PUT teams/{team}`, `DELETE teams/{team}` | | Shows, updates or deletes a team. |
+| `POST teams/{team}/restore` | `restorable-teams` | Restores a deleted team inside its window. |
+| `GET teams/{team}/members`, `PUT teams/{team}/members/{user}`, `DELETE teams/{team}/members/{user}` | | Lists members, changes a role, removes a member. |
+| `DELETE teams/{team}/leave` | | Leaves a team. |
+| `GET teams/{team}/invitations`, `POST teams/{team}/invitations`, `DELETE teams/{team}/invitations/{invitation}` | | Lists, sends and cancels invitations. |
+| `POST invitations/{token}/accept` | | Accepts an invitation. |
+| `POST teams/{team}/profile-photo`, `DELETE teams/{team}/profile-photo` | `profile-photos` | Uploads or removes the team photo. |
+| `PUT user/current-team` | | Switches the current team. |
+
+Roles you can assign are `admin`, `editor` and `member`; the owner is whoever `team.user_id` names.
 
 <a name="introduction"></a>
 ## Introduction
@@ -277,15 +297,15 @@ By default `DELETE /teams/{team}` deletes the team for good. The `restorable-tea
 
 Switching it on takes three things in the consuming application:
 
-1. **The column.** `magic-starter:install` publishes `add_soft_deletes_to_teams_table` with the teams feature; on an existing install copy it from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` into `database/migrations/`. It adds `deleted_at` and an indexed, nullable `restore_until`.
+1. **The column.** `magic-starter:install` publishes `add_soft_deletes_to_teams_table` with the teams feature; on an existing install copy it from `vendor/anilcancakir/magic-starter-laravel/database/migrations/` into `database/migrations/`. It adds `deleted_at` and an indexed, nullable `restore_until`.
 2. **The trait.** The team model uses `Illuminate\Database\Eloquent\SoftDeletes`. The published `App\Models\Team` stub does; add it by hand to an older one. The package's own `Models\Team` does not, so that applications that never opt in keep a teams table without the column.
 3. **The feature and the schedule.**
 
 ```php
 // config/magic-starter.php
 'features' => [
-    \FlutterSdk\MagicStarter\Features::teams(),
-    \FlutterSdk\MagicStarter\Features::restorableTeams(),
+    \AnilcanCakir\MagicStarter\Features::teams(),
+    \AnilcanCakir\MagicStarter\Features::restorableTeams(),
 ],
 
 'teams' => [
@@ -764,7 +784,7 @@ Switches the authenticated user's active team. The request is authorized via the
 <a name="lifecycle-events"></a>
 ## Lifecycle Events
 
-A host that tells people when something happens to their team (a member joined, the household was deleted, ownership passed) listens to six events instead of overriding the actions:
+A host that tells people when something happens to their team (a member joined, the household was deleted, ownership passed) listens to these events instead of overriding the actions:
 
 | Event | Dispatched | Properties |
 |-------|------------|------------|
@@ -776,15 +796,15 @@ A host that tells people when something happens to their team (a member joined, 
 | `Events\TeamOwnershipTransferred` | After `TransferTeamOwnership` hands a team to another member: a host's own transfer, the admin panel, and the account purge when it hands on a departing owner's team. | `teamId`, `previousOwnerId`, `newOwnerId`, `actorId` |
 
 ```php
-use FlutterSdk\MagicStarter\Events\TeamDeleted;
-use FlutterSdk\MagicStarter\Events\TeamMemberJoined;
+use AnilcanCakir\MagicStarter\Events\TeamDeleted;
+use AnilcanCakir\MagicStarter\Events\TeamMemberJoined;
 use Illuminate\Support\Facades\Event;
 
 Event::listen(TeamMemberJoined::class, fn (TeamMemberJoined $event) => /* tell the owner */);
 Event::listen(TeamDeleted::class, fn (TeamDeleted $event) => /* tell every former member */);
 ```
 
-Four rules hold for all six:
+Four rules hold for all of them:
 
 - **After the commit.** Each event implements `ShouldDispatchAfterCommit`. The account purge calls these actions inside its own transaction, so a listener hears of a change only once the whole of it has committed, and never hears of one that rolled back. Outside a transaction an event is dispatched at once.
 - **Once, and only for a change.** An action that refuses fires nothing: a join the plan or `ensureCanJoin()` refuses, the owner being removed, a delete or trash the billing guard refuses, a restore after the window closed, a transfer to a user who is not a member. Neither does a call that changes nothing: removing someone who is not a member, restoring a team that is not trashed, transferring a team to the owner it already has.
@@ -799,9 +819,9 @@ Two departures follow from what the actions do. Deleting a team detaches its mem
 `TransferTeamOwnership` makes the new owner the owner and leaves the outgoing owner on the team as an `admin`. A host whose teams have fewer roles overrides `outgoingRole()` and keeps the rest of the transfer, the event included:
 
 ```php
-use FlutterSdk\MagicStarter\Actions\TransferTeamOwnership;
-use FlutterSdk\MagicStarter\Contracts\TransfersTeamOwnership;
-use FlutterSdk\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Actions\TransferTeamOwnership;
+use AnilcanCakir\MagicStarter\Contracts\TransfersTeamOwnership;
+use AnilcanCakir\MagicStarter\Enums\Role;
 
 class TransferHouseholdOwnership extends TransferTeamOwnership
 {
@@ -855,7 +875,7 @@ App providers boot after package providers, so the override takes precedence.
 <a name="team-model"></a>
 ### Team
 
-**Class:** `FlutterSdk\MagicStarter\Models\Team`
+**Class:** `AnilcanCakir\MagicStarter\Models\Team`
 
 | Property              | Type          | Description                                     |
 |-----------------------|---------------|-------------------------------------------------|
@@ -889,7 +909,7 @@ App providers boot after package providers, so the override takes precedence.
 <a name="teamuser-pivot"></a>
 ### TeamUser (Pivot)
 
-**Class:** `FlutterSdk\MagicStarter\Models\TeamUser`
+**Class:** `AnilcanCakir\MagicStarter\Models\TeamUser`
 
 Extends `Illuminate\Database\Eloquent\Relations\Pivot`. Uses the `team_user` table.
 
@@ -909,7 +929,7 @@ Uses `ConditionallyUsesUuids` for runtime UUID/integer PK switching.
 <a name="teaminvitation-model"></a>
 ### TeamInvitation
 
-**Class:** `FlutterSdk\MagicStarter\Models\TeamInvitation`
+**Class:** `AnilcanCakir\MagicStarter\Models\TeamInvitation`
 
 | Property     | Type         | Description                           |
 |--------------|--------------|---------------------------------------|
@@ -943,7 +963,7 @@ Uses `ConditionallyUsesUuids` for runtime UUID/integer PK switching.
 <a name="roles"></a>
 ## Roles
 
-Roles are defined in `FlutterSdk\MagicStarter\Enums\Role`:
+Roles are defined in `AnilcanCakir\MagicStarter\Enums\Role`:
 
 | Role     | Value      | Assignable | Description                              |
 |----------|------------|------------|------------------------------------------|
@@ -959,7 +979,7 @@ The `owner` role is never assigned via the pivot table -- it is resolved at runt
 <a name="hasteams-trait"></a>
 ## HasTeams Trait
 
-**Trait:** `FlutterSdk\MagicStarter\Traits\HasTeams`
+**Trait:** `AnilcanCakir\MagicStarter\Traits\HasTeams`
 
 Applied to the User model to provide team relationship methods.
 
@@ -974,3 +994,23 @@ Applied to the User model to provide team relationship methods.
 | `belongsToTeam(Model $team)`   | bool             | Whether the user owns or is a member of the team    |
 | `ownsTeam(Model $team)`        | bool             | Whether the user owns the team (`user_id` match)    |
 | `hasTeamRole(Model $team, string $role)` | bool  | Whether the user has the given role on the team (does not check ownership) |
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Deleting or leaving a personal team | Deleting is refused with a `422`, and its owner cannot leave (`403`). A personal team stays with its owner. |
+| Sending `owner` as a member or invitation role | Only `admin`, `editor` and `member` are valid. Ownership follows `team.user_id`; hand it on with `TransferTeamOwnership`. |
+| Assuming a team delete can be undone | It is permanent unless `restorable-teams` is on and the model uses `SoftDeletes`. |
+| Using the package `Team` model with `restorable-teams` | Publish the `Team` stub, which carries `SoftDeletes`, and run its `add_soft_deletes_to_teams_table` migration. |
+| Reading the current team without a fallback | When a member is removed from, or leaves, their current team, `current_team_id` is cleared. Use `getCurrentTeamOrPersonal()`. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Authentication](./authentication.md): the `user/current-team` switch and the user payload.
+- [Account Deletion](./account-deletion.md): handing on shared teams when an owner leaves.
+- [Billing](./billing.md): billing a team instead of a user.
+- [Configuration](../getting-started/configuration.md): `invitation_expiry_days`, `teams.*` and the feature flags.
+- [Models](../architecture/models.md): `Team`, `TeamUser` and `TeamInvitation` in depth.

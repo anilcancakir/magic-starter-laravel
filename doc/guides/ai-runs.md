@@ -1,5 +1,8 @@
 # AI Run Log
 
+A record of every model call your application makes, one run per logical call and one attempt per provider leg, with the usage and cost each reported.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Enabling](#enabling)
 - [Configuration](#configuration)
@@ -9,15 +12,26 @@
 - [Masking](#masking)
 - [Pruning](#pruning)
 - [Admin Panel](#admin-panel)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+| Item | Value |
+|:-----|:------|
+| Feature | `Features::aiRuns()`, then `php artisan magic-starter:install --features=ai-runs` and `php artisan migrate`. |
+| Contract | `AnilcanCakir\MagicStarter\Contracts\RecordsAiRuns`; your code makes the call and hands it plain values. |
+| Retention | `ai_runs.retention_days`, 30 by default; the prune blanks bodies and keeps the metadata. |
+| Abandoned | `ai_runs.abandon_after_minutes`, 30 by default, closes a run that lost its caller. |
+| Prune | `php artisan magic-starter:ai-runs:prune`, hourly while the feature is on. |
+| Panel | `AiRunResource` and `AiRunStatsWidget`, under the key `ai_runs`. |
 
 <a name="introduction"></a>
 ## Introduction
 
 The AI run log records every model call your application makes: one run per logical call, one attempt per provider leg (a retry or a fallback is its own attempt), with the usage and cost each reported and, until the prune blanks them, the prompt and the answer. It answers "what did this feature spend, and why did it fail" after the request is gone.
 
-The package never calls a model and has no `laravel/ai` dependency. Your code makes the call and hands the log plain values through one contract, `FlutterSdk\MagicStarter\Contracts\RecordsAiRuns`.
+The package never calls a model and has no `laravel/ai` dependency. Your code makes the call and hands the log plain values through one contract, `AnilcanCakir\MagicStarter\Contracts\RecordsAiRuns`.
 
 **Feature:** `Features::aiRuns()`. While it is off, `start()` answers `null`, nothing is written, and no prune, panel resource or widget exists.
 
@@ -73,13 +87,13 @@ Every key is optional. The package merges its config shallowly, so a published `
 ```php
 namespace App\Services;
 
-use FlutterSdk\MagicStarter\Contracts\RecordsAiRuns;
-use FlutterSdk\MagicStarter\Enums\AiCostSource;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunAttemptData;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunOutcome;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunStart;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiUsage;
+use AnilcanCakir\MagicStarter\Contracts\RecordsAiRuns;
+use AnilcanCakir\MagicStarter\Enums\AiCostSource;
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunAttemptData;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunOutcome;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunStart;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiUsage;
 use Throwable;
 
 class IncidentAnalyst
@@ -276,9 +290,16 @@ A table that does not exist is skipped, since the command can run before the mig
 <a name="admin-panel"></a>
 ## Admin Panel
 
-With the [admin panel](basics/admin-panel.md) installed and the feature on, the plugin adds two parts behind the panel's own access gate:
+With the [admin panel](../basics/admin-panel.md) installed and the feature on, the plugin adds two parts behind the panel's own access gate:
 
 - **`AiRunResource`**, a read-only list and view of every run: started time, feature, status, team, provider, model, attempts, tokens, cost and duration, with filters for feature, status, team and a started date range. Status badges and the status filter use translated labels (`admin_ai.statuses.*`, English and Turkish). A run is a reading of what a call did, so there is no create, edit or delete.
 - **`AiRunStatsWidget`**, on the dashboard: for the last 7 and 30 days, the run count, the failed share, the cost and the cache hit rate. It does not poll; reload the page for fresh figures. The rate is `cache_read_tokens` over `input_tokens`, taken only over the runs that reported both figures; with no such run, or no run at all for the failed share, it shows a dash.
 
 The resource is registered under the key `ai_runs`, so `MagicStarterPlugin::make()->withoutResources(['ai_runs'])` drops it like any other.
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [AI Prompt Overrides](./ai-prompts.md): the prompt source and hash a run records.
+- [Admin Panel](../basics/admin-panel.md): the panel that hosts the run resource.
+- [Configuration](../getting-started/configuration.md): `schedule.ai_runs_prune`.

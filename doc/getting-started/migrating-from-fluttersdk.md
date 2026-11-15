@@ -1,0 +1,125 @@
+# Migrating from fluttersdk/magic-starter-laravel
+
+How to move a Laravel application from `fluttersdk/magic-starter-laravel` 0.0.x to `anilcancakir/magic-starter-laravel` 1.0.0: a new Composer name and a new PHP namespace, with no change to the API your Flutter client talks to.
+
+- [Quick Reference](#quick-reference)
+- [Drain the Queue](#drain-the-queue)
+- [Swap the Package](#swap-the-package)
+- [Rename the Namespace](#rename-the-namespace)
+- [Run the Migration](#run-the-migration)
+- [Laravel Boost](#laravel-boost)
+- [What Does Not Change](#what-does-not-change)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
+
+<a name="quick-reference"></a>
+## Quick Reference
+
+The old package is abandoned on Packagist and names `anilcancakir/magic-starter-laravel` as its replacement. Nothing else about the package changes: the repository moved to a new owner, the namespace changed from `FlutterSdk\MagicStarter\` to `AnilcanCakir\MagicStarter\`, and 1.0.0 is the first release under the new name.
+
+```bash
+php artisan queue:work --stop-when-empty
+composer remove fluttersdk/magic-starter-laravel && composer require anilcancakir/magic-starter-laravel
+rg -l0 'FlutterSdk\\+MagicStarter' app config database routes tests \
+    | xargs -0 -r perl -pi -e 's/FlutterSdk(\\+)MagicStarter/AnilcanCakir$1MagicStarter/g'
+php artisan migrate
+```
+
+| Step | What you do | Details |
+|:-----|:------------|:--------|
+| 1 | Stop dispatching and run the queue empty. | [Drain the Queue](#drain-the-queue) |
+| 2 | Replace the Composer package. | [Swap the Package](#swap-the-package) |
+| 3 | Rename the namespace in your application code. | [Rename the Namespace](#rename-the-namespace) |
+| 4 | Run the upgrade migration. | [Run the Migration](#run-the-migration) |
+| 5 | Re-select the package in Laravel Boost, if you use it. | [Laravel Boost](#laravel-boost) |
+
+<a name="drain-the-queue"></a>
+## Drain the Queue
+
+A queued job stores the class name it was dispatched with. The package queues jobs of its own (the support responder, the RevenueCat entitlement sync, the trial card check and the account purge among them), and a job pushed before the upgrade names a `FlutterSdk\MagicStarter\` class that no longer exists afterwards. The worker cannot unserialize it and the job lands in `failed_jobs`, where a retry cannot succeed either.
+
+Stop whatever dispatches work, then let the workers finish what is queued:
+
+```bash
+php artisan queue:work --stop-when-empty
+```
+
+Do the same for every named queue and connection your application uses.
+
+<a name="swap-the-package"></a>
+## Swap the Package
+
+```bash
+composer remove fluttersdk/magic-starter-laravel
+composer require anilcancakir/magic-starter-laravel
+```
+
+Package auto-discovery registers `AnilcanCakir\MagicStarter\MagicStarterServiceProvider`; a provider you registered by hand in `bootstrap/providers.php` or `config/app.php` needs the same rename as the rest of your code. Composer reports the old package as abandoned until you remove it, naming the new one as the replacement.
+
+The vendor path changes too: a command or note that copies a migration from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` reads `vendor/anilcancakir/magic-starter-laravel/database/migrations/` from now on.
+
+<a name="rename-the-namespace"></a>
+## Rename the Namespace
+
+Every class moved from `FlutterSdk\MagicStarter\` to `AnilcanCakir\MagicStarter\`. Your application references some of them: contract bindings in a service provider, `use` lines in the action, model and policy stubs you published, the `use` lines at the top of the published `config/magic-starter.php`, and the `Features::` calls inside it. Strings can carry the namespace too, in the doubled-backslash form (`FlutterSdk\\MagicStarter\\Models\\Team`), for example in a config array or a morph map.
+
+One pattern covers both forms and keeps the number of backslashes it finds:
+
+```bash
+rg -l0 'FlutterSdk\\+MagicStarter' app config database routes tests
+rg -l0 'FlutterSdk\\+MagicStarter' app config database routes tests \
+    | xargs -0 -r perl -pi -e 's/FlutterSdk(\\+)MagicStarter/AnilcanCakir$1MagicStarter/g'
+```
+
+The first command lists the files that match, the second rewrites them in place. Run the list again afterwards: it must print nothing. Check the rest of the project too (`bootstrap/`, `phpstan.neon`, `phpunit.xml`) with `rg FlutterSdk` over the repository, leaving `vendor/` out.
+
+A file you published from the old package extends or implements a class of the old namespace, so it fails until it is renamed. Rename it in place; republishing it with `--force` to get the new namespace discards your edits.
+
+<a name="run-the-migration"></a>
+## Run the Migration
+
+```bash
+php artisan migrate
+```
+
+The package stores a few PHP class names in the database. The upgrade migration `rewrite_stored_class_names` rewrites them to the new namespace:
+
+| Table | Column | Holds |
+|:------|:-------|:------|
+| `magic_starter_audits` | `auditable_type` | The class of the audited model. |
+| `magic_starter_audits` | `actor_type` | The class of the actor of a change. |
+| `notifications` | `type` | The class of the notification that wrote the row. |
+
+Without it, the old names stay in those columns: they point at classes that no longer exist, and a query by the new class name does not find the rows. `Auditor` queries `auditable_type` and `actor_type` by morph class, so the audit history of a package model such as `Team` would read as empty.
+
+<a name="laravel-boost"></a>
+## Laravel Boost
+
+The package ships its agent skill, `magic-starter-development`, under `resources/boost/skills/`. Boost installs a skill for the Composer package you selected, so run `php artisan boost:install` again and select `anilcancakir/magic-starter-laravel`. The skill is then installed under the new Composer name.
+
+<a name="what-does-not-change"></a>
+## What Does Not Change
+
+- The `config/magic-starter.php` keys and every `MAGIC_STARTER_*` environment variable.
+- The route names, the `api/v1` route prefix and the request and response shapes your Flutter client relies on.
+- The table names and their columns.
+- The artisan commands (`magic-starter:install` and the rest) and the translation namespace `magic-starter::`.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Upgrading with jobs still in the queue | Drain the queue first. A payload naming the old class cannot be retried afterwards. |
+| Replacing only `FlutterSdk\MagicStarter` | The doubled-backslash form in config and strings needs the same rename; the pattern above covers both. |
+| Searching only `app/` | Search `config/`, `database/`, `routes/` and `tests/` too, and `bootstrap/` for a hand-registered provider. |
+| Republishing stubs with `--force` to pick up the namespace | Rename the namespace in place instead; `--force` overwrites your changes. |
+| Skipping `php artisan migrate` | The audit and notification rows keep the old class names. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Installation](./installation.md): the install command and the `User` model traits.
+- [Configuration](./configuration.md): the config keys that stay as they are.
+- [Action Contracts](../architecture/action-contracts.md): how a binding names the classes you override.
+- [Audit Trail](../basics/audit.md): the table behind `magic_starter_audits`.

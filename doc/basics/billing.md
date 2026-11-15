@@ -1,5 +1,8 @@
 # Billing
 
+One entitlement sold on two rails, Stripe through Cashier and the App Store and Google Play through RevenueCat, driven by a single catalogue in `config('magic-starter.billing')`.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [The Catalogue](#the-catalogue)
@@ -14,20 +17,36 @@
 - [Promotion Codes](#promotion-codes)
 - [Campaigns](#campaigns)
 - [RevenueCat Webhook](#revenuecat-webhook)
+  - [Sandbox allowlist](#sandbox-allowlist)
+  - [Stripe test mode](#stripe-test-mode)
 - [Agent Commands](#agent-commands)
 - [Audit Log](#audit-log)
 - [Admin Panel](#admin-panel)
+  - [Billing authorization](#billing-authorization)
 - [Account Deletion](#account-deletion)
 - [Upgrading](#upgrading)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+| Step | What you do | Details |
+|:-----|:------------|:--------|
+| Enable | Add `Features::billing()` and run `php artisan magic-starter:install --features=billing`. | [Requirements](#requirements) |
+| Describe | Fill `billing.tier_order`, `billing.tiers` and `billing.products`. | [The Catalogue](#the-catalogue) |
+| Apply | `php artisan billing:manifest` prints what Stripe, the stores and RevenueCat must hold. | [Agent Commands](#agent-commands) |
+| Check | `php artisan billing:doctor` verifies the setup. | [Agent Commands](#agent-commands) |
+| Serve | The client reads `billing`, `billing/plans` and posts `billing/checkout`, `billing/swap` and `billing/cancel`. | [Endpoints](#endpoints) |
+
+The boot validates the catalogue and throws a `LogicException` naming the key, product or tier when it could sell the wrong thing.
 
 <a name="introduction"></a>
 ## Introduction
 
 Billing sells subscriptions on two rails and keeps one entitlement for both. The **card rail** is Stripe through Laravel Cashier, and the **store rail** is the App Store and Google Play through RevenueCat. Whichever rail charged last writes the same columns on the billable (`plan`, `plan_status`, `plan_provider`, `plan_product_id`, and the rest of the provenance set), and a rail may only revoke what it granted.
 
-Everything you sell is described once, in `config('magic-starter.billing')`. The package never writes to Stripe, App Store Connect, Google Play or RevenueCat: [`billing:manifest`](#agent-commands) prints what each of them has to hold, and [`billing:doctor`](#agent-commands) checks that they do. An LLM agent with the vendor CLIs can apply the manifest from the [billing setup reference](../../resources/boost/skills/magic-starter-development/references/billing-setup.md).
+Everything you sell is described once, in `config('magic-starter.billing')`. The package never writes to Stripe, App Store Connect, Google Play or RevenueCat: [`billing:manifest`](#agent-commands) prints what each of them has to hold, and [`billing:doctor`](#agent-commands) checks that they do. An LLM agent with the vendor CLIs can apply the manifest from the billing setup reference (`references/billing-setup.md`) of the package's Boost skill.
 
 Throughout this document `{prefix}` is `config('magic-starter.route_prefix')`.
 
@@ -223,7 +242,7 @@ One Play subscription sells one tier. Give each tier its own Play subscription a
 `HasEntitlement` adds read-only checks to the billable model that answer for every rail. Cashier's `subscribed()` answers for Stripe alone, so a store buyer would read as free.
 
 ```php
-use FlutterSdk\MagicStarter\Traits\HasEntitlement;
+use AnilcanCakir\MagicStarter\Traits\HasEntitlement;
 
 class User extends Authenticatable
 {
@@ -326,7 +345,6 @@ A product with `sellable: false` is listed so a client can rank what a subscribe
 
 An application that has published nothing gets an empty list, not a 404.
 
-<a name="translating-tier-copy"></a>
 #### Translating tier copy
 
 Copy is passed through `__()` per request, so author it as English source strings or translation keys. Every top-level string of a tier except `id`, and every string inside a list such as `features`, is translated into the request locale; a line with no translation comes back unchanged. An associative array such as `limits`, and any value that is not a string, is served as configured. A Turkish plan grid is then one entry per line in `lang/tr.json`:
@@ -529,7 +547,7 @@ The `checkout_started` row of the [audit log](#audit-log) records `promotion_cod
 A campaign is a time-boxed Stripe promotion code that staff offer on some catalogue products. It is a **web rail** feature: a store purchase is priced by the store. It is off by default.
 
 ```php
-\FlutterSdk\MagicStarter\Features::campaigns(),
+\AnilcanCakir\MagicStarter\Features::campaigns(),
 ```
 
 `php artisan magic-starter:install --features=campaigns` publishes the `create_campaigns_table.php` migration; an existing application copies it in, see [Upgrading](#upgrading). The `billing` feature has to be on as well.
@@ -782,12 +800,12 @@ Recording sits inside the Stripe webhook's own transaction, so the insert runs i
 
 ### Listening
 
-Each outcome is one class in `FlutterSdk\MagicStarter\Events\Billing` (`EntitlementApplied`, `EntitlementDropped`, `CheckoutStarted`, `CampaignCodeRefused`, `CampaignRedeemed`, `SubscriptionSwapped`, `SubscriptionCancelled`, `PortalOpened`, `RequestRefused`, `DeliveryRefused`, `TrialRecorded`, `TrialRefused`, `TrialCancelled`, `TrialRefusalWithdrawn`, `GrantAdded`, `GrantRevoked`, `GrantExpired`, `TrialExtended`, `TrialEnded`, `SubscriptionResumed`, `InvoiceRefunded`, `EntitlementSynced`), and all of them implement `BillingOutcome`. They are dispatched after the surrounding transaction commits, so an outcome that rolled back never fires. The package registers no listener of its own.
+Each outcome is one class in `AnilcanCakir\MagicStarter\Events\Billing` (`EntitlementApplied`, `EntitlementDropped`, `CheckoutStarted`, `CampaignCodeRefused`, `CampaignRedeemed`, `SubscriptionSwapped`, `SubscriptionCancelled`, `PortalOpened`, `RequestRefused`, `DeliveryRefused`, `TrialRecorded`, `TrialRefused`, `TrialCancelled`, `TrialRefusalWithdrawn`, `GrantAdded`, `GrantRevoked`, `GrantExpired`, `TrialExtended`, `TrialEnded`, `SubscriptionResumed`, `InvoiceRefunded`, `EntitlementSynced`), and all of them implement `BillingOutcome`. They are dispatched after the surrounding transaction commits, so an outcome that rolled back never fires. The package registers no listener of its own.
 
 A synchronous listener runs in the billing path, inside the webhook, request or job that produced the outcome. A listener that throws is reported through your exception handler and never propagated, so the delivery still answers 200 and the request still answers what it would have, but that listener's work is lost. Prefer a `ShouldQueue` listener for anything that can fail or take time.
 
 ```php
-use FlutterSdk\MagicStarter\Events\Billing\BillingOutcome;
+use AnilcanCakir\MagicStarter\Events\Billing\BillingOutcome;
 use Illuminate\Support\Facades\Event;
 
 Event::listen(BillingOutcome::class, function (BillingOutcome $event): void {
@@ -896,17 +914,17 @@ A user who owns a team that a rail is still billing, or who is billed directly u
 <a name="upgrading"></a>
 ## Upgrading
 
-The catalogue replaces `plans`, `prices` and `store_products`, and checkout and swap take `product` instead of `plan` and `cycle`. The [changelog](../../CHANGELOG.md) carries the migration steps.
+The catalogue replaces `plans`, `prices` and `store_products`, and checkout and swap take `product` instead of `plan` and `cycle`. The changelog carries the migration steps.
 
-An application that installed before trials existed and wants to sell one copies `vendor/fluttersdk/magic-starter-laravel/database/migrations/create_billing_trials_table.php` into `database/migrations/` under a timestamp later than your latest migration and runs `php artisan migrate`, before it sets a `trial_days`. Do not re-run `magic-starter:install` for this. An application that sets no `trial_days` never reads the table and needs neither.
+An application that installed before trials existed and wants to sell one copies `vendor/anilcancakir/magic-starter-laravel/database/migrations/create_billing_trials_table.php` into `database/migrations/` under a timestamp later than your latest migration and runs `php artisan migrate`, before it sets a `trial_days`. Do not re-run `magic-starter:install` for this. An application that sets no `trial_days` never reads the table and needs neither.
 
-The audit log needs two migrations. Copy `create_billing_events_table.php` and `add_processed_at_index_to_processed_webhook_events_table.php` from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` into `database/migrations/` under timestamps later than your latest migration (or re-run the install command's billing publish) and run `php artisan migrate`. Until you do, billing keeps working and each worker logs one warning that `billing_events` is missing; `billing:doctor` reports it as `schema.billing_events`.
+The audit log needs two migrations. Copy `create_billing_events_table.php` and `add_processed_at_index_to_processed_webhook_events_table.php` from `vendor/anilcancakir/magic-starter-laravel/database/migrations/` into `database/migrations/` under timestamps later than your latest migration (or re-run the install command's billing publish) and run `php artisan migrate`. Until you do, billing keeps working and each worker logs one warning that `billing_events` is missing; `billing:doctor` reports it as `schema.billing_events`.
 
-The admin panel's manual grants need one more migration. Copy `create_billing_grants_table.php` from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` into `database/migrations/` under a timestamp later than your latest migration (or re-run the install command's billing publish) and run `php artisan migrate`. Until you do, a grant cannot be recorded and `magic-starter:billing:expire-grants` skips with a line; `billing:doctor` reports it as `schema.billing_grants`. The command is scheduled hourly by the package, so your scheduler has to be running.
+The admin panel's manual grants need one more migration. Copy `create_billing_grants_table.php` from `vendor/anilcancakir/magic-starter-laravel/database/migrations/` into `database/migrations/` under a timestamp later than your latest migration (or re-run the install command's billing publish) and run `php artisan migrate`. Until you do, a grant cannot be recorded and `magic-starter:billing:expire-grants` skips with a line; `billing:doctor` reports it as `schema.billing_grants`. The command is scheduled hourly by the package, so your scheduler has to be running.
 
-Campaigns need their own migration. Copy `create_campaigns_table.php` from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` into `database/migrations/` under a timestamp later than your latest migration (or run `php artisan magic-starter:install --features=campaigns`) and run `php artisan migrate` before you add `Features::campaigns()`; then add `checkout.session.completed` to your Stripe webhook endpoint (see [Attribution](#campaigns)).
+Campaigns need their own migration. Copy `create_campaigns_table.php` from `vendor/anilcancakir/magic-starter-laravel/database/migrations/` into `database/migrations/` under a timestamp later than your latest migration (or run `php artisan magic-starter:install --features=campaigns`) and run `php artisan migrate` before you add `Features::campaigns()`; then add `checkout.session.completed` to your Stripe webhook endpoint (see [Attribution](#campaigns)).
 
-The per-caller currency needs one more migration. Copy `add_billing_currency_to_billable_table.php` from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` into `database/migrations/` under a timestamp later than your latest migration and run `php artisan migrate`, then set `pricing.country_header` (see [Currency](#currency)). Every product row of `billing/plans` now carries `currency` and only that currency's web price, whether or not you set a header.
+The per-caller currency needs one more migration. Copy `add_billing_currency_to_billable_table.php` from `vendor/anilcancakir/magic-starter-laravel/database/migrations/` into `database/migrations/` under a timestamp later than your latest migration and run `php artisan migrate`, then set `pricing.country_header` (see [Currency](#currency)). Every product row of `billing/plans` now carries `currency` and only that currency's web price, whether or not you set a header.
 
 The operator side is overridable: `Contracts\AdministersBilling` is bound to `Actions\AdministerBilling` unconditionally, so an application binds its own class over the contract to change what the panel's billing actions do. An implementation of the contract takes `refundLastInvoice(Authenticatable $actor, Model $billable, string $reason, ?string $expectedInvoiceId = null)`; the panel passes the invoice its modal showed. The expiry command resolves `Actions\AdministerBilling` itself (settling a grant is the sweep's step, not an operator's act, and is not on the contract), so bind a subclass over that class as well when the sweep must use yours; its constructor takes the reconciler (`ReconcileBillingEntitlements`) after the RevenueCat client.
 
@@ -919,3 +937,24 @@ Code that builds on the package internals changes in these places:
 - A subclass of `StripeWebhookController` that overrides `subscriptionClaim`, `revokeEntitlement`, `reaffirmEntitlementFromInvoice` or `warnUnmappedPrice` adds the `string $eventId` parameter those methods gained. Its constructor, like `BillingController`'s, now takes a `BillingEventRecorder`.
 - `CheckTrialCard::handle` takes a `BillingEventRecorder` parameter, and `ReconcileBillingEntitlements::reconcileStripeSubject` takes an optional `BillingSource`.
 - `BillingController::abortWithBillingConflict()` takes `Model $billable` first; `StripeWebhookController::existingUserKey()` is now `existingUser()` and returns `?Model`; a `WriteEntitlement` subclass with its own constructor calls `parent::__construct()` so the recorder is set.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Running `vendor:publish --tag=cashier-migrations` | Do not. The package ships its own, which read the billable table and the key type from config. |
+| Having run Cashier's own migrations already | Set `MAGIC_STARTER_PACKAGE_SUBSCRIPTION_MODELS=false`, or every subscription write fails under UUID keys. |
+| Setting `billing.billable` to `'team'` without the teams feature | Boot refuses it. Enable `Features::teams()` first. |
+| Reading an unmapped Stripe price or store id as a downgrade | It is a config gap: the rail leaves the entitlement alone and logs a warning. |
+| Adding campaigns without `checkout.session.completed` on the Stripe webhook | Cashier's default events do not include it, so campaigns still discount but the redemption count stays at zero with nothing failing. Add the event to the endpoint. |
+| Setting `REVENUECAT_SECRET_API_KEY` without `REVENUECAT_WEBHOOK_SECRET` | The webhook route is withheld and the install command refuses. Set the secret, or unset the key to run the card rail alone. |
+| Accepting sandbox purchases in production | Leave `billing.revenuecat.accept_sandbox` `false` there. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Admin Panel](./admin-panel.md): the Billing tab and the manual grants.
+- [Account Deletion](./account-deletion.md): the refusal while a subscription is live.
+- [Teams](./teams.md): billing a team instead of a user.
+- [Configuration](../getting-started/configuration.md): every `billing.*` key and its environment variable.

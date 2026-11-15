@@ -1,5 +1,8 @@
 # Sign-in Handoff
 
+How a session that is already signed in mints a short-lived, single-use code that another origin or a mobile app trades for a sign-in, without a bearer token ever appearing in a url.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Configuration](#configuration)
 - [Mint a Code](#mint-a-code)
@@ -7,8 +10,24 @@
 - [Security Properties](#security-properties)
 - [Using It from a Browser](#using-it-from-a-browser)
 - [Overriding the Actions](#overriding-the-actions)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+Enable `Features::signInHandoff()`. `{prefix}` is the `route_prefix` config value.
+
+| Endpoint | Auth | Does |
+|:---------|:-----|:-----|
+| `POST {prefix}/auth/handoff` | `auth:sanctum` | The signed-in side mints a code and passes the `next` path it wants opened. |
+| `POST {prefix}/auth/handoff/exchange` | none | The app spends the code and receives the same answer a login gives. |
+
+| Setting | Default | Meaning |
+|:--------|:--------|:--------|
+| `handoff.code_ttl` | `60` | Seconds a code lives. |
+| `handoff.cache_store` | `null` | The cache store that holds the codes; every web node must share it. |
+| `handoff.max_token_age` | `null` | Seconds; a mint from an older token answers `403 handoff_forbidden`. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -26,7 +45,7 @@ Enable the feature in `config/magic-starter.php`:
 
 ```php
 'features' => [
-    \FlutterSdk\MagicStarter\Features::signInHandoff(),
+    \AnilcanCakir\MagicStarter\Features::signInHandoff(),
 ],
 ```
 
@@ -184,3 +203,22 @@ Bind your own in a service provider, as for every other [action contract](../arc
 ```php
 $this->app->bind(ExchangesHandoffCodes::class, MyExchangeHandoffCode::class);
 ```
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Putting a bearer token in the url | Put the code there; it is single use and lives `handoff.code_ttl` seconds. |
+| Sending the browser to the app late | The code expires after 60 seconds by default. Redirect at once. |
+| Running web nodes on separate cache stores | Point `handoff.cache_store` at one shared store, or an exchange that lands on another node finds no code. |
+| Minting from a guest or a restricted-ability token | It is refused. A code never upgrades a lesser credential into a full one. |
+| Caching the routes before enabling the feature | The gate is read when the routes load, so a `route:cache` freezes it. Rebuild the cache after you change `features`. |
+| Opening `next` as a full url | Open it through the app's own router. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Authentication](./authentication.md): the login answer the exchange returns, and the 2FA challenge.
+- [Action Contracts](../architecture/action-contracts.md): binding your own mint or exchange action.
+- [Configuration](../getting-started/configuration.md): the `features` array.

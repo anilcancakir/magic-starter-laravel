@@ -1,5 +1,8 @@
 # Service Provider
 
+What `MagicStarterServiceProvider` registers and in which order: config, contract bindings, routes, rate limiters, Sanctum and password reset customisation, event listeners, the team policy, translations and the publish tags.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Bootstrap Lifecycle](#bootstrap-lifecycle)
 - [Contract Bindings](#contract-bindings)
@@ -12,11 +15,23 @@
 - [Translation Loading](#translation-loading)
 - [Configuration Publishing](#configuration-publishing)
 - [Install Command](#install-command)
+- [Related Documentation](#related-documentation)
+
+<a name="quick-reference"></a>
+## Quick Reference
+
+| To do this | Do this |
+|:-----------|:--------|
+| Replace a default action | `$this->app->bind(Contract::class, YourAction::class)` in your `AppServiceProvider::register()`. |
+| Skip the package routes | Call `MagicStarter::ignoreRoutes()` in `register()` and define your own. |
+| Move the routes | Set `magic-starter.route_prefix`. |
+| Add middleware to the routes | List it in `magic-starter.route_middleware`. |
+| Publish an asset | `php artisan vendor:publish --tag=<tag>`; the tags are listed under [Configuration Publishing](#configuration-publishing). |
 
 <a name="introduction"></a>
 ## Introduction
 
-`FlutterSdk\MagicStarter\MagicStarterServiceProvider` is the single entry point for the package. It is registered automatically through Laravel's package auto-discovery mechanism (`extra.laravel.providers` in `composer.json`) — no manual registration is required in `config/app.php`.
+`AnilcanCakir\MagicStarter\MagicStarterServiceProvider` is the single entry point for the package. It is registered automatically through Laravel's package auto-discovery mechanism (`extra.laravel.providers` in `composer.json`), so no manual registration is required in `config/app.php`.
 
 The provider is responsible for merging configuration, binding every action contract to its default implementation, suppressing Sanctum's own migrations, registering rate limiters, loading routes, wiring event listeners, and publishing all publishable assets.
 
@@ -40,8 +55,8 @@ Runs before the application fully boots. Only IoC container work happens here:
 
 Runs after all providers have registered. All side-effectful setup happens here, in this order:
 
-1. `configureRateLimiting()` — registers named `RateLimiter` definitions.
-2. Sanctum model swap — `Sanctum::usePersonalAccessTokenModel(Models\PersonalAccessToken::class)`.
+1. `configureRateLimiting()`: registers named `RateLimiter` definitions.
+2. Sanctum model swap: `Sanctum::usePersonalAccessTokenModel(Models\PersonalAccessToken::class)`.
 3. Password reset URL customization via `ResetPassword::createUrlUsing()`.
 4. Team policy and `Registered` event listener registration (when `Features::hasTeamFeatures()`).
 5. Notification channel gating listener registration (when `Features::hasNotificationFeatures()`).
@@ -99,7 +114,7 @@ $this->app->singleton(Social\AppleProviderFactory::class);
 
 ```php
 // app/Providers/AppServiceProvider.php
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
 
 public function register(): void
 {
@@ -120,12 +135,12 @@ if (! MagicStarter::shouldIgnoreRoutes()) {
 
 Call `MagicStarter::ignoreRoutes()` in your `AppServiceProvider::register()` to skip route loading entirely and define your own routes manually.
 
-The route prefix is read from `config('magic-starter.route_prefix')` (default: `api/v1`) and applied globally to all package routes. Every route group is additionally gated by its corresponding feature flag — routes for disabled features are never registered.
+The route prefix is read from `config('magic-starter.route_prefix')` (default: `api/v1`) and applied globally to all package routes. Every route group is additionally gated by its corresponding feature flag: routes for disabled features are never registered.
 
 <a name="rate-limiters"></a>
 ## Rate Limiters
 
-`configureRateLimiting()` registers nine named `RateLimiter` definitions. All are keyed by a combination of IP address and a request-specific discriminator to prevent credential-stuffing while not unfairly blocking shared NATs. An IPv6 address is collapsed to its /64 before it becomes part of a key (an IPv4 address is used as is), because one subscriber is routinely handed a whole /64 and a key on the full address would give that host a fresh bucket per address.
+`configureRateLimiting()` registers named `RateLimiter` definitions. The ones below are keyed by a combination of IP address and a request-specific discriminator to prevent credential-stuffing while not unfairly blocking shared NATs. An IPv6 address is collapsed to its /64 before it becomes part of a key (an IPv4 address is used as is), because one subscriber is routinely handed a whole /64 and a key on the full address would give that host a fresh bucket per address.
 
 | Limiter Name | Limit | Key Strategy |
 |:-------------|:------|:-------------|
@@ -139,6 +154,12 @@ The route prefix is read from `config('magic-starter.route_prefix')` (default: `
 | `magic-starter-otp` (verify) | 5 / minute | `ip\|verify\|phone` |
 | `magic-starter-settings` | 30 / minute | `ip` |
 | `magic-starter-email-verification` | 1 / minute | `user.id` or `ip` |
+| `magic-starter-auth-handoff` | 10 / minute | `user.id\|ip` |
+| `magic-starter-auth-handoff-exchange` | 10 / minute | `ip` |
+| `magic-starter-releases` | 60 / minute | `ip` |
+| `magic-starter-push-test` | 5 / minute | `user.id` or `ip` |
+
+The support routes carry their own limiters, described with the [support desk](../basics/support.md).
 
 The `magic-starter-otp` limiter is a single named limiter that branches internally on whether the request path contains `otp/send`.
 
@@ -159,8 +180,8 @@ if (class_exists(Sanctum::class) && method_exists(Sanctum::class, 'ignoreMigrati
 
 This prevents Sanctum from publishing or running its own `personal_access_tokens` migration, because the package ships its own version plus an additive migration (`add_device_info_to_personal_access_tokens_table`) that adds:
 
-- `ip_address` — `string(45)`, nullable — stores the client's IPv4 or IPv6 address.
-- `user_agent` — `text`, nullable — stores the raw `User-Agent` header.
+- `ip_address`: `string(45)`, nullable, stores the client's IPv4 or IPv6 address.
+- `user_agent`: `text`, nullable, stores the raw `User-Agent` header.
 
 ### Model Swap (`boot()`)
 
@@ -201,7 +222,7 @@ Config resolution falls back from `magic-starter.frontend_url` → `app.frontend
 > This is why the fallback cannot be written as `config('magic-starter.frontend_url', config('app.frontend_url'))`, which is what this section used to show. `config()`'s default argument fires for an ABSENT key, and `MAGIC_STARTER_FRONTEND_URL=` makes the key present-and-EMPTY, so `app.frontend_url` was dead configuration and an operator who set it got nothing.
 
 > [!NOTE]
-> This customization is unconditional — it runs regardless of which features are enabled. If your application uses a different reset URL structure, override it after the package provider boots by calling `ResetPassword::createUrlUsing()` again in your own `AppServiceProvider::boot()`.
+> This customization is unconditional: it runs regardless of which features are enabled. If your application uses a different reset URL structure, override it after the package provider boots by calling `ResetPassword::createUrlUsing()` again in your own `AppServiceProvider::boot()`.
 
 <a name="event-listeners"></a>
 ## Event Listeners
@@ -239,7 +260,7 @@ Event::listen(NotificationSending::class, Listeners\GateNotificationChannels::cl
 3. Returns `true` if the notifiable does not implement `prefers()`.
 4. Returns `true` for unknown or locked channels.
 4a. Returns `true` when the notification implements `BypassesNotificationPreferences` and `bypassesPreference($notifiable, $logicalChannel)` says so.
-5. Calls `$notifiable->prefers($slug, $logicalChannel)` as the final gate — returning `false` cancels delivery for that channel.
+5. Calls `$notifiable->prefers($slug, $logicalChannel)` as the final gate; returning `false` cancels delivery for that channel.
 
 <a name="team-policy"></a>
 ## Team Policy
@@ -250,7 +271,7 @@ When `Features::hasTeamFeatures()` is `true`, the provider auto-registers `Polic
 Gate::policy(MagicStarter::teamModel(), Policies\TeamPolicy::class);
 ```
 
-`MagicStarter::teamModel()` resolves dynamically — it checks `config('magic-starter.models.team')` first, then falls back to `App\Models\Team` via `class_exists()`. This ensures the policy is registered against whatever model class the consuming application is using.
+`MagicStarter::teamModel()` resolves dynamically: it checks `config('magic-starter.models.team')` first, then falls back to `App\Models\Team` via `class_exists()`. This ensures the policy is registered against whatever model class the consuming application is using.
 
 > [!NOTE]
 > If you publish team model stubs and rename the model class, ensure `config('magic-starter.models.team')` reflects the new FQCN, or the policy will be registered against the wrong class.
@@ -285,6 +306,8 @@ All publish registrations are wrapped in `if ($this->app->runningInConsole())` t
 | `magic-starter-policies` | `stubs/policies/` | `app/Policies/` |
 | `magic-starter-models` | `stubs/models/Team.php`, `TeamUser.php`, `TeamInvitation.php` | `app/Models/` |
 | `magic-starter-lang` | `lang/` | `lang/vendor/magic-starter/` |
+| `magic-starter-user-model` | `stubs/models/User.php` | `app/Models/User.php` |
+| `magic-starter-factories` | `stubs/factories/UserFactory.php` | `database/factories/UserFactory.php` |
 
 Migrations are registered via `publishesMigrations()` (introduced in Laravel 11) rather than `publishes()`, which enables the `--ansi` timestamping behaviour and migration status tracking.
 
@@ -301,3 +324,11 @@ $this->commands([InstallCommand::class]);
 `Console\InstallCommand` is registered only when running in the console. The command (`magic-starter:install`) provides an interactive setup wizard (Laravel Prompts) and a non-interactive flag-driven mode for CI pipelines. It publishes config, selectively publishes feature-relevant migrations, optionally publishes team model stubs, and can immediately run `php artisan migrate`.
 
 See the [Installation guide](../getting-started/installation.md) for full usage documentation including all available `--flags`.
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Action Contracts](./action-contracts.md): what each bound contract does and how to override it.
+- [Installation](../getting-started/installation.md): the install command and the publish tags in use.
+- [Configuration](../getting-started/configuration.md): `route_prefix`, `route_middleware` and the feature flags that gate the routes.
+- [Models](./models.md): how the model classes the provider hands to Sanctum and the policy are resolved.

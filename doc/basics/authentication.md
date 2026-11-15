@@ -1,5 +1,8 @@
 # Authentication
 
+The Sanctum token endpoints for signing in, registering, signing out, resetting a password, guest sessions, phone OTP and the two-factor challenge.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Login](#login)
 - [Registration](#registration)
@@ -11,8 +14,30 @@
 - [Phone OTP](#phone-otp)
 - [Two-Factor Challenge](#two-factor-challenge)
 - [Switch Team](#switch-team)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+Every path sits under `{prefix}`, the `route_prefix` config value (`api/v1` by default).
+
+| Endpoint | Auth | Needs | Rate limit |
+|:---------|:-----|:------|:-----------|
+| `POST {prefix}/auth/login` | none | | 5 a minute per IP and email |
+| `POST {prefix}/auth/register` | none | | 3 a minute per IP |
+| `POST {prefix}/auth/logout` | `auth:sanctum` | | none |
+| `GET {prefix}/auth/user` | `auth:sanctum` | | none |
+| `POST {prefix}/auth/forgot-password` | none | | 3 a minute per IP and email |
+| `POST {prefix}/auth/reset-password` | none | | 3 a minute per IP and email |
+| `POST {prefix}/auth/guest` | none | `guest-auth` | 10 a minute per IP and device ID |
+| `POST {prefix}/auth/guest/claim` | `auth:sanctum` | `guest-auth` | 10 a minute per IP |
+| `POST {prefix}/auth/otp/send` | none | `phone-otp` | 2 a minute per IP and phone |
+| `POST {prefix}/auth/otp/verify` | none | `phone-otp` | 5 a minute per IP and phone |
+| `POST {prefix}/auth/two-factor-challenge` | none | `two-factor-authentication` | 5 a minute per IP and challenge token |
+| `PUT {prefix}/user/current-team` | `auth:sanctum` | `teams` | none |
+
+A successful sign-in answers `{"data": {"user": {...}, "token": "1|abc..."}}`. Send the token on every later request as `Authorization: Bearer {token}`.
 
 <a name="introduction"></a>
 ## Introduction
@@ -473,14 +498,14 @@ One refusal for four causes, deliberately: the token names something that cannot
 The whole transfer runs in one database transaction.
 
 1. The package moves the rows it owns. That is the guest's database notifications and support conversations, and nothing else (a conversation filed under a team the account does not belong to moves to the account's current team): notification settings carry a unique key per type and channel, so a guest's defaults would collide with choices the account has already made; a personal team is not moved because the target already owns one; newsletter subscriptions are keyed on an email address a guest never had.
-2. `FlutterSdk\MagicStarter\Events\GuestClaimed` is dispatched with both user models. This is the whole seam for your own data: reassign your tables from `$event->guest` to `$event->target` in a listener.
+2. `AnilcanCakir\MagicStarter\Events\GuestClaimed` is dispatched with both user models. This is the whole seam for your own data: reassign your tables from `$event->guest` to `$event->target` in a listener.
 3. The guest's tokens are deleted and its `device_id` is released. The row keeps `is_guest`, so a job pruning abandoned guests can still reclaim it; with no token, no device ID, no email and no password, nothing can authenticate as it again.
 
 > [!WARNING]
 > The event is dispatched SYNCHRONOUSLY, inside that transaction, and a queued listener is not supported. A listener that implements `ShouldQueue` would run after the commit, so its failure could no longer roll the claim back. Keep the listener synchronous and let it throw: a throw unwinds the whole claim and leaves the guest exactly as it was.
 
 ```php
-use FlutterSdk\MagicStarter\Events\GuestClaimed;
+use AnilcanCakir\MagicStarter\Events\GuestClaimed;
 use Illuminate\Support\Facades\Event;
 
 Event::listen(GuestClaimed::class, function (GuestClaimed $event): void {
@@ -715,3 +740,23 @@ Authorization is enforced via the `switchTo` Gate -- the user must be permitted 
   "message": "You are not a member of this team."
 }
 ```
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Treating a `200` from login as signed in | When the answer carries `"two_factor": true` it holds a `two_factor_token`, not a Sanctum token. Post it to the two-factor challenge. |
+| Letting the reset link open the backend host | Set `MAGIC_STARTER_FRONTEND_URL`; the link is built from `frontend_url`. |
+| Sending the guest token as the bearer on `auth/guest/claim` | Authenticate as the target account and put the guest session's token in the body. |
+| Queueing a listener for `GuestClaimed` | The event runs inside the claim's transaction. Keep the listener synchronous and let it throw to undo the claim. |
+| Expecting `auth.phone` to switch on OTP | It only lets a phone number sign in. The OTP endpoints need the `phone-otp` feature as well. |
+| Retrying login in a loop | The limiter allows 5 attempts a minute per IP and email, then answers `429`. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Two-Factor Authentication](./two-factor-authentication.md): enrolling and the challenge in detail.
+- [Social Login](./social-login.md): Google, Apple, GitHub and Microsoft sign-in.
+- [Sign-in Handoff](./sign-in-handoff.md): carrying a signed-in session into a browser.
+- [Configuration](../getting-started/configuration.md): `auth.*`, `frontend_url` and token lifetimes.

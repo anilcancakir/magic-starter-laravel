@@ -1,13 +1,33 @@
 # Mail on OneSignal
 
+How to send selected mail classes through OneSignal email, with an SMTP failover, while Laravel still renders every mail with your views and theme.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [The Mailers](#the-mailers)
 - [Routing a Mail Class](#routing-a-mail-class)
 - [The Failover](#the-failover)
 - [Send Records and the Doctor](#send-records-and-the-doctor)
 - [Limits](#limits)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+```dotenv
+MAIL_MAILER=routed
+MAGIC_STARTER_MAIL_ONESIGNAL_ENABLED=true
+MAGIC_STARTER_MAIL_ONESIGNAL_CLASSES=TeamInvitationNotification
+```
+
+| Item | Value |
+|:-----|:------|
+| Mailers | `onesignal`, `onesignal-failover` and `routed`, defined in `config/mail.php`. |
+| Switch | `MAGIC_STARTER_MAIL_ONESIGNAL_ENABLED`, off by default. |
+| Classes | `MAGIC_STARTER_MAIL_ONESIGNAL_CLASSES`, comma separated basenames or `*`. |
+| Credentials | `ONESIGNAL_APP_ID` and `ONESIGNAL_REST_API_KEY`, the same as push. |
+| Check | `php artisan magic-starter:mail:doctor`, which sends nothing. |
+| Prune | `php artisan magic-starter:mail:prune-sends`, daily. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -122,3 +142,9 @@ It prints whether the credentials are set, whether OneSignal reports the email c
 - Every send uses `include_unsubscribed`, because your own database is the opt-out of record. OneSignal therefore adds no `List-Unsubscribe` header, and it cannot carry the one your mailable sets: keep the unsubscribe link in the body.
 - OneSignal creates an email subscription for every address it sends to. Name OneSignal in your privacy notice before you route mail to people outside your own users.
 - Marketing mail is out of scope: the transport sends to explicit addresses only and never targets a segment.
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Notifications](../basics/notifications.md): the OneSignal push channel that shares these credentials, and mail branding.
+- [Configuration](../getting-started/configuration.md): the `mail.brand.*` keys and the `schedule` block.
