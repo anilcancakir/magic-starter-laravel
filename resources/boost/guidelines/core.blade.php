@@ -128,7 +128,8 @@ public function register(): void
 | `magic-starter.models.membership` | `TeamUser::class` | Pivot model class |
 | `magic-starter.models.team_invitation` | `TeamInvitation::class` | Invitation model class |
 | `magic-starter.route_prefix` | `'api/v1'` | Route prefix for all package endpoints |
-| `magic-starter.token_expiration_minutes` | `null` | Sanctum token TTL (null = never expires) |
+| `magic-starter.token_expiration_minutes` | `null` | Lifetime in minutes of every issued token (both null = no expiry unless `sanctum.expiration`) |
+| `magic-starter.remember_me_expiration_minutes` | `null` | Replaces it for a password login with `remember_me: true` (2FA included); null falls back |
 | `magic-starter.two_factor.challenge_token_ttl` | `5` | 2FA challenge window in minutes |
 | `magic-starter.admin.emails` | `[]` | Emails admitted to the admin panel (`MAGIC_STARTER_ADMIN_EMAILS`); empty admits nobody |
 | `magic-starter.admin.host` | `null` | Host the generated admin panel answers on (`MAGIC_STARTER_ADMIN_HOST`) |

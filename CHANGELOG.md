@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- **`POST auth/login` accepts `remember_me`.** An optional boolean; `true` gives the token the new `remember_me_expiration_minutes` lifetime (`MAGIC_STARTER_REMEMBER_ME_EXPIRATION`, default null, which falls back to `token_expiration_minutes`), and a value that is not a boolean answers 422. The 2FA challenge token carries the flag, so a remembered sign-in through `POST auth/two-factor-challenge` keeps its lifetime; a challenge token minted before this release reads as not remembered. `AuthenticatesUsers::createAuthToken()` and `signInResponse()` take a trailing `bool $remember = false`. (`src/Http/Requests/LoginRequest.php`, `src/Http/Controllers/Concerns/AuthenticatesUsers.php`, `src/Http/Controllers/TwoFactorChallengeController.php`, `config/magic-starter.php`, `doc/basics/authentication.md`)
+
+### Changed
+
+- **`createAuthToken()` and `signInResponse()` of the `AuthenticatesUsers` trait take a trailing optional `bool $remember = false`.** A host controller that extends `AuthController` and overrides either method with the old signature must add the parameter, or PHP refuses the class declaration (the package's own routes point at `AuthController` itself, but a subclass the host routes to, or rebinds, is affected). Set both lifetime keys when using `remember_me_expiration_minutes`, with the remember value at least as long as `token_expiration_minutes`: with only the remember key set, a sign-in without `remember_me` gets a token without expiry. `0` or an empty value on the remember key falls back to `token_expiration_minutes`, like `null`.
+
+### Fixed
+
+- **`token_expiration_minutes` now sets the lifetime of every token.** The key (`MAGIC_STARTER_TOKEN_EXPIRATION`) was documented as the token lifetime but read by nothing, so a host that set it got tokens without expiry. Every authentication token the package issues (login, registration, the token handed out once a 2FA challenge is completed, OTP, guest, social) now carries `expires_at` set that many minutes ahead; null or 0 keeps today's tokens without their own expiry, and `sanctum.expiration` still applies on top. A guest claim refuses a guest token past its own `expires_at`, as Sanctum's guard does. (`src/Http/Controllers/Concerns/AuthenticatesUsers.php`, `doc/getting-started/configuration.md`)
+
 ## [0.0.64] - 2026-11-10
 
 ### Changed

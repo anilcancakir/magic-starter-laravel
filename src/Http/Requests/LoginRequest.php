@@ -13,6 +13,9 @@ use Illuminate\Foundation\Http\FormRequest;
  * Rules are dynamically built from the identity strategy config
  * (`auth.email` / `auth.phone`). When both identifiers are enabled,
  * the user may provide either one — at least one is required.
+ *
+ * An optional boolean `remember_me` lets the token outlive the default
+ * lifetime; see `magic-starter.remember_me_expiration_minutes`.
  */
 class LoginRequest extends FormRequest
 {
@@ -37,6 +40,10 @@ class LoginRequest extends FormRequest
             'password' => [
                 'required',
                 'string',
+            ],
+            'remember_me' => [
+                'sometimes',
+                'boolean',
             ],
         ];
 

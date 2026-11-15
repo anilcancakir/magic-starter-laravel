@@ -77,6 +77,7 @@ class AuthController
             $user,
             $request,
             (string) __('magic-starter::auth.login_successful'),
+            remember: $request->boolean('remember_me'),
         );
     }
 

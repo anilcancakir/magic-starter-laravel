@@ -47,6 +47,6 @@
 
 ### Auth response pattern (AuthenticatesUsers trait)
 
-- createAuthToken() calls $user->createToken('auth_token') and then force-fills ip_address and user_agent onto the resulting PersonalAccessToken — requires the custom token model with those columns.
+- createAuthToken() calls $user->createToken('auth_token'), with an expires_at of now plus token_expiration_minutes (or remember_me_expiration_minutes when $remember is true and that is set) when the lifetime is a positive number, and then force-fills ip_address and user_agent onto the resulting PersonalAccessToken — requires the custom token model with those columns.
 - authenticatedResponse() sets the user resolver on both the injected $request and the container-resolved app('request') so that nested resources (e.g. TeamResource) can call $request->user() before Sanctum middleware has run.
 - The JSON envelope is always {data: {user, token}, message}; no variations exist.

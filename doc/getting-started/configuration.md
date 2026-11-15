@@ -141,7 +141,8 @@ Every key available in `config/magic-starter.php`:
 | `required_ability` | `null` | Ability a Sanctum token must carry to reach a signed-in route; others get 403 `missing_ability`. Null checks nothing |
 | `invitation_expiry_days` | `7` | Number of days until a team invitation token expires |
 | `invitation_confirm_email_mismatch` | `false` | When `true`, a user with an active Sign in with Apple link or an `@privaterelay.appleid.com` address who accepts an invitation sent to another email is answered `409 email_mismatch` and joins on a repeat request carrying `confirm_email_mismatch: true`; everyone else keeps the `403`. See [Accept Invitation](../basics/teams.md#accept-invitation) |
-| `token_expiration_minutes` | `null` | Sanctum personal access token TTL in minutes; `null` means tokens never expire |
+| `token_expiration_minutes` | `null` | Lifetime in minutes of every authentication token the package issues (login, registration, the token handed out once a 2FA challenge is completed, OTP, guest, social). The 2FA challenge token itself lives for `two_factor.challenge_token_ttl` only. When both this and `remember_me_expiration_minutes` are `null`, tokens do not expire unless `sanctum.expiration` says so |
+| `remember_me_expiration_minutes` | `null` | Lifetime in minutes that replaces `token_expiration_minutes` for a password sign-in that sent `remember_me: true` (including the 2FA challenge that finishes it); `null`, `0` or an empty value falls back to `token_expiration_minutes`. Set both keys, with this one at least as long as the other, and keep `sanctum.expiration` `null` or at least as long as this one (Sanctum's guard also ages a token by its creation time). With only this key set, a sign-in without `remember_me` gets a token that never expires |
 | `auth.email` | `true` | Whether email-based authentication is accepted for login and registration |
 | `auth.phone` | `false` | Whether phone-based authentication is accepted for login and registration |
 | `two_factor.company_name` | `env('APP_NAME', 'Laravel')` | Company name displayed in authenticator apps (Google Authenticator, Authy, etc.) |
@@ -484,7 +485,8 @@ All environment variables recognized by the package:
 | `MAGIC_STARTER_ROUTE_PREFIX` | `route_prefix` | `'api/v1'` | Route prefix for all package routes |
 | `MAGIC_STARTER_INVITATION_EXPIRY_DAYS` | `invitation_expiry_days` | `7` | Team invitation expiry in days |
 | `MAGIC_STARTER_INVITATION_CONFIRM_EMAIL_MISMATCH` | `invitation_confirm_email_mismatch` | `false` | Let a Sign in with Apple user confirm joining with a different email |
-| `MAGIC_STARTER_TOKEN_EXPIRATION` | `token_expiration_minutes` | `null` | Sanctum token TTL in minutes |
+| `MAGIC_STARTER_TOKEN_EXPIRATION` | `token_expiration_minutes` | `null` | Lifetime in minutes of every issued token |
+| `MAGIC_STARTER_REMEMBER_ME_EXPIRATION` | `remember_me_expiration_minutes` | `null` | Lifetime in minutes of a token from a password sign-in with `remember_me: true` |
 | `MAGIC_STARTER_AUTH_EMAIL` | `auth.email` | `true` | Enable email-based authentication |
 | `MAGIC_STARTER_AUTH_PHONE` | `auth.phone` | `false` | Enable phone-based authentication |
 | `APP_NAME` | `two_factor.company_name` | `'Laravel'` | Company name in authenticator apps |

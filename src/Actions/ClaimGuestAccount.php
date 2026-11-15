@@ -86,14 +86,14 @@ class ClaimGuestAccount implements ClaimsGuestAccounts
         //    Answered as "nothing to claim" rather than as a refusal, so the
         //    endpoint says nothing about which tokens exist.
         //
-        //    BOTH of the guard's rules, because the one that reads as the
-        //    obvious check is the one that never fires here. Guest tokens are
-        //    minted by `AuthenticatesUsers` with `createToken('auth_token')`
-        //    and no expiry, so `expires_at` is null on every token this package
-        //    issues; on an application that sets `sanctum.expiration` the age of
-        //    `created_at` is the ONLY rule that ages one out. Reading
-        //    `expires_at` alone left a captured guest token refused by every
-        //    other route and still able to move an account's rows.
+        //    BOTH of the guard's rules, because either one can be the only one
+        //    that fires. `AuthenticatesUsers` mints a guest token with its own
+        //    `expires_at` only when `token_expiration_minutes` is set; without
+        //    it `expires_at` is null and, on an application that sets
+        //    `sanctum.expiration`, the age of `created_at` is the ONLY rule that
+        //    ages one out. Reading `expires_at` alone left a captured guest
+        //    token refused by every other route and still able to move an
+        //    account's rows.
         //
         //    The second comparison mirrors `Guard::isValidAccessToken`, falsy
         //    expiration included: Sanctum reads 0 and null alike as "no window".

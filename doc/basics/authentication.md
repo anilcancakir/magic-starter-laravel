@@ -80,6 +80,9 @@ Provide either `email` or `phone` -- at least one is required.
 | `email`    | string | Required (or `required_without:phone` in dual mode). Valid email.  |
 | `phone`    | string | Required (or `required_without:email` in dual mode). E.164 format. |
 | `password` | string | Required.                                                          |
+| `remember_me` | boolean | Optional. `true`, `false`, `1`, `0`, `"1"` or `"0"`; anything else answers 422. |
+
+`remember_me: true` gives the token the `remember_me_expiration_minutes` lifetime instead of `token_expiration_minutes`; when that is `null` the token falls back to `token_expiration_minutes`. When both are `null` the token does not expire unless `sanctum.expiration` says so. See [Configuration](../getting-started/configuration.md).
 
 ### Success Response (200)
 
@@ -616,6 +619,8 @@ Completes a two-factor authentication challenge after a successful login that re
 When `recovery_code` is provided, the `code` field is automatically nullified. Provide one or the other, not both.
 
 The challenge token expires after the configured TTL (`config('magic-starter.two_factor.challenge_token_ttl')`, default: 5 minutes).
+
+The challenge token also carries the `remember_me` the login sent, so the token this endpoint issues gets the same lifetime the login would have given it. A challenge token minted before this field existed counts as `remember_me: false`.
 
 ### Success Response (200)
 
