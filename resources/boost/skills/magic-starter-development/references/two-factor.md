@@ -29,7 +29,7 @@
 
 ### Challenge flow uses a short-lived encrypted token
 
-When login detects 2FA is enabled, it returns an encrypted `two_factor_token` containing `user_id` and `expires_at` (TTL from `challenge_token_ttl` config, in minutes). The challenge endpoint decrypts the token, checks expiry, resolves the user, then validates either a TOTP `code` or a `recovery_code`. On success it calls `createAuthToken` and returns the standard authenticated response.
+When login detects 2FA is enabled, it returns an encrypted `two_factor_token` containing `user_id`, `expires_at` (TTL from `challenge_token_ttl` config, in minutes) and `remember` (the login's `remember_me`). The challenge endpoint decrypts the token, checks expiry, resolves the user, then validates either a TOTP `code` or a `recovery_code`. On success it calls `createAuthToken` with `remember` (a token without the key means false) and returns the standard authenticated response.
 
 ### Config and storage details
 

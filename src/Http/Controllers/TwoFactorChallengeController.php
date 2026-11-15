@@ -51,8 +51,13 @@ class TwoFactorChallengeController extends AuthController
             $this->verifyTotpCode($request, $user);
         }
 
-        // 5. Generate authenticated response via AuthController parent method.
-        $token = $this->createAuthToken($user, $request);
+        // 5. Issue the token with the lifetime the password sign-in asked for;
+        //    a challenge minted before `remember` existed reads as not remembered.
+        $token = $this->createAuthToken(
+            $user,
+            $request,
+            remember: (bool) ($payload['remember'] ?? false),
+        );
 
         return $this->authenticatedResponse($user, $request, $token);
     }

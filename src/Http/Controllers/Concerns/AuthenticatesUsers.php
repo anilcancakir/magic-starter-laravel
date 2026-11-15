@@ -97,11 +97,19 @@ trait AuthenticatesUsers
      * `magic-starter.two_factor.challenge_token_ttl` minutes; it is redeemed at
      * `POST auth/two-factor-challenge`.
      *
+     * The challenge carries `$remember`, so the token the challenge finally
+     * issues keeps the lifetime the sign-in asked for.
+     *
      * @param  Model  $user  The user who proved the first factor.
      * @param  string|null  $message  Response message, or null for the sign-in default.
+     * @param  bool  $remember  Whether the sign-in asked for the `remember_me` lifetime.
      */
-    protected function signInResponse(Model $user, Request $request, ?string $message = null): JsonResponse
-    {
+    protected function signInResponse(
+        Model $user,
+        Request $request,
+        ?string $message = null,
+        bool $remember = false,
+    ): JsonResponse {
         if (
             Features::hasTwoFactorAuthenticationFeatures() &&
             method_exists($user, 'hasEnabledTwoFactorAuthentication') &&
@@ -112,6 +120,7 @@ trait AuthenticatesUsers
                 'expires_at' => now()->addMinutes(
                     (int) config('magic-starter.two_factor.challenge_token_ttl', 5),
                 )->timestamp,
+                'remember' => $remember,
             ]));
 
             return response()->json([
@@ -123,7 +132,7 @@ trait AuthenticatesUsers
         return $this->authenticatedResponse(
             $user,
             $request,
-            $this->createAuthToken($user, $request, true),
+            $this->createAuthToken($user, $request, true, $remember),
             $message,
         );
     }
@@ -184,20 +193,33 @@ trait AuthenticatesUsers
      * Signing in during the grace period of a deletion the user asked for
      * cancels it first; see {@see self::cancelScheduledDeletion()}.
      *
+     * The token expires after {@see self::tokenLifetimeMinutes()} minutes, or
+     * carries no expiry of its own when that is null; `sanctum.expiration`
+     * still applies on top either way.
+     *
      * @param  mixed  $user  The user model instance.
      * @param  Request  $request  The current HTTP request (used for device info).
      * @param  bool  $storeDeviceInfo  Whether to persist ip/user_agent on the token.
+     * @param  bool  $remember  Whether the sign-in asked for the `remember_me` lifetime.
      * @return string The plain-text token string.
      */
-    protected function createAuthToken(mixed $user, Request $request, bool $storeDeviceInfo = true): string
-    {
+    protected function createAuthToken(
+        mixed $user,
+        Request $request,
+        bool $storeDeviceInfo = true,
+        bool $remember = false,
+    ): string {
         $this->cancelScheduledDeletion($user, $request);
 
         if (! method_exists($user, 'createToken')) {
             return Str::random(80);
         }
 
-        $tokenResult = $user->createToken('auth_token');
+        $minutes = $this->tokenLifetimeMinutes($remember);
+
+        $tokenResult = $minutes === null
+            ? $user->createToken('auth_token')
+            : $user->createToken('auth_token', ['*'], now()->addMinutes($minutes));
         $plainTextToken = $tokenResult->plainTextToken ?? Str::random(80);
 
         $accessToken = $tokenResult->accessToken ?? null;
@@ -214,6 +236,34 @@ trait AuthenticatesUsers
         }
 
         return (string) $plainTextToken;
+    }
+
+    /**
+     * The lifetime of a new token in minutes, or null for no expiry of its own.
+     *
+     * `remember_me_expiration_minutes` replaces `token_expiration_minutes` for
+     * a remembered sign-in and falls back to it while unset. A value that is
+     * not a positive whole number of minutes reads as unset (an empty env var
+     * arrives as `""`), so `0` keeps a token without expiry the way
+     * `sanctum.expiration` reads it.
+     */
+    protected function tokenLifetimeMinutes(bool $remember): ?int
+    {
+        $remembered = $remember
+            ? $this->positiveMinutes(config('magic-starter.remember_me_expiration_minutes'))
+            : null;
+
+        return $remembered ?? $this->positiveMinutes(config('magic-starter.token_expiration_minutes'));
+    }
+
+    /**
+     * A config value as a positive number of minutes, or null.
+     */
+    private function positiveMinutes(mixed $value): ?int
+    {
+        $minutes = is_numeric($value) ? (int) $value : 0;
+
+        return $minutes > 0 ? $minutes : null;
     }
 
     /**

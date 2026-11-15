@@ -607,6 +607,40 @@ class GuestClaimTest extends TestCase
     }
 
     /**
+     * Test 9b: a guest token past its own `expires_at` claims nothing.
+     *
+     * With `token_expiration_minutes` set the package mints every token with
+     * its own expiry, guest tokens included, and Sanctum's guard refuses one
+     * past it on every other route.
+     */
+    public function test_a_claim_with_a_guest_token_past_its_own_expiry_moves_nothing(): void
+    {
+        config(['magic-starter.token_expiration_minutes' => 60]);
+
+        $guest = $this->startGuestSession();
+        $notificationId = $this->notificationFor($guest['user_id']);
+
+        $this->travel(61)->minutes();
+
+        $account = $this->registeredAccount();
+
+        Event::fake([GuestClaimed::class]);
+
+        $this->withToken($account['token'])
+            ->postJson('/auth/guest/claim', ['guest_token' => $guest['token']])
+            ->assertOk()
+            ->assertJsonPath('data.claimed', false);
+
+        $this->assertSame(
+            $guest['user_id'],
+            $this->notificationOwner($notificationId),
+            'An expired guest token must move nothing.',
+        );
+
+        Event::assertNotDispatched(GuestClaimed::class);
+    }
+
+    /**
      * Test 10: a guest that never carried a device id is claimable.
      *
      * The published `UserFactory` makes exactly this row: `is_guest` true and no

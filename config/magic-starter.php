@@ -516,13 +516,21 @@ return [
     | Token Expiration
     |--------------------------------------------------------------------------
     |
-    | Set the number of minutes until issued tokens expire. Null means
-    | tokens never expire. Configure Sanctum's pruning command to clean
-    | up expired tokens: php artisan sanctum:prune-expired --hours=24
+    | Set the number of minutes until issued tokens expire. It applies to
+    | every token the package issues (login, registration, 2FA, OTP, guest,
+    | social). Null means tokens never expire unless `sanctum.expiration`
+    | says so. Configure Sanctum's pruning command to clean up expired
+    | tokens: php artisan sanctum:prune-expired --hours=24
+    |
+    | The remember-me lifetime replaces it for a password sign-in that sent
+    | `remember_me: true` (and the 2FA challenge that finishes one). Null
+    | falls back to the lifetime above.
     |
     */
 
     'token_expiration_minutes' => env('MAGIC_STARTER_TOKEN_EXPIRATION', null),
+
+    'remember_me_expiration_minutes' => env('MAGIC_STARTER_REMEMBER_ME_EXPIRATION', null),
 
     /*
     |--------------------------------------------------------------------------
