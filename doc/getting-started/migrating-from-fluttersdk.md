@@ -4,8 +4,8 @@ How to move a Laravel application from `fluttersdk/magic-starter-laravel` 0.0.x 
 
 - [Quick Reference](#quick-reference)
 - [Drain the Queue](#drain-the-queue)
-- [Swap the Package](#swap-the-package)
 - [Rename the Namespace](#rename-the-namespace)
+- [Swap the Package](#swap-the-package)
 - [Run the Migration](#run-the-migration)
 - [Laravel Boost](#laravel-boost)
 - [What Does Not Change](#what-does-not-change)
@@ -15,13 +15,16 @@ How to move a Laravel application from `fluttersdk/magic-starter-laravel` 0.0.x 
 <a name="quick-reference"></a>
 ## Quick Reference
 
-The old package is abandoned on Packagist and names `anilcancakir/magic-starter-laravel` as its replacement. Nothing else about the package changes: the repository moved to a new owner, the namespace changed from `FlutterSdk\MagicStarter\` to `AnilcanCakir\MagicStarter\`, and 1.0.0 is the first release under the new name.
+From 1.0.0 the old package is abandoned on Packagist and names `anilcancakir/magic-starter-laravel` as its replacement. Nothing else about the package changes: the repository moved to a new owner, the namespace changed from `FlutterSdk\MagicStarter\` to `AnilcanCakir\MagicStarter\`, and 1.0.0 is the first release under the new name.
+
+Rename your code first and swap the package second: the published `config/magic-starter.php` calls `Features::` methods by their full class name, and Composer boots the application while it removes a package, so a config that still names the old namespace stops `composer remove` with a fatal error.
 
 ```bash
 php artisan queue:work --stop-when-empty
-composer remove fluttersdk/magic-starter-laravel && composer require anilcancakir/magic-starter-laravel
 rg -l0 'FlutterSdk\\+MagicStarter' app config database routes tests \
     | xargs -0 -r perl -pi -e 's/FlutterSdk(\\+)MagicStarter/AnilcanCakir$1MagicStarter/g'
+composer remove fluttersdk/magic-starter-laravel --no-update
+composer require anilcancakir/magic-starter-laravel
 cp vendor/anilcancakir/magic-starter-laravel/database/migrations/rewrite_stored_class_names.php \
     "database/migrations/$(date +%Y_%m_%d_%H%M%S)_rewrite_stored_class_names.php"
 php artisan migrate
@@ -30,8 +33,8 @@ php artisan migrate
 | Step | What you do | Details |
 |:-----|:------------|:--------|
 | 1 | Stop dispatching and run the queue empty. | [Drain the Queue](#drain-the-queue) |
-| 2 | Replace the Composer package. | [Swap the Package](#swap-the-package) |
-| 3 | Rename the namespace in your application code. | [Rename the Namespace](#rename-the-namespace) |
+| 2 | Rename the namespace in your application code. | [Rename the Namespace](#rename-the-namespace) |
+| 3 | Replace the Composer package in one resolution. | [Swap the Package](#swap-the-package) |
 | 4 | Run the upgrade migration. | [Run the Migration](#run-the-migration) |
 | 5 | Re-select the package in Laravel Boost, if you use it. | [Laravel Boost](#laravel-boost) |
 
@@ -47,18 +50,6 @@ php artisan queue:work --stop-when-empty
 ```
 
 Do the same for every named queue and connection your application uses.
-
-<a name="swap-the-package"></a>
-## Swap the Package
-
-```bash
-composer remove fluttersdk/magic-starter-laravel
-composer require anilcancakir/magic-starter-laravel
-```
-
-Package auto-discovery registers `AnilcanCakir\MagicStarter\MagicStarterServiceProvider`; a provider you registered by hand in `bootstrap/providers.php` or `config/app.php` needs the same rename as the rest of your code. Composer reports the old package as abandoned until you remove it, naming the new one as the replacement.
-
-The vendor path changes too: a command or note that copies a migration from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` reads `vendor/anilcancakir/magic-starter-laravel/database/migrations/` from now on.
 
 <a name="rename-the-namespace"></a>
 ## Rename the Namespace
@@ -76,6 +67,18 @@ rg -l0 'FlutterSdk\\+MagicStarter' app config database routes tests \
 The first command lists the files that match, the second rewrites them in place. Run the list again afterwards: it must print nothing. Check the rest of the project too (`bootstrap/`, `phpstan.neon`, `phpunit.xml`) with `rg FlutterSdk` over the repository, leaving `vendor/` out.
 
 A file you published from the old package extends or implements a class of the old namespace, so it fails until it is renamed. Rename it in place; republishing it with `--force` to get the new namespace discards your edits.
+
+<a name="swap-the-package"></a>
+## Swap the Package
+
+```bash
+composer remove fluttersdk/magic-starter-laravel --no-update
+composer require anilcancakir/magic-starter-laravel
+```
+
+`--no-update` only edits `composer.json`, so Composer resolves once, with the new package, and the application boots against the renamed code. Package auto-discovery registers `AnilcanCakir\MagicStarter\MagicStarterServiceProvider`; a provider you registered by hand in `bootstrap/providers.php` or `config/app.php` needs the same rename as the rest of your code. While the old package is still required, Composer reports it as abandoned and names the new one as the replacement.
+
+The vendor path changes too: a command or note that copies a migration from `vendor/fluttersdk/magic-starter-laravel/database/migrations/` reads `vendor/anilcancakir/magic-starter-laravel/database/migrations/` from now on.
 
 <a name="run-the-migration"></a>
 ## Run the Migration
@@ -119,6 +122,7 @@ The package ships its agent skill, `magic-starter-development`, under `resources
 
 | Mistake | Fix |
 |:--------|:----|
+| Running `composer remove` before renaming the code | The published config still names the old `Features` class and the application fails to boot inside Composer. Rename first, then `composer remove ... --no-update` and `composer require`. |
 | Upgrading with jobs still in the queue | Drain the queue first. A payload naming the old class cannot be retried afterwards. |
 | Replacing only `FlutterSdk\MagicStarter` | The doubled-backslash form in config and strings needs the same rename; the pattern above covers both. |
 | Searching only `app/` | Search `config/`, `database/`, `routes/` and `tests/` too, and `bootstrap/` for a hand-registered provider. |
