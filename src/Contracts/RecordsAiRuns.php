@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunAttemptData;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunOutcome;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunStart;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunAttemptData;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunOutcome;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunStart;
 
 /**
  * Records a host application's model calls: one run per logical call, one

@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Actions\TrashTeam;
-use FlutterSdk\MagicStarter\Events\TeamDeleted;
-use FlutterSdk\MagicStarter\Events\TeamRestored;
-use FlutterSdk\MagicStarter\Events\TeamTrashed;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\TeamController;
-use FlutterSdk\MagicStarter\Http\Controllers\TeamInvitationController;
-use FlutterSdk\MagicStarter\Policies\TeamPolicy;
-use FlutterSdk\MagicStarter\Tests\Fixtures\BuildsRestorableTeamSchema;
-use FlutterSdk\MagicStarter\Tests\Fixtures\RestorableTeam;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\TrashTeam;
+use AnilcanCakir\MagicStarter\Events\TeamDeleted;
+use AnilcanCakir\MagicStarter\Events\TeamRestored;
+use AnilcanCakir\MagicStarter\Events\TeamTrashed;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\TeamController;
+use AnilcanCakir\MagicStarter\Http\Controllers\TeamInvitationController;
+use AnilcanCakir\MagicStarter\Policies\TeamPolicy;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\BuildsRestorableTeamSchema;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\RestorableTeam;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;

@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Social;
+namespace AnilcanCakir\MagicStarter\Social;
 
-use FlutterSdk\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

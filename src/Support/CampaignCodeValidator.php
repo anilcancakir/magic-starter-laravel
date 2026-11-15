@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
+use AnilcanCakir\MagicStarter\Enums\CampaignDiscountType;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Enums\CampaignDiscountType;
 use Illuminate\Validation\ValidationException;
 use Stripe\Coupon;
 use Stripe\Exception\ApiErrorException;

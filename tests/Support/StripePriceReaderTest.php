@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Support\StripePriceReader;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\StripePriceReader;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Stripe\ApiRequestor;
 use Stripe\Exception\AuthenticationException;
 use Stripe\HttpClient\ClientInterface;

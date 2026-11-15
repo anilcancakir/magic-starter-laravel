@@ -19,9 +19,9 @@
  * be a 419 until somebody remembered to exempt the exact path.
  */
 
-use FlutterSdk\MagicStarter\Http\Controllers\RevenueCatWebhookController;
-use FlutterSdk\MagicStarter\Http\Controllers\StripeWebhookController;
-use FlutterSdk\MagicStarter\Support\StoreRailConfiguration;
+use AnilcanCakir\MagicStarter\Http\Controllers\RevenueCatWebhookController;
+use AnilcanCakir\MagicStarter\Http\Controllers\StripeWebhookController;
+use AnilcanCakir\MagicStarter\Support\StoreRailConfiguration;
 use Illuminate\Support\Facades\Route;
 
 /*

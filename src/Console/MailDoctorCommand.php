@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Mail\RoutingTransport;
-use FlutterSdk\MagicStarter\Models\MailSend;
-use FlutterSdk\MagicStarter\Support\OneSignalSubscriptions;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Mail\RoutingTransport;
+use AnilcanCakir\MagicStarter\Models\MailSend;
+use AnilcanCakir\MagicStarter\Support\OneSignalSubscriptions;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\Container;

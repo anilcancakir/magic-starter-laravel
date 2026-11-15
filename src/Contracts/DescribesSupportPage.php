@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportTurn;
-use FlutterSdk\MagicStarter\Support\SupportPageContext;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportTurn;
+use AnilcanCakir\MagicStarter\Support\SupportPageContext;
 use Throwable;
 
 /**

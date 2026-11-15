@@ -1,31 +1,31 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
+use AnilcanCakir\MagicStarter\Actions\WriteEntitlement;
+use AnilcanCakir\MagicStarter\Contracts\WritesEntitlement;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Events\Billing\DeliveryRefused;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialRecorded;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\StripeWebhookController;
+use AnilcanCakir\MagicStarter\Jobs\CheckTrialCard;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Models\ProcessedWebhookEvent;
+use AnilcanCakir\MagicStarter\Support\BillingEventRecorder;
+use AnilcanCakir\MagicStarter\Support\EntitlementWrite;
+use AnilcanCakir\MagicStarter\Support\MigrationHelper;
+use AnilcanCakir\MagicStarter\Support\TrialCardGateway;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\Support\FeederInvariantWriter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Carbon\CarbonImmutable;
-use FlutterSdk\MagicStarter\Actions\WriteEntitlement;
-use FlutterSdk\MagicStarter\Contracts\WritesEntitlement;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Events\Billing\DeliveryRefused;
-use FlutterSdk\MagicStarter\Events\Billing\TrialRecorded;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\StripeWebhookController;
-use FlutterSdk\MagicStarter\Jobs\CheckTrialCard;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Models\ProcessedWebhookEvent;
-use FlutterSdk\MagicStarter\Support\BillingEventRecorder;
-use FlutterSdk\MagicStarter\Support\EntitlementWrite;
-use FlutterSdk\MagicStarter\Support\MigrationHelper;
-use FlutterSdk\MagicStarter\Support\TrialCardGateway;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\Support\FeederInvariantWriter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
@@ -247,13 +247,13 @@ class StripeWebhookTest extends TestCase
         config([
             'magic-starter.features' => [Features::teams(), Features::billing()],
             'magic-starter.billing.billable' => 'team',
-            'magic-starter.models.team' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam::class,
+            'magic-starter.models.team' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam::class,
         ]);
 
         (new MagicStarterServiceProvider($this->app))->register();
 
         $this->assertSame(
-            \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam::class,
+            \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam::class,
             Cashier::$customerModel,
         );
     }

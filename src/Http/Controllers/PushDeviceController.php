@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Requests\ReleasePushDeviceRequest;
-use FlutterSdk\MagicStarter\Http\Requests\StorePushDeviceStateRequest;
-use FlutterSdk\MagicStarter\Models\PushDevice;
+use AnilcanCakir\MagicStarter\Http\Requests\ReleasePushDeviceRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\StorePushDeviceStateRequest;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
 use Illuminate\Http\Response;
 
 /**

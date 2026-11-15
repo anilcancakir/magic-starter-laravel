@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
 use Filament\Resources\Pages\CreateRecord;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
 
 class CreateAiPromptOverride extends CreateRecord
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi\Tools;
 
-use FlutterSdk\MagicStarter\Contracts\SupportTool;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportArticleSearch;
+use AnilcanCakir\MagicStarter\Contracts\SupportTool;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportArticleSearch;
 use Illuminate\Contracts\Foundation\Application;
 
 /**

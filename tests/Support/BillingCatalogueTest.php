@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Console\BillingDoctorCommand;
-use FlutterSdk\MagicStarter\Enums\BillingCycle;
-use FlutterSdk\MagicStarter\Enums\CommissionMode;
-use FlutterSdk\MagicStarter\Enums\ProductType;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Console\BillingDoctorCommand;
+use AnilcanCakir\MagicStarter\Enums\BillingCycle;
+use AnilcanCakir\MagicStarter\Enums\CommissionMode;
+use AnilcanCakir\MagicStarter\Enums\ProductType;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Facades\Log;
 use LogicException;

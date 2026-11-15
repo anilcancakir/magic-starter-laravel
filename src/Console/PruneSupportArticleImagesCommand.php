@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
-use FlutterSdk\MagicStarter\Listeners\RemoveSupportArticleImages;
+use AnilcanCakir\MagicStarter\Listeners\RemoveSupportArticleImages;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 

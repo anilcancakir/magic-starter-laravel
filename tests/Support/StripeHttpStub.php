@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
 use Closure;
 use Stripe\ApiRequestor;

@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Users\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Users\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\UserResource;
 use Filament\Resources\Pages\CreateRecord;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\UserResource;
 
 class CreateUser extends CreateRecord
 {

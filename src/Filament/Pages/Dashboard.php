@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Pages;
 
 use Filament\Pages\Dashboard as BaseDashboard;
 

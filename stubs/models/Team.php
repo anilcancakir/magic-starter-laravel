@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use FlutterSdk\MagicStarter\Models\Team as MagicStarterTeam;
+use AnilcanCakir\MagicStarter\Models\Team as MagicStarterTeam;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

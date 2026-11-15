@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Http\Resources\AppReleaseResource;
-use FlutterSdk\MagicStarter\Models\AppRelease;
+use AnilcanCakir\MagicStarter\Http\Resources\AppReleaseResource;
+use AnilcanCakir\MagicStarter\Models\AppRelease;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 

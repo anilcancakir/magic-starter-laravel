@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Infolists;
+namespace AnilcanCakir\MagicStarter\Filament\Infolists;
 
+use AnilcanCakir\MagicStarter\Filament\Support\CodeBlock;
 use Filament\Infolists\Components\ViewEntry;
-use FlutterSdk\MagicStarter\Filament\Support\CodeBlock;
 
 /**
  * An infolist entry that shows its state as code: highlighted JSON for

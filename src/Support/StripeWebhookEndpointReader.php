@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
 use Laravel\Cashier\Cashier;
 use Stripe\Exception\ApiErrorException;

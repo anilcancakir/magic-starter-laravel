@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Controllers\AuthController;
-use FlutterSdk\MagicStarter\Http\Controllers\GuestAuthController;
-use FlutterSdk\MagicStarter\Http\Controllers\ProfileController;
-use FlutterSdk\MagicStarter\Http\Controllers\SessionController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Http\Controllers\AuthController;
+use AnilcanCakir\MagicStarter\Http\Controllers\GuestAuthController;
+use AnilcanCakir\MagicStarter\Http\Controllers\ProfileController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SessionController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -32,7 +32,7 @@ class GuestLifecycleTest extends TestCase
     {
         return [
             \Laravel\Sanctum\SanctumServiceProvider::class,
-            \FlutterSdk\MagicStarter\MagicStarterServiceProvider::class,
+            \AnilcanCakir\MagicStarter\MagicStarterServiceProvider::class,
         ];
     }
 
@@ -113,8 +113,8 @@ class GuestLifecycleTest extends TestCase
         });
 
         $this->app->instance(
-            \FlutterSdk\MagicStarter\Contracts\UpdatesUserProfiles::class,
-            $this->app->make(\FlutterSdk\MagicStarter\Actions\UpdateUserProfile::class),
+            \AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles::class,
+            $this->app->make(\AnilcanCakir\MagicStarter\Actions\UpdateUserProfile::class),
         );
     }
 
@@ -350,10 +350,10 @@ class GuestLifecycleTest extends TestCase
  */
 final class GuestLifecycleTestUser extends \Illuminate\Foundation\Auth\User
 {
-    use \FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-    use \FlutterSdk\MagicStarter\Traits\HasGuestSupport;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
+    use \AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+    use \AnilcanCakir\MagicStarter\Traits\HasGuestSupport;
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use \Laravel\Sanctum\HasApiTokens;
 
     protected $table = 'users';

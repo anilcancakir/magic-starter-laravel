@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Traits;
+namespace AnilcanCakir\MagicStarter\Traits;
 
-use FlutterSdk\MagicStarter\Jobs\PruneSmsSubscriptions;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\NotificationSetting;
-use FlutterSdk\MagicStarter\NotificationPreferenceRegistry;
-use FlutterSdk\MagicStarter\Support\OneSignalSubscriptions;
+use AnilcanCakir\MagicStarter\Jobs\PruneSmsSubscriptions;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\NotificationSetting;
+use AnilcanCakir\MagicStarter\NotificationPreferenceRegistry;
+use AnilcanCakir\MagicStarter\Support\OneSignalSubscriptions;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Schema;
  * Add to your User model:
  *
  * ```php
- * use FlutterSdk\MagicStarter\Traits\HasNotifications;
+ * use AnilcanCakir\MagicStarter\Traits\HasNotifications;
  *
  * class User extends Authenticatable
  * {
@@ -247,7 +247,7 @@ trait HasNotifications
      *     must agree on the format.
      *
      * It comes from `magic-starter.onesignal.external_id_prefix` rather than
-     * being written here, because {@see \FlutterSdk\MagicStarter\Notifications\Channels\OneSignalChannel}
+     * being written here, because {@see \AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel}
      * composes the same string for a notifiable that does not use this trait,
      * and two hardcoded copies of a value whose mismatch is SILENT is the
      * shape this stack has already been bitten by. The client's own default

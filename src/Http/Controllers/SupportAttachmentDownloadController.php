@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Models\SupportMessage;
-use FlutterSdk\MagicStarter\Models\SupportMessageAttachment;
-use FlutterSdk\MagicStarter\Support\SupportAttachmentResponse;
-use FlutterSdk\MagicStarter\Support\TeamKey;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Models\SupportMessageAttachment;
+use AnilcanCakir\MagicStarter\Support\SupportAttachmentResponse;
+use AnilcanCakir\MagicStarter\Support\TeamKey;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpFoundation\StreamedResponse;

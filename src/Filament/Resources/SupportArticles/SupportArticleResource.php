@@ -1,7 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportArticles;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles;
 
+use AnilcanCakir\MagicStarter\Contracts\TranslatesSupportArticles;
+use AnilcanCakir\MagicStarter\Contracts\ValidatesSupportArticleMarkdown;
+use AnilcanCakir\MagicStarter\Enums\SupportArticleVisibility;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages\CreateSupportArticle;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages\EditSupportArticle;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages\ListSupportArticles;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Listeners\RemoveSupportArticleImages;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
 use BackedEnum;
 use Closure;
 use Filament\Actions\Action;
@@ -16,17 +27,6 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\TranslatesSupportArticles;
-use FlutterSdk\MagicStarter\Contracts\ValidatesSupportArticleMarkdown;
-use FlutterSdk\MagicStarter\Enums\SupportArticleVisibility;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages\CreateSupportArticle;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages\EditSupportArticle;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages\ListSupportArticles;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Listeners\RemoveSupportArticleImages;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

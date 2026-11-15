@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers;
 
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Columns\IconColumn;

@@ -15,9 +15,9 @@
  * either; the flow it finishes lives in the state the redirect recorded.
  */
 
-use FlutterSdk\MagicStarter\Http\Controllers\AppleNotificationController;
-use FlutterSdk\MagicStarter\Http\Controllers\SocialCallbackController;
-use FlutterSdk\MagicStarter\Social\ProviderIdentity;
+use AnilcanCakir\MagicStarter\Http\Controllers\AppleNotificationController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SocialCallbackController;
+use AnilcanCakir\MagicStarter\Social\ProviderIdentity;
 use Illuminate\Support\Facades\Route;
 
 Route::match(['GET', 'POST'], ProviderIdentity::CALLBACK_PATH, SocialCallbackController::class)

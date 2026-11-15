@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events;
+namespace AnilcanCakir\MagicStarter\Events;
 
-use FlutterSdk\MagicStarter\Actions\AcceptTeamInvitation;
-use FlutterSdk\MagicStarter\Actions\AddTeamMember;
+use AnilcanCakir\MagicStarter\Actions\AcceptTeamInvitation;
+use AnilcanCakir\MagicStarter\Actions\AddTeamMember;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
 /**

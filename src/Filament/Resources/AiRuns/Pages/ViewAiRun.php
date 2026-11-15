@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AiRuns\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
 use Filament\Resources\Pages\ViewRecord;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
 
 class ViewAiRun extends ViewRecord
 {

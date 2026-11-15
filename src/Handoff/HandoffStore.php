@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Handoff;
+namespace AnilcanCakir\MagicStarter\Handoff;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Cache\Factory as CacheFactory;
@@ -34,7 +34,7 @@ class HandoffStore
     /**
      * Mint a code that signs in the given user, once.
      *
-     * @param  string|null  $next  a same-app path, already validated by {@see \FlutterSdk\MagicStarter\Rules\SameAppPath}
+     * @param  string|null  $next  a same-app path, already validated by {@see \AnilcanCakir\MagicStarter\Rules\SameAppPath}
      * @return string the opaque 64 character code, valid for {@see self::ttl()} seconds
      */
     public function mint(Authenticatable $user, ?string $next): string

@@ -22,7 +22,7 @@ The panel is optional. `filament/filament` (`^4.0|^5.0`), `laravel/horizon`, `la
 
 ```php
 use Filament\Models\Contracts\FilamentUser;
-use FlutterSdk\MagicStarter\Filament\Concerns\AuthorizesAdminPanel;
+use AnilcanCakir\MagicStarter\Filament\Concerns\AuthorizesAdminPanel;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -82,7 +82,7 @@ Set every option BEFORE `->plugin()`: Filament calls `register()` the moment the
 2. With `authorizeUsing()` set, the callback decides alone.
 3. Otherwise the lowercased, trimmed email must be in `magic-starter.admin.emails` and the address must be verified. An empty list admits nobody, and an empty email is refused.
 
-Sign in asks for the API's TOTP code (or a recovery code) when the `twoFactorAuthentication` feature is on and the user confirmed two-factor: `FlutterSdk\MagicStarter\Filament\Auth\TwoFactorAuthentication`, a Filament `MultiFactorAuthenticationProvider` over the `TwoFactorAuthenticatable` columns. Codes go through `TwoFactorAuthenticationProvider::verifyOnce()` and `redeemRecoveryCode()`, the same calls as the API challenge, so a code spent on one surface is spent on both. The plugin mounts it only on a panel with no `multiFactorAuthentication()` of its own when the panel is built; an app that configures one lists `TwoFactorAuthentication::make()` itself. It never writes a secret; the Users resource's `reset_two_factor` turns two-factor off and so also lifts the panel challenge.
+Sign in asks for the API's TOTP code (or a recovery code) when the `twoFactorAuthentication` feature is on and the user confirmed two-factor: `AnilcanCakir\MagicStarter\Filament\Auth\TwoFactorAuthentication`, a Filament `MultiFactorAuthenticationProvider` over the `TwoFactorAuthenticatable` columns. Codes go through `TwoFactorAuthenticationProvider::verifyOnce()` and `redeemRecoveryCode()`, the same calls as the API challenge, so a code spent on one surface is spent on both. The plugin mounts it only on a panel with no `multiFactorAuthentication()` of its own when the panel is built; an app that configures one lists `TwoFactorAuthentication::make()` itself. It never writes a secret; the Users resource's `reset_two_factor` turns two-factor off and so also lifts the panel challenge.
 
 ## What the Plugin Mounts
 
@@ -107,9 +107,9 @@ Extend `MagicStarterResource`, never Filament's `Resource` directly. It resolves
 4. Register it with `->resource('key', Class::class)` on the plugin, or leave it to the app panel's own discovery.
 
 ```php
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
 
 class ProjectResource extends MagicStarterResource
 {
@@ -154,7 +154,7 @@ Copies the resource to `app/Filament/Resources/<Name>` under `App\Filament\Resou
 Add to the app's suite so a stock write cannot slip in:
 
 ```php
-use FlutterSdk\MagicStarter\Testing\AssertsAdminWritesUseContracts;
+use AnilcanCakir\MagicStarter\Testing\AssertsAdminWritesUseContracts;
 
 public function test_admin_writes_use_contracts(): void
 {

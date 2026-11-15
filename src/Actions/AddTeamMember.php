@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\AddsTeamMembers;
-use FlutterSdk\MagicStarter\Events\TeamMemberJoined;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Contracts\AddsTeamMembers;
+use AnilcanCakir\MagicStarter\Events\TeamMemberJoined;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;

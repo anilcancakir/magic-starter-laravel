@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\AiPrompts;
+namespace AnilcanCakir\MagicStarter\Tests\Support\AiPrompts;
 
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptDefinition;
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptRegistry;
-use FlutterSdk\MagicStarter\Support\AiPrompts\RequiredPhrases;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptDefinition;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptRegistry;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\RequiredPhrases;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use InvalidArgumentException;
 
 /**

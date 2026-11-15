@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Router script for the `php -S` process that {@see \FlutterSdk\MagicStarter\Tests\Support\FakeOAuthServer} starts.
+ * Router script for the `php -S` process that {@see \AnilcanCakir\MagicStarter\Tests\Support\FakeOAuthServer} starts.
  *
  * Test support only. Each request is a fresh PHP run, so everything that must survive between requests lives as
  * files in the directory named by `FAKE_OAUTH_STATE_DIR` (written by FakeOAuthServer before launch):

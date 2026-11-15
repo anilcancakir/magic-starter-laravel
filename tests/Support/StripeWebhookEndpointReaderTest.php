@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Support\StripeWebhookEndpointReader;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\StripeWebhookEndpointReader;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 
 /**
  * The Stripe webhook endpoint read `billing:doctor --remote` checks the lifecycle mail events against, driven

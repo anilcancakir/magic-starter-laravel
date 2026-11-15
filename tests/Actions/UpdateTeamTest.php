@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\UpdateTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\BuildsRestorableTeamSchema;
-use FlutterSdk\MagicStarter\Tests\Fixtures\VisibilityRecordingDisk;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\UpdateTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\BuildsRestorableTeamSchema;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\VisibilityRecordingDisk;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 

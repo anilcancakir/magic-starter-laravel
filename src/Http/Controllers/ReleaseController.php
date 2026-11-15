@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Support\ReleaseFeed;
+use AnilcanCakir\MagicStarter\Support\ReleaseFeed;
 use Illuminate\Http\JsonResponse;
 
 /**

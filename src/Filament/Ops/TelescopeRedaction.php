@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Ops;
+namespace AnilcanCakir\MagicStarter\Filament\Ops;
 
-use FlutterSdk\MagicStarter\Http\Controllers\TeamInvitationController;
-use FlutterSdk\MagicStarter\Http\Controllers\TwoFactorRecoveryCodeController;
+use AnilcanCakir\MagicStarter\Http\Controllers\TeamInvitationController;
+use AnilcanCakir\MagicStarter\Http\Controllers\TwoFactorRecoveryCodeController;
 use Illuminate\Support\Collection;
 use Laravel\Telescope\EntryType;
 use Laravel\Telescope\IncomingEntry;

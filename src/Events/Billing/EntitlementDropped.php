@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events\Billing;
+namespace AnilcanCakir\MagicStarter\Events\Billing;
 
 /**
  * Fires when a rail's entitlement write was refused and the stored entitlement

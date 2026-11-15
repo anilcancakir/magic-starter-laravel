@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Models;
+namespace AnilcanCakir\MagicStarter\Tests\Models;
 
-use FlutterSdk\MagicStarter\Enums\ReleaseItemType;
-use FlutterSdk\MagicStarter\Enums\ReleaseStatus;
-use FlutterSdk\MagicStarter\Models\AppRelease;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\ReleaseItemType;
+use AnilcanCakir\MagicStarter\Enums\ReleaseStatus;
+use AnilcanCakir\MagicStarter\Models\AppRelease;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Carbon;
 
 /**

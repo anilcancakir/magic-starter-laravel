@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi\Tools;
 
-use FlutterSdk\MagicStarter\Actions\RecordSupportProposal;
-use FlutterSdk\MagicStarter\Contracts\RecordsSupportProposals;
-use FlutterSdk\MagicStarter\Contracts\SupportTool;
-use FlutterSdk\MagicStarter\Enums\SupportProposalAction;
+use AnilcanCakir\MagicStarter\Actions\RecordSupportProposal;
+use AnilcanCakir\MagicStarter\Contracts\RecordsSupportProposals;
+use AnilcanCakir\MagicStarter\Contracts\SupportTool;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalAction;
 
 /**
  * Lets the support AI ask for a change to the customer's subscription: a trial

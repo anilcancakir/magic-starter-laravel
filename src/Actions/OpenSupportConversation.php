@@ -1,26 +1,26 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Audit\Auditor;
-use FlutterSdk\MagicStarter\Contracts\OpensSupportConversations;
-use FlutterSdk\MagicStarter\Contracts\PostsCustomerSupportMessages;
-use FlutterSdk\MagicStarter\Enums\SupportAttachmentOrigin;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Events\SupportConversationNeedsStaff;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Jobs\RespondToSupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Notifications\SupportTicketCreatedNotification;
-use FlutterSdk\MagicStarter\Support\MailLocale;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportHandoff;
-use FlutterSdk\MagicStarter\Support\SupportPageContext;
-use FlutterSdk\MagicStarter\Support\SupportRules;
-use FlutterSdk\MagicStarter\Support\SupportStaffRecipients;
-use FlutterSdk\MagicStarter\Support\SupportThreadToken;
+use AnilcanCakir\MagicStarter\Audit\Auditor;
+use AnilcanCakir\MagicStarter\Contracts\OpensSupportConversations;
+use AnilcanCakir\MagicStarter\Contracts\PostsCustomerSupportMessages;
+use AnilcanCakir\MagicStarter\Enums\SupportAttachmentOrigin;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Events\SupportConversationNeedsStaff;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Jobs\RespondToSupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Notifications\SupportTicketCreatedNotification;
+use AnilcanCakir\MagicStarter\Support\MailLocale;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportHandoff;
+use AnilcanCakir\MagicStarter\Support\SupportPageContext;
+use AnilcanCakir\MagicStarter\Support\SupportRules;
+use AnilcanCakir\MagicStarter\Support\SupportStaffRecipients;
+use AnilcanCakir\MagicStarter\Support\SupportThreadToken;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;

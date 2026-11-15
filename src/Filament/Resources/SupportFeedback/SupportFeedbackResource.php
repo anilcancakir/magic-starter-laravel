@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportFeedback;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportFeedback;
 
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportFeedback\Pages\ListSupportFeedback;
+use AnilcanCakir\MagicStarter\Models\SupportFeedback;
 use BackedEnum;
 use Filament\Facades\Filament;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportFeedback\Pages\ListSupportFeedback;
-use FlutterSdk\MagicStarter\Models\SupportFeedback;
 use Illuminate\Database\Eloquent\Builder;
 use UnitEnum;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Enums\SupportAiPool;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportAnswer;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportTurn;
+use AnilcanCakir\MagicStarter\Enums\SupportAiPool;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportAnswer;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportTurn;
 use Throwable;
 
 /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Notifications;
+namespace AnilcanCakir\MagicStarter\Tests\Notifications;
 
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
-use FlutterSdk\MagicStarter\Notifications\NewsletterSubscribedNotification;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Notifications\NewsletterSubscribedNotification;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Mail\Transport\ArrayTransport;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;

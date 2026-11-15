@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\GeneratesNewRecoveryCodes;
+use AnilcanCakir\MagicStarter\Contracts\GeneratesNewRecoveryCodes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 

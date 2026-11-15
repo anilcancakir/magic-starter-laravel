@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament\Teams;
+namespace AnilcanCakir\MagicStarter\Tests\Filament\Teams;
 
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\Pages\EditTeam;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\RelationManagers\InvitationsRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\RelationManagers\MembersRelationManager;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Notifications\TeamInvitationNotification;
+use AnilcanCakir\MagicStarter\Tests\Filament\FilamentTestCase;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification as FilamentNotification;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\Pages\EditTeam;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\RelationManagers\InvitationsRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\RelationManagers\MembersRelationManager;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Notifications\TeamInvitationNotification;
-use FlutterSdk\MagicStarter\Tests\Filament\FilamentTestCase;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;

@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers;
 
+use AnilcanCakir\MagicStarter\Contracts\DisconnectsSocialAccounts;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
 use Filament\Actions\Action;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\DisconnectsSocialAccounts;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 

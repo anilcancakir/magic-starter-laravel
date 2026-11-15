@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Middleware;
+namespace AnilcanCakir\MagicStarter\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Authenticatable;

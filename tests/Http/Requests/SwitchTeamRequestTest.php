@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Requests;
 
-use FlutterSdk\MagicStarter\Http\Controllers\AuthController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Http\Controllers\AuthController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -55,7 +55,7 @@ final class SwitchTeamRequestTest extends TestCase
             'auth.providers.users.model' => SwitchTeamIntUser::class,
             'magic-starter.models.user' => SwitchTeamIntUser::class,
             'magic-starter.models.team' => SwitchTeamIntTeam::class,
-            'magic-starter.models.membership' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            'magic-starter.models.membership' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
         ]);
 
         MagicStarter::useUserModel(SwitchTeamIntUser::class);
@@ -87,7 +87,7 @@ final class SwitchTeamRequestTest extends TestCase
             $table->timestamps();
         });
 
-        Gate::policy(SwitchTeamIntTeam::class, \FlutterSdk\MagicStarter\Policies\TeamPolicy::class);
+        Gate::policy(SwitchTeamIntTeam::class, \AnilcanCakir\MagicStarter\Policies\TeamPolicy::class);
     }
 
     /**
@@ -100,7 +100,7 @@ final class SwitchTeamRequestTest extends TestCase
             'auth.providers.users.model' => SwitchTeamUuidUser::class,
             'magic-starter.models.user' => SwitchTeamUuidUser::class,
             'magic-starter.models.team' => SwitchTeamUuidTeam::class,
-            'magic-starter.models.membership' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            'magic-starter.models.membership' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
         ]);
 
         MagicStarter::useUserModel(SwitchTeamUuidUser::class);
@@ -132,7 +132,7 @@ final class SwitchTeamRequestTest extends TestCase
             $table->timestamps();
         });
 
-        Gate::policy(SwitchTeamUuidTeam::class, \FlutterSdk\MagicStarter\Policies\TeamPolicy::class);
+        Gate::policy(SwitchTeamUuidTeam::class, \AnilcanCakir\MagicStarter\Policies\TeamPolicy::class);
     }
 
     // -------------------------------------------------------------------------
@@ -173,9 +173,9 @@ final class SwitchTeamRequestTest extends TestCase
     public function test_rules_returns_integer_rule_when_use_uuids_is_false(): void
     {
         config(['magic-starter.use_uuids' => false]);
-        MagicStarter::useTeamModel(\FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam::class);
+        MagicStarter::useTeamModel(\AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam::class);
 
-        $request = new \FlutterSdk\MagicStarter\Http\Requests\SwitchTeamRequest;
+        $request = new \AnilcanCakir\MagicStarter\Http\Requests\SwitchTeamRequest;
         $rules = $request->rules();
 
         $this->assertContains('integer', $rules['team_id'], 'Expected integer rule in integer mode.');
@@ -214,9 +214,9 @@ final class SwitchTeamRequestTest extends TestCase
     public function test_rules_returns_uuid_rule_when_use_uuids_is_true(): void
     {
         config(['magic-starter.use_uuids' => true]);
-        MagicStarter::useTeamModel(\FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam::class);
+        MagicStarter::useTeamModel(\AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam::class);
 
-        $request = new \FlutterSdk\MagicStarter\Http\Requests\SwitchTeamRequest;
+        $request = new \AnilcanCakir\MagicStarter\Http\Requests\SwitchTeamRequest;
         $rules = $request->rules();
 
         $this->assertContains('uuid', $rules['team_id'], 'Expected uuid rule in UUID mode.');
@@ -250,10 +250,10 @@ final class SwitchTeamRequestTest extends TestCase
 
 final class SwitchTeamIntUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
 
     protected $table = 'users';
 
@@ -286,7 +286,7 @@ final class SwitchTeamIntUser extends Model implements AuthenticatableContract
     }
 }
 
-final class SwitchTeamIntTeam extends \FlutterSdk\MagicStarter\Models\Team
+final class SwitchTeamIntTeam extends \AnilcanCakir\MagicStarter\Models\Team
 {
     protected $table = 'teams';
 
@@ -295,7 +295,7 @@ final class SwitchTeamIntTeam extends \FlutterSdk\MagicStarter\Models\Team
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(SwitchTeamIntUser::class, 'team_user', 'team_id', 'user_id')
-            ->using(\FlutterSdk\MagicStarter\MagicStarter::membershipModel())
+            ->using(\AnilcanCakir\MagicStarter\MagicStarter::membershipModel())
             ->withPivot('role')
             ->withTimestamps();
     }
@@ -307,10 +307,10 @@ final class SwitchTeamIntTeam extends \FlutterSdk\MagicStarter\Models\Team
 
 final class SwitchTeamUuidUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
     use HasUuids;
 
     protected $table = 'users';
@@ -348,7 +348,7 @@ final class SwitchTeamUuidUser extends Model implements AuthenticatableContract
     }
 }
 
-final class SwitchTeamUuidTeam extends \FlutterSdk\MagicStarter\Models\Team
+final class SwitchTeamUuidTeam extends \AnilcanCakir\MagicStarter\Models\Team
 {
     protected $table = 'teams';
 
@@ -361,7 +361,7 @@ final class SwitchTeamUuidTeam extends \FlutterSdk\MagicStarter\Models\Team
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(SwitchTeamUuidUser::class, 'team_user', 'team_id', 'user_id')
-            ->using(\FlutterSdk\MagicStarter\MagicStarter::membershipModel())
+            ->using(\AnilcanCakir\MagicStarter\MagicStarter::membershipModel())
             ->withPivot('role')
             ->withTimestamps();
     }

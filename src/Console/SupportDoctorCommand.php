@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
-use FlutterSdk\MagicStarter\Contracts\RespondsToSupport;
-use FlutterSdk\MagicStarter\Jobs\RespondToSupportConversation;
+use AnilcanCakir\MagicStarter\Contracts\RespondsToSupport;
+use AnilcanCakir\MagicStarter\Jobs\RespondToSupportConversation;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\Container;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Mail;
+namespace AnilcanCakir\MagicStarter\Tests\Mail;
 
-use FlutterSdk\MagicStarter\Mail\OneSignalTransport;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Mail\OneSignalTransport;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Handler\MockHandler;

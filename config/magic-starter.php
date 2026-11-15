@@ -1,9 +1,9 @@
 <?php
 
-use FlutterSdk\MagicStarter\Models\Team;
-use FlutterSdk\MagicStarter\Models\TeamInvitation;
-use FlutterSdk\MagicStarter\Models\TeamUser;
-use FlutterSdk\MagicStarter\Support\RevenueCatClient;
+use AnilcanCakir\MagicStarter\Models\Team;
+use AnilcanCakir\MagicStarter\Models\TeamInvitation;
+use AnilcanCakir\MagicStarter\Models\TeamUser;
+use AnilcanCakir\MagicStarter\Support\RevenueCatClient;
 
 return [
     /*
@@ -36,28 +36,28 @@ return [
     */
 
     'features' => [
-        // \FlutterSdk\MagicStarter\Features::twoFactorAuthentication(),
-        // \FlutterSdk\MagicStarter\Features::teams(),
-        // \FlutterSdk\MagicStarter\Features::restorableTeams(),
-        // \FlutterSdk\MagicStarter\Features::profilePhotos(),
-        // \FlutterSdk\MagicStarter\Features::sessions(),
-        // \FlutterSdk\MagicStarter\Features::socialLogin(),
-        // \FlutterSdk\MagicStarter\Features::signInHandoff(),
-        // \FlutterSdk\MagicStarter\Features::newsletterSubscription(),
-        // \FlutterSdk\MagicStarter\Features::extendedProfile(),
-        // \FlutterSdk\MagicStarter\Features::notifications(),
-        // \FlutterSdk\MagicStarter\Features::onesignal(),
-        // \FlutterSdk\MagicStarter\Features::guestAuth(),
-        // \FlutterSdk\MagicStarter\Features::phoneOtp(),
-        // \FlutterSdk\MagicStarter\Features::emailVerification(),
-        // \FlutterSdk\MagicStarter\Features::timezones(),
-        // \FlutterSdk\MagicStarter\Features::billing(),
-        // \FlutterSdk\MagicStarter\Features::audit(),
-        // \FlutterSdk\MagicStarter\Features::support(),
-        // \FlutterSdk\MagicStarter\Features::releases(),
-        // \FlutterSdk\MagicStarter\Features::aiRuns(),
-        // \FlutterSdk\MagicStarter\Features::aiPrompts(),
-        // \FlutterSdk\MagicStarter\Features::campaigns(),
+        // \AnilcanCakir\MagicStarter\Features::twoFactorAuthentication(),
+        // \AnilcanCakir\MagicStarter\Features::teams(),
+        // \AnilcanCakir\MagicStarter\Features::restorableTeams(),
+        // \AnilcanCakir\MagicStarter\Features::profilePhotos(),
+        // \AnilcanCakir\MagicStarter\Features::sessions(),
+        // \AnilcanCakir\MagicStarter\Features::socialLogin(),
+        // \AnilcanCakir\MagicStarter\Features::signInHandoff(),
+        // \AnilcanCakir\MagicStarter\Features::newsletterSubscription(),
+        // \AnilcanCakir\MagicStarter\Features::extendedProfile(),
+        // \AnilcanCakir\MagicStarter\Features::notifications(),
+        // \AnilcanCakir\MagicStarter\Features::onesignal(),
+        // \AnilcanCakir\MagicStarter\Features::guestAuth(),
+        // \AnilcanCakir\MagicStarter\Features::phoneOtp(),
+        // \AnilcanCakir\MagicStarter\Features::emailVerification(),
+        // \AnilcanCakir\MagicStarter\Features::timezones(),
+        // \AnilcanCakir\MagicStarter\Features::billing(),
+        // \AnilcanCakir\MagicStarter\Features::audit(),
+        // \AnilcanCakir\MagicStarter\Features::support(),
+        // \AnilcanCakir\MagicStarter\Features::releases(),
+        // \AnilcanCakir\MagicStarter\Features::aiRuns(),
+        // \AnilcanCakir\MagicStarter\Features::aiPrompts(),
+        // \AnilcanCakir\MagicStarter\Features::campaigns(),
     ],
 
     /*
@@ -846,7 +846,7 @@ return [
     | them. `billing:doctor` reports a mismatch as `schema.subscription_keys`.
     |
     | USAGE REPORTING has no key here, because it has no default to hold: the
-    | package ships FlutterSdk\MagicStarter\Contracts\ReportsUsage with
+    | package ships AnilcanCakir\MagicStarter\Contracts\ReportsUsage with
     | deliberately NO default implementation and NO binding, and the usage
     | endpoint it would feed is registered only once a consumer binds one
     | (typically `$this->app->bind(ReportsUsage::class, ...)` in the
@@ -875,7 +875,7 @@ return [
     | subscriptions, reaching the application as webhook deliveries that are
     | only ever a SIGNAL. What a subscriber is actually entitled to is read
     | back from RevenueCat's API by
-    | \FlutterSdk\MagicStarter\Support\RevenueCatClient, so both halves of the
+    | \AnilcanCakir\MagicStarter\Support\RevenueCatClient, so both halves of the
     | rail need configuration here: the secret that authenticates an inbound
     | delivery, and the key that authenticates the outbound read.
     |

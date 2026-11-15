@@ -1,23 +1,23 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AppReleases;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AppReleases;
 
+use AnilcanCakir\MagicStarter\Contracts\CreatesAppReleases;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesAppReleases;
+use AnilcanCakir\MagicStarter\Enums\ReleaseStatus;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\Pages\CreateAppRelease;
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\Pages\EditAppRelease;
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\Pages\ListAppReleases;
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\Schemas\AppReleaseForm;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Models\AppRelease;
 use BackedEnum;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\CreatesAppReleases;
-use FlutterSdk\MagicStarter\Contracts\UpdatesAppReleases;
-use FlutterSdk\MagicStarter\Enums\ReleaseStatus;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\Pages\CreateAppRelease;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\Pages\EditAppRelease;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\Pages\ListAppReleases;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\Schemas\AppReleaseForm;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Models\AppRelease;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use UnitEnum;

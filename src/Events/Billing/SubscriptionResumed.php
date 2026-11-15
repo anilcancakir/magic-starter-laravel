@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events\Billing;
+namespace AnilcanCakir\MagicStarter\Events\Billing;
 
 /**
  * Fires when an operator resumed a Stripe subscription that was cancelled at period end.

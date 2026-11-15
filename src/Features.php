@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter;
+namespace AnilcanCakir\MagicStarter;
 
 use Illuminate\Support\Facades\Config;
 

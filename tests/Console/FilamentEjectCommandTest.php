@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Tests\Filament\FilamentTestCase;
+use AnilcanCakir\MagicStarter\Tests\Filament\FilamentTestCase;
 use Illuminate\Support\Facades\File;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Process\Process;
@@ -51,10 +51,10 @@ final class FilamentEjectCommandTest extends FilamentTestCase
         $this->assertStringContainsString("namespace App\\Filament\\Resources\\Users;\n", $source);
         $this->assertStringContainsString('use App\Filament\Resources\Users\Pages\EditUser;', $source);
         $this->assertStringContainsString(
-            'use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;',
+            'use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;',
             $source,
         );
-        $this->assertStringNotContainsString('FlutterSdk\MagicStarter\Filament\Resources\Users', $source);
+        $this->assertStringNotContainsString('AnilcanCakir\MagicStarter\Filament\Resources\Users', $source);
     }
 
     #[DataProvider('resources')]
@@ -74,7 +74,7 @@ final class FilamentEjectCommandTest extends FilamentTestCase
 
             $this->assertTrue($lint->isSuccessful(), $lint->getOutput() . $lint->getErrorOutput());
             $this->assertStringNotContainsString(
-                'FlutterSdk\MagicStarter\Filament\Resources\\' . $name . '\\',
+                'AnilcanCakir\MagicStarter\Filament\Resources\\' . $name . '\\',
                 $file->getContents(),
             );
         }

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Tests\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportUsage;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportUsage;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
 

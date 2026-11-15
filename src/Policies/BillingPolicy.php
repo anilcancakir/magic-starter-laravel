@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Policies;
+namespace AnilcanCakir\MagicStarter\Policies;
 
-use FlutterSdk\MagicStarter\Traits\HasTeams;
+use AnilcanCakir\MagicStarter\Traits\HasTeams;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**

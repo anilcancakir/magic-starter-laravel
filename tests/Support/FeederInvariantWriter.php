@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Contracts\WritesEntitlement;
-use FlutterSdk\MagicStarter\Support\EntitlementWrite;
+use AnilcanCakir\MagicStarter\Contracts\WritesEntitlement;
+use AnilcanCakir\MagicStarter\Support\EntitlementWrite;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -15,7 +15,7 @@ use PHPUnit\Framework\Assert;
  *
  * WHY THIS NEEDS ITS OWN GUARD AT ALL
  *
- * {@see \FlutterSdk\MagicStarter\Actions\WriteEntitlement}'s rule 2 refuses a
+ * {@see \AnilcanCakir\MagicStarter\Actions\WriteEntitlement}'s rule 2 refuses a
  * cross-rail write that would take access away, and it decides that by asking
  * whether the incoming claim leaves the subject holding less. It depends on the
  * invariant and has NO guard for its absence: given a claim that revokes while

@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Support;
+namespace AnilcanCakir\MagicStarter\Filament\Support;
 
 /**
  * One value as the panel's code view shows it: pretty-printed JSON when it is

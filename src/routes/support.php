@@ -12,15 +12,15 @@
  * credential, so a system viewer holding no bearer token can follow it.
  */
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\PublicSupportThreadController;
-use FlutterSdk\MagicStarter\Http\Controllers\SupportArticleController;
-use FlutterSdk\MagicStarter\Http\Controllers\SupportAttachmentController;
-use FlutterSdk\MagicStarter\Http\Controllers\SupportAttachmentDownloadController;
-use FlutterSdk\MagicStarter\Http\Controllers\SupportConversationController;
-use FlutterSdk\MagicStarter\Http\Controllers\SupportFeedbackController;
-use FlutterSdk\MagicStarter\Http\Controllers\SupportRatingController;
-use FlutterSdk\MagicStarter\Http\Middleware\RequireTokenAbility;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\PublicSupportThreadController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SupportArticleController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SupportAttachmentController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SupportAttachmentDownloadController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SupportConversationController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SupportFeedbackController;
+use AnilcanCakir\MagicStarter\Http\Controllers\SupportRatingController;
+use AnilcanCakir\MagicStarter\Http\Middleware\RequireTokenAbility;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix((string) config('magic-starter.route_prefix', ''))

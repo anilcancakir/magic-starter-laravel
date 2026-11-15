@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesAppReleases;
-use FlutterSdk\MagicStarter\Enums\ReleaseItemType;
-use FlutterSdk\MagicStarter\Enums\ReleaseStatus;
-use FlutterSdk\MagicStarter\Models\AppRelease;
+use AnilcanCakir\MagicStarter\Contracts\CreatesAppReleases;
+use AnilcanCakir\MagicStarter\Enums\ReleaseItemType;
+use AnilcanCakir\MagicStarter\Enums\ReleaseStatus;
+use AnilcanCakir\MagicStarter\Models\AppRelease;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;

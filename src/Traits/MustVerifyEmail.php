@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Traits;
+namespace AnilcanCakir\MagicStarter\Traits;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Notifications\VerifyEmailNotification;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Notifications\VerifyEmailNotification;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Carbon;
 

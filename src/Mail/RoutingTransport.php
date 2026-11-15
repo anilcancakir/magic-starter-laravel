@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Mail;
+namespace AnilcanCakir\MagicStarter\Mail;
 
 use Illuminate\Mail\MailManager;
 use Symfony\Component\Mailer\Exception\TransportException;

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Notifications\Channels;
+namespace AnilcanCakir\MagicStarter\Tests\Notifications\Channels;
 
-use FlutterSdk\MagicStarter\Notifications\Channels\OneSignalChannel;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use InvalidArgumentException;
 use onesignal\client\api\DefaultApi;
