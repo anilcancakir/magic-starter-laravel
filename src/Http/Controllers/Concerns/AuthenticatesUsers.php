@@ -244,8 +244,9 @@ trait AuthenticatesUsers
      * `remember_me_expiration_minutes` replaces `token_expiration_minutes` for
      * a remembered sign-in and falls back to it while unset. A value that is
      * not a positive whole number of minutes reads as unset (an empty env var
-     * arrives as `""`), so `0` keeps a token without expiry the way
-     * `sanctum.expiration` reads it.
+     * arrives as `""`), so `0` on `token_expiration_minutes` keeps a token without
+     * expiry the way `sanctum.expiration` reads it, while `0` on the remember
+     * key falls back to `token_expiration_minutes` like null does.
      */
     protected function tokenLifetimeMinutes(bool $remember): ?int
     {
