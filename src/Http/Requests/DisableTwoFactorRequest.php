@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
 /**
  * Validates password confirmation before disabling two-factor authentication.

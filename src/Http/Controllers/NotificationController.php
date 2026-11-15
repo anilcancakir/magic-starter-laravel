@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Resources\NotificationResource;
+use AnilcanCakir\MagicStarter\Http\Resources\NotificationResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;

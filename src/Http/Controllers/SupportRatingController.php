@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Actions\RateSupportConversation;
-use FlutterSdk\MagicStarter\Enums\SupportCsatRating;
-use FlutterSdk\MagicStarter\Http\Requests\RateSupportConversationRequest;
-use FlutterSdk\MagicStarter\Http\Resources\SupportConversationResource;
+use AnilcanCakir\MagicStarter\Actions\RateSupportConversation;
+use AnilcanCakir\MagicStarter\Enums\SupportCsatRating;
+use AnilcanCakir\MagicStarter\Http\Requests\RateSupportConversationRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\SupportConversationResource;
 
 /**
  * A signed-in customer's rating of one of their own resolved conversations.

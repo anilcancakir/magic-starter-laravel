@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Policies;
+namespace AnilcanCakir\MagicStarter\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 

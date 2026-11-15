@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiRuns;
+namespace AnilcanCakir\MagicStarter\Support\AiRuns;
 
 /**
  * Scrubs secrets out of an AI run body before it is written, so a prompt that
@@ -14,7 +14,7 @@ namespace FlutterSdk\MagicStarter\Support\AiRuns;
  * is built from the same key names, so `password=...`, `"token": "..."` and
  * `X-Api-Key: ...` written as text are caught too. Other scalars pass through.
  *
- * The defaults live here, like {@see \FlutterSdk\MagicStarter\Audit\Redactor}'s:
+ * The defaults live here, like {@see \AnilcanCakir\MagicStarter\Audit\Redactor}'s:
  * `magic-starter.ai_runs.mask.extra_keys` and `extra_patterns` EXTEND them and
  * can never shorten them, so a published config cannot quietly start storing
  * credentials. An extra pattern that does not compile refuses the provider's

@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Listeners;
+namespace AnilcanCakir\MagicStarter\Tests\Listeners;
 
-use FlutterSdk\MagicStarter\Actions\UpdateUserProfile;
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\UpdateUserProfile;
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Foundation\Application;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;

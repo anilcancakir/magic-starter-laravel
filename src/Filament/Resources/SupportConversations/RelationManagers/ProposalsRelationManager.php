@@ -1,7 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\RelationManagers;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\RelationManagers;
 
+use AnilcanCakir\MagicStarter\Contracts\DecidesSupportProposals;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalAction;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Filament\Support\BillingAuthorization;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Models\SupportProposal;
+use AnilcanCakir\MagicStarter\Support\StripeBillingState;
 use Closure;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -14,18 +26,6 @@ use Filament\Support\Enums\Size;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\DecidesSupportProposals;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportProposalAction;
-use FlutterSdk\MagicStarter\Enums\SupportProposalStatus;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Filament\Support\BillingAuthorization;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
-use FlutterSdk\MagicStarter\Models\SupportProposal;
-use FlutterSdk\MagicStarter\Support\StripeBillingState;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;

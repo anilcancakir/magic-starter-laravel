@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Actions\AcceptTeamInvitation;
-use FlutterSdk\MagicStarter\Contracts\AcceptsTeamInvitations;
-use FlutterSdk\MagicStarter\Contracts\InvitesTeamMembers;
-use FlutterSdk\MagicStarter\Events\TeamMemberJoined;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\TeamInvitationController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\SocialAccount;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\AcceptTeamInvitation;
+use AnilcanCakir\MagicStarter\Contracts\AcceptsTeamInvitations;
+use AnilcanCakir\MagicStarter\Contracts\InvitesTeamMembers;
+use AnilcanCakir\MagicStarter\Events\TeamMemberJoined;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\TeamInvitationController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -97,7 +97,7 @@ final class TeamInvitationControllerTest extends TestCase
 
         \call_user_func('app', 'gate')->policy(
             TeamInvitationControllerTestTeam::class,
-            \FlutterSdk\MagicStarter\Policies\TeamPolicy::class,
+            \AnilcanCakir\MagicStarter\Policies\TeamPolicy::class,
         );
 
         $this->app->instance(InvitesTeamMembers::class, new class implements InvitesTeamMembers
@@ -976,10 +976,10 @@ final class TeamInvitationControllerTest extends TestCase
 
 final class TeamInvitationControllerTestUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
     use HasUuids;
 
     protected $table = 'users';
@@ -991,7 +991,7 @@ final class TeamInvitationControllerTestUser extends Model implements Authentica
     protected $guarded = [];
 }
 
-final class TeamInvitationControllerTestTeam extends \FlutterSdk\MagicStarter\Models\Team
+final class TeamInvitationControllerTestTeam extends \AnilcanCakir\MagicStarter\Models\Team
 {
     protected $table = 'teams';
 
@@ -1004,18 +1004,18 @@ final class TeamInvitationControllerTestTeam extends \FlutterSdk\MagicStarter\Mo
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(TeamInvitationControllerTestUser::class, 'team_user', 'team_id', 'user_id')
-            ->using(\FlutterSdk\MagicStarter\MagicStarter::membershipModel())
+            ->using(\AnilcanCakir\MagicStarter\MagicStarter::membershipModel())
             ->withPivot('role')
             ->withTimestamps();
     }
 
     public function invitations(): HasMany
     {
-        return $this->hasMany(\FlutterSdk\MagicStarter\MagicStarter::teamInvitationModel(), 'team_id');
+        return $this->hasMany(\AnilcanCakir\MagicStarter\MagicStarter::teamInvitationModel(), 'team_id');
     }
 }
 
-final class TeamInvitationControllerTestInvitation extends \FlutterSdk\MagicStarter\Models\TeamInvitation
+final class TeamInvitationControllerTestInvitation extends \AnilcanCakir\MagicStarter\Models\TeamInvitation
 {
     protected $table = 'team_invitations';
 
@@ -1026,7 +1026,7 @@ final class TeamInvitationControllerTestInvitation extends \FlutterSdk\MagicStar
     protected $guarded = [];
 }
 
-final class TeamInvitationControllerTestMembership extends \FlutterSdk\MagicStarter\Models\TeamUser
+final class TeamInvitationControllerTestMembership extends \AnilcanCakir\MagicStarter\Models\TeamUser
 {
     protected $table = 'team_user';
 

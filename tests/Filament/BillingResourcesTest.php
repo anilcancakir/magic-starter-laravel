@@ -1,24 +1,24 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\Pages\ListBillingEvents;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\Pages\ViewBillingEvent;
+use AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\Pages\ListWebhookDeliveries;
+use AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\Pages\ViewWebhookDelivery;
+use AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\WebhookDeliveryResource;
+use AnilcanCakir\MagicStarter\Jobs\SyncRevenueCatEntitlement;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\ProcessedWebhookEvent;
+use AnilcanCakir\MagicStarter\Models\Subscription;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\Pages\ListBillingEvents;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\Pages\ViewBillingEvent;
-use FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\Pages\ListWebhookDeliveries;
-use FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\Pages\ViewWebhookDelivery;
-use FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\WebhookDeliveryResource;
-use FlutterSdk\MagicStarter\Jobs\SyncRevenueCatEntitlement;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\ProcessedWebhookEvent;
-use FlutterSdk\MagicStarter\Models\Subscription;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Subscription as CashierSubscription;
 use Laravel\Cashier\SubscriptionItem as CashierSubscriptionItem;

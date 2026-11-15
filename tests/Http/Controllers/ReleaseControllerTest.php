@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Enums\ReleaseStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Models\AppRelease;
-use FlutterSdk\MagicStarter\Support\ReleaseFeed;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\ReleaseStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Models\AppRelease;
+use AnilcanCakir\MagicStarter\Support\ReleaseFeed;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;

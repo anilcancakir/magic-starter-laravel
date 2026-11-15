@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
 use Closure;
 use Illuminate\Http\UploadedFile;

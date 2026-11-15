@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
-use FlutterSdk\MagicStarter\Http\Requests\Concerns\ConfirmsIdentity;
+use AnilcanCakir\MagicStarter\Http\Requests\Concerns\ConfirmsIdentity;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
 

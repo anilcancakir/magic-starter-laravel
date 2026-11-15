@@ -1,21 +1,21 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Campaigns;
+namespace AnilcanCakir\MagicStarter\Tests\Campaigns;
 
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Events\Billing\BillingOutcome;
-use FlutterSdk\MagicStarter\Events\Billing\CampaignCodeRefused;
-use FlutterSdk\MagicStarter\Events\Billing\CheckoutStarted;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\Campaign;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Tests\Support\StripeHttpStub;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Events\Billing\BillingOutcome;
+use AnilcanCakir\MagicStarter\Events\Billing\CampaignCodeRefused;
+use AnilcanCakir\MagicStarter\Events\Billing\CheckoutStarted;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\Campaign;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Tests\Support\StripeHttpStub;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;

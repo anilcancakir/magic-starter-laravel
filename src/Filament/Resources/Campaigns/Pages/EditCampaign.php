@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
 use Filament\Resources\Pages\EditRecord;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
 
 class EditCampaign extends EditRecord
 {

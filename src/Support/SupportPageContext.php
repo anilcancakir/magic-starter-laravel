@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Contracts\DescribesSupportPage;
+use AnilcanCakir\MagicStarter\Contracts\DescribesSupportPage;
 
 /**
  * The page references a customer's message carries: which screen of the host

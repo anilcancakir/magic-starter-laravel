@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Support\RequestLocaleDetector;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\RequestLocaleDetector;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Http\Request;
 
 final class RequestLocaleDetectorTest extends TestCase

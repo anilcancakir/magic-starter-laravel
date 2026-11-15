@@ -1,19 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Actions\ChangeSupportConversation;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportCsatRating;
-use FlutterSdk\MagicStarter\Events\SupportConversationUpdated;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Notifications\SupportCsatInvitationNotification;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteVerifiableUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\ChangeSupportConversation;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportCsatRating;
+use AnilcanCakir\MagicStarter\Events\SupportConversationUpdated;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Notifications\SupportCsatInvitationNotification;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteVerifiableUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;

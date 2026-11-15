@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
-use FlutterSdk\MagicStarter\Http\Controllers\AuthController;
-use FlutterSdk\MagicStarter\Listeners\CreatePersonalTeamListener;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Http\Controllers\AuthController;
+use AnilcanCakir\MagicStarter\Listeners\CreatePersonalTeamListener;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -39,7 +39,7 @@ class AuthControllerTest extends TestCase
             'auth.providers.users.model' => AuthControllerTestUser::class,
             'magic-starter.models.user' => AuthControllerTestUser::class,
             'magic-starter.models.team' => AuthControllerTestTeam::class,
-            'magic-starter.models.membership' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            'magic-starter.models.membership' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
             'auth.guards.web' => [
                 'driver' => 'session',
                 'provider' => 'users',
@@ -114,7 +114,7 @@ class AuthControllerTest extends TestCase
 
         Gate::policy(
             AuthControllerTestTeam::class,
-            \FlutterSdk\MagicStarter\Policies\TeamPolicy::class,
+            \AnilcanCakir\MagicStarter\Policies\TeamPolicy::class,
         );
 
         Route::post('/register', [AuthController::class, 'register']);
@@ -612,7 +612,7 @@ class AuthControllerTest extends TestCase
     public function test_register_auto_detects_locale_from_accept_language_header(): void
     {
         // Bind real CreateUser action to test auto-detection.
-        $this->app->bind(CreatesUsers::class, \FlutterSdk\MagicStarter\Actions\CreateUser::class);
+        $this->app->bind(CreatesUsers::class, \AnilcanCakir\MagicStarter\Actions\CreateUser::class);
 
         $this->postJson(
             '/register',
@@ -633,7 +633,7 @@ class AuthControllerTest extends TestCase
     public function test_register_auto_detects_timezone_from_x_timezone_header(): void
     {
         // Bind real CreateUser action to test auto-detection.
-        $this->app->bind(CreatesUsers::class, \FlutterSdk\MagicStarter\Actions\CreateUser::class);
+        $this->app->bind(CreatesUsers::class, \AnilcanCakir\MagicStarter\Actions\CreateUser::class);
 
         $this->postJson(
             '/register',
@@ -654,7 +654,7 @@ class AuthControllerTest extends TestCase
     public function test_register_explicit_locale_overrides_header_detection(): void
     {
         // Bind real CreateUser action to test auto-detection.
-        $this->app->bind(CreatesUsers::class, \FlutterSdk\MagicStarter\Actions\CreateUser::class);
+        $this->app->bind(CreatesUsers::class, \AnilcanCakir\MagicStarter\Actions\CreateUser::class);
 
         $this->postJson(
             '/register',
@@ -703,10 +703,10 @@ class AuthControllerTest extends TestCase
 
 final class AuthControllerTestUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
     use HasUuids;
 
     protected $table = 'users';
@@ -734,10 +734,10 @@ final class AuthControllerTestUser extends Model implements AuthenticatableContr
 
 final class AuthControllerGuardedUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
     use HasUuids;
 
     protected $table = 'users';
@@ -759,7 +759,7 @@ final class AuthControllerGuardedUser extends Model implements AuthenticatableCo
     ];
 }
 
-final class AuthControllerTestTeam extends \FlutterSdk\MagicStarter\Models\Team
+final class AuthControllerTestTeam extends \AnilcanCakir\MagicStarter\Models\Team
 {
     protected $table = 'teams';
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events;
+namespace AnilcanCakir\MagicStarter\Events;
 
-use FlutterSdk\MagicStarter\Actions\TransferTeamOwnership;
+use AnilcanCakir\MagicStarter\Actions\TransferTeamOwnership;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
 /**

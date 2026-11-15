@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Enums\SupportHandoffReason;
-use FlutterSdk\MagicStarter\Enums\SupportPriority;
+use AnilcanCakir\MagicStarter\Enums\SupportHandoffReason;
+use AnilcanCakir\MagicStarter\Enums\SupportPriority;
 use InvalidArgumentException;
 
 /**

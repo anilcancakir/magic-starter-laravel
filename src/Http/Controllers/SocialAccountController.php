@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\DisconnectsSocialAccounts;
-use FlutterSdk\MagicStarter\Contracts\SetsUserPasswords;
-use FlutterSdk\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
-use FlutterSdk\MagicStarter\Http\Requests\LinkTicketRequest;
-use FlutterSdk\MagicStarter\Http\Requests\SetPasswordRequest;
-use FlutterSdk\MagicStarter\Social\ProviderIdentity;
-use FlutterSdk\MagicStarter\Social\SocialFlowStore;
-use FlutterSdk\MagicStarter\Social\SocialSignInRefused;
+use AnilcanCakir\MagicStarter\Contracts\DisconnectsSocialAccounts;
+use AnilcanCakir\MagicStarter\Contracts\SetsUserPasswords;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
+use AnilcanCakir\MagicStarter\Http\Requests\LinkTicketRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\SetPasswordRequest;
+use AnilcanCakir\MagicStarter\Social\ProviderIdentity;
+use AnilcanCakir\MagicStarter\Social\SocialFlowStore;
+use AnilcanCakir\MagicStarter\Social\SocialSignInRefused;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

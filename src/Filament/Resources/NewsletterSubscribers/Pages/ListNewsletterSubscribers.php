@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\NewsletterSubscribers\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\NewsletterSubscribers\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\NewsletterSubscribers\NewsletterSubscriberResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Filament\Resources\NewsletterSubscribers\NewsletterSubscriberResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ListNewsletterSubscribers extends ListRecords

@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi;
 
 /**
  * The last gate before an AI reply is saved for a customer.

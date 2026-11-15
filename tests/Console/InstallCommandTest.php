@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
@@ -107,7 +107,7 @@ final class InstallCommandTest extends TestCase
 
         $config = File::get(config_path('magic-starter.php'));
 
-        $this->assertStringContainsString('// \\FlutterSdk\\MagicStarter\\Features::restorableTeams(),', $config);
+        $this->assertStringContainsString('// \\AnilcanCakir\\MagicStarter\\Features::restorableTeams(),', $config);
         $this->assertStringContainsString("'restore_days' =>", $config);
     }
 
@@ -442,21 +442,21 @@ final class InstallCommandTest extends TestCase
 
         // Selected features should be uncommented.
         $this->assertStringContainsString(
-            '\\FlutterSdk\\MagicStarter\\Features::teams(),',
+            '\\AnilcanCakir\\MagicStarter\\Features::teams(),',
             $config,
         );
         $this->assertStringContainsString(
-            '\\FlutterSdk\\MagicStarter\\Features::sessions(),',
+            '\\AnilcanCakir\\MagicStarter\\Features::sessions(),',
             $config,
         );
 
         // Non-selected features should remain commented.
         $this->assertStringContainsString(
-            '// \\FlutterSdk\\MagicStarter\\Features::profilePhotos(),',
+            '// \\AnilcanCakir\\MagicStarter\\Features::profilePhotos(),',
             $config,
         );
         $this->assertStringContainsString(
-            '// \\FlutterSdk\\MagicStarter\\Features::socialLogin(),',
+            '// \\AnilcanCakir\\MagicStarter\\Features::socialLogin(),',
             $config,
         );
     }
@@ -553,7 +553,7 @@ final class InstallCommandTest extends TestCase
 
         $this->assertCount(1, glob(database_path('migrations/*_create_app_releases_table.php')) ?: []);
         $this->assertStringContainsString(
-            "\n        \\FlutterSdk\\MagicStarter\\Features::releases(),",
+            "\n        \\AnilcanCakir\\MagicStarter\\Features::releases(),",
             (string) file_get_contents(config_path('magic-starter.php')),
         );
     }
@@ -583,7 +583,7 @@ final class InstallCommandTest extends TestCase
             'The attempts table points at ai_runs, so the runs migration must be stamped first.',
         );
         $this->assertStringContainsString(
-            "\n        \\FlutterSdk\\MagicStarter\\Features::aiRuns(),",
+            "\n        \\AnilcanCakir\\MagicStarter\\Features::aiRuns(),",
             (string) file_get_contents(config_path('magic-starter.php')),
         );
     }
@@ -596,7 +596,7 @@ final class InstallCommandTest extends TestCase
 
         $this->assertCount(1, glob(database_path('migrations/*_create_ai_prompt_overrides_table.php')) ?: []);
         $this->assertStringContainsString(
-            "\n        \\FlutterSdk\\MagicStarter\\Features::aiPrompts(),",
+            "\n        \\AnilcanCakir\\MagicStarter\\Features::aiPrompts(),",
             (string) file_get_contents(config_path('magic-starter.php')),
         );
     }
@@ -755,11 +755,11 @@ final class InstallCommandTest extends TestCase
         $config = File::get(config_path('magic-starter.php'));
 
         $this->assertStringContainsString(
-            '\\FlutterSdk\\MagicStarter\\Features::guestAuth(),',
+            '\\AnilcanCakir\\MagicStarter\\Features::guestAuth(),',
             $config,
         );
         $this->assertStringContainsString(
-            '\\FlutterSdk\\MagicStarter\\Features::phoneOtp(),',
+            '\\AnilcanCakir\\MagicStarter\\Features::phoneOtp(),',
             $config,
         );
     }
@@ -773,7 +773,7 @@ final class InstallCommandTest extends TestCase
         $config = File::get(config_path('magic-starter.php'));
 
         $this->assertStringContainsString(
-            '\\FlutterSdk\\MagicStarter\\Features::guestAuth(),',
+            '\\AnilcanCakir\\MagicStarter\\Features::guestAuth(),',
             $config,
         );
     }
@@ -786,7 +786,7 @@ final class InstallCommandTest extends TestCase
         $config = File::get(config_path('magic-starter.php'));
 
         $this->assertStringContainsString(
-            '\\FlutterSdk\\MagicStarter\\Features::emailVerification(),',
+            '\\AnilcanCakir\\MagicStarter\\Features::emailVerification(),',
             $config,
         );
     }
@@ -800,7 +800,7 @@ final class InstallCommandTest extends TestCase
         $config = File::get(config_path('magic-starter.php'));
 
         $this->assertStringContainsString(
-            '\\FlutterSdk\\MagicStarter\\Features::emailVerification(),',
+            '\\AnilcanCakir\\MagicStarter\\Features::emailVerification(),',
             $config,
         );
     }
@@ -814,7 +814,7 @@ final class InstallCommandTest extends TestCase
         $config = File::get(config_path('magic-starter.php'));
 
         $this->assertStringContainsString(
-            '// \\FlutterSdk\\MagicStarter\\Features::emailVerification(),',
+            '// \\AnilcanCakir\\MagicStarter\\Features::emailVerification(),',
             $config,
         );
     }
@@ -872,7 +872,7 @@ final class InstallCommandTest extends TestCase
         // are still missing, instead of a silent skip.
         File::ensureDirectoryExists(app_path('Models'));
         $partial = "<?php\n\nnamespace App\\Models;\n\n"
-            . "use FlutterSdk\\MagicStarter\\Traits\\HasTeams;\n"
+            . "use AnilcanCakir\\MagicStarter\\Traits\\HasTeams;\n"
             . "use Illuminate\\Foundation\\Auth\\User as Authenticatable;\n\n"
             . "class User extends Authenticatable\n{\n    use HasTeams;\n"
             . "    public \$customMarker = true;\n}\n";
@@ -1009,12 +1009,12 @@ final class InstallCommandTest extends TestCase
     private function fullyWiredUserModel(): string
     {
         return "<?php\n\nnamespace App\\Models;\n\n"
-            . "use FlutterSdk\\MagicStarter\\Support\\ConditionallyUsesUuids;\n"
-            . "use FlutterSdk\\MagicStarter\\Traits\\HasGuestSupport;\n"
-            . "use FlutterSdk\\MagicStarter\\Traits\\HasNotifications;\n"
-            . "use FlutterSdk\\MagicStarter\\Traits\\HasProfilePhoto;\n"
-            . "use FlutterSdk\\MagicStarter\\Traits\\HasTeams;\n"
-            . "use FlutterSdk\\MagicStarter\\Traits\\TwoFactorAuthenticatable;\n"
+            . "use AnilcanCakir\\MagicStarter\\Support\\ConditionallyUsesUuids;\n"
+            . "use AnilcanCakir\\MagicStarter\\Traits\\HasGuestSupport;\n"
+            . "use AnilcanCakir\\MagicStarter\\Traits\\HasNotifications;\n"
+            . "use AnilcanCakir\\MagicStarter\\Traits\\HasProfilePhoto;\n"
+            . "use AnilcanCakir\\MagicStarter\\Traits\\HasTeams;\n"
+            . "use AnilcanCakir\\MagicStarter\\Traits\\TwoFactorAuthenticatable;\n"
             . "use Illuminate\\Foundation\\Auth\\User as Authenticatable;\n\n"
             . "class User extends Authenticatable\n{\n"
             . "    use ConditionallyUsesUuids;\n    use HasGuestSupport;\n"

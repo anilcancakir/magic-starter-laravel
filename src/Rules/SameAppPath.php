@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Rules;
+namespace AnilcanCakir\MagicStarter\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;

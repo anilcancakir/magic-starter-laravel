@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
 /**
  * What the store rail's configuration says about itself, in one place.

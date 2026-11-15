@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Enums;
+namespace AnilcanCakir\MagicStarter\Enums;
 
 /**
  * How a campaign's coupon discounts, as the save snapshotted it from Stripe.

@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Tests\Support\SupportAi\Tools;
 
-use FlutterSdk\MagicStarter\Contracts\ResolvesSupportArticlePlaceholders;
-use FlutterSdk\MagicStarter\Enums\SupportArticleVisibility;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\MigrationHelper;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\GetFaqArticleTool;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SearchFaqTool;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesSupportArticlePlaceholders;
+use AnilcanCakir\MagicStarter\Enums\SupportArticleVisibility;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\MigrationHelper;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\GetFaqArticleTool;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SearchFaqTool;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 

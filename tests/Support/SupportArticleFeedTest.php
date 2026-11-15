@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Enums\SupportArticleVisibility;
-use FlutterSdk\MagicStarter\Enums\SupportAudience;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
-use FlutterSdk\MagicStarter\Support\SupportArticleFeed;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\SupportArticleVisibility;
+use AnilcanCakir\MagicStarter\Enums\SupportAudience;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Support\SupportArticleFeed;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 

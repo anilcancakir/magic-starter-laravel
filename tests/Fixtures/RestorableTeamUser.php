@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Fixtures;
+namespace AnilcanCakir\MagicStarter\Tests\Fixtures;
 
 use Laravel\Sanctum\HasApiTokens;
 

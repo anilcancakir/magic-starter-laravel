@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Notifications;
+namespace AnilcanCakir\MagicStarter\Notifications;
 
-use FlutterSdk\MagicStarter\Jobs\CheckTrialCard;
-use FlutterSdk\MagicStarter\Support\FrontendUrl;
+use AnilcanCakir\MagicStarter\Jobs\CheckTrialCard;
+use AnilcanCakir\MagicStarter\Support\FrontendUrl;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;

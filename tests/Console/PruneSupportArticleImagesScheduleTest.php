@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Console\PruneSupportArticleImagesCommand;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Console\PruneSupportArticleImagesCommand;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;

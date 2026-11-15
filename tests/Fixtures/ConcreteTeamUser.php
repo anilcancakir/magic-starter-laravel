@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Fixtures;
+namespace AnilcanCakir\MagicStarter\Tests\Fixtures;
 
-use FlutterSdk\MagicStarter\Models\TeamUser;
+use AnilcanCakir\MagicStarter\Models\TeamUser;
 
 class ConcreteTeamUser extends TeamUser
 {

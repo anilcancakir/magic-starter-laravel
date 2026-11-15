@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\OpensSupportConversations;
-use FlutterSdk\MagicStarter\Contracts\PostsCustomerSupportMessages;
-use FlutterSdk\MagicStarter\Http\Requests\StorePublicSupportConversationRequest;
-use FlutterSdk\MagicStarter\Http\Requests\StoreSupportMessageRequest;
-use FlutterSdk\MagicStarter\Http\Resources\SupportConversationResource;
-use FlutterSdk\MagicStarter\Http\Resources\SupportMessageResource;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportThreadToken;
+use AnilcanCakir\MagicStarter\Contracts\OpensSupportConversations;
+use AnilcanCakir\MagicStarter\Contracts\PostsCustomerSupportMessages;
+use AnilcanCakir\MagicStarter\Http\Requests\StorePublicSupportConversationRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\StoreSupportMessageRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\SupportConversationResource;
+use AnilcanCakir\MagicStarter\Http\Resources\SupportMessageResource;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportThreadToken;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 

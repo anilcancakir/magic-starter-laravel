@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Database;
+namespace AnilcanCakir\MagicStarter\Tests\Database;
 
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Users\Schemas;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Users\Schemas;
 
+use AnilcanCakir\MagicStarter\Features;
 use DateTimeZone;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
-use FlutterSdk\MagicStarter\Features;
 use Illuminate\Database\Eloquent\Model;
 
 /**

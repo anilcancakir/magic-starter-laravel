@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Models;
+namespace AnilcanCakir\MagicStarter\Models;
 
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;

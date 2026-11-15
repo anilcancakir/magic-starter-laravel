@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Database;
+namespace AnilcanCakir\MagicStarter\Tests\Database;
 
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Notifications\DatabaseNotification;

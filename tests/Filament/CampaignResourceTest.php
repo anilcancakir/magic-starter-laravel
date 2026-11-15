@@ -1,20 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Enums\CampaignDiscountType;
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Pages\CreateCampaign;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Pages\EditCampaign;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Pages\ListCampaigns;
+use AnilcanCakir\MagicStarter\Models\Campaign;
+use AnilcanCakir\MagicStarter\Support\CampaignCodeValidator;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Carbon\CarbonInterface;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Enums\CampaignDiscountType;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Pages\CreateCampaign;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Pages\EditCampaign;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Pages\ListCampaigns;
-use FlutterSdk\MagicStarter\Models\Campaign;
-use FlutterSdk\MagicStarter\Support\CampaignCodeValidator;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;

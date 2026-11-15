@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AppReleases\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
 use Filament\Resources\Pages\CreateRecord;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
 
 class CreateAppRelease extends CreateRecord
 {

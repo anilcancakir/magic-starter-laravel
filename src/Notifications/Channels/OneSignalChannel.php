@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Notifications\Channels;
+namespace AnilcanCakir\MagicStarter\Notifications\Channels;
 
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Notifications\Notification;
 use InvalidArgumentException;
 use onesignal\client\api\DefaultApi;

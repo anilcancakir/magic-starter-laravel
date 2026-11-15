@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Audit;
+namespace AnilcanCakir\MagicStarter\Audit;
 
 use Illuminate\Database\Eloquent\Casts\AsEncryptedArrayObject;
 use Illuminate\Database\Eloquent\Casts\AsEncryptedCollection;

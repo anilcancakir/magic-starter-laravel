@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Concerns;
+namespace AnilcanCakir\MagicStarter\Filament\Concerns;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
 use Filament\Facades\Filament;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

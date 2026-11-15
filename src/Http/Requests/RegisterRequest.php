@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Rules\E164Phone;
 use DateTimeZone;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Rules\E164Phone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;

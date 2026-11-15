@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Models;
+namespace AnilcanCakir\MagicStarter\Models;
 
-use FlutterSdk\MagicStarter\Audit\Redactor;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportCsatRating;
-use FlutterSdk\MagicStarter\Enums\SupportHandoffReason;
-use FlutterSdk\MagicStarter\Enums\SupportPriority;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Support\SupportThreadToken;
+use AnilcanCakir\MagicStarter\Audit\Redactor;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportCsatRating;
+use AnilcanCakir\MagicStarter\Enums\SupportHandoffReason;
+use AnilcanCakir\MagicStarter\Enums\SupportPriority;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Support\SupportThreadToken;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;

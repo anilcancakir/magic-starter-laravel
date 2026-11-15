@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
+use AnilcanCakir\MagicStarter\Models\BillingGrant;
+use AnilcanCakir\MagicStarter\Support\BillingAdministrationRefused;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Models\BillingGrant;
-use FlutterSdk\MagicStarter\Support\BillingAdministrationRefused;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Social;
+namespace AnilcanCakir\MagicStarter\Tests\Social;
 
+use AnilcanCakir\MagicStarter\Social\JwksKeySet;
+use AnilcanCakir\MagicStarter\Social\KeySetUnavailableException;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Firebase\JWT\JWT;
-use FlutterSdk\MagicStarter\Social\JwksKeySet;
-use FlutterSdk\MagicStarter\Social\KeySetUnavailableException;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use OpenSSLAsymmetricKey;

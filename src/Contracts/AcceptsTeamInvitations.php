@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -28,11 +28,11 @@ interface AcceptsTeamInvitations
      * @param  Authenticatable  $user  The invited user; matched to the invitation's email, or a confirmed mismatch.
      * @param  Model  $invitation  The invitation being accepted.
      *
-     * @throws \FlutterSdk\MagicStarter\Support\TeamInvitationRefused When the invitation has expired
-     *                                                                (`expired`) or the user already belongs
-     *                                                                to the team (`already_joined`); either way the
-     *                                                                invitation is deleted, because it can never
-     *                                                                be used.
+     * @throws \AnilcanCakir\MagicStarter\Support\TeamInvitationRefused When the invitation has expired
+     *                                                                  (`expired`) or the user already belongs
+     *                                                                  to the team (`already_joined`); either way the
+     *                                                                  invitation is deleted, because it can never
+     *                                                                  be used.
      * @throws \Illuminate\Validation\ValidationException When an implementation refuses the join (a plan's
      *                                                    member cap, say); nothing is attached and the
      *                                                    invitation stays, so it can be retried once the

@@ -1,19 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\BillingController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Support\StripeTestMode;
-use FlutterSdk\MagicStarter\Tests\Support\StripeHttpStub;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\HasGuestSupport;
-use FlutterSdk\MagicStarter\Traits\MustVerifyEmail;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\BillingController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Support\StripeTestMode;
+use AnilcanCakir\MagicStarter\Tests\Support\StripeHttpStub;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\HasGuestSupport;
+use AnilcanCakir\MagicStarter\Traits\MustVerifyEmail;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;

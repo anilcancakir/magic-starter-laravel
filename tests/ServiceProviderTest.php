@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests;
+namespace AnilcanCakir\MagicStarter\Tests;
 
-use FlutterSdk\MagicStarter\Actions\AdministerBilling;
-use FlutterSdk\MagicStarter\Actions\ResolveBillingCurrency;
-use FlutterSdk\MagicStarter\Console\ExpireBillingGrantsCommand;
-use FlutterSdk\MagicStarter\Console\PruneBillingRecordsCommand;
-use FlutterSdk\MagicStarter\Contracts\AdministersBilling;
-use FlutterSdk\MagicStarter\Contracts\ResolvesBillingCurrency;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Tests\Console\BillingManifestCommandTest;
+use AnilcanCakir\MagicStarter\Actions\AdministerBilling;
+use AnilcanCakir\MagicStarter\Actions\ResolveBillingCurrency;
+use AnilcanCakir\MagicStarter\Console\ExpireBillingGrantsCommand;
+use AnilcanCakir\MagicStarter\Console\PruneBillingRecordsCommand;
+use AnilcanCakir\MagicStarter\Contracts\AdministersBilling;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesBillingCurrency;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Tests\Console\BillingManifestCommandTest;
 use Illuminate\Console\Scheduling\Event as ScheduledEvent;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Notifications\Events\NotificationSending;

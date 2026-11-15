@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AppReleases\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
 
 class ListAppReleases extends ListRecords
 {

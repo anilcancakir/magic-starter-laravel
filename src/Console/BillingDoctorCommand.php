@@ -1,21 +1,21 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
-use FlutterSdk\MagicStarter\Enums\BillingChannel;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\BillingGrant;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
-use FlutterSdk\MagicStarter\Support\BillingManifest;
-use FlutterSdk\MagicStarter\Support\PriceTable;
-use FlutterSdk\MagicStarter\Support\RevenueCatProjectClient;
-use FlutterSdk\MagicStarter\Support\StoreRailConfiguration;
-use FlutterSdk\MagicStarter\Support\StripePriceReader;
-use FlutterSdk\MagicStarter\Support\StripeTestMode;
-use FlutterSdk\MagicStarter\Support\StripeWebhookEndpointReader;
+use AnilcanCakir\MagicStarter\Enums\BillingChannel;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\BillingGrant;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
+use AnilcanCakir\MagicStarter\Support\BillingManifest;
+use AnilcanCakir\MagicStarter\Support\PriceTable;
+use AnilcanCakir\MagicStarter\Support\RevenueCatProjectClient;
+use AnilcanCakir\MagicStarter\Support\StoreRailConfiguration;
+use AnilcanCakir\MagicStarter\Support\StripePriceReader;
+use AnilcanCakir\MagicStarter\Support\StripeTestMode;
+use AnilcanCakir\MagicStarter\Support\StripeWebhookEndpointReader;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;

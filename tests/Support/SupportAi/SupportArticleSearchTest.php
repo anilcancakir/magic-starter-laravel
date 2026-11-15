@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Tests\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Contracts\SearchesSupportArticles;
-use FlutterSdk\MagicStarter\Enums\SupportArticleVisibility;
-use FlutterSdk\MagicStarter\Enums\SupportAudience;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportArticleSearch;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\SearchesSupportArticles;
+use AnilcanCakir\MagicStarter\Enums\SupportArticleVisibility;
+use AnilcanCakir\MagicStarter\Enums\SupportAudience;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportArticleSearch;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 
 /**
  * Locks how the knowledge base answers a question: who may see which article,

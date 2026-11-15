@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Requests\UpdateTeamPhotoRequest;
-use FlutterSdk\MagicStarter\Http\Resources\TeamResource;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Http\Requests\UpdateTeamPhotoRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\TeamResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 

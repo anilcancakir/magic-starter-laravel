@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests;
+namespace AnilcanCakir\MagicStarter\Tests;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteCollection;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;

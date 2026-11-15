@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
+use AnilcanCakir\MagicStarter\Console\BillingDoctorCommand;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\Subscription;
+use AnilcanCakir\MagicStarter\Models\SubscriptionItem;
+use AnilcanCakir\MagicStarter\Support\RevenueCatProjectClient;
+use AnilcanCakir\MagicStarter\Support\StripePriceReader;
+use AnilcanCakir\MagicStarter\Support\StripeWebhookEndpointReader;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Closure;
-use FlutterSdk\MagicStarter\Console\BillingDoctorCommand;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\Subscription;
-use FlutterSdk\MagicStarter\Models\SubscriptionItem;
-use FlutterSdk\MagicStarter\Support\RevenueCatProjectClient;
-use FlutterSdk\MagicStarter\Support\StripePriceReader;
-use FlutterSdk\MagicStarter\Support\StripeWebhookEndpointReader;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Client\Factory;

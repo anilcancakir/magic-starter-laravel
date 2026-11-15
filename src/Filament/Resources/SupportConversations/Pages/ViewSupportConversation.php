@@ -1,7 +1,23 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\Pages;
 
+use AnilcanCakir\MagicStarter\Actions\StoreSupportAttachments;
+use AnilcanCakir\MagicStarter\Contracts\AssistsSupportStaff;
+use AnilcanCakir\MagicStarter\Contracts\ChangesSupportConversations;
+use AnilcanCakir\MagicStarter\Contracts\RepliesToSupport;
+use AnilcanCakir\MagicStarter\Enums\SupportAttachmentOrigin;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportPriority;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Jobs\PrepareSupportStaffAssist;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportStaffAssistCache;
+use AnilcanCakir\MagicStarter\Support\SupportAttachmentResponse;
 use Filament\Actions\Action;
 use Filament\Forms\Components\BaseFileUpload;
 use Filament\Forms\Components\FileUpload;
@@ -12,22 +28,6 @@ use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Colors\Color;
 use Filament\Support\Exceptions\Cancel;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Actions\StoreSupportAttachments;
-use FlutterSdk\MagicStarter\Contracts\AssistsSupportStaff;
-use FlutterSdk\MagicStarter\Contracts\ChangesSupportConversations;
-use FlutterSdk\MagicStarter\Contracts\RepliesToSupport;
-use FlutterSdk\MagicStarter\Enums\SupportAttachmentOrigin;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportPriority;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Jobs\PrepareSupportStaffAssist;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportStaffAssistCache;
-use FlutterSdk\MagicStarter\Support\SupportAttachmentResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

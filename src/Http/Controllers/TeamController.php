@@ -1,17 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesTeams;
-use FlutterSdk\MagicStarter\Contracts\DeletesTeams;
-use FlutterSdk\MagicStarter\Contracts\TrashesTeams;
-use FlutterSdk\MagicStarter\Contracts\UpdatesTeams;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Requests\StoreTeamRequest;
-use FlutterSdk\MagicStarter\Http\Requests\UpdateTeamRequest;
-use FlutterSdk\MagicStarter\Http\Resources\TeamResource;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\SoftDeletingTeams;
+use AnilcanCakir\MagicStarter\Contracts\CreatesTeams;
+use AnilcanCakir\MagicStarter\Contracts\DeletesTeams;
+use AnilcanCakir\MagicStarter\Contracts\TrashesTeams;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesTeams;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Requests\StoreTeamRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\UpdateTeamRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\TeamResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\SoftDeletingTeams;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;

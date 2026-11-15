@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Policies\BillingPolicy;
+use AnilcanCakir\MagicStarter\Policies\BillingPolicy;
 use Illuminate\Database\Eloquent\Model;
 
 /**

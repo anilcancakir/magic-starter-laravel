@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Jobs\PrepareSupportStaffAssist;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Jobs\PrepareSupportStaffAssist;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Carbon;
 

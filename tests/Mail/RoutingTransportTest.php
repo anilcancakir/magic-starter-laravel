@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Mail;
+namespace AnilcanCakir\MagicStarter\Tests\Mail;
 
-use FlutterSdk\MagicStarter\Listeners\StampMailClass;
-use FlutterSdk\MagicStarter\Mail\MailRoute;
-use FlutterSdk\MagicStarter\Mail\RoutingTransport;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Listeners\StampMailClass;
+use AnilcanCakir\MagicStarter\Mail\MailRoute;
+use AnilcanCakir\MagicStarter\Mail\RoutingTransport;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Mail\Events\MessageSent;

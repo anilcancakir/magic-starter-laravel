@@ -2,7 +2,7 @@
 
 namespace App\Actions\MagicStarter;
 
-use FlutterSdk\MagicStarter\Contracts\AddsTeamMembers;
+use AnilcanCakir\MagicStarter\Contracts\AddsTeamMembers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 

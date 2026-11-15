@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Social;
+namespace AnilcanCakir\MagicStarter\Social;
 
-use FlutterSdk\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
 use GuzzleHttp\Client;
 use RuntimeException;
 use SocialiteProviders\Apple\Provider;

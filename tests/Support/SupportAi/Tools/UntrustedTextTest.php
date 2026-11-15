@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Tests\Support\SupportAi\Tools;
 
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\UntrustedText;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use DateTimeImmutable;
 use DateTimeZone;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\UntrustedText;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use JsonSerializable;

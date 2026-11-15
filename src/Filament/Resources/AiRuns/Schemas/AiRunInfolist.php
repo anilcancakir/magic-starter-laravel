@@ -1,7 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AiRuns\Schemas;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\Schemas;
 
+use AnilcanCakir\MagicStarter\Enums\AiCostSource;
+use AnilcanCakir\MagicStarter\Enums\AiPromptSource;
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Filament\Infolists\CodeBlockEntry;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
+use AnilcanCakir\MagicStarter\Models\AiRun;
+use AnilcanCakir\MagicStarter\Models\AiRunAttempt;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\RepeatableEntry\TableColumn;
 use Filament\Infolists\Components\TextEntry;
@@ -11,13 +18,6 @@ use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\FontFamily;
 use Filament\Support\Facades\FilamentTimezone;
-use FlutterSdk\MagicStarter\Enums\AiCostSource;
-use FlutterSdk\MagicStarter\Enums\AiPromptSource;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Filament\Infolists\CodeBlockEntry;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
-use FlutterSdk\MagicStarter\Models\AiRun;
-use FlutterSdk\MagicStarter\Models\AiRunAttempt;
 
 /**
  * The run page: its metadata, the bodies that went in and came out, and one row

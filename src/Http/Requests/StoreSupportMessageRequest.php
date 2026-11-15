@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Support\SupportRules;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Support\SupportRules;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

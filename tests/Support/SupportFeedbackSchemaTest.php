@@ -1,20 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Contracts\DescribesSupportCustomer;
-use FlutterSdk\MagicStarter\Enums\SupportAttachmentOrigin;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportCsatRating;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportFeedback;
-use FlutterSdk\MagicStarter\Models\SupportMessageAttachment;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Contracts\DescribesSupportCustomer;
+use AnilcanCakir\MagicStarter\Enums\SupportAttachmentOrigin;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportCsatRating;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportFeedback;
+use AnilcanCakir\MagicStarter\Models\SupportMessageAttachment;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;

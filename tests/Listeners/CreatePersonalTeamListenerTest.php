@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Listeners;
+namespace AnilcanCakir\MagicStarter\Tests\Listeners;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Listeners\CreatePersonalTeamListener;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Listeners\CreatePersonalTeamListener;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

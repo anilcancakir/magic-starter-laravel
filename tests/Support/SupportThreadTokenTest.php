@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportThreadToken;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportThreadToken;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 
 /**

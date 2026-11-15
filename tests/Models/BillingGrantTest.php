@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Models;
+namespace AnilcanCakir\MagicStarter\Tests\Models;
 
-use FlutterSdk\MagicStarter\Enums\GrantEndReason;
-use FlutterSdk\MagicStarter\Models\BillingGrant;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\GrantEndReason;
+use AnilcanCakir\MagicStarter\Models\BillingGrant;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;

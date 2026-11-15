@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests;
+namespace AnilcanCakir\MagicStarter\Tests;
 
-use FlutterSdk\MagicStarter\NotificationPreferenceRegistry;
+use AnilcanCakir\MagicStarter\NotificationPreferenceRegistry;
 
 class NotificationPreferenceRegistryTest extends TestCase
 {

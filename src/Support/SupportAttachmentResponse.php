@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Models\SupportMessageAttachment;
+use AnilcanCakir\MagicStarter\Models\SupportMessageAttachment;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

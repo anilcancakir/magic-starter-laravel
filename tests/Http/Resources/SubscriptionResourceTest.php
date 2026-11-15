@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Resources;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Resources;
 
-use FlutterSdk\MagicStarter\Contracts\ReportsUsage;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Http\Resources\SubscriptionResource;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\ReportsUsage;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Http\Resources\SubscriptionResource;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use RuntimeException;

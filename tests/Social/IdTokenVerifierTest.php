@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Social;
+namespace AnilcanCakir\MagicStarter\Tests\Social;
 
+use AnilcanCakir\MagicStarter\Social\AppleProviderFactory;
+use AnilcanCakir\MagicStarter\Social\IdTokenVerifier;
+use AnilcanCakir\MagicStarter\Social\InvalidIdentityException;
+use AnilcanCakir\MagicStarter\Social\VerifiedIdentity;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Firebase\JWT\JWT;
-use FlutterSdk\MagicStarter\Social\AppleProviderFactory;
-use FlutterSdk\MagicStarter\Social\IdTokenVerifier;
-use FlutterSdk\MagicStarter\Social\InvalidIdentityException;
-use FlutterSdk\MagicStarter\Social\VerifiedIdentity;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

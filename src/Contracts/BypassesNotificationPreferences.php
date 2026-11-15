@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
 /**
  * Contract for a notification that delivers a channel regardless of the notifiable's preference.

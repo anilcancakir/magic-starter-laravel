@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportCsatRating;
-use FlutterSdk\MagicStarter\Events\SupportConversationNeedsStaff;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportCsatRating;
+use AnilcanCakir\MagicStarter\Events\SupportConversationNeedsStaff;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Lang;

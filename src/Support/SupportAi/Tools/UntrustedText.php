@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi\Tools;
 
 use BackedEnum;
 use DateTimeInterface;

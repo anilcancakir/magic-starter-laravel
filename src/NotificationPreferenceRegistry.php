@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter;
+namespace AnilcanCakir\MagicStarter;
 
 /**
  * Registry for notification preferences types and their available channels.

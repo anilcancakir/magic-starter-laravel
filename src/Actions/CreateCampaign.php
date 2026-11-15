@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesCampaigns;
-use FlutterSdk\MagicStarter\Models\Campaign;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
-use FlutterSdk\MagicStarter\Support\CampaignCodeValidator;
+use AnilcanCakir\MagicStarter\Contracts\CreatesCampaigns;
+use AnilcanCakir\MagicStarter\Models\Campaign;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
+use AnilcanCakir\MagicStarter\Support\CampaignCodeValidator;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;

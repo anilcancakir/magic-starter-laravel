@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Social;
+namespace AnilcanCakir\MagicStarter\Social;
 
 /**
  * Who a provider vouched for, after its credential passed verification.

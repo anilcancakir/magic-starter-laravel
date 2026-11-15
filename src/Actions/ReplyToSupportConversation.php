@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Audit\Auditor;
-use FlutterSdk\MagicStarter\Contracts\RepliesToSupport;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Events\SupportConversationUpdated;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
-use FlutterSdk\MagicStarter\Notifications\SupportReplyNotification;
-use FlutterSdk\MagicStarter\Support\SupportRules;
-use FlutterSdk\MagicStarter\Support\SupportThreadToken;
+use AnilcanCakir\MagicStarter\Audit\Auditor;
+use AnilcanCakir\MagicStarter\Contracts\RepliesToSupport;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Events\SupportConversationUpdated;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Notifications\SupportReplyNotification;
+use AnilcanCakir\MagicStarter\Support\SupportRules;
+use AnilcanCakir\MagicStarter\Support\SupportThreadToken;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;

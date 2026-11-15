@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Widgets;
+namespace AnilcanCakir\MagicStarter\Filament\Widgets;
 
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportCsatRating;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportCsatRating;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Carbon;
 use stdClass;

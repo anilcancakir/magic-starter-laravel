@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\CreateAppRelease;
-use FlutterSdk\MagicStarter\Contracts\CreatesAppReleases;
-use FlutterSdk\MagicStarter\Contracts\DeletesAppReleases;
-use FlutterSdk\MagicStarter\Contracts\UpdatesAppReleases;
-use FlutterSdk\MagicStarter\Enums\ReleaseItemType;
-use FlutterSdk\MagicStarter\Enums\ReleaseStatus;
-use FlutterSdk\MagicStarter\Models\AppRelease;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\CreateAppRelease;
+use AnilcanCakir\MagicStarter\Contracts\CreatesAppReleases;
+use AnilcanCakir\MagicStarter\Contracts\DeletesAppReleases;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesAppReleases;
+use AnilcanCakir\MagicStarter\Enums\ReleaseItemType;
+use AnilcanCakir\MagicStarter\Enums\ReleaseStatus;
+use AnilcanCakir\MagicStarter\Models\AppRelease;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Validation\ValidationException;
 
 /**

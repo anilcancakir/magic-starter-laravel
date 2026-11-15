@@ -1,7 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries;
 
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\Pages\ListWebhookDeliveries;
+use AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\Pages\ViewWebhookDelivery;
+use AnilcanCakir\MagicStarter\Jobs\SyncRevenueCatEntitlement;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\ProcessedWebhookEvent;
 use BackedEnum;
 use Filament\Actions\ViewAction;
 use Filament\Infolists\Components\RepeatableEntry;
@@ -14,13 +21,6 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\Pages\ListWebhookDeliveries;
-use FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\Pages\ViewWebhookDelivery;
-use FlutterSdk\MagicStarter\Jobs\SyncRevenueCatEntitlement;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\ProcessedWebhookEvent;
 use Illuminate\Database\Eloquent\Builder;
 use UnitEnum;
 

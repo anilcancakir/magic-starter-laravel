@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles;
+use AnilcanCakir\MagicStarter\Events\GuestConverted;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Rules\E164Phone;
 use DateTimeZone;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserProfiles;
-use FlutterSdk\MagicStarter\Events\GuestConverted;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Rules\E164Phone;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Event;

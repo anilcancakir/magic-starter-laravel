@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Resources;
+namespace AnilcanCakir\MagicStarter\Http\Resources;
 
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
 use Closure;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;

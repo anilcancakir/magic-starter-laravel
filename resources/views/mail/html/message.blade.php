@@ -1,4 +1,4 @@
-@php($brand = \FlutterSdk\MagicStarter\Support\MailBrand::current())
+@php($brand = \AnilcanCakir\MagicStarter\Support\MailBrand::current())
 <x-mail::layout>
 {{-- Header --}}
 <x-slot:header>

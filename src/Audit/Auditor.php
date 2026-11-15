@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Audit;
+namespace AnilcanCakir\MagicStarter\Audit;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

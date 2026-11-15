@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiPrompts;
+namespace AnilcanCakir\MagicStarter\Support\AiPrompts;
 
-use FlutterSdk\MagicStarter\Enums\AiPromptSource;
+use AnilcanCakir\MagicStarter\Enums\AiPromptSource;
 
 /**
  * The text a host sends to the model for one call, with where its body came

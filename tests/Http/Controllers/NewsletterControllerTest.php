@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\NewsletterController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
-use FlutterSdk\MagicStarter\Notifications\NewsletterSubscribedNotification;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\NewsletterController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Notifications\NewsletterSubscribedNotification;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\User as Authenticatable;

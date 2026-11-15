@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests;
+namespace AnilcanCakir\MagicStarter\Tests;
 
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -19,10 +19,10 @@ class TestCase extends OrchestraTestCase
             Schema::dropAllTables();
         }
 
-        \FlutterSdk\MagicStarter\MagicStarter::useUserModel(\FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser::class);
-        \FlutterSdk\MagicStarter\MagicStarter::useTeamModel(\FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam::class);
-        \FlutterSdk\MagicStarter\MagicStarter::useMembershipModel(\FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class);
-        \FlutterSdk\MagicStarter\MagicStarter::useTeamInvitationModel(\FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamInvitation::class);
+        \AnilcanCakir\MagicStarter\MagicStarter::useUserModel(\AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser::class);
+        \AnilcanCakir\MagicStarter\MagicStarter::useTeamModel(\AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam::class);
+        \AnilcanCakir\MagicStarter\MagicStarter::useMembershipModel(\AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class);
+        \AnilcanCakir\MagicStarter\MagicStarter::useTeamInvitationModel(\AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamInvitation::class);
     }
 
     protected function getPackageProviders($app): array

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Mail;
+namespace AnilcanCakir\MagicStarter\Tests\Mail;
 
-use FlutterSdk\MagicStarter\Notifications\TrialRefusedNotification;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Notifications\TrialRefusedNotification;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Application;

@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
+use AnilcanCakir\MagicStarter\Contracts\AdministersBilling;
+use AnilcanCakir\MagicStarter\Http\Controllers\BillingController;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Contracts\AdministersBilling;
-use FlutterSdk\MagicStarter\Http\Controllers\BillingController;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Invoice;

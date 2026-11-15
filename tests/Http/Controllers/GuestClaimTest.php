@@ -1,17 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Events\GuestClaimed;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Events\GuestClaimed;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
@@ -38,7 +38,7 @@ class GuestClaimTest extends TestCase
     {
         return [
             \Laravel\Sanctum\SanctumServiceProvider::class,
-            \FlutterSdk\MagicStarter\MagicStarterServiceProvider::class,
+            \AnilcanCakir\MagicStarter\MagicStarterServiceProvider::class,
         ];
     }
 
@@ -699,11 +699,11 @@ class GuestClaimTest extends TestCase
  */
 final class GuestClaimTestUser extends \Illuminate\Foundation\Auth\User
 {
-    use \FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-    use \FlutterSdk\MagicStarter\Traits\HasGuestSupport;
-    use \FlutterSdk\MagicStarter\Traits\HasNotifications;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
+    use \AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+    use \AnilcanCakir\MagicStarter\Traits\HasGuestSupport;
+    use \AnilcanCakir\MagicStarter\Traits\HasNotifications;
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use \Laravel\Sanctum\HasApiTokens;
 
     protected $table = 'users';
@@ -733,7 +733,7 @@ final class GuestClaimTestUser extends \Illuminate\Foundation\Auth\User
  */
 final class GuestClaimOtherTokenable extends \Illuminate\Foundation\Auth\User
 {
-    use \FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
+    use \AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
     use \Laravel\Sanctum\HasApiTokens;
 
     protected $table = 'devices';

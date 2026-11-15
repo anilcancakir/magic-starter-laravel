@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Database\Factories;
+namespace AnilcanCakir\MagicStarter\Database\Factories;
 
-use FlutterSdk\MagicStarter\Enums\SupportArticleVisibility;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Enums\SupportArticleVisibility;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

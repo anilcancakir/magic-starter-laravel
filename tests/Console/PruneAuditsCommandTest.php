@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Console\PruneAuditsCommand;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Console\PruneAuditsCommand;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;

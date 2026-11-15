@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Widgets;
+namespace AnilcanCakir\MagicStarter\Filament\Widgets;
 
 use Carbon\CarbonInterval;
 use Filament\Widgets\StatsOverviewWidget;

@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Contracts;
+namespace AnilcanCakir\MagicStarter\Tests\Contracts;
 
-use FlutterSdk\MagicStarter\Contracts\ReportsUsage;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\ReportsUsage;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use PHPUnit\Framework\ExpectationFailedException;
 

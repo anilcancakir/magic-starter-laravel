@@ -1,25 +1,25 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
+use AnilcanCakir\MagicStarter\Actions\AdministerBilling;
+use AnilcanCakir\MagicStarter\Contracts\AdministersBilling;
+use AnilcanCakir\MagicStarter\Contracts\WritesEntitlement;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\GrantEndReason;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\BillingGrant;
+use AnilcanCakir\MagicStarter\Models\Subscription;
+use AnilcanCakir\MagicStarter\Support\BillingAdministrationRefused;
+use AnilcanCakir\MagicStarter\Support\EntitlementWrite;
+use AnilcanCakir\MagicStarter\Support\RevenueCatClient;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Carbon\CarbonImmutable;
-use FlutterSdk\MagicStarter\Actions\AdministerBilling;
-use FlutterSdk\MagicStarter\Contracts\AdministersBilling;
-use FlutterSdk\MagicStarter\Contracts\WritesEntitlement;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\GrantEndReason;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\BillingGrant;
-use FlutterSdk\MagicStarter\Models\Subscription;
-use FlutterSdk\MagicStarter\Support\BillingAdministrationRefused;
-use FlutterSdk\MagicStarter\Support\EntitlementWrite;
-use FlutterSdk\MagicStarter\Support\RevenueCatClient;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Events\TransactionBeginning;
 use Illuminate\Database\QueryException;

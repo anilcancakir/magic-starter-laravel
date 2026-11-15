@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\EnablesTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Support\TwoFactorAuthenticationProvider;
+use AnilcanCakir\MagicStarter\Contracts\EnablesTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Support\TwoFactorAuthenticationProvider;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 

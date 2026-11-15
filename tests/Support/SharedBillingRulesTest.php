@@ -1,21 +1,21 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
+use AnilcanCakir\MagicStarter\Actions\WriteEntitlement;
+use AnilcanCakir\MagicStarter\Contracts\WritesEntitlement;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Support\EntitlementWrite;
+use AnilcanCakir\MagicStarter\Support\ReadsBillableAttributes;
+use AnilcanCakir\MagicStarter\Support\StripeSubscriptionState;
+use AnilcanCakir\MagicStarter\Support\TeamKey;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\Exceptions\InvalidFormatException;
-use FlutterSdk\MagicStarter\Actions\WriteEntitlement;
-use FlutterSdk\MagicStarter\Contracts\WritesEntitlement;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Support\EntitlementWrite;
-use FlutterSdk\MagicStarter\Support\ReadsBillableAttributes;
-use FlutterSdk\MagicStarter\Support\StripeSubscriptionState;
-use FlutterSdk\MagicStarter\Support\TeamKey;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use PHPUnit\Framework\AssertionFailedError;
 
@@ -127,7 +127,7 @@ class SharedBillingRulesTest extends TestCase
      * The feeder invariant, and proof that the thing enforcing it has teeth.
      *
      * The invariant is that no feeder pairs a non-granting status with a
-     * non-null tier. {@see \FlutterSdk\MagicStarter\Actions\WriteEntitlement}'s
+     * non-null tier. {@see \AnilcanCakir\MagicStarter\Actions\WriteEntitlement}'s
      * rule 2 depends on it and has no guard for its absence, and rule 2's own
      * tests SUPPLY the pairing rather than checking it, so a feeder that revoked
      * without nulling the tier would pass every test in the package.

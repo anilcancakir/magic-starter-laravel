@@ -1,18 +1,18 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\NewsletterSubscribers;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\NewsletterSubscribers;
 
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\NewsletterSubscribers\Pages\ListNewsletterSubscribers;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Resources\NewsletterSubscribers\Pages\ListNewsletterSubscribers;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
 use UnitEnum;
 
 /**

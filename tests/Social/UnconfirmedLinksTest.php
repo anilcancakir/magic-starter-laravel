@@ -1,19 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Social;
+namespace AnilcanCakir\MagicStarter\Tests\Social;
 
-use FlutterSdk\MagicStarter\Contracts\ConnectsSocialAccounts;
-use FlutterSdk\MagicStarter\Contracts\ResolvesSocialUsers;
-use FlutterSdk\MagicStarter\Http\Controllers\EmailVerificationController;
-use FlutterSdk\MagicStarter\Http\Controllers\PasswordResetController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\SocialAccount;
-use FlutterSdk\MagicStarter\Social\AppleProviderFactory;
-use FlutterSdk\MagicStarter\Social\SocialSignInRefused;
-use FlutterSdk\MagicStarter\Social\UnconfirmedLinks;
-use FlutterSdk\MagicStarter\Social\VerifiedIdentity;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\HasSocialAccounts;
+use AnilcanCakir\MagicStarter\Contracts\ConnectsSocialAccounts;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesSocialUsers;
+use AnilcanCakir\MagicStarter\Http\Controllers\EmailVerificationController;
+use AnilcanCakir\MagicStarter\Http\Controllers\PasswordResetController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\SocialAccount;
+use AnilcanCakir\MagicStarter\Social\AppleProviderFactory;
+use AnilcanCakir\MagicStarter\Social\SocialSignInRefused;
+use AnilcanCakir\MagicStarter\Social\UnconfirmedLinks;
+use AnilcanCakir\MagicStarter\Social\VerifiedIdentity;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\HasSocialAccounts;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\SearchesSupportArticles;
-use FlutterSdk\MagicStarter\Enums\SupportAudience;
-use FlutterSdk\MagicStarter\Http\Requests\SearchSupportArticlesRequest;
-use FlutterSdk\MagicStarter\Http\Resources\SupportArticleSuggestionResource;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportArticleSearch;
+use AnilcanCakir\MagicStarter\Contracts\SearchesSupportArticles;
+use AnilcanCakir\MagicStarter\Enums\SupportAudience;
+use AnilcanCakir\MagicStarter\Http\Requests\SearchSupportArticlesRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\SupportArticleSuggestionResource;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportArticleSearch;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**

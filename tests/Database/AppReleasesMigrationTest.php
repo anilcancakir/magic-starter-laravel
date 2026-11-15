@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Database;
+namespace AnilcanCakir\MagicStarter\Tests\Database;
 
-use FlutterSdk\MagicStarter\Models\AppRelease;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Models\AppRelease;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\Schema;

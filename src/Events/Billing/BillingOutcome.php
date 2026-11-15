@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events\Billing;
+namespace AnilcanCakir\MagicStarter\Events\Billing;
 
-use FlutterSdk\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
 
 /**
  * Every billing outcome event, so a listener can subscribe to all of them at

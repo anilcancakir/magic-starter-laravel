@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Notifications;
+namespace AnilcanCakir\MagicStarter\Tests\Notifications;
 
-use FlutterSdk\MagicStarter\Notifications\TeamInvitationNotification;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Notifications\TeamInvitationNotification;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;

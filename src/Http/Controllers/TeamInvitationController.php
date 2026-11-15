@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\AcceptsTeamInvitations;
-use FlutterSdk\MagicStarter\Contracts\InvitesTeamMembers;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Requests\StoreTeamInvitationRequest;
-use FlutterSdk\MagicStarter\Http\Resources\TeamInvitationResource;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\TeamInvitationRefused;
+use AnilcanCakir\MagicStarter\Contracts\AcceptsTeamInvitations;
+use AnilcanCakir\MagicStarter\Contracts\InvitesTeamMembers;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Requests\StoreTeamInvitationRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\TeamInvitationResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\TeamInvitationRefused;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;

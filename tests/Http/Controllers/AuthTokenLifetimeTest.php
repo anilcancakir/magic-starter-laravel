@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\TwoFactorAuthenticationProvider;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\TwoFactorAuthenticationProvider;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -33,7 +33,7 @@ class AuthTokenLifetimeTest extends TestCase
     {
         return [
             \Laravel\Sanctum\SanctumServiceProvider::class,
-            \FlutterSdk\MagicStarter\MagicStarterServiceProvider::class,
+            \AnilcanCakir\MagicStarter\MagicStarterServiceProvider::class,
         ];
     }
 
@@ -358,11 +358,11 @@ class AuthTokenLifetimeTest extends TestCase
 
 final class AuthTokenLifetimeTestUser extends \Illuminate\Foundation\Auth\User
 {
-    use \FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-    use \FlutterSdk\MagicStarter\Traits\HasGuestSupport;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
-    use \FlutterSdk\MagicStarter\Traits\TwoFactorAuthenticatable;
+    use \AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+    use \AnilcanCakir\MagicStarter\Traits\HasGuestSupport;
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
+    use \AnilcanCakir\MagicStarter\Traits\TwoFactorAuthenticatable;
     use \Laravel\Sanctum\HasApiTokens;
 
     protected $table = 'users';

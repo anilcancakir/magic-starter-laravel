@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
+use AnilcanCakir\MagicStarter\Contracts\WritesEntitlement;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Contracts\WritesEntitlement;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
 use Illuminate\Database\Eloquent\Model;
 
 /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Audit;
+namespace AnilcanCakir\MagicStarter\Tests\Audit;
 
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Attributes\DataProvider;

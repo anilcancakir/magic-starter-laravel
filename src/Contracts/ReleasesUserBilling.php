@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Support\BillingReleaseFailed;
+use AnilcanCakir\MagicStarter\Support\BillingReleaseFailed;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**

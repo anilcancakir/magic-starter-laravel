@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\ResolvesBillingCurrency;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesBillingCurrency;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 

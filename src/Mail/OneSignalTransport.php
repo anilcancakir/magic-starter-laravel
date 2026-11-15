@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Mail;
+namespace AnilcanCakir\MagicStarter\Mail;
 
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\MailSend;
-use FlutterSdk\MagicStarter\Support\OneSignalSubscriptions;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\MailSend;
+use AnilcanCakir\MagicStarter\Support\OneSignalSubscriptions;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Str;

@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Database;
+namespace AnilcanCakir\MagicStarter\Tests\Database;
 
-use FlutterSdk\MagicStarter\Audit\Redactor;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Audit\Redactor;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\DataProvider;

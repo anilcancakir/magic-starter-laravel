@@ -1,6 +1,6 @@
 <?php
 
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -49,7 +49,7 @@ use Illuminate\Support\Facades\Schema;
  *
  * There is deliberately no database enum or CHECK constraint on
  * `plan_provider` or `plan_provider_status` either. The provider vocabulary
- * lives in a PHP enum ({@see \FlutterSdk\MagicStarter\Enums\BillingProvider}),
+ * lives in a PHP enum ({@see \AnilcanCakir\MagicStarter\Enums\BillingProvider}),
  * and the status column exists precisely to keep a word that vocabulary does
  * not have.
  *

@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Teams\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Teams\Pages;
 
+use AnilcanCakir\MagicStarter\Contracts\DeletesTeams;
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Contracts\DeletesTeams;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
 
 class EditTeam extends EditRecord
 {

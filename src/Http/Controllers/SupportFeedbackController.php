@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Actions\SubmitSupportFeedback;
-use FlutterSdk\MagicStarter\Http\Requests\SubmitSupportFeedbackRequest;
+use AnilcanCakir\MagicStarter\Actions\SubmitSupportFeedback;
+use AnilcanCakir\MagicStarter\Http\Requests\SubmitSupportFeedbackRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

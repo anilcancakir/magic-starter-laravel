@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\ValidationException;

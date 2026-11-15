@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Models\PushDevice;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\HasNotifications;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\HasNotifications;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;

@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Listeners;
+namespace AnilcanCakir\MagicStarter\Listeners;
 
-use FlutterSdk\MagicStarter\Events\SupportConversationNeedsStaff;
-use FlutterSdk\MagicStarter\Notifications\SupportConversationNeedsStaffNotification;
-use FlutterSdk\MagicStarter\Support\SupportStaffRecipients;
+use AnilcanCakir\MagicStarter\Events\SupportConversationNeedsStaff;
+use AnilcanCakir\MagicStarter\Notifications\SupportConversationNeedsStaffNotification;
+use AnilcanCakir\MagicStarter\Support\SupportStaffRecipients;
 use Illuminate\Support\Facades\Notification;
 
 /**

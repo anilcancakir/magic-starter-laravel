@@ -2,7 +2,7 @@
 
 namespace App\Actions\MagicStarter;
 
-use FlutterSdk\MagicStarter\Contracts\DeletesUsers;
+use AnilcanCakir\MagicStarter\Contracts\DeletesUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Listeners;
+namespace AnilcanCakir\MagicStarter\Listeners;
 
-use FlutterSdk\MagicStarter\Contracts\BypassesNotificationPreferences;
-use FlutterSdk\MagicStarter\NotificationPreferenceRegistry;
+use AnilcanCakir\MagicStarter\Contracts\BypassesNotificationPreferences;
+use AnilcanCakir\MagicStarter\NotificationPreferenceRegistry;
 use Illuminate\Notifications\Events\NotificationSending;
 
 /**

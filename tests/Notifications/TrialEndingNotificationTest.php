@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Notifications;
+namespace AnilcanCakir\MagicStarter\Tests\Notifications;
 
+use AnilcanCakir\MagicStarter\Notifications\TrialEndingNotification;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Carbon\CarbonImmutable;
-use FlutterSdk\MagicStarter\Notifications\TrialEndingNotification;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\URL;
 

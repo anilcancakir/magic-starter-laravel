@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Enums;
+namespace AnilcanCakir\MagicStarter\Enums;
 
 /**
  * Where a catalogue product is priced and sold: the keys of a product's

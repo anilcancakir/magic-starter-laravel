@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Audits\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Audits\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\Audits\AuditResource;
 use Filament\Resources\Pages\ViewRecord;
-use FlutterSdk\MagicStarter\Filament\Resources\Audits\AuditResource;
 
 class ViewAudit extends ViewRecord
 {

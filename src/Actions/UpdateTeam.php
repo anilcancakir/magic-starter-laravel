@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\UpdatesTeams;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesTeams;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;

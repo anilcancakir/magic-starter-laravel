@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesTeams;
-use FlutterSdk\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Contracts\CreatesTeams;
+use AnilcanCakir\MagicStarter\Enums\Role;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;

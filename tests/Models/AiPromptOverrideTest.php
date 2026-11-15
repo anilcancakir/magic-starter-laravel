@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Models;
+namespace AnilcanCakir\MagicStarter\Tests\Models;
 
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 

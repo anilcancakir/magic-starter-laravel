@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events;
+namespace AnilcanCakir\MagicStarter\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

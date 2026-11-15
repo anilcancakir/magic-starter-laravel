@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Traits;
+namespace AnilcanCakir\MagicStarter\Tests\Traits;
 
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -55,7 +55,7 @@ final class HasTeamsTest extends TestCase
 
         config([
             'magic-starter.models.team' => HasTeamsTestTeam::class,
-            'magic-starter.models.membership' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            'magic-starter.models.membership' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
         ]);
     }
 
@@ -230,7 +230,7 @@ final class HasTeamsTest extends TestCase
 
 final class HasTeamsTestUser extends Model
 {
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
 
     protected $table = 'users';
 

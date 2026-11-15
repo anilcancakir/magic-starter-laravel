@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
 /**
  * A host's own values for the placeholder tokens its knowledge-base articles carry.
@@ -9,7 +9,7 @@ namespace FlutterSdk\MagicStarter\Contracts;
  * computes (a plan limit, a region count) as a token instead of typing it, and
  * only the host knows the value. With nothing bound the text is read as written.
  *
- * {@see \FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportArticleText} asks
+ * {@see \AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportArticleText} asks
  * before it reduces the Markdown to text, so every reader the package serves (the
  * FAQ tools the model calls and the in-app suggestions) sees the values, and a
  * value written in Markdown is reduced like the rest of the article.

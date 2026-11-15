@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Enums;
+namespace AnilcanCakir\MagicStarter\Enums;
 
 /**
  * What a billing catalogue product is, as its `type` names it in config.

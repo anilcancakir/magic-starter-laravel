@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\TwoFactorAuthenticatable;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\TwoFactorAuthenticatable;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Schema\Blueprint;

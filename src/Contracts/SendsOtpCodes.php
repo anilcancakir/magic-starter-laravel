@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
 /**
  * Contract for sending OTP codes via a provider.

@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Policies;
+namespace AnilcanCakir\MagicStarter\Tests\Policies;
 
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Policies\TeamPolicy;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Policies\TeamPolicy;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -32,7 +32,7 @@ final class TeamPolicyTest extends TestCase
         config()->set('magic-starter.models.user', TeamPolicyTestUser::class);
         config()->set('magic-starter.models.team', TeamPolicyTestTeam::class);
         config()->set('magic-starter.models.membership',
-            \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
         );
 
         $schema = app('db.schema');
@@ -311,9 +311,9 @@ final class TeamPolicyTest extends TestCase
 
 final class TeamPolicyTestUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
     use HasUuids;
 
     protected $table = 'users';
@@ -325,7 +325,7 @@ final class TeamPolicyTestUser extends Model implements AuthenticatableContract
     protected $guarded = [];
 }
 
-final class TeamPolicyTestTeam extends \FlutterSdk\MagicStarter\Models\Team
+final class TeamPolicyTestTeam extends \AnilcanCakir\MagicStarter\Models\Team
 {
     protected $table = 'teams';
 

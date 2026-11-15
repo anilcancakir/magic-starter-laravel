@@ -1,7 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Contracts\AdministersBilling;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Support\BillingEventRecorder;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Closure;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -9,16 +19,6 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Facades\Filament;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
-use FlutterSdk\MagicStarter\Contracts\AdministersBilling;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Support\BillingEventRecorder;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;

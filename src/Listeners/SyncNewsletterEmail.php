@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Listeners;
+namespace AnilcanCakir\MagicStarter\Listeners;
 
-use FlutterSdk\MagicStarter\Audit\Auditor;
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Audit\Auditor;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;

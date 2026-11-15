@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\CreateGuestUser;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\CreateGuestUser;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;

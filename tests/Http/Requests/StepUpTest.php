@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Requests;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Social\StepUpConfirmations;
-use FlutterSdk\MagicStarter\Support\TwoFactorAuthenticationProvider;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\HasSocialAccounts;
-use FlutterSdk\MagicStarter\Traits\TwoFactorAuthenticatable;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Social\StepUpConfirmations;
+use AnilcanCakir\MagicStarter\Support\TwoFactorAuthenticationProvider;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\HasSocialAccounts;
+use AnilcanCakir\MagicStarter\Traits\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Schema\Blueprint;

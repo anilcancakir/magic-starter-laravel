@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\TeamPhotoController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\VisibilityRecordingDisk;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\TeamPhotoController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\VisibilityRecordingDisk;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -58,7 +58,7 @@ final class TeamPhotoControllerTest extends TestCase
 
         Gate::policy(
             TestTeamForTeamPhoto::class,
-            \FlutterSdk\MagicStarter\Policies\TeamPolicy::class,
+            \AnilcanCakir\MagicStarter\Policies\TeamPolicy::class,
         );
 
         Route::post('/teams/{team}/photo', [TeamPhotoController::class, 'update']);
@@ -323,9 +323,9 @@ final class TeamPhotoControllerTest extends TestCase
 
 class TestUserForTeamPhoto extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
 
     protected $table = 'users';
 

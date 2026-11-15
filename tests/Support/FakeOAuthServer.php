@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;

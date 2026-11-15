@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\BillingGrants\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\BillingGrants\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Actions\GrantPlanAction;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingGrants\BillingGrantResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
-use FlutterSdk\MagicStarter\Filament\Actions\GrantPlanAction;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingGrants\BillingGrantResource;
 
 class ListBillingGrants extends ListRecords
 {

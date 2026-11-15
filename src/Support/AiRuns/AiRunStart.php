@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiRuns;
+namespace AnilcanCakir\MagicStarter\Support\AiRuns;
 
-use FlutterSdk\MagicStarter\Enums\AiPromptSource;
+use AnilcanCakir\MagicStarter\Enums\AiPromptSource;
 
 /**
  * What a host knows when it opens a run: one logical model call, before any

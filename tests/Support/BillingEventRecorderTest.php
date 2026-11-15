@@ -1,26 +1,26 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Events\Billing\BillingOutcome;
-use FlutterSdk\MagicStarter\Events\Billing\CheckoutStarted;
-use FlutterSdk\MagicStarter\Events\Billing\EntitlementApplied;
-use FlutterSdk\MagicStarter\Events\Billing\EntitlementSynced;
-use FlutterSdk\MagicStarter\Events\Billing\GrantAdded;
-use FlutterSdk\MagicStarter\Events\Billing\GrantExpired;
-use FlutterSdk\MagicStarter\Events\Billing\GrantRevoked;
-use FlutterSdk\MagicStarter\Events\Billing\InvoiceRefunded;
-use FlutterSdk\MagicStarter\Events\Billing\SubscriptionResumed;
-use FlutterSdk\MagicStarter\Events\Billing\TrialEnded;
-use FlutterSdk\MagicStarter\Events\Billing\TrialExtended;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Support\BillingEventRecorder;
-use FlutterSdk\MagicStarter\Support\MigrationHelper;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Events\Billing\BillingOutcome;
+use AnilcanCakir\MagicStarter\Events\Billing\CheckoutStarted;
+use AnilcanCakir\MagicStarter\Events\Billing\EntitlementApplied;
+use AnilcanCakir\MagicStarter\Events\Billing\EntitlementSynced;
+use AnilcanCakir\MagicStarter\Events\Billing\GrantAdded;
+use AnilcanCakir\MagicStarter\Events\Billing\GrantExpired;
+use AnilcanCakir\MagicStarter\Events\Billing\GrantRevoked;
+use AnilcanCakir\MagicStarter\Events\Billing\InvoiceRefunded;
+use AnilcanCakir\MagicStarter\Events\Billing\SubscriptionResumed;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialEnded;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialExtended;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Support\BillingEventRecorder;
+use AnilcanCakir\MagicStarter\Support\MigrationHelper;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;

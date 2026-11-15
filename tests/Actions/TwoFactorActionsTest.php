@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\ConfirmTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Actions\DisableTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Actions\EnableTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Actions\GenerateNewRecoveryCodes;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\TwoFactorAuthenticationProvider;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\TwoFactorAuthenticatable;
+use AnilcanCakir\MagicStarter\Actions\ConfirmTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Actions\DisableTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Actions\EnableTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Actions\GenerateNewRecoveryCodes;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\TwoFactorAuthenticationProvider;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Schema\Blueprint;

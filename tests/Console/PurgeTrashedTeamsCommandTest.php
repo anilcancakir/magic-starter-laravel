@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Actions\TrashTeam;
-use FlutterSdk\MagicStarter\Console\PurgeTrashedTeamsCommand;
-use FlutterSdk\MagicStarter\Contracts\DeletesTeams;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\BuildsRestorableTeamSchema;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\RestorableTeam;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\TrashTeam;
+use AnilcanCakir\MagicStarter\Console\PurgeTrashedTeamsCommand;
+use AnilcanCakir\MagicStarter\Contracts\DeletesTeams;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\BuildsRestorableTeamSchema;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\RestorableTeam;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Carbon;

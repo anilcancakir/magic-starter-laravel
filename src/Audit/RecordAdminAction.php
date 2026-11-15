@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Audit;
+namespace AnilcanCakir\MagicStarter\Audit;
 
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
 
 /**
  * Turns an admin panel write into one `admin.*` audit row.

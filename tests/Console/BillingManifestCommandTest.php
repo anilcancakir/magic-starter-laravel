@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Console\BillingManifestCommand;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Console\BillingManifestCommand;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Artisan;
 
 /**

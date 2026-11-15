@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Enums;
+namespace AnilcanCakir\MagicStarter\Enums;
 
 /**
  * Where a support conversation stands, as `support_conversations.status` stores it.

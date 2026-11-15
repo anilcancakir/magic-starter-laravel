@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Actions\OpenSupportConversation;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Events\SupportConversationNeedsStaff;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Notifications\SupportTicketCreatedNotification;
-use FlutterSdk\MagicStarter\Support\SupportThreadToken;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteVerifiableUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\OpenSupportConversation;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Events\SupportConversationNeedsStaff;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Notifications\SupportTicketCreatedNotification;
+use AnilcanCakir\MagicStarter\Support\SupportThreadToken;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteVerifiableUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Queue\ShouldBeEncrypted;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\AnonymousNotifiable;
