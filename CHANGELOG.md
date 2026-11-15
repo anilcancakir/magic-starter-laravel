@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- **`createAuthToken()` and `signInResponse()` of the `AuthenticatesUsers` trait take a trailing optional `bool $remember = false`.** A host controller that extends `AuthController` and overrides either method with the old signature must add the parameter, or PHP refuses the class declaration (the routes point at `AuthController` itself, so only a subclass the host rebinds is affected). Set both lifetime keys when using `remember_me_expiration_minutes`, with the remember value at least as long as `token_expiration_minutes`: with only the remember key set, a sign-in without `remember_me` gets a token without expiry. `0` or an empty value on the remember key falls back to `token_expiration_minutes`, like `null`.
+- **`createAuthToken()` and `signInResponse()` of the `AuthenticatesUsers` trait take a trailing optional `bool $remember = false`.** A host controller that extends `AuthController` and overrides either method with the old signature must add the parameter, or PHP refuses the class declaration (the package's own routes point at `AuthController` itself, but a subclass the host routes to, or rebinds, is affected). Set both lifetime keys when using `remember_me_expiration_minutes`, with the remember value at least as long as `token_expiration_minutes`: with only the remember key set, a sign-in without `remember_me` gets a token without expiry. `0` or an empty value on the remember key falls back to `token_expiration_minutes`, like `null`.
 
 ### Fixed
 
