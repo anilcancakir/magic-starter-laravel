@@ -5,14 +5,83 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+*'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
 jobs:
   validate:
+    name: Validate
     runs-on: ubuntu-latest
+    outputs:
+      notes: ${{ steps.notes.outputs.body }}
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Packagist trusts every tag that reaches it, so a tag pushed from an
+      # unmerged branch would publish code that skipped the pull request and
+      # its checks. Release from the merge commit on master.
+      - name: Require the tag to sit on master
+        run: |
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/master; then
+            echo "::error::Tag $GITHUB_REF_NAME is not on master; tag the merge commit." >&2
+            exit 1
+          fi
+
+      # The tag and the Boost skill must name one version, or Packagist, the
+      # GitHub Release and the skill agents read would each carry a different one.
+      - name: Check version stamps
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          skill_file='resources/boost/skills/magic-starter-development/SKILL.blade.php'
+          if [ ! -f "$skill_file" ]; then
+            echo "::error::$skill_file is missing; the Boost skill carries the version stamp." >&2
+            exit 1
+          fi
+          skill="$(awk '/^version:/ { print $2; exit }' "$skill_file" | tr -d "\"'")"
+          if [ -z "$skill" ]; then
+            echo "::error::$skill_file has no version: line in its frontmatter." >&2
+            exit 1
+          fi
+          if [ "$TAG" != "$skill" ]; then
+            echo "::error::Version mismatch: tag $TAG, Boost skill $skill." >&2
+            exit 1
+          fi
+
+      # Runs before the irreversible Packagist update: a tag without a
+      # `## [<version>]` section in CHANGELOG.md stops here instead of shipping
+      # a version with no GitHub Release. index() matches the tag literally, so
+      # a `+1` suffix is not read as a pattern.
+      - name: Extract changelog section
+        id: notes
+        env:
+          VERSION: ${{ github.ref_name }}
+        run: |
+          notes="$(awk -v ver="$VERSION" '
+            index($0, "## [" ver "]") == 1 { flag = 1; next }
+            flag && /^## / { exit }
+            flag { print }
+          ' CHANGELOG.md)"
+          if [ -z "$(printf '%s' "$notes" | tr -d '[:space:]')" ]; then
+            echo "::error::No CHANGELOG.md section found for $VERSION; refusing to publish a version without release notes." >&2
+            exit 1
+          fi
+          {
+            echo 'body<<CHANGELOG_EOF'
+            printf '%s\n' "$notes"
+            echo 'CHANGELOG_EOF'
+          } >> "$GITHUB_OUTPUT"
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2.40.0
         with:
           php-version: '8.3'
           coverage: none
@@ -29,20 +98,42 @@ jobs:
       - name: Static analysis
         run: vendor/bin/phpstan analyse
 
-  release:
+  publish:
     needs: validate
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v7
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
-        with:
-          generate_release_notes: true
-
+      # A Packagist package URL updates only that package. The JSON body is read
+      # only when the request says it is JSON (without the header Packagist
+      # answers 406 and this job fails on every tag), and the Bearer header keeps
+      # the credentials out of the URL.
       - name: Update Packagist
+        env:
+          PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_API_TOKEN: ${{ secrets.PACKAGIST_API_TOKEN }}
         run: |
-          curl -s -X POST "https://packagist.org/api/update-package?username=${{ secrets.PACKAGIST_USERNAME }}&apiToken=${{ secrets.PACKAGIST_API_TOKEN }}" \
-            -d '{"repository":{"url":"https://github.com/fluttersdk/magic-starter-laravel"}}'
+          curl --fail-with-body --silent --show-error -X POST \
+            -H 'Content-Type: application/json' \
+            -H "Authorization: Bearer ${PACKAGIST_USERNAME}:${PACKAGIST_API_TOKEN}" \
+            -d '{"repository":{"url":"https://packagist.org/packages/anilcancakir/magic-starter-laravel"}}' \
+            https://packagist.org/api/update-package
+
+  github-release:
+    name: GitHub Release
+    needs: [validate, publish]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to create the GitHub Release
+    steps:
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+          NOTES: ${{ needs.validate.outputs.notes }}
+        run: |
+          printf '%s\n' "$NOTES" > "$RUNNER_TEMP/release-notes.md"
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --latest \
+            --verify-tag \
+            --notes-file "$RUNNER_TEMP/release-notes.md"

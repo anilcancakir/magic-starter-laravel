@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Question / Discussion
-    url: https://github.com/fluttersdk/magic-starter-laravel/discussions
-    about: Ask questions and discuss Magic Starter Laravel with the community
+  - name: Security vulnerability
+    url: https://github.com/anilcancakir/magic-starter-laravel/security/advisories/new
+    about: Report a vulnerability privately, not as a public issue
+  - name: Documentation
+    url: https://anilcancakir.com/magic-starter-laravel
+    about: Check the documentation before opening an issue
