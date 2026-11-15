@@ -1,18 +1,21 @@
 # Auto-detect text files and normalize line endings
 * text=auto
 
-# Export-ignore (excluded from composer dist archives)
+# Export-ignore (excluded from composer dist archives); doc/ and llms.txt stay in
 /tests              export-ignore
 /.github            export-ignore
 /phpunit.xml        export-ignore
 /phpstan.neon       export-ignore
 /pint.json          export-ignore
 /.editorconfig      export-ignore
+/.phpactor.json     export-ignore
 /.gitattributes     export-ignore
 /.gitignore         export-ignore
+/.lycheeignore      export-ignore
 /CHANGELOG.md       export-ignore
-/doc                export-ignore
 /CLAUDE.md          export-ignore
 /.claude            export-ignore
-/AGENTS.md          export-ignore
+/.mcp.json          export-ignore
+/skills             export-ignore
+/tool               export-ignore
 /.ac                export-ignore
