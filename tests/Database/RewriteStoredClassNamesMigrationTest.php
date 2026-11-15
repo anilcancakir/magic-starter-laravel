@@ -116,6 +116,27 @@ class RewriteStoredClassNamesMigrationTest extends TestCase
         $this->assertSame($before, $this->snapshot());
     }
 
+    public function test_a_prefix_spelt_in_another_case_is_rewritten_too(): void
+    {
+        // PHP resolves class names case-insensitively, so `use flutterSdk\...` stores
+        // that spelling; a case-insensitive MySQL collation also merges such values.
+        $this->buildTables();
+        DB::table('magic_starter_audits')->insert([
+            ['auditable_type' => 'flutterSdk\\MagicStarter\\Models\\Team'],
+            ['auditable_type' => 'FLUTTERSDK\\MagicStarter\\Models\\Subscription'],
+        ]);
+
+        (require self::MIGRATION)->up();
+
+        $this->assertSame(
+            [
+                self::NEW . 'Models\\Subscription',
+                self::NEW . 'Models\\Team',
+            ],
+            DB::table('magic_starter_audits')->orderBy('auditable_type')->pluck('auditable_type')->all(),
+        );
+    }
+
     public function test_an_absent_table_is_skipped_and_the_others_are_rewritten(): void
     {
         $this->buildTables(except: 'magic_starter_audits');

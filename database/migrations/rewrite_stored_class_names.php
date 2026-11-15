@@ -97,7 +97,10 @@ return new class extends Migration
             ->pluck($column);
 
         foreach ($values as $value) {
-            if (! str_starts_with((string) $value, $from)) {
+            // PHP resolves class names case-insensitively, so the stored spelling
+            // can differ in case (`use flutterSdk\...`), and a case-insensitive
+            // MySQL collation hands back one spelling for all of them.
+            if (strncasecmp((string) $value, $from, strlen($from)) !== 0) {
                 continue;
             }
 
