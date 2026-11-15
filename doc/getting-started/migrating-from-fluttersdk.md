@@ -22,6 +22,8 @@ php artisan queue:work --stop-when-empty
 composer remove fluttersdk/magic-starter-laravel && composer require anilcancakir/magic-starter-laravel
 rg -l0 'FlutterSdk\\+MagicStarter' app config database routes tests \
     | xargs -0 -r perl -pi -e 's/FlutterSdk(\\+)MagicStarter/AnilcanCakir$1MagicStarter/g'
+cp vendor/anilcancakir/magic-starter-laravel/database/migrations/rewrite_stored_class_names.php \
+    "database/migrations/$(date +%Y_%m_%d_%H%M%S)_rewrite_stored_class_names.php"
 php artisan migrate
 ```
 
@@ -78,19 +80,26 @@ A file you published from the old package extends or implements a class of the o
 <a name="run-the-migration"></a>
 ## Run the Migration
 
+The package stores PHP class names in the database. The upgrade migration `rewrite_stored_class_names` rewrites them to the new namespace. A fresh install publishes it with every other migration; an application that is already installed copies the one file under a timestamp later than its latest migration, then migrates:
+
 ```bash
+cp vendor/anilcancakir/magic-starter-laravel/database/migrations/rewrite_stored_class_names.php \
+    "database/migrations/$(date +%Y_%m_%d_%H%M%S)_rewrite_stored_class_names.php"
 php artisan migrate
 ```
 
-The package stores a few PHP class names in the database. The upgrade migration `rewrite_stored_class_names` rewrites them to the new namespace:
+Copy the file; do not publish the `magic-starter-migrations` tag for this, because that tag publishes the whole migrations directory.
 
 | Table | Column | Holds |
 |:------|:-------|:------|
 | `magic_starter_audits` | `auditable_type` | The class of the audited model. |
-| `magic_starter_audits` | `actor_type` | The class of the actor of a change. |
 | `notifications` | `type` | The class of the notification that wrote the row. |
+| `magic_starter_mail_sends` | `mail_class` | The class of the mail or notification that was sent. |
+| `ai_runs` | `subject_type` | The class of the model a run was made for. |
+| `ai_runs`, `ai_run_attempts` | `error_class` | The class of the exception a call failed with. |
+| `billing_events`, `billing_grants`, `billing_trials`, `support_proposals` | `billable_type` | The class of the billable model, which is the package `Team` when you did not publish your own. |
 
-Without it, the old names stay in those columns: they point at classes that no longer exist, and a query by the new class name does not find the rows. `Auditor` queries `auditable_type` and `actor_type` by morph class, so the audit history of a package model such as `Team` would read as empty.
+Without it, the old names stay in those columns: they point at classes that no longer exist, and a query by the new class name does not find the rows. `Auditor` queries `auditable_type` by morph class, so the audit history of a package model such as `Team` would read as empty. Columns that only ever hold your own user model (`actor_type`, `notifiable_type`, `tokenable_type`) are not touched, and neither is any value outside the old namespace. The migration skips a table or column that does not exist, a second run changes nothing, and `php artisan migrate:rollback` swaps the names back.
 
 <a name="laravel-boost"></a>
 ## Laravel Boost
@@ -114,7 +123,8 @@ The package ships its agent skill, `magic-starter-development`, under `resources
 | Replacing only `FlutterSdk\MagicStarter` | The doubled-backslash form in config and strings needs the same rename; the pattern above covers both. |
 | Searching only `app/` | Search `config/`, `database/`, `routes/` and `tests/` too, and `bootstrap/` for a hand-registered provider. |
 | Republishing stubs with `--force` to pick up the namespace | Rename the namespace in place instead; `--force` overwrites your changes. |
-| Skipping `php artisan migrate` | The audit and notification rows keep the old class names. |
+| Skipping the upgrade migration | The audit, notification, mail, AI run and billing rows keep the old class names. |
+| Publishing the `magic-starter-migrations` tag to get the new migration | It publishes the whole directory. Copy `rewrite_stored_class_names.php` alone, as above. |
 
 <a name="related-documentation"></a>
 ## Related Documentation
