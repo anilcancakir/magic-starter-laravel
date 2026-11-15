@@ -49,7 +49,9 @@ Stop whatever dispatches work, then let the workers finish what is queued:
 php artisan queue:work --stop-when-empty
 ```
 
-Do the same for every named queue and connection your application uses.
+Do the same for every named queue and connection your application uses. `--stop-when-empty` exits as soon as nothing is ready, so it does not wait for a job that was pushed with a delay: let those fall due and run, or look for them in your queue backend (for example the `delayed` set on Redis or `available_at` in the `jobs` table), before you continue.
+
+Laravel must already be on 12.32 or later: the new package requires `illuminate/*` `^12.32|^13.0`, and Composer cannot resolve it on an older framework once the old package is gone.
 
 <a name="rename-the-namespace"></a>
 ## Rename the Namespace
