@@ -1,69 +1,45 @@
 # Release
 
-Release a new version of `fluttersdk/magic-starter-laravel` to Packagist via GitHub Release.
+Release `anilcancakir/magic-starter-laravel` X.Y.Z to Packagist and GitHub Releases. The release lands through a `release: X.Y.Z` pull request; the bare tag on its merge commit starts `.github/workflows/publish.yml`, which does the rest.
 
-**Usage**: `/release <version>` (e.g., `/release 1.1.0`)
+**Usage**: `/release X.Y.Z` (e.g. `/release 1.0.1`). The version is bare: no `v`.
 
-## Phase 1: Pre-flight Checks
+## 1. Pre-flight
 
-1. Verify you are on the `master` branch: `git branch --show-current`
-2. Verify working tree is clean: `git status --porcelain` should be empty
-3. Verify no uncommitted changes: `git diff --cached --quiet`
-4. Pull latest: `git pull origin master`
+1. `git checkout master && git pull --ff-only origin master`; `git status --porcelain` must be empty.
+2. `composer test`, `composer lint` and `composer analyse` must pass. Stop and fix on a failure; never skip one.
+3. `CHANGELOG.md` must have entries under `## [Unreleased]`. An empty section means there is nothing to release.
 
-If any check fails, stop and inform the user.
+## 2. The release pull request
 
-## Phase 2: Version Bump
+1. `git checkout -b release/X.Y.Z`.
+2. Stamp the two version files, which `publish.yml` checks against the tag:
+   - `CHANGELOG.md`: rename `## [Unreleased]` to `## [X.Y.Z] - YYYY-MM-DD` (today's date) and add a fresh empty `## [Unreleased]` above it. The section's body becomes the GitHub Release notes.
+   - `resources/boost/skills/magic-starter-development/SKILL.blade.php`: set the top-level `version: X.Y.Z` line in the frontmatter.
+3. `git commit -am "release: X.Y.Z"`, `git push -u origin release/X.Y.Z`, then `gh pr create --base master --title "release: X.Y.Z" --body "Release X.Y.Z."`.
+4. Wait for every required check to pass, then `gh pr merge <number> --merge`. Never `--squash` and never `--rebase`: the tag has to sit on the merge commit of a reviewed history.
 
-1. Update `CHANGELOG.md`:
-   - Move all content under `## [Unreleased]` into a new section `## [<version>] - <today's date>`
-   - Add a fresh empty `## [Unreleased]` section at the top
-   - Preserve existing changelog entries below
+## 3. Tag the merge commit
 
-## Phase 3: Quality Gates
+1. `git checkout master && git pull --ff-only origin master && git fetch origin`.
+2. `sha=$(gh pr view <number> --json mergeCommit --jq .mergeCommit.oid)`, then confirm `git rev-parse origin/master` prints the same SHA. Stop if it does not: something else merged, and the tag would carry it.
+3. `git tag X.Y.Z "$sha" && git push origin X.Y.Z`.
 
-Run all three checks — **all must pass**:
+## 4. What publish.yml does
 
-```bash
-composer test        # PHPUnit test suite
-composer lint        # Pint dry-run check
-composer analyse     # PHPStan level 6
-```
+The tag runs three jobs in order; each starts only when the one before it passed.
 
-If any check fails, stop and fix before continuing. Do not skip.
+| Job | Does |
+|---|---|
+| `Validate` | Refuses a tag that is not on `master`, a skill `version:` that differs from the tag, and a tag without a `## [X.Y.Z]` CHANGELOG section; runs PHPUnit, Pint and PHPStan |
+| `publish` | Asks Packagist to update `anilcancakir/magic-starter-laravel` |
+| `GitHub Release` | Creates the release `X.Y.Z` with the CHANGELOG section as its notes |
 
-## Phase 4: Commit
+Watch it with `gh run watch $(gh run list --workflow=publish.yml --limit=1 --json databaseId --jq '.[0].databaseId')`.
 
-```bash
-git add CHANGELOG.md
-git commit -m "chore(release): <version>"
-```
+On a failure, fix the cause, then use **Re-run failed jobs**, never **Re-run all jobs**: re-running everything repeats the Packagist update and the release step, and `gh release create` refuses a release that already exists. A `Validate` failure published nothing; fix it through a pull request and ask before moving or deleting a pushed tag.
 
-## Phase 5: Tag
+## 5. Verify
 
-```bash
-git tag <version>
-```
-
-Use the exact version string (e.g., `1.1.0`), no `v` prefix.
-
-## Phase 6: Push
-
-```bash
-git push origin master
-git push origin <version>
-```
-
-Pushing the tag triggers `.github/workflows/publish.yml` which:
-1. Runs the validate job (tests, lint, analyse)
-2. Creates a GitHub Release with auto-generated release notes
-
-## Phase 7: Verify
-
-1. Confirm tag was pushed: `git ls-remote --tags origin | grep <version>`
-2. Check GitHub Actions: `gh run list --workflow=publish.yml --limit=1`
-3. Remind: Packagist auto-syncs via GitHub webhook. Verify at:
-   - **GitHub**: https://github.com/fluttersdk/magic-starter-laravel/releases
-   - **Packagist**: https://packagist.org/packages/fluttersdk/magic-starter-laravel
-
-> **Note**: If Packagist doesn't update within a few minutes, check that the GitHub webhook is configured at https://github.com/fluttersdk/magic-starter-laravel/settings/hooks
+- `gh release view X.Y.Z` shows the notes from the CHANGELOG section.
+- https://packagist.org/packages/anilcancakir/magic-starter-laravel lists X.Y.Z.
