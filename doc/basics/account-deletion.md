@@ -24,8 +24,8 @@ How an account is deleted: a request that only schedules and locks it, a grace p
 | Item | Value |
 |:-----|:------|
 | Request | `DELETE {prefix}/user` (`POST` works too), `auth:sanctum`, answers `202`. |
-| Proof | `password`, or a TOTP `code` or `confirmation_token` for a password-less account. |
-| Grace period | `grace_days` days; a sign-in during it cancels the deletion. |
+| Proof | `password`, or a TOTP `code` or `confirmation_token` for a password-less account. A guest without a password sends no proof. |
+| Grace period | `grace_days` days; a sign-in during it cancels the deletion, except an orphan's, see [Grace Period](#grace-period). |
 | Immediate | `immediately: true` queues the purge at once. |
 | Purge | `php artisan magic-starter:purge-deleted-users`; the host schedules it. |
 | Events | `UserDeletionScheduled` and `UserDeletionCancelled`. |

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Support\TrialCardGateway;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\TrialCardGateway;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Stripe\Exception\InvalidRequestException;
 
 /**

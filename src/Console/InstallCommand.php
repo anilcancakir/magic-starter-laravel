@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Support\StoreRailConfiguration;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Support\StoreRailConfiguration;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Carbon;
@@ -525,8 +525,8 @@ class InstallCommand extends Command
             }
 
             $this->replaceInFile(
-                "        // \\FlutterSdk\\MagicStarter\\Features::{$methodName}(),",
-                "        \\FlutterSdk\\MagicStarter\\Features::{$methodName}(),",
+                "        // \\AnilcanCakir\\MagicStarter\\Features::{$methodName}(),",
+                "        \\AnilcanCakir\\MagicStarter\\Features::{$methodName}(),",
                 $configPath,
             );
         }
@@ -816,7 +816,7 @@ class InstallCommand extends Command
     {
         $content = @file_get_contents($path);
 
-        if ($content === false || str_contains($content, 'FlutterSdk\\MagicStarter')) {
+        if ($content === false || str_contains($content, 'AnilcanCakir\\MagicStarter')) {
             return false;
         }
 

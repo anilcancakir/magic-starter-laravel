@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiPrompts;
+namespace AnilcanCakir\MagicStarter\Support\AiPrompts;
 
 use Closure;
 use InvalidArgumentException;

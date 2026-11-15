@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Policies;
+namespace AnilcanCakir\MagicStarter\Tests\Policies;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Policies\BillingPolicy;
-use FlutterSdk\MagicStarter\Policies\TeamPolicy;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Policies\BillingPolicy;
+use AnilcanCakir\MagicStarter\Policies\TeamPolicy;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Gate;

@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Jobs\CheckTrialCard;
+use AnilcanCakir\MagicStarter\Jobs\CheckTrialCard;
 use Laravel\Cashier\Cashier;
 use Stripe\Exception\InvalidRequestException;
 use Stripe\PaymentMethod;

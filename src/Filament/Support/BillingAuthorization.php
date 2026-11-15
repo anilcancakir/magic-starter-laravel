@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Support;
+namespace AnilcanCakir\MagicStarter\Filament\Support;
 
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
 use Filament\Facades\Filament;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 

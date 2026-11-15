@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Enums\SupportAiPool;
+use AnilcanCakir\MagicStarter\Enums\SupportAiPool;
 
 /**
  * What {@see SupportAiQuota::reserve()} charged for one turn, and the handle to settle it.

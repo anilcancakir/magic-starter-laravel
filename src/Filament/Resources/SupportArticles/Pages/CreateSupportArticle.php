@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\SupportArticleResource;
 use Filament\Resources\Pages\CreateRecord;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\SupportArticleResource;
 
 class CreateSupportArticle extends CreateRecord
 {

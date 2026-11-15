@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events\Billing;
+namespace AnilcanCakir\MagicStarter\Events\Billing;
 
 /**
  * Fires when a trial was refused because the card or the subject had already taken one.

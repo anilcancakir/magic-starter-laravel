@@ -188,8 +188,9 @@ jobs:
 
       # SQLite ignores `for update`; only a real PostgreSQL shows a dropped row lock.
       # AiRunResource rides along: PostgreSQL alone puts nulls first in a descending sort.
+      # RewriteStoredClassNames rides along: its exact-match updates are the claim to prove off SQLite.
       - name: Run support tests
-        run: vendor/bin/phpunit --filter 'Support|AiRunResource'
+        run: vendor/bin/phpunit --filter 'Support|AiRunResource|RewriteStoredClassNames'
 
   lint:
     runs-on: ubuntu-latest

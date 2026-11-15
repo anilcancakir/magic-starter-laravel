@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
 /**
  * ISO 4217 minor units, the one fact a price in minor units cannot carry.

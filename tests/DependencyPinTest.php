@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests;
+namespace AnilcanCakir\MagicStarter\Tests;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
 use Laravel\Cashier\Cashier;
 
 /**

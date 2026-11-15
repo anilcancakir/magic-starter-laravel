@@ -1,20 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament\Ops;
+namespace AnilcanCakir\MagicStarter\Tests\Filament\Ops;
 
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Widgets\HorizonStatusWidget;
+use AnilcanCakir\MagicStarter\Filament\Widgets\PulseSummaryWidget;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Filament\FilamentTestCase;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\Filament\TestPanelProvider;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Widgets\HorizonStatusWidget;
-use FlutterSdk\MagicStarter\Filament\Widgets\PulseSummaryWidget;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Filament\FilamentTestCase;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\Filament\TestPanelProvider;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\Horizon;

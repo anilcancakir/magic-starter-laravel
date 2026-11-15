@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\SchedulesUserDeletion;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserPasswords;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserProfiles;
-use FlutterSdk\MagicStarter\Http\Requests\DeleteAccountRequest;
-use FlutterSdk\MagicStarter\Http\Requests\UpdatePasswordRequest;
-use FlutterSdk\MagicStarter\Http\Requests\UpdateProfileRequest;
-use FlutterSdk\MagicStarter\Http\Resources\UserResource;
-use FlutterSdk\MagicStarter\Support\OwnedTeams;
+use AnilcanCakir\MagicStarter\Contracts\SchedulesUserDeletion;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserPasswords;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles;
+use AnilcanCakir\MagicStarter\Http\Requests\DeleteAccountRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\UpdatePasswordRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\UpdateProfileRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\UserResource;
+use AnilcanCakir\MagicStarter\Support\OwnedTeams;
 use Illuminate\Http\JsonResponse;
 
 /**

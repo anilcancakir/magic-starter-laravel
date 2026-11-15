@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\SavesAiPromptOverrides;
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptRegistry;
-use FlutterSdk\MagicStarter\Support\AiPrompts\RequiredPhrases;
+use AnilcanCakir\MagicStarter\Contracts\SavesAiPromptOverrides;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptRegistry;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\RequiredPhrases;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;

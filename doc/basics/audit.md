@@ -35,7 +35,7 @@ Who changed what, when and from where: every Eloquent create, update and delete,
 | Retention | `magic-starter.audit.retention_days`, 365 by default and never less than one day. |
 | Prune | `php artisan magic-starter:audit:prune`, scheduled daily while the feature is on. |
 | Skip a model | List it in `audit.exclude`, or wrap the write in `Auditor::withoutAuditing()`. |
-| Record a bulk write | Wrap it in `Auditor::record()`. |
+| Record a bulk write | Run the write, then call `Auditor::record($event, $subject, $context)` yourself. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -242,14 +242,14 @@ A newsletter subscription is covered, but not by the purge: `DeleteUser` deletes
 - Writes made with model events muted, such as `saveQuietly()`.
 - Models in `audit.exclude`, and anything inside `Auditor::withoutAuditing()`.
 
-When such a write matters, wrap it in `Auditor::record()`.
+When such a write matters, make it, then record it with a call to `Auditor::record()`.
 
 <a name="gotchas"></a>
 ## Gotchas
 
 | Mistake | Fix |
 |:--------|:----|
-| Expecting a bulk `update()` or `delete()` to be audited | The query builder fires no model events. Wrap the write in `Auditor::record()`. |
+| Expecting a bulk `update()` or `delete()` to be audited | The query builder fires no model events. Make the write, then record it with a call to `Auditor::record()`. |
 | Expecting `saveQuietly()` to leave a row | It mutes the events the listener reads. |
 | Counting on a rolled-back change appearing in the trail | A row is inserted after the transaction commits, so a rollback leaves none. |
 | Relying on the trail after deleting a user | Rows about that user are deleted with the account; rows where they acted keep `actor_id` as null. |

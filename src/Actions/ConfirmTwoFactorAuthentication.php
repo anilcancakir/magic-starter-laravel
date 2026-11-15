@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\ConfirmsTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Support\TwoFactorAuthenticationProvider;
+use AnilcanCakir\MagicStarter\Contracts\ConfirmsTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Support\TwoFactorAuthenticationProvider;
 use Illuminate\Validation\ValidationException;
 
 class ConfirmTwoFactorAuthentication implements ConfirmsTwoFactorAuthentication

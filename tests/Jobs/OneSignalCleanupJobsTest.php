@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Jobs;
+namespace AnilcanCakir\MagicStarter\Tests\Jobs;
 
-use FlutterSdk\MagicStarter\Jobs\DeleteOneSignalUser;
-use FlutterSdk\MagicStarter\Jobs\PruneSmsSubscriptions;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Jobs\DeleteOneSignalUser;
+use AnilcanCakir\MagicStarter\Jobs\PruneSmsSubscriptions;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Schema;
 use onesignal\client\api\DefaultApi;

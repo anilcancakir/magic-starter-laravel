@@ -1,25 +1,25 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
+use AnilcanCakir\MagicStarter\Contracts\RecordsSupportProposals;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalAction;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\Subscription;
+use AnilcanCakir\MagicStarter\Models\SubscriptionItem;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Models\SupportProposal;
+use AnilcanCakir\MagicStarter\Models\Team;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Carbon\CarbonImmutable;
-use FlutterSdk\MagicStarter\Contracts\RecordsSupportProposals;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportProposalAction;
-use FlutterSdk\MagicStarter\Enums\SupportProposalStatus;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\Subscription;
-use FlutterSdk\MagicStarter\Models\SubscriptionItem;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
-use FlutterSdk\MagicStarter\Models\SupportProposal;
-use FlutterSdk\MagicStarter\Models\Team;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Laravel\Cashier\Billable;

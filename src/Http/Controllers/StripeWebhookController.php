@@ -1,32 +1,32 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
+use AnilcanCakir\MagicStarter\Contracts\WritesEntitlement;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Jobs\CheckTrialCard;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Models\Campaign;
+use AnilcanCakir\MagicStarter\Models\ProcessedWebhookEvent;
+use AnilcanCakir\MagicStarter\Notifications\PaymentFailedNotification;
+use AnilcanCakir\MagicStarter\Notifications\TrialEndingNotification;
+use AnilcanCakir\MagicStarter\Support\BillingEventRecorder;
+use AnilcanCakir\MagicStarter\Support\BillingLog;
+use AnilcanCakir\MagicStarter\Support\BillingRecipient;
+use AnilcanCakir\MagicStarter\Support\EntitlementWrite;
+use AnilcanCakir\MagicStarter\Support\MailLocale;
+use AnilcanCakir\MagicStarter\Support\ReadsBillableAttributes;
+use AnilcanCakir\MagicStarter\Support\StripePriceReader;
+use AnilcanCakir\MagicStarter\Support\StripeSubscriptionState;
+use AnilcanCakir\MagicStarter\Support\TeamKey;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Closure;
-use FlutterSdk\MagicStarter\Contracts\WritesEntitlement;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Jobs\CheckTrialCard;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Models\Campaign;
-use FlutterSdk\MagicStarter\Models\ProcessedWebhookEvent;
-use FlutterSdk\MagicStarter\Notifications\PaymentFailedNotification;
-use FlutterSdk\MagicStarter\Notifications\TrialEndingNotification;
-use FlutterSdk\MagicStarter\Support\BillingEventRecorder;
-use FlutterSdk\MagicStarter\Support\BillingLog;
-use FlutterSdk\MagicStarter\Support\BillingRecipient;
-use FlutterSdk\MagicStarter\Support\EntitlementWrite;
-use FlutterSdk\MagicStarter\Support\MailLocale;
-use FlutterSdk\MagicStarter\Support\ReadsBillableAttributes;
-use FlutterSdk\MagicStarter\Support\StripePriceReader;
-use FlutterSdk\MagicStarter\Support\StripeSubscriptionState;
-use FlutterSdk\MagicStarter\Support\TeamKey;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -60,7 +60,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Nothing in this controller names a team or a user. The billable is resolved
  * through Cashier's own `findBillable()`, which reads the model
  * `Cashier::useCustomerModel()` was pointed at; the package's provider points it
- * at {@see \FlutterSdk\MagicStarter\MagicStarter::billableModel()} during
+ * at {@see \AnilcanCakir\MagicStarter\MagicStarter::billableModel()} during
  * `register()`. Without that wiring Cashier searches `App\Models\User` on a
  * team-billing application and matches nobody, which is a Stripe rail that
  * silently finds no customer.

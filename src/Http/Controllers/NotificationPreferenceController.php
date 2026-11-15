@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Requests\UpdateNotificationPreferenceRequest;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\NotificationSetting;
+use AnilcanCakir\MagicStarter\Http\Requests\UpdateNotificationPreferenceRequest;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\NotificationSetting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

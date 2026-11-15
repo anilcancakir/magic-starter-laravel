@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Users\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Users\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\UserResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\UserResource;
 
 class ListUsers extends ListRecords
 {

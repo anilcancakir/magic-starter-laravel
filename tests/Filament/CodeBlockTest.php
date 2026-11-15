@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
-use FlutterSdk\MagicStarter\Filament\Support\CodeBlock;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Filament\Support\CodeBlock;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 
 /**
  * The panel's code view: what reads as JSON, how it is highlighted, and that

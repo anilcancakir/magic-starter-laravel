@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\SupportArticleResource;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\SupportArticleResource;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
 
 class EditSupportArticle extends EditRecord
 {

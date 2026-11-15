@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Enums;
+namespace AnilcanCakir\MagicStarter\Enums;
 
 /**
  * How the cost of an AI run or attempt was known, as `cost_source` stores it.

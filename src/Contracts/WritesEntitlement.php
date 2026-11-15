@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Support\EntitlementWrite;
+use AnilcanCakir\MagicStarter\Support\EntitlementWrite;
 
 /**
  * Contract for the single code path that writes a billable's entitlement.
@@ -28,7 +28,7 @@ use FlutterSdk\MagicStarter\Support\EntitlementWrite;
  * that every reader downstream gates on. A rail's own word is mapped by the
  * feeder that speaks it and survives verbatim in `$providerStatus`.
  *
- * @see \FlutterSdk\MagicStarter\Actions\WriteEntitlement the default
+ * @see \AnilcanCakir\MagicStarter\Actions\WriteEntitlement the default
  *      implementation and the four ordering rules it enforces
  */
 interface WritesEntitlement

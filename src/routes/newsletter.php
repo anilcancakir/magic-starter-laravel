@@ -14,7 +14,7 @@
  * scanners and link previews follow every link; only the POST withdraws.
  */
 
-use FlutterSdk\MagicStarter\Http\Controllers\PublicNewsletterUnsubscribeController;
+use AnilcanCakir\MagicStarter\Http\Controllers\PublicNewsletterUnsubscribeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('newsletter/unsubscribe/{token}', [PublicNewsletterUnsubscribeController::class, 'show'])

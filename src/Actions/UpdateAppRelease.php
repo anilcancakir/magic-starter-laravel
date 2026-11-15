@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\UpdatesAppReleases;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesAppReleases;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\ValidationException;

@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\SendsOtpCodes;
-use FlutterSdk\MagicStarter\Contracts\VerifiesOtpCodes;
-use FlutterSdk\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
-use FlutterSdk\MagicStarter\Http\Requests\SendOtpRequest;
-use FlutterSdk\MagicStarter\Http\Requests\VerifyOtpRequest;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Contracts\SendsOtpCodes;
+use AnilcanCakir\MagicStarter\Contracts\VerifiesOtpCodes;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
+use AnilcanCakir\MagicStarter\Http\Requests\SendOtpRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\VerifyOtpRequest;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests;
+namespace AnilcanCakir\MagicStarter\Tests;
 
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarter;
 
 class MagicStarterTest extends TestCase
 {
@@ -106,7 +106,7 @@ class MagicStarterTest extends TestCase
     {
         // When config points to the built-in package Team class,
         // resolveConcreteModel should return App\Models\Team if published.
-        config(['magic-starter.models.team' => \FlutterSdk\MagicStarter\Models\Team::class]);
+        config(['magic-starter.models.team' => \AnilcanCakir\MagicStarter\Models\Team::class]);
 
         $result = MagicStarter::teamModel();
 
@@ -115,7 +115,7 @@ class MagicStarterTest extends TestCase
         if (class_exists('App\\Models\\Team')) {
             $this->assertSame('App\\Models\\Team', $result);
         } else {
-            $this->assertSame(\FlutterSdk\MagicStarter\Models\Team::class, $result);
+            $this->assertSame(\AnilcanCakir\MagicStarter\Models\Team::class, $result);
         }
     }
 
@@ -129,7 +129,7 @@ class MagicStarterTest extends TestCase
 
     public function test_runtime_override_takes_precedence_over_abstract_resolution(): void
     {
-        config(['magic-starter.models.team' => \FlutterSdk\MagicStarter\Models\Team::class]);
+        config(['magic-starter.models.team' => \AnilcanCakir\MagicStarter\Models\Team::class]);
         MagicStarter::useTeamModel('App\\Models\\MyCustomTeam');
 
         // Runtime override is NOT subject to abstract resolution —

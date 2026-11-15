@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -108,7 +108,7 @@ class FilamentInstallCommand extends Command
         $this->line('Add to your user model (the panel refuses every user until you do):');
         $this->newLine();
         $this->line('    use Filament\Models\Contracts\FilamentUser;');
-        $this->line('    use FlutterSdk\MagicStarter\Filament\Concerns\AuthorizesAdminPanel;');
+        $this->line('    use AnilcanCakir\MagicStarter\Filament\Concerns\AuthorizesAdminPanel;');
         $this->newLine();
         $this->line('    class User extends Authenticatable implements FilamentUser');
         $this->line('    {');

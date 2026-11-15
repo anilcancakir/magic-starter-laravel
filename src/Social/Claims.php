@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Social;
+namespace AnilcanCakir\MagicStarter\Social;
 
 /**
  * Reads claims a provider may withhold, send empty, or send as another type.

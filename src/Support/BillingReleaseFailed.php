@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Contracts\ReleasesUserBilling;
+use AnilcanCakir\MagicStarter\Contracts\ReleasesUserBilling;
 use RuntimeException;
 
 /**

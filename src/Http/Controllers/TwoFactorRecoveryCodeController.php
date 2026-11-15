@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\GeneratesNewRecoveryCodes;
-use FlutterSdk\MagicStarter\Http\Requests\ConfirmPasswordRequest;
+use AnilcanCakir\MagicStarter\Contracts\GeneratesNewRecoveryCodes;
+use AnilcanCakir\MagicStarter\Http\Requests\ConfirmPasswordRequest;
 use Illuminate\Http\JsonResponse;
 
 /**

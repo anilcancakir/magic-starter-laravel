@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Ops;
+namespace AnilcanCakir\MagicStarter\Filament\Ops;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;

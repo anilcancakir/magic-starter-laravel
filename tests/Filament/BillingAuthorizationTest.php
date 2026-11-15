@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Support\BillingAuthorization;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Facades\Filament;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Support\BillingAuthorization;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**

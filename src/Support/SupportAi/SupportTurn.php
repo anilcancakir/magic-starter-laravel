@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Contracts\DescribesSupportPage;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Contracts\DescribesSupportPage;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
 use InvalidArgumentException;
 
 /**

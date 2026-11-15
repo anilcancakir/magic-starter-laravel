@@ -24,7 +24,7 @@ What `MagicStarterServiceProvider` registers and in which order: config, contrac
 |:-----------|:--------|
 | Replace a default action | `$this->app->bind(Contract::class, YourAction::class)` in your `AppServiceProvider::register()`. |
 | Skip the package routes | Call `MagicStarter::ignoreRoutes()` in `register()` and define your own. |
-| Move the routes | Set `magic-starter.route_prefix`. |
+| Move the routes | Set `magic-starter.route_prefix`. The social callback routes under `magic-starter/social/` load outside the prefix and stay where they are. |
 | Add middleware to the routes | List it in `magic-starter.route_middleware`. |
 | Publish an asset | `php artisan vendor:publish --tag=<tag>`; the tags are listed under [Configuration Publishing](#configuration-publishing). |
 

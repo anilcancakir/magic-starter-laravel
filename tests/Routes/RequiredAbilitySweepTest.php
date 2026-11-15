@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Routes;
+namespace AnilcanCakir\MagicStarter\Tests\Routes;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Middleware\RequireTokenAbility;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Middleware\RequireTokenAbility;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\SanctumServiceProvider;

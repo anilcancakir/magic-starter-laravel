@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
-use FlutterSdk\MagicStarter\Models\MailSend;
+use AnilcanCakir\MagicStarter\Models\MailSend;
 use Illuminate\Console\Command;
 
 /**

@@ -1,16 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\ReleasesUserBilling;
-use FlutterSdk\MagicStarter\Contracts\SchedulesUserDeletion;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Events\UserDeletionScheduled;
-use FlutterSdk\MagicStarter\Jobs\PurgeUserNow;
-use FlutterSdk\MagicStarter\Models\PushDevice;
-use FlutterSdk\MagicStarter\Support\BillingReleaseFailed;
-use FlutterSdk\MagicStarter\Support\OwnedTeams;
-use FlutterSdk\MagicStarter\Support\ReadsBillableAttributes;
+use AnilcanCakir\MagicStarter\Contracts\ReleasesUserBilling;
+use AnilcanCakir\MagicStarter\Contracts\SchedulesUserDeletion;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Events\UserDeletionScheduled;
+use AnilcanCakir\MagicStarter\Jobs\PurgeUserNow;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
+use AnilcanCakir\MagicStarter\Support\BillingReleaseFailed;
+use AnilcanCakir\MagicStarter\Support\OwnedTeams;
+use AnilcanCakir\MagicStarter\Support\ReadsBillableAttributes;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

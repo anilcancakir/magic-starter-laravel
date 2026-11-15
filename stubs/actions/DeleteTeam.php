@@ -2,7 +2,7 @@
 
 namespace App\Actions\MagicStarter;
 
-use FlutterSdk\MagicStarter\Contracts\DeletesTeams;
+use AnilcanCakir\MagicStarter\Contracts\DeletesTeams;
 use Illuminate\Database\Eloquent\Model;
 
 /**

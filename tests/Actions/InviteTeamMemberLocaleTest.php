@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\InviteTeamMember;
-use FlutterSdk\MagicStarter\Actions\ResendTeamInvitation;
-use FlutterSdk\MagicStarter\Notifications\TeamInvitationNotification;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\InviteTeamMember;
+use AnilcanCakir\MagicStarter\Actions\ResendTeamInvitation;
+use AnilcanCakir\MagicStarter\Notifications\TeamInvitationNotification;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;

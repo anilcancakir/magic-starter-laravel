@@ -1,24 +1,24 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Contracts\AssistsSupportStaff;
-use FlutterSdk\MagicStarter\Contracts\RespondsToSupport;
-use FlutterSdk\MagicStarter\Enums\SupportAiPool;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportHandoffReason;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportPriority;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportMessage;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportAnswer;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportStaffAssist;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportTurn;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportUsage;
-use FlutterSdk\MagicStarter\Support\SupportRules;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\AssistsSupportStaff;
+use AnilcanCakir\MagicStarter\Contracts\RespondsToSupport;
+use AnilcanCakir\MagicStarter\Enums\SupportAiPool;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportHandoffReason;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportPriority;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportMessage;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportAnswer;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportStaffAssist;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportTurn;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportUsage;
+use AnilcanCakir\MagicStarter\Support\SupportRules;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;

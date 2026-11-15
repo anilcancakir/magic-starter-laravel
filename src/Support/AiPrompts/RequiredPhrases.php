@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiPrompts;
+namespace AnilcanCakir\MagicStarter\Support\AiPrompts;
 
 /**
  * The one check of whether a prompt body still carries the literals its

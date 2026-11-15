@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Notifications;
+namespace AnilcanCakir\MagicStarter\Notifications;
 
-use FlutterSdk\MagicStarter\Support\FrontendUrl;
+use AnilcanCakir\MagicStarter\Support\FrontendUrl;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;

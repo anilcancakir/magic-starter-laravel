@@ -1,20 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Audits\AuditResource;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportFeedback\SupportFeedbackResource;
-use FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\WebhookDeliveryResource;
-use FlutterSdk\MagicStarter\Models\AiRun;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Audits\AuditResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportFeedback\SupportFeedbackResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\WebhookDeliveryResource;
+use AnilcanCakir\MagicStarter\Models\AiRun;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;

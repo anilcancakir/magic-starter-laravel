@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Models;
+namespace AnilcanCakir\MagicStarter\Models;
 
-use FlutterSdk\MagicStarter\Enums\TrialRefusalReason;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Enums\TrialRefusalReason;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Testing;
+namespace AnilcanCakir\MagicStarter\Testing;
 
 use PhpToken;
 use PHPUnit\Framework\Assert;

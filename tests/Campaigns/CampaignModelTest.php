@@ -1,17 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Campaigns;
+namespace AnilcanCakir\MagicStarter\Tests\Campaigns;
 
-use FlutterSdk\MagicStarter\Actions\CreateCampaign;
-use FlutterSdk\MagicStarter\Actions\UpdateCampaign;
-use FlutterSdk\MagicStarter\Contracts\CreatesCampaigns;
-use FlutterSdk\MagicStarter\Contracts\UpdatesCampaigns;
-use FlutterSdk\MagicStarter\Enums\CampaignDiscountType;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\Campaign;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\Support\StripeHttpStub;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\CreateCampaign;
+use AnilcanCakir\MagicStarter\Actions\UpdateCampaign;
+use AnilcanCakir\MagicStarter\Contracts\CreatesCampaigns;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesCampaigns;
+use AnilcanCakir\MagicStarter\Enums\CampaignDiscountType;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\Campaign;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\Support\StripeHttpStub;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 

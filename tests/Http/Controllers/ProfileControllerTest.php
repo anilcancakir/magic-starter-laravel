@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserPasswords;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserProfiles;
-use FlutterSdk\MagicStarter\Http\Controllers\ProfileController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\HasTeams;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserPasswords;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles;
+use AnilcanCakir\MagicStarter\Http\Controllers\ProfileController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\HasTeams;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

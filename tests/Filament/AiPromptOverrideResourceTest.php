@@ -1,23 +1,23 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Actions\SaveAiPromptOverride;
+use AnilcanCakir\MagicStarter\Enums\AiPromptOverrideStatus;
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Pages\CreateAiPromptOverride;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Pages\EditAiPromptOverride;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Pages\ListAiPromptOverrides;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptRegistry;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification as FilamentNotification;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Actions\SaveAiPromptOverride;
-use FlutterSdk\MagicStarter\Enums\AiPromptOverrideStatus;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Pages\CreateAiPromptOverride;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Pages\EditAiPromptOverride;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Pages\ListAiPromptOverrides;
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptRegistry;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Livewire\Livewire;

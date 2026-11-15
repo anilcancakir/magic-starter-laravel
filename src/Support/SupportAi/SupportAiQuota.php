@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Enums\SupportAiPool;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Enums\SupportAiPool;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;

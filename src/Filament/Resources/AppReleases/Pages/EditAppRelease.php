@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AppReleases\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\Pages;
 
+use AnilcanCakir\MagicStarter\Contracts\DeletesAppReleases;
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Contracts\DeletesAppReleases;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
 
 class EditAppRelease extends EditRecord
 {

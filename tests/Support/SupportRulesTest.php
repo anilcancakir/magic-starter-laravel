@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Http\Requests\StorePublicSupportConversationRequest;
-use FlutterSdk\MagicStarter\Support\SupportRules;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Http\Requests\StorePublicSupportConversationRequest;
+use AnilcanCakir\MagicStarter\Support\SupportRules;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
 
 /**

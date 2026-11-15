@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Listeners;
+namespace AnilcanCakir\MagicStarter\Listeners;
 
-use FlutterSdk\MagicStarter\Mail\MailRoute;
-use FlutterSdk\MagicStarter\Mail\RoutingTransport;
+use AnilcanCakir\MagicStarter\Mail\MailRoute;
+use AnilcanCakir\MagicStarter\Mail\RoutingTransport;
 use Illuminate\Mail\Events\MessageSending;
 
 /**

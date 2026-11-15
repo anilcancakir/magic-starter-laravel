@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Fixtures;
+namespace AnilcanCakir\MagicStarter\Tests\Fixtures;
 
-use FlutterSdk\MagicStarter\Traits\MustVerifyEmail;
+use AnilcanCakir\MagicStarter\Traits\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 
 /**

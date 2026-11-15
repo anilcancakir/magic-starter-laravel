@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AppReleases\Schemas;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\Schemas;
 
+use AnilcanCakir\MagicStarter\Enums\ReleaseItemType;
+use AnilcanCakir\MagicStarter\Enums\ReleaseStatus;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
-use FlutterSdk\MagicStarter\Enums\ReleaseItemType;
-use FlutterSdk\MagicStarter\Enums\ReleaseStatus;
 
 /**
  * The release form: the version, its status and dates, and the notes as a list of typed entries.

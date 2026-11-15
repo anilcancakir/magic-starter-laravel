@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Audits\RelationManagers;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Audits\RelationManagers;
 
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Filament\Resources\Audits\AuditResource;
 use Filament\Resources\RelationManagers\RelationManager;
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Filament\Resources\Audits\AuditResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;

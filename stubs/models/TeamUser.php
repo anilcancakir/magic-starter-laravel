@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use FlutterSdk\MagicStarter\Models\TeamUser as MagicStarterTeamUser;
+use AnilcanCakir\MagicStarter\Models\TeamUser as MagicStarterTeamUser;
 
 class TeamUser extends MagicStarterTeamUser
 {

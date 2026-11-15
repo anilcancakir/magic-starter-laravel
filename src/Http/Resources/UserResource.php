@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Resources;
+namespace AnilcanCakir\MagicStarter\Http\Resources;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

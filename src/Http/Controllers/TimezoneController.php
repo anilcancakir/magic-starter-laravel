@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
+use AnilcanCakir\MagicStarter\Http\Resources\TimezoneResource;
 use DateTimeImmutable;
 use DateTimeZone;
-use FlutterSdk\MagicStarter\Http\Resources\TimezoneResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Pagination\LengthAwarePaginator;

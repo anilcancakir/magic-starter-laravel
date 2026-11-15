@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Enums\BillingChannel;
-use FlutterSdk\MagicStarter\Enums\CommissionMode;
-use FlutterSdk\MagicStarter\Support\Currency;
-use FlutterSdk\MagicStarter\Support\PriceTable;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\BillingChannel;
+use AnilcanCakir\MagicStarter\Enums\CommissionMode;
+use AnilcanCakir\MagicStarter\Support\Currency;
+use AnilcanCakir\MagicStarter\Support\PriceTable;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 
 /**
  * Store prices derived from the web price, and the minor-unit arithmetic under

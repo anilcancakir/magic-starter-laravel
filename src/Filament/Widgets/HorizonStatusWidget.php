@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Widgets;
+namespace AnilcanCakir\MagicStarter\Filament\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;

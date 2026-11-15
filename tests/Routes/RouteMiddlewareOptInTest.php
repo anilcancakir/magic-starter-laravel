@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Routes;
+namespace AnilcanCakir\MagicStarter\Tests\Routes;
 
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Config\Repository;
 
 /**

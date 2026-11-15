@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Fixtures;
+namespace AnilcanCakir\MagicStarter\Tests\Fixtures;
 
+use AnilcanCakir\MagicStarter\Filament\Concerns\AuthorizesAdminPanel;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
+use AnilcanCakir\MagicStarter\Traits\MustVerifyEmail;
+use AnilcanCakir\MagicStarter\Traits\TwoFactorAuthenticatable;
 use Filament\Models\Contracts\FilamentUser;
-use FlutterSdk\MagicStarter\Filament\Concerns\AuthorizesAdminPanel;
-use FlutterSdk\MagicStarter\Models\PushDevice;
-use FlutterSdk\MagicStarter\Traits\MustVerifyEmail;
-use FlutterSdk\MagicStarter\Traits\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;

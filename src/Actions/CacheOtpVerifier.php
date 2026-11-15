@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\VerifiesOtpCodes;
+use AnilcanCakir\MagicStarter\Contracts\VerifiesOtpCodes;
 use Illuminate\Support\Facades\Cache;
 
 /**

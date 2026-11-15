@@ -1,19 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Users\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Users\Pages;
 
+use AnilcanCakir\MagicStarter\Contracts\CancelsUserDeletion;
+use AnilcanCakir\MagicStarter\Contracts\DisablesTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Contracts\RevokesApiTokens;
+use AnilcanCakir\MagicStarter\Contracts\SchedulesUserDeletion;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\UserResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Contracts\CancelsUserDeletion;
-use FlutterSdk\MagicStarter\Contracts\DisablesTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Contracts\RevokesApiTokens;
-use FlutterSdk\MagicStarter\Contracts\SchedulesUserDeletion;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\UserResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;

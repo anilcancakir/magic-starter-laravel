@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Social;
+namespace AnilcanCakir\MagicStarter\Tests\Social;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Foundation\Application;
 use Illuminate\Log\Events\MessageLogged;
 use Orchestra\Testbench\Attributes\DefineEnvironment;

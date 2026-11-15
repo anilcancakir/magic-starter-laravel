@@ -1,7 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Teams\RelationManagers;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Teams\RelationManagers;
 
+use AnilcanCakir\MagicStarter\Contracts\AddsTeamMembers;
+use AnilcanCakir\MagicStarter\Contracts\RemovesTeamMembers;
+use AnilcanCakir\MagicStarter\Contracts\TransfersTeamOwnership;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesTeamMemberRoles;
+use AnilcanCakir\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -9,14 +17,6 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\AddsTeamMembers;
-use FlutterSdk\MagicStarter\Contracts\RemovesTeamMembers;
-use FlutterSdk\MagicStarter\Contracts\TransfersTeamOwnership;
-use FlutterSdk\MagicStarter\Contracts\UpdatesTeamMemberRoles;
-use FlutterSdk\MagicStarter\Enums\Role;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\MagicStarter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 

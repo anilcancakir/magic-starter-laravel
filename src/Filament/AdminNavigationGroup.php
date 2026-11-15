@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament;
+namespace AnilcanCakir\MagicStarter\Filament;
 
 use Filament\Support\Contracts\HasLabel;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
-use FlutterSdk\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Audit\Audit;
 use Illuminate\Console\Command;
 
 /**

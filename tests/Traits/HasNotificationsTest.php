@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Traits;
+namespace AnilcanCakir\MagicStarter\Tests\Traits;
 
-use FlutterSdk\MagicStarter\Jobs\PruneSmsSubscriptions;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\NotificationSetting;
-use FlutterSdk\MagicStarter\NotificationPreferenceRegistry;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\HasNotifications;
+use AnilcanCakir\MagicStarter\Jobs\PruneSmsSubscriptions;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\NotificationSetting;
+use AnilcanCakir\MagicStarter\NotificationPreferenceRegistry;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\HasNotifications;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Schema\Blueprint;

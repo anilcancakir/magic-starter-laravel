@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
+use AnilcanCakir\MagicStarter\Support\OneSignalSubscriptions;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use ArrayObject;
-use FlutterSdk\MagicStarter\Support\OneSignalSubscriptions;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -753,7 +753,7 @@ final class OneSignalSubscriptionsTest extends TestCase
  */
 class StubUnroutableUser extends \Illuminate\Database\Eloquent\Model
 {
-    use \FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
+    use \AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
 
     protected $table = 'users';
 

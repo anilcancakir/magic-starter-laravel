@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Listeners;
+namespace AnilcanCakir\MagicStarter\Tests\Listeners;
 
-use FlutterSdk\MagicStarter\Contracts\BypassesNotificationPreferences;
-use FlutterSdk\MagicStarter\Listeners\GateNotificationChannels;
-use FlutterSdk\MagicStarter\NotificationPreferenceRegistry;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\BypassesNotificationPreferences;
+use AnilcanCakir\MagicStarter\Listeners\GateNotificationChannels;
+use AnilcanCakir\MagicStarter\NotificationPreferenceRegistry;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Notifications\Events\NotificationSending;
 
 class GateNotificationChannelsTest extends TestCase

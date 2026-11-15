@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
-use FlutterSdk\MagicStarter\Traits\MustVerifyEmail;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Traits\MustVerifyEmail;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,12 +49,12 @@ final class EmailVerificationControllerTest extends TestCase
         Route::middleware('auth')
             ->post(
                 'email/verification-notification',
-                [\FlutterSdk\MagicStarter\Http\Controllers\EmailVerificationController::class, 'sendVerificationNotification'],
+                [\AnilcanCakir\MagicStarter\Http\Controllers\EmailVerificationController::class, 'sendVerificationNotification'],
             )->name('verification.send');
 
         Route::get(
             'email/verify/{id}/{hash}',
-            [\FlutterSdk\MagicStarter\Http\Controllers\EmailVerificationController::class, 'verify'],
+            [\AnilcanCakir\MagicStarter\Http\Controllers\EmailVerificationController::class, 'verify'],
         )->middleware('signed')->name('verification.verify');
     }
 

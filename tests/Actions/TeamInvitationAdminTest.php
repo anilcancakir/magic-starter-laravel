@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\CancelsTeamInvitations;
-use FlutterSdk\MagicStarter\Contracts\ResendsTeamInvitations;
-use FlutterSdk\MagicStarter\Notifications\TeamInvitationNotification;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamInvitation;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\CancelsTeamInvitations;
+use AnilcanCakir\MagicStarter\Contracts\ResendsTeamInvitations;
+use AnilcanCakir\MagicStarter\Notifications\TeamInvitationNotification;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamInvitation;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\AnonymousNotifiable;

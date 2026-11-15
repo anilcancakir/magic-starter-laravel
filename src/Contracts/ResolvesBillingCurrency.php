@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
  * own settings, a geolocation service instead of a proxy header) without
  * touching the endpoints that read it.
  *
- * @see \FlutterSdk\MagicStarter\Actions\ResolveBillingCurrency the default rule
+ * @see \AnilcanCakir\MagicStarter\Actions\ResolveBillingCurrency the default rule
  */
 interface ResolvesBillingCurrency
 {

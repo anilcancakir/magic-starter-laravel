@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\ClaimsGuestAccounts;
-use FlutterSdk\MagicStarter\Contracts\CreatesGuestUsers;
-use FlutterSdk\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
-use FlutterSdk\MagicStarter\Http\Requests\GuestLoginRequest;
-use FlutterSdk\MagicStarter\Http\Resources\UserResource;
+use AnilcanCakir\MagicStarter\Contracts\ClaimsGuestAccounts;
+use AnilcanCakir\MagicStarter\Contracts\CreatesGuestUsers;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
+use AnilcanCakir\MagicStarter\Http\Requests\GuestLoginRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -58,7 +58,7 @@ class GuestAuthController
      * The caller holds the TARGET account's token and presents the guest
      * session's own token in the body, so the endpoint can verify both halves
      * by possession. The rows this package owns move and the guest row is
-     * consumed; {@see \FlutterSdk\MagicStarter\Events\GuestClaimed} is what lets
+     * consumed; {@see \AnilcanCakir\MagicStarter\Events\GuestClaimed} is what lets
      * a consumer move its own tables inside the same transaction.
      *
      * Answers 200 in both directions, with `data.claimed` saying which one

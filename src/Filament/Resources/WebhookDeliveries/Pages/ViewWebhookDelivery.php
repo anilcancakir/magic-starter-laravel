@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\WebhookDeliveryResource;
 use Filament\Resources\Pages\ViewRecord;
-use FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\WebhookDeliveryResource;
 
 class ViewWebhookDelivery extends ViewRecord
 {

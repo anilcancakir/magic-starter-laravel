@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Fixtures\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Fixtures\Filament;
 
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Pages\Page;
 use Filament\Panel;
 use Filament\PanelProvider;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 
 /**
  * The fixture panel every Filament test drives: id `admin`, no tenancy,

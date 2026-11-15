@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Mail;
+namespace AnilcanCakir\MagicStarter\Tests\Mail;
 
-use FlutterSdk\MagicStarter\Console\PruneMailSendsCommand;
-use FlutterSdk\MagicStarter\Mail\OneSignalTransport;
-use FlutterSdk\MagicStarter\Models\MailSend;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Console\PruneMailSendsCommand;
+use AnilcanCakir\MagicStarter\Mail\OneSignalTransport;
+use AnilcanCakir\MagicStarter\Models\MailSend;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Database\QueryException;

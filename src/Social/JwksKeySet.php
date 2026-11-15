@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Social;
+namespace AnilcanCakir\MagicStarter\Social;
 
 use DomainException;
 use Firebase\JWT\JWK;

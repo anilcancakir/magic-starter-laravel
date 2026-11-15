@@ -1,30 +1,30 @@
 <?php
 
-namespace FlutterSdk\MagicStarter;
+namespace AnilcanCakir\MagicStarter;
 
+use AnilcanCakir\MagicStarter\Console\BillingDoctorCommand;
+use AnilcanCakir\MagicStarter\Console\BillingManifestCommand;
+use AnilcanCakir\MagicStarter\Console\ExpireBillingGrantsCommand;
+use AnilcanCakir\MagicStarter\Console\FilamentEjectCommand;
+use AnilcanCakir\MagicStarter\Console\FilamentInstallCommand;
+use AnilcanCakir\MagicStarter\Console\InstallCommand;
+use AnilcanCakir\MagicStarter\Console\MailDoctorCommand;
+use AnilcanCakir\MagicStarter\Console\PruneAiRunsCommand;
+use AnilcanCakir\MagicStarter\Console\PruneAuditsCommand;
+use AnilcanCakir\MagicStarter\Console\PruneBillingRecordsCommand;
+use AnilcanCakir\MagicStarter\Console\PruneMailSendsCommand;
+use AnilcanCakir\MagicStarter\Console\PruneSupportArticleImagesCommand;
+use AnilcanCakir\MagicStarter\Console\PurgeDeletedUsersCommand;
+use AnilcanCakir\MagicStarter\Console\PurgeTrashedTeamsCommand;
+use AnilcanCakir\MagicStarter\Console\ReconcileBillingEntitlements;
+use AnilcanCakir\MagicStarter\Console\SupportDoctorCommand;
+use AnilcanCakir\MagicStarter\Console\SweepSupportConversationsCommand;
+use AnilcanCakir\MagicStarter\Mail\MailRoute;
+use AnilcanCakir\MagicStarter\Mail\OneSignalTransport;
+use AnilcanCakir\MagicStarter\Mail\RoutingTransport;
+use AnilcanCakir\MagicStarter\Support\FrontendUrl;
+use AnilcanCakir\MagicStarter\Support\MailBrand;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Console\BillingDoctorCommand;
-use FlutterSdk\MagicStarter\Console\BillingManifestCommand;
-use FlutterSdk\MagicStarter\Console\ExpireBillingGrantsCommand;
-use FlutterSdk\MagicStarter\Console\FilamentEjectCommand;
-use FlutterSdk\MagicStarter\Console\FilamentInstallCommand;
-use FlutterSdk\MagicStarter\Console\InstallCommand;
-use FlutterSdk\MagicStarter\Console\MailDoctorCommand;
-use FlutterSdk\MagicStarter\Console\PruneAiRunsCommand;
-use FlutterSdk\MagicStarter\Console\PruneAuditsCommand;
-use FlutterSdk\MagicStarter\Console\PruneBillingRecordsCommand;
-use FlutterSdk\MagicStarter\Console\PruneMailSendsCommand;
-use FlutterSdk\MagicStarter\Console\PruneSupportArticleImagesCommand;
-use FlutterSdk\MagicStarter\Console\PurgeDeletedUsersCommand;
-use FlutterSdk\MagicStarter\Console\PurgeTrashedTeamsCommand;
-use FlutterSdk\MagicStarter\Console\ReconcileBillingEntitlements;
-use FlutterSdk\MagicStarter\Console\SupportDoctorCommand;
-use FlutterSdk\MagicStarter\Console\SweepSupportConversationsCommand;
-use FlutterSdk\MagicStarter\Mail\MailRoute;
-use FlutterSdk\MagicStarter\Mail\OneSignalTransport;
-use FlutterSdk\MagicStarter\Mail\RoutingTransport;
-use FlutterSdk\MagicStarter\Support\FrontendUrl;
-use FlutterSdk\MagicStarter\Support\MailBrand;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -432,7 +432,7 @@ class MagicStarterServiceProvider extends ServiceProvider
             $channelManager = $this->app->make(\Illuminate\Notifications\ChannelManager::class);
 
             $channelManager->extend('onesignal', fn ($app) => $app->make(
-                \FlutterSdk\MagicStarter\Notifications\Channels\OneSignalChannel::class,
+                \AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel::class,
             ));
 
             // SMS rides the same channel via a distinct driver + builder (toSms),
@@ -442,7 +442,7 @@ class MagicStarterServiceProvider extends ServiceProvider
             // OneSignalSubscriptions::ensureSmsSubscription() before it targets
             // the sms channel (this driver only sends).
             $channelManager->extend('onesignal-sms', fn ($app) => $app->make(
-                \FlutterSdk\MagicStarter\Notifications\Channels\OneSignalChannel::class,
+                \AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel::class,
                 ['builderMethod' => 'toSms'],
             ));
 

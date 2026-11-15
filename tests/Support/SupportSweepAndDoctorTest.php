@@ -1,25 +1,25 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Console\SupportDoctorCommand;
-use FlutterSdk\MagicStarter\Console\SweepSupportConversationsCommand;
-use FlutterSdk\MagicStarter\Contracts\RespondsToSupport;
-use FlutterSdk\MagicStarter\Enums\SupportAiPool;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Enums\SupportConversationStatus;
-use FlutterSdk\MagicStarter\Enums\SupportHandoffReason;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Events\SupportConversationNeedsStaff;
-use FlutterSdk\MagicStarter\Events\SupportConversationUpdated;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportAnswer;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportTurn;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportUsage;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Console\SupportDoctorCommand;
+use AnilcanCakir\MagicStarter\Console\SweepSupportConversationsCommand;
+use AnilcanCakir\MagicStarter\Contracts\RespondsToSupport;
+use AnilcanCakir\MagicStarter\Enums\SupportAiPool;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportHandoffReason;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Events\SupportConversationNeedsStaff;
+use AnilcanCakir\MagicStarter\Events\SupportConversationUpdated;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportAnswer;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportTurn;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportUsage;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Console\Scheduling\Event as ScheduledEvent;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Carbon;

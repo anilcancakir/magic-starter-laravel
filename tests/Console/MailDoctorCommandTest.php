@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Console\MailDoctorCommand;
-use FlutterSdk\MagicStarter\Models\MailSend;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Console\MailDoctorCommand;
+use AnilcanCakir\MagicStarter\Models\MailSend;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Illuminate\Http\Client\ConnectionException;

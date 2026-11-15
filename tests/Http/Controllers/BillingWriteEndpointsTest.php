@@ -1,25 +1,25 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\ResolvesBillingCurrency;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Events\Billing\BillingOutcome;
-use FlutterSdk\MagicStarter\Events\Billing\CheckoutStarted;
-use FlutterSdk\MagicStarter\Events\Billing\RequestRefused;
-use FlutterSdk\MagicStarter\Events\Billing\SubscriptionCancelled;
-use FlutterSdk\MagicStarter\Events\Billing\SubscriptionSwapped;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Controllers\BillingController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Models\Team;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesBillingCurrency;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Events\Billing\BillingOutcome;
+use AnilcanCakir\MagicStarter\Events\Billing\CheckoutStarted;
+use AnilcanCakir\MagicStarter\Events\Billing\RequestRefused;
+use AnilcanCakir\MagicStarter\Events\Billing\SubscriptionCancelled;
+use AnilcanCakir\MagicStarter\Events\Billing\SubscriptionSwapped;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\BillingController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Models\Team;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -110,7 +110,7 @@ class BillingWriteEndpointsTest extends TestCase
             ],
             'magic-starter.models.user' => BillingWriteUser::class,
             'magic-starter.models.team' => BillingWriteTeam::class,
-            'magic-starter.models.membership' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            'magic-starter.models.membership' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
             'magic-starter.route_prefix' => '',
             // The adopter's ranking, cheapest first, and the products that sell
             // it. `business_monthly` deliberately carries no Stripe price: it
@@ -2499,12 +2499,12 @@ final class BillingWriteSubscriptionBuilder
 
 class BillingWriteUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasGuestSupport;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
     use BillingWriteBillable;
     use ConditionallyUsesUuids;
-    use \FlutterSdk\MagicStarter\Traits\HasGuestSupport;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
 
     protected $table = 'users';
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events\Billing;
+namespace AnilcanCakir\MagicStarter\Events\Billing;
 
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Support\BillingEventRecorder;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Support\BillingEventRecorder;
 
 /**
  * The shape every billing outcome event shares: the recorded row, handed over

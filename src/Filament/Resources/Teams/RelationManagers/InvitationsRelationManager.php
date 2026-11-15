@@ -1,7 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Teams\RelationManagers;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Teams\RelationManagers;
 
+use AnilcanCakir\MagicStarter\Contracts\CancelsTeamInvitations;
+use AnilcanCakir\MagicStarter\Contracts\InvitesTeamMembers;
+use AnilcanCakir\MagicStarter\Contracts\ResendsTeamInvitations;
+use AnilcanCakir\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\TeamInvitation;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -9,14 +17,6 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\CancelsTeamInvitations;
-use FlutterSdk\MagicStarter\Contracts\InvitesTeamMembers;
-use FlutterSdk\MagicStarter\Contracts\ResendsTeamInvitations;
-use FlutterSdk\MagicStarter\Enums\Role;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\TeamInvitation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;

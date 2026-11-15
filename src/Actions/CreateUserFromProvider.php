@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\ConnectsSocialAccounts;
-use FlutterSdk\MagicStarter\Contracts\CreatesUsersFromProvider;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Social\VerifiedIdentity;
-use FlutterSdk\MagicStarter\Support\RequestLocaleDetector;
+use AnilcanCakir\MagicStarter\Contracts\ConnectsSocialAccounts;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsersFromProvider;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Social\VerifiedIdentity;
+use AnilcanCakir\MagicStarter\Support\RequestLocaleDetector;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Contracts\Auth\Authenticatable;

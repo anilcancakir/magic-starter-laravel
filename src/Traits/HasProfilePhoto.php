@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Traits;
+namespace AnilcanCakir\MagicStarter\Traits;
 
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\MagicStarter;
 
 trait HasProfilePhoto
 {

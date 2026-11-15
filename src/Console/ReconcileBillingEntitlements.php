@@ -1,23 +1,23 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
+use AnilcanCakir\MagicStarter\Contracts\WritesEntitlement;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Jobs\CheckTrialCard;
+use AnilcanCakir\MagicStarter\Jobs\SyncRevenueCatEntitlement;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
+use AnilcanCakir\MagicStarter\Support\BillingLog;
+use AnilcanCakir\MagicStarter\Support\EntitlementWrite;
+use AnilcanCakir\MagicStarter\Support\ReadsBillableAttributes;
+use AnilcanCakir\MagicStarter\Support\RevenueCatClient;
+use AnilcanCakir\MagicStarter\Support\StripeSubscriptionState;
+use AnilcanCakir\MagicStarter\Support\TeamKey;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Contracts\WritesEntitlement;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Jobs\CheckTrialCard;
-use FlutterSdk\MagicStarter\Jobs\SyncRevenueCatEntitlement;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
-use FlutterSdk\MagicStarter\Support\BillingLog;
-use FlutterSdk\MagicStarter\Support\EntitlementWrite;
-use FlutterSdk\MagicStarter\Support\ReadsBillableAttributes;
-use FlutterSdk\MagicStarter\Support\RevenueCatClient;
-use FlutterSdk\MagicStarter\Support\StripeSubscriptionState;
-use FlutterSdk\MagicStarter\Support\TeamKey;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

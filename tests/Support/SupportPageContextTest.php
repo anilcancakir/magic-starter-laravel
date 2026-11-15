@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Support\SupportPageContext;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\SupportPageContext;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**

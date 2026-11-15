@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\AddsTeamMembers;
-use FlutterSdk\MagicStarter\Contracts\UpdatesTeamMemberRoles;
-use FlutterSdk\MagicStarter\Events\TeamMemberRemoved;
-use FlutterSdk\MagicStarter\Http\Controllers\TeamMemberController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\AddsTeamMembers;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesTeamMemberRoles;
+use AnilcanCakir\MagicStarter\Events\TeamMemberRemoved;
+use AnilcanCakir\MagicStarter\Http\Controllers\TeamMemberController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -34,7 +34,7 @@ final class TeamMemberControllerTest extends TestCase
             ],
             'magic-starter.models.user' => TeamMemberControllerTestUser::class,
             'magic-starter.models.team' => TeamMemberControllerTestTeam::class,
-            'magic-starter.models.membership' => \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
+            'magic-starter.models.membership' => \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser::class,
         ]);
 
         \call_user_func([\call_user_func('app', 'db.schema'), 'create'], 'users', function (Blueprint $table): void {
@@ -73,7 +73,7 @@ final class TeamMemberControllerTest extends TestCase
 
         \call_user_func('app', 'gate')->policy(
             TeamMemberControllerTestTeam::class,
-            \FlutterSdk\MagicStarter\Policies\TeamPolicy::class,
+            \AnilcanCakir\MagicStarter\Policies\TeamPolicy::class,
         );
 
         $this->app->instance(AddsTeamMembers::class, new class implements AddsTeamMembers
@@ -323,10 +323,10 @@ final class TeamMemberControllerTest extends TestCase
 
 final class TeamMemberControllerTestUser extends Model implements AuthenticatableContract
 {
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Traits\HasTeams;
     use AuthenticatableTrait;
     use Authorizable;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
-    use \FlutterSdk\MagicStarter\Traits\HasTeams;
     use HasUuids;
 
     protected $table = 'users';
@@ -343,7 +343,7 @@ final class TeamMemberControllerTestUser extends Model implements Authenticatabl
     ];
 }
 
-final class TeamMemberControllerTestTeam extends \FlutterSdk\MagicStarter\Models\Team
+final class TeamMemberControllerTestTeam extends \AnilcanCakir\MagicStarter\Models\Team
 {
     protected $table = 'teams';
 
@@ -356,7 +356,7 @@ final class TeamMemberControllerTestTeam extends \FlutterSdk\MagicStarter\Models
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(TeamMemberControllerTestUser::class, 'team_user', 'team_id', 'user_id')
-            ->using(\FlutterSdk\MagicStarter\MagicStarter::membershipModel())
+            ->using(\AnilcanCakir\MagicStarter\MagicStarter::membershipModel())
             ->withPivot('role')
             ->withTimestamps();
     }

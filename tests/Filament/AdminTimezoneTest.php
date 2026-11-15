@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\Pages\ListUsers;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Facades\Filament;
 use Filament\Support\Facades\FilamentTimezone;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\Pages\ListUsers;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Support\Carbon;
 use Livewire\Livewire;
 

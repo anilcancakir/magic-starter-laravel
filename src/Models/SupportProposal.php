@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Models;
+namespace AnilcanCakir\MagicStarter\Models;
 
-use FlutterSdk\MagicStarter\Enums\SupportProposalAction;
-use FlutterSdk\MagicStarter\Enums\SupportProposalStatus;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalAction;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalStatus;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

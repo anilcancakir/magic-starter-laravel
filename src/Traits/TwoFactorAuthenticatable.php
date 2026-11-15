@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Traits;
+namespace AnilcanCakir\MagicStarter\Traits;
 
+use AnilcanCakir\MagicStarter\Support\TwoFactorAuthenticationProvider;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
-use FlutterSdk\MagicStarter\Support\TwoFactorAuthenticationProvider;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

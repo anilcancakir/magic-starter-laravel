@@ -1,7 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Audits;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Audits;
 
+use AnilcanCakir\MagicStarter\Audit\Audit;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\Audits\Pages\ListAudits;
+use AnilcanCakir\MagicStarter\Filament\Resources\Audits\Pages\ViewAudit;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use BackedEnum;
 use Filament\Actions\ViewAction;
 use Filament\Facades\Filament;
@@ -18,12 +24,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Audit\Audit;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\Audits\Pages\ListAudits;
-use FlutterSdk\MagicStarter\Filament\Resources\Audits\Pages\ViewAudit;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\MagicStarter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;

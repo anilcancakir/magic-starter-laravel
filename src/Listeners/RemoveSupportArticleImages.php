@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Listeners;
+namespace AnilcanCakir\MagicStarter\Listeners;
 
-use FlutterSdk\MagicStarter\Enums\SupportArticleVisibility;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Enums\SupportArticleVisibility;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\DB;

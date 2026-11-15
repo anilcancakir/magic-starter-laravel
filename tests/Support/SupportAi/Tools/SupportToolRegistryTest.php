@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Tests\Support\SupportAi\Tools;
 
-use FlutterSdk\MagicStarter\Contracts\SupportTool;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\SupportTool;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use InvalidArgumentException;
 
 /**

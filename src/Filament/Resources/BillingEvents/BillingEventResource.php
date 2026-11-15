@@ -1,7 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\BillingEvents;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents;
 
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Infolists\CodeBlockEntry;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\Pages\ListBillingEvents;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\Pages\ViewBillingEvent;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
 use BackedEnum;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
@@ -14,15 +23,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Infolists\CodeBlockEntry;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\Pages\ListBillingEvents;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\Pages\ViewBillingEvent;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use UnitEnum;

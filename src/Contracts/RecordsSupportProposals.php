@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Enums\SupportProposalAction;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalAction;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
 
 /**
  * Contract for recording a change to a subscription that the customer asked

@@ -1,17 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\ScheduleUserDeletion;
-use FlutterSdk\MagicStarter\Contracts\SchedulesUserDeletion;
-use FlutterSdk\MagicStarter\Http\Controllers\AuthController;
-use FlutterSdk\MagicStarter\Http\Controllers\ProfileController;
-use FlutterSdk\MagicStarter\Jobs\PurgeUserNow;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\Support\StripeHttpStub;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\ScheduleUserDeletion;
+use AnilcanCakir\MagicStarter\Contracts\SchedulesUserDeletion;
+use AnilcanCakir\MagicStarter\Http\Controllers\AuthController;
+use AnilcanCakir\MagicStarter\Http\Controllers\ProfileController;
+use AnilcanCakir\MagicStarter\Jobs\PurgeUserNow;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\Support\StripeHttpStub;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;

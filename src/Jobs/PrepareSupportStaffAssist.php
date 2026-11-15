@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Jobs;
+namespace AnilcanCakir\MagicStarter\Jobs;
 
+use AnilcanCakir\MagicStarter\Contracts\AssistsSupportStaff;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportStaffAssistCache;
 use DateTimeInterface;
-use FlutterSdk\MagicStarter\Contracts\AssistsSupportStaff;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportStaffAssistCache;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Models;
+namespace AnilcanCakir\MagicStarter\Models;
 
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -22,7 +22,7 @@ use Illuminate\Support\Carbon;
  *
  * `owner_confirmed` is false for a link nobody has shown to belong to the
  * owner of the user's mailbox (an account created from an address the provider
- * did not verify); {@see \FlutterSdk\MagicStarter\Social\UnconfirmedLinks}
+ * did not verify); {@see \AnilcanCakir\MagicStarter\Social\UnconfirmedLinks}
  * severs such links once the mailbox owner proves control.
  *
  * @property string|int $id

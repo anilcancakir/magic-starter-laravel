@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
-use FlutterSdk\MagicStarter\Actions\AdministerBilling;
-use FlutterSdk\MagicStarter\Contracts\AdministersBilling;
-use FlutterSdk\MagicStarter\Enums\GrantEndReason;
-use FlutterSdk\MagicStarter\Models\BillingGrant;
+use AnilcanCakir\MagicStarter\Actions\AdministerBilling;
+use AnilcanCakir\MagicStarter\Contracts\AdministersBilling;
+use AnilcanCakir\MagicStarter\Enums\GrantEndReason;
+use AnilcanCakir\MagicStarter\Models\BillingGrant;
 use Illuminate\Console\Command;
 use Throwable;
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\Pages\ListAiRuns;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\Pages\ViewAiRun;
+use AnilcanCakir\MagicStarter\Filament\Widgets\AiRunStatsWidget;
+use AnilcanCakir\MagicStarter\Models\AiRun;
+use AnilcanCakir\MagicStarter\Models\AiRunAttempt;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\Pages\ListAiRuns;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\Pages\ViewAiRun;
-use FlutterSdk\MagicStarter\Filament\Widgets\AiRunStatsWidget;
-use FlutterSdk\MagicStarter\Models\AiRun;
-use FlutterSdk\MagicStarter\Models\AiRunAttempt;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;

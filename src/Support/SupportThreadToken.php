@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
 
 /**
  * The secret in a public support thread link, for a visitor with no account.

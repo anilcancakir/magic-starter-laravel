@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests\Concerns;
+namespace AnilcanCakir\MagicStarter\Http\Requests\Concerns;
 
 use Illuminate\Support\Str;
 
