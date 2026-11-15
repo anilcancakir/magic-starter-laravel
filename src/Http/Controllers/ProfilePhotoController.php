@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Requests\UpdateProfilePhotoRequest;
-use FlutterSdk\MagicStarter\Http\Resources\UserResource;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Http\Requests\UpdateProfilePhotoRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\UserResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Http\Request;
 
 /**

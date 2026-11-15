@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Teams\Schemas;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Teams\Schemas;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
 
 /**
  * Edits the team name and nothing else; see {@see TeamResource} for why the

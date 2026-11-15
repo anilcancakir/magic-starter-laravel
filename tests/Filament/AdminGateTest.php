@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Facades\Filament;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 
 /**
- * The admin panel's access gate: {@see \FlutterSdk\MagicStarter\Filament\Concerns\AuthorizesAdminPanel}.
+ * The admin panel's access gate: {@see \AnilcanCakir\MagicStarter\Filament\Concerns\AuthorizesAdminPanel}.
  *
  * The panel carries cross-team writes over every user and team, so this gate is
  * the whole of the access control. The allow case comes first: every other case

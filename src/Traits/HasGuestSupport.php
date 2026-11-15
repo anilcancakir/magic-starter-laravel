@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Traits;
+namespace AnilcanCakir\MagicStarter\Traits;
 
 /**
  * Trait HasGuestSupport

@@ -1,7 +1,16 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AiRuns;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AiRuns;
 
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\Pages\ListAiRuns;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\Pages\ViewAiRun;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\Schemas\AiRunInfolist;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\AiRun;
 use BackedEnum;
 use Closure;
 use Filament\Actions\ViewAction;
@@ -12,15 +21,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\Pages\ListAiRuns;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\Pages\ViewAiRun;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\Schemas\AiRunInfolist;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\AiRun;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;

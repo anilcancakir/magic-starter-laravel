@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Social\VerifiedIdentity;
+use AnilcanCakir\MagicStarter\Social\VerifiedIdentity;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 

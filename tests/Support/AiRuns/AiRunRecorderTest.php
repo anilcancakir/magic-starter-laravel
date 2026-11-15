@@ -1,20 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\AiRuns;
+namespace AnilcanCakir\MagicStarter\Tests\Support\AiRuns;
 
-use FlutterSdk\MagicStarter\Contracts\RecordsAiRuns;
-use FlutterSdk\MagicStarter\Enums\AiCostSource;
-use FlutterSdk\MagicStarter\Enums\AiPromptSource;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\AiRun;
-use FlutterSdk\MagicStarter\Models\AiRunAttempt;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunAttemptData;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunOutcome;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunRecorder;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiRunStart;
-use FlutterSdk\MagicStarter\Support\AiRuns\AiUsage;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\RecordsAiRuns;
+use AnilcanCakir\MagicStarter\Enums\AiCostSource;
+use AnilcanCakir\MagicStarter\Enums\AiPromptSource;
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\AiRun;
+use AnilcanCakir\MagicStarter\Models\AiRunAttempt;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunAttemptData;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunOutcome;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunRecorder;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiRunStart;
+use AnilcanCakir\MagicStarter\Support\AiRuns\AiUsage;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\DeadlockException;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Schema\Blueprint;

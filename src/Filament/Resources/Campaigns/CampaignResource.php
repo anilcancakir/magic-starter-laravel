@@ -1,7 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Campaigns;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Campaigns;
 
+use AnilcanCakir\MagicStarter\Contracts\CreatesCampaigns;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesCampaigns;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\CampaignDiscountType;
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Pages\CreateCampaign;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Pages\EditCampaign;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Pages\ListCampaigns;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\Schemas\CampaignForm;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\Campaign;
 use BackedEnum;
 use Closure;
 use Filament\Schemas\Schema;
@@ -10,19 +23,6 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\CreatesCampaigns;
-use FlutterSdk\MagicStarter\Contracts\UpdatesCampaigns;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\CampaignDiscountType;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Pages\CreateCampaign;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Pages\EditCampaign;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Pages\ListCampaigns;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\Schemas\CampaignForm;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\Campaign;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -203,7 +203,7 @@ class CampaignResource extends MagicStarterResource
     /**
      * Run a contract write, announce it, and turn a refusal into errors on the form's fields.
      *
-     * Not {@see \FlutterSdk\MagicStarter\Filament\Support\ContractAction}: it shows a refusal as
+     * Not {@see \AnilcanCakir\MagicStarter\Filament\Support\ContractAction}: it shows a refusal as
      * a notification and halts, while a campaign refusal names the field to fix (the window, the
      * promotion code), so it is re-thrown keyed to the field's state path and Livewire shows it
      * there.

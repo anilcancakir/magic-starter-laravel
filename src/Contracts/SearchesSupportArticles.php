@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Enums\SupportAudience;
+use AnilcanCakir\MagicStarter\Enums\SupportAudience;
 
 /**
  * Ranks the knowledge base against a question, for one audience in one locale.
  *
- * The package binds the PHP scorer {@see \FlutterSdk\MagicStarter\Support\SupportAi\SupportArticleSearch};
+ * The package binds the PHP scorer {@see \AnilcanCakir\MagicStarter\Support\SupportAi\SupportArticleSearch};
  * a host with an embedding index binds its own. Whatever ranks, only articles
  * the audience may read are returned, so a staff-only article never reaches a
  * customer however the question is worded.

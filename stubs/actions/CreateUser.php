@@ -2,7 +2,7 @@
 
 namespace App\Actions\MagicStarter;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**

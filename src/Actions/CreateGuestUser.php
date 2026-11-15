@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesGuestUsers;
-use FlutterSdk\MagicStarter\Enums\Role;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\RequestLocaleDetector;
+use AnilcanCakir\MagicStarter\Contracts\CreatesGuestUsers;
+use AnilcanCakir\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\RequestLocaleDetector;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Validator;
 

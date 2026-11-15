@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
-use FlutterSdk\MagicStarter\Contracts\RevokesApiTokens;
-use FlutterSdk\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
-use FlutterSdk\MagicStarter\Http\Requests\LoginRequest;
-use FlutterSdk\MagicStarter\Http\Requests\RegisterRequest;
-use FlutterSdk\MagicStarter\Http\Requests\SwitchTeamRequest;
-use FlutterSdk\MagicStarter\Http\Resources\UserResource;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Contracts\RevokesApiTokens;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
+use AnilcanCakir\MagicStarter\Http\Requests\LoginRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\RegisterRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\SwitchTeamRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\UserResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

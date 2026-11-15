@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
-use FlutterSdk\MagicStarter\Http\Requests\SocialRedirectRequest;
-use FlutterSdk\MagicStarter\Social\ProviderIdentity;
-use FlutterSdk\MagicStarter\Social\SocialFlowStore;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\AuthenticatesUsers;
+use AnilcanCakir\MagicStarter\Http\Requests\SocialRedirectRequest;
+use AnilcanCakir\MagicStarter\Social\ProviderIdentity;
+use AnilcanCakir\MagicStarter\Social\SocialFlowStore;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 

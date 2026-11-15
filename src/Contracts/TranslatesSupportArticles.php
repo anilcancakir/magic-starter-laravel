@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
 use Throwable;
 
 /**

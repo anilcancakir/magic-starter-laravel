@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Requests;
 
-use FlutterSdk\MagicStarter\Contracts\SchedulesUserDeletion;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserPasswords;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserProfiles;
-use FlutterSdk\MagicStarter\Http\Controllers\ProfileController;
-use FlutterSdk\MagicStarter\Http\Controllers\ProfilePhotoController;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\SchedulesUserDeletion;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserPasswords;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles;
+use AnilcanCakir\MagicStarter\Http\Controllers\ProfileController;
+use AnilcanCakir\MagicStarter\Http\Controllers\ProfilePhotoController;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;

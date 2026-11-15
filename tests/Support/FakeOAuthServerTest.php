@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use DOMDocument;
 use DOMXPath;
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Psr\Http\Message\ResponseInterface;

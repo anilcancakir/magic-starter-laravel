@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Notifications;
+namespace AnilcanCakir\MagicStarter\Notifications;
 
-use FlutterSdk\MagicStarter\Models\NewsletterSubscriber;
+use AnilcanCakir\MagicStarter\Models\NewsletterSubscriber;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;

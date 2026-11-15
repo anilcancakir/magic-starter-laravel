@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\AiPrompts;
+namespace AnilcanCakir\MagicStarter\Tests\Support\AiPrompts;
 
-use FlutterSdk\MagicStarter\Contracts\ResolvesPrompts;
-use FlutterSdk\MagicStarter\Enums\AiPromptSource;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptRegistry;
-use FlutterSdk\MagicStarter\Support\AiPrompts\PromptResolver;
-use FlutterSdk\MagicStarter\Support\AiPrompts\ResolvedPrompt;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesPrompts;
+use AnilcanCakir\MagicStarter\Enums\AiPromptSource;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptRegistry;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\PromptResolver;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\ResolvedPrompt;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Events\TransactionBeginning;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;

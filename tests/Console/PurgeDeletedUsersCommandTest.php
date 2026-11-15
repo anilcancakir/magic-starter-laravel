@@ -1,21 +1,21 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Console;
+namespace AnilcanCakir\MagicStarter\Tests\Console;
 
-use FlutterSdk\MagicStarter\Actions\SubscriptionGuardedDeleteTeam;
-use FlutterSdk\MagicStarter\Actions\TransferTeamOwnership;
-use FlutterSdk\MagicStarter\Console\PurgeDeletedUsersCommand;
-use FlutterSdk\MagicStarter\Contracts\DeletesTeams;
-use FlutterSdk\MagicStarter\Contracts\DeletesUsers;
-use FlutterSdk\MagicStarter\Contracts\SchedulesUserDeletion;
-use FlutterSdk\MagicStarter\Contracts\TransfersTeamOwnership;
-use FlutterSdk\MagicStarter\Events\TeamDeleted;
-use FlutterSdk\MagicStarter\Events\TeamOwnershipTransferred;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\Support\StripeHttpStub;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\SubscriptionGuardedDeleteTeam;
+use AnilcanCakir\MagicStarter\Actions\TransferTeamOwnership;
+use AnilcanCakir\MagicStarter\Console\PurgeDeletedUsersCommand;
+use AnilcanCakir\MagicStarter\Contracts\DeletesTeams;
+use AnilcanCakir\MagicStarter\Contracts\DeletesUsers;
+use AnilcanCakir\MagicStarter\Contracts\SchedulesUserDeletion;
+use AnilcanCakir\MagicStarter\Contracts\TransfersTeamOwnership;
+use AnilcanCakir\MagicStarter\Events\TeamDeleted;
+use AnilcanCakir\MagicStarter\Events\TeamOwnershipTransferred;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\Support\StripeHttpStub;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use FlutterSdk\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Features;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

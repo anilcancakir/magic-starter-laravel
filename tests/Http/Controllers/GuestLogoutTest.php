@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Tests\Http\Controllers;
 
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +28,7 @@ class GuestLogoutTest extends TestCase
     {
         return [
             \Laravel\Sanctum\SanctumServiceProvider::class,
-            \FlutterSdk\MagicStarter\MagicStarterServiceProvider::class,
+            \AnilcanCakir\MagicStarter\MagicStarterServiceProvider::class,
         ];
     }
 
@@ -306,10 +306,10 @@ class GuestLogoutTest extends TestCase
  */
 final class GuestLogoutTestUser extends \Illuminate\Foundation\Auth\User
 {
-    use \FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
-    use \FlutterSdk\MagicStarter\Traits\HasGuestSupport;
-    use \FlutterSdk\MagicStarter\Traits\HasNotifications;
-    use \FlutterSdk\MagicStarter\Traits\HasProfilePhoto;
+    use \AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
+    use \AnilcanCakir\MagicStarter\Traits\HasGuestSupport;
+    use \AnilcanCakir\MagicStarter\Traits\HasNotifications;
+    use \AnilcanCakir\MagicStarter\Traits\HasProfilePhoto;
     use \Laravel\Sanctum\HasApiTokens;
 
     protected $table = 'users';

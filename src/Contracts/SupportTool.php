@@ -1,20 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
 
 /**
  * One read, or one recorded proposal, the support AI may make about the
  * customer's own account while it drafts an answer.
  *
- * The host registers the class with {@see \FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry}
+ * The host registers the class with {@see \AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry}
  * and maps it onto its own AI SDK; the package never imports one. Four rules
  * hold for every tool, because what it returns lands in a model prompt:
  *
  * - Never execute a change. A tool reads, or records a proposal that a staff
  *   member approves or rejects later (see
- *   {@see \FlutterSdk\MagicStarter\Support\SupportAi\Tools\ProposeBillingChangeTool});
+ *   {@see \AnilcanCakir\MagicStarter\Support\SupportAi\Tools\ProposeBillingChangeTool});
  *   only that approval changes anything, so a model talked into a call can
  *   never move money or data by itself.
  * - Never throw for a data reason (no team, nothing found, a refused
@@ -25,7 +25,7 @@ use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
  *   model chose. Leave out the url columns you own; `UntrustedText` replaces
  *   the links a customer wrote, but keeps a bare name without a path.
  * - Pass every tenant-written text (a monitor name, an incident note) through
- *   {@see \FlutterSdk\MagicStarter\Support\SupportAi\Tools\UntrustedText}, so the
+ *   {@see \AnilcanCakir\MagicStarter\Support\SupportAi\Tools\UntrustedText}, so the
  *   model reads it as data and not as instructions.
  */
 interface SupportTool

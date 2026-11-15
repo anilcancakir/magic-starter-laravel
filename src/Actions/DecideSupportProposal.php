@@ -1,26 +1,26 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
+use AnilcanCakir\MagicStarter\Contracts\AdministersBilling;
+use AnilcanCakir\MagicStarter\Contracts\DecidesSupportProposals;
+use AnilcanCakir\MagicStarter\Enums\SupportMessageKind;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalAction;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalStatus;
+use AnilcanCakir\MagicStarter\Enums\SupportSenderType;
+use AnilcanCakir\MagicStarter\Events\SupportConversationUpdated;
+use AnilcanCakir\MagicStarter\Filament\Support\BillingAuthorization;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportProposal;
+use AnilcanCakir\MagicStarter\Support\BillingAdministrationRefused;
+use AnilcanCakir\MagicStarter\Support\StripeBillingState;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportHandoff;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportProposalBillable;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportProposalTrialWindow;
 use Carbon\CarbonInterface;
 use Closure;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Contracts\AdministersBilling;
-use FlutterSdk\MagicStarter\Contracts\DecidesSupportProposals;
-use FlutterSdk\MagicStarter\Enums\SupportMessageKind;
-use FlutterSdk\MagicStarter\Enums\SupportProposalAction;
-use FlutterSdk\MagicStarter\Enums\SupportProposalStatus;
-use FlutterSdk\MagicStarter\Enums\SupportSenderType;
-use FlutterSdk\MagicStarter\Events\SupportConversationUpdated;
-use FlutterSdk\MagicStarter\Filament\Support\BillingAuthorization;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportProposal;
-use FlutterSdk\MagicStarter\Support\BillingAdministrationRefused;
-use FlutterSdk\MagicStarter\Support\StripeBillingState;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportHandoff;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportProposalBillable;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportProposalTrialWindow;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;

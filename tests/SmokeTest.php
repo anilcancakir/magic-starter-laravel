@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests;
+namespace AnilcanCakir\MagicStarter\Tests;
 
-use FlutterSdk\MagicStarter\MagicStarterServiceProvider;
+use AnilcanCakir\MagicStarter\MagicStarterServiceProvider;
 
 class SmokeTest extends TestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Actions\AcceptTeamInvitation;
-use FlutterSdk\MagicStarter\Contracts\AcceptsTeamInvitations;
+use AnilcanCakir\MagicStarter\Actions\AcceptTeamInvitation;
+use AnilcanCakir\MagicStarter\Contracts\AcceptsTeamInvitations;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 

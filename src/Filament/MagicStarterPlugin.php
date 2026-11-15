@@ -1,7 +1,19 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament;
+namespace AnilcanCakir\MagicStarter\Filament;
 
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Auth\TwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Filament\Ops\OpsAuthorization;
+use AnilcanCakir\MagicStarter\Filament\Ops\TelescopeRedaction;
+use AnilcanCakir\MagicStarter\Filament\Pages\Dashboard;
+use AnilcanCakir\MagicStarter\Filament\Widgets\AiRunStatsWidget;
+use AnilcanCakir\MagicStarter\Filament\Widgets\HorizonStatusWidget;
+use AnilcanCakir\MagicStarter\Filament\Widgets\PulseSummaryWidget;
+use AnilcanCakir\MagicStarter\Filament\Widgets\StarterStatsWidget;
+use AnilcanCakir\MagicStarter\Filament\Widgets\SupportResolutionWidget;
+use AnilcanCakir\MagicStarter\Http\Controllers\Admin\SupportAttachmentPanelController;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Models\Contracts\FilamentUser;
@@ -9,18 +21,6 @@ use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\Support\Facades\FilamentTimezone;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Auth\TwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Filament\Ops\OpsAuthorization;
-use FlutterSdk\MagicStarter\Filament\Ops\TelescopeRedaction;
-use FlutterSdk\MagicStarter\Filament\Pages\Dashboard;
-use FlutterSdk\MagicStarter\Filament\Widgets\AiRunStatsWidget;
-use FlutterSdk\MagicStarter\Filament\Widgets\HorizonStatusWidget;
-use FlutterSdk\MagicStarter\Filament\Widgets\PulseSummaryWidget;
-use FlutterSdk\MagicStarter\Filament\Widgets\StarterStatsWidget;
-use FlutterSdk\MagicStarter\Filament\Widgets\SupportResolutionWidget;
-use FlutterSdk\MagicStarter\Http\Controllers\Admin\SupportAttachmentPanelController;
-use FlutterSdk\MagicStarter\MagicStarter;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -522,26 +522,26 @@ class MagicStarterPlugin implements Plugin
     protected function mountedResources(): array
     {
         $resources = [
-            'users' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\Users\\UserResource',
-            'teams' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\Teams\\TeamResource',
-            'subscriptions' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\Subscriptions\\SubscriptionResource',
-            'billing_grants' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\BillingGrants\\BillingGrantResource',
-            'billing_events' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\BillingEvents\\BillingEventResource',
-            'webhook_deliveries' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\WebhookDeliveries\\'
+            'users' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\Users\\UserResource',
+            'teams' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\Teams\\TeamResource',
+            'subscriptions' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\Subscriptions\\SubscriptionResource',
+            'billing_grants' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\BillingGrants\\BillingGrantResource',
+            'billing_events' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\BillingEvents\\BillingEventResource',
+            'webhook_deliveries' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\WebhookDeliveries\\'
                 . 'WebhookDeliveryResource',
-            'newsletter_subscribers' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\NewsletterSubscribers\\'
+            'newsletter_subscribers' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\NewsletterSubscribers\\'
                 . 'NewsletterSubscriberResource',
-            'audits' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\Audits\\AuditResource',
-            'support' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\SupportConversations\\'
+            'audits' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\Audits\\AuditResource',
+            'support' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\SupportConversations\\'
                 . 'SupportConversationResource',
-            'support_feedback' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\SupportFeedback\\'
+            'support_feedback' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\SupportFeedback\\'
                 . 'SupportFeedbackResource',
-            'support_articles' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\SupportArticles\\'
+            'support_articles' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\SupportArticles\\'
                 . 'SupportArticleResource',
-            'releases' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\AppReleases\\AppReleaseResource',
-            'campaigns' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\Campaigns\\CampaignResource',
-            'ai_runs' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\AiRuns\\AiRunResource',
-            'ai_prompts' => 'FlutterSdk\\MagicStarter\\Filament\\Resources\\AiPrompts\\AiPromptOverrideResource',
+            'releases' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\AppReleases\\AppReleaseResource',
+            'campaigns' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\Campaigns\\CampaignResource',
+            'ai_runs' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\AiRuns\\AiRunResource',
+            'ai_prompts' => 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\AiPrompts\\AiPromptOverrideResource',
             ...$this->resources,
         ];
 

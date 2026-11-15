@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
+use AnilcanCakir\MagicStarter\Enums\BillingChannel;
+use AnilcanCakir\MagicStarter\Enums\BillingCycle;
+use AnilcanCakir\MagicStarter\Enums\CommissionMode;
+use AnilcanCakir\MagicStarter\Enums\ProductType;
 use BackedEnum;
-use FlutterSdk\MagicStarter\Enums\BillingChannel;
-use FlutterSdk\MagicStarter\Enums\BillingCycle;
-use FlutterSdk\MagicStarter\Enums\CommissionMode;
-use FlutterSdk\MagicStarter\Enums\ProductType;
 use LogicException;
 
 /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportFeedback\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportFeedback\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportFeedback\SupportFeedbackResource;
 use Filament\Resources\Pages\ListRecords;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportFeedback\SupportFeedbackResource;
 
 class ListSupportFeedback extends ListRecords
 {

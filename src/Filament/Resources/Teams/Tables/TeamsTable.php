@@ -1,14 +1,14 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Teams\Tables;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Teams\Tables;
 
+use AnilcanCakir\MagicStarter\Features;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Features;
 use Illuminate\Database\Eloquent\Model;
 
 /**

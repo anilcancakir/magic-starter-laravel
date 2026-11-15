@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Models;
+namespace AnilcanCakir\MagicStarter\Models;
 
+use AnilcanCakir\MagicStarter\Enums\CampaignDiscountType;
+use AnilcanCakir\MagicStarter\Enums\ProductType;
+use AnilcanCakir\MagicStarter\Observers\CampaignObserver;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Enums\CampaignDiscountType;
-use FlutterSdk\MagicStarter\Enums\ProductType;
-use FlutterSdk\MagicStarter\Observers\CampaignObserver;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

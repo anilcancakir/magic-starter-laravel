@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\PushDevice;
 use Closure;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\PushDevice;
 use Illuminate\Database\Eloquent\Model;
 use onesignal\client\api\DefaultApi;
 use onesignal\client\ApiException;

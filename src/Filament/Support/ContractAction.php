@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Support;
+namespace AnilcanCakir\MagicStarter\Filament\Support;
 
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Social\SocialSignInRefused;
+use AnilcanCakir\MagicStarter\Support\BillingAdministrationRefused;
 use Closure;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Notifications\Notification;
 use Filament\Support\Exceptions\Halt;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Social\SocialSignInRefused;
-use FlutterSdk\MagicStarter\Support\BillingAdministrationRefused;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;

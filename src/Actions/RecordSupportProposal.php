@@ -1,17 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
+use AnilcanCakir\MagicStarter\Contracts\RecordsSupportProposals;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalAction;
+use AnilcanCakir\MagicStarter\Enums\SupportProposalStatus;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportProposal;
+use AnilcanCakir\MagicStarter\Support\StripeBillingState;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportProposalBillable;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportProposalTrialWindow;
 use Carbon\CarbonInterface;
-use FlutterSdk\MagicStarter\Contracts\RecordsSupportProposals;
-use FlutterSdk\MagicStarter\Enums\SupportProposalAction;
-use FlutterSdk\MagicStarter\Enums\SupportProposalStatus;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportProposal;
-use FlutterSdk\MagicStarter\Support\StripeBillingState;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportProposalBillable;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportProposalTrialWindow;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;

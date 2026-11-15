@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Actions;
+namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
-use FlutterSdk\MagicStarter\Actions\ResolveBillingCurrency;
-use FlutterSdk\MagicStarter\Contracts\ResolvesBillingCurrency;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Actions\ResolveBillingCurrency;
+use AnilcanCakir\MagicStarter\Contracts\ResolvesBillingCurrency;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Attributes\DataProvider;

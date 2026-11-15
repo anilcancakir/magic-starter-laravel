@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi\Tools;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi\Tools;
 
-use FlutterSdk\MagicStarter\Contracts\SupportTool;
+use AnilcanCakir\MagicStarter\Contracts\SupportTool;
 use Illuminate\Contracts\Container\Container;
 use InvalidArgumentException;
 use ReflectionClass;

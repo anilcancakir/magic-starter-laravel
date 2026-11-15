@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events\Billing;
+namespace AnilcanCakir\MagicStarter\Events\Billing;
 
 /**
  * Fires when a subscription was swapped to another plan.

@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiRuns;
+namespace AnilcanCakir\MagicStarter\Support\AiRuns;
 
+use AnilcanCakir\MagicStarter\Enums\AiCostSource;
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
 use DateTimeInterface;
-use FlutterSdk\MagicStarter\Enums\AiCostSource;
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
 use InvalidArgumentException;
 
 /**

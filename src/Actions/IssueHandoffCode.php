@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\IssuesHandoffCodes;
-use FlutterSdk\MagicStarter\Handoff\HandoffStore;
+use AnilcanCakir\MagicStarter\Contracts\IssuesHandoffCodes;
+use AnilcanCakir\MagicStarter\Handoff\HandoffStore;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**

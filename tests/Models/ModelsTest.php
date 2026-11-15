@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Models;
+namespace AnilcanCakir\MagicStarter\Tests\Models;
 
-use FlutterSdk\MagicStarter\Models\Team;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Models\Team;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 
 class ModelsTest extends TestCase
@@ -19,15 +19,15 @@ class ModelsTest extends TestCase
             'magic-starter.models.team_invitation' => ConfiguredTeamInvitation::class,
         ]);
 
-        \FlutterSdk\MagicStarter\MagicStarter::useUserModel(ConfiguredUser::class);
-        \FlutterSdk\MagicStarter\MagicStarter::useTeamModel(ConfiguredTeam::class);
-        \FlutterSdk\MagicStarter\MagicStarter::useMembershipModel(ConfiguredMembership::class);
-        \FlutterSdk\MagicStarter\MagicStarter::useTeamInvitationModel(ConfiguredTeamInvitation::class);
+        \AnilcanCakir\MagicStarter\MagicStarter::useUserModel(ConfiguredUser::class);
+        \AnilcanCakir\MagicStarter\MagicStarter::useTeamModel(ConfiguredTeam::class);
+        \AnilcanCakir\MagicStarter\MagicStarter::useMembershipModel(ConfiguredMembership::class);
+        \AnilcanCakir\MagicStarter\MagicStarter::useTeamInvitationModel(ConfiguredTeamInvitation::class);
     }
 
     public function test_team_relationships_resolve_configured_models(): void
     {
-        $teamClass = \FlutterSdk\MagicStarter\MagicStarter::teamModel();
+        $teamClass = \AnilcanCakir\MagicStarter\MagicStarter::teamModel();
         $team = new $teamClass;
 
         $owner = $team->owner();
@@ -55,7 +55,7 @@ class ModelsTest extends TestCase
         $this->assertNotContains('casts', $declaredProperties);
 
         $castsMethod = $reflection->getMethod('casts');
-        $teamClass = \FlutterSdk\MagicStarter\MagicStarter::teamModel();
+        $teamClass = \AnilcanCakir\MagicStarter\MagicStarter::teamModel();
         $casts = $castsMethod->invoke(new $teamClass);
 
         $this->assertSame([
@@ -66,7 +66,7 @@ class ModelsTest extends TestCase
 
     public function test_team_invitation_team_relation_uses_configured_team_model(): void
     {
-        $invitationClass = \FlutterSdk\MagicStarter\MagicStarter::teamInvitationModel();
+        $invitationClass = \AnilcanCakir\MagicStarter\MagicStarter::teamInvitationModel();
         $relation = (new $invitationClass)->team();
 
         $this->assertSame(ConfiguredTeam::class, $relation->getRelated()::class);
@@ -74,7 +74,7 @@ class ModelsTest extends TestCase
 
     public function test_team_user_uses_expected_table_and_uuid_key_shape(): void
     {
-        $membershipClass = \FlutterSdk\MagicStarter\MagicStarter::membershipModel();
+        $membershipClass = \AnilcanCakir\MagicStarter\MagicStarter::membershipModel();
         $teamUser = new $membershipClass;
 
         $this->assertSame('team_user', $teamUser->getTable());
@@ -84,7 +84,7 @@ class ModelsTest extends TestCase
 
     public function test_personal_access_token_uses_uuid_key_shape(): void
     {
-        $class = implode('\\', ['FlutterSdk', 'MagicStarter', 'Models', 'PersonalAccessToken']);
+        $class = implode('\\', ['AnilcanCakir', 'MagicStarter', 'Models', 'PersonalAccessToken']);
 
         $this->assertTrue(class_exists($class));
 
@@ -96,10 +96,10 @@ class ModelsTest extends TestCase
     }
 }
 
-class ConfiguredUser extends \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser {}
+class ConfiguredUser extends \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser {}
 
-class ConfiguredTeam extends \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeam {}
+class ConfiguredTeam extends \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam {}
 
-class ConfiguredMembership extends \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamUser {}
+class ConfiguredMembership extends \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamUser {}
 
-class ConfiguredTeamInvitation extends \FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteTeamInvitation {}
+class ConfiguredTeamInvitation extends \AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeamInvitation {}

@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\Pages;
 
+use AnilcanCakir\MagicStarter\Contracts\DeletesAiPromptOverrides;
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Contracts\DeletesAiPromptOverrides;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Support\UserPassword;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\UserPassword;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Auth\GenericUser;
 
 /**

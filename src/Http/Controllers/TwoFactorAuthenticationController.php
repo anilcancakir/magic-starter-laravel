@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Contracts\ConfirmsTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Contracts\DisablesTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Contracts\EnablesTwoFactorAuthentication;
-use FlutterSdk\MagicStarter\Http\Requests\ConfirmTwoFactorRequest;
-use FlutterSdk\MagicStarter\Http\Requests\DisableTwoFactorRequest;
-use FlutterSdk\MagicStarter\Http\Requests\EnableTwoFactorRequest;
+use AnilcanCakir\MagicStarter\Contracts\ConfirmsTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Contracts\DisablesTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Contracts\EnablesTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Http\Requests\ConfirmTwoFactorRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\DisableTwoFactorRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\EnableTwoFactorRequest;
 use Illuminate\Http\JsonResponse;
 
 class TwoFactorAuthenticationController

@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support;
+namespace AnilcanCakir\MagicStarter\Support;
 
-use FlutterSdk\MagicStarter\Http\Resources\CampaignResource;
-use FlutterSdk\MagicStarter\Models\Campaign;
+use AnilcanCakir\MagicStarter\Http\Resources\CampaignResource;
+use AnilcanCakir\MagicStarter\Models\Campaign;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;

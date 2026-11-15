@@ -1,27 +1,27 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Teams;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Teams;
 
+use AnilcanCakir\MagicStarter\Contracts\UpdatesTeams;
+use AnilcanCakir\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\Audits\RelationManagers\AuditsRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Billing\RelationManagers\BillingRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\Pages\EditTeam;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\Pages\ListTeams;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\RelationManagers\InvitationsRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\RelationManagers\MembersRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\Schemas\TeamForm;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\Tables\TeamsTable;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use BackedEnum;
 use Filament\Facades\Filament;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Contracts\UpdatesTeams;
-use FlutterSdk\MagicStarter\Enums\Role;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\Audits\RelationManagers\AuditsRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Billing\RelationManagers\BillingRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\Pages\EditTeam;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\Pages\ListTeams;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\RelationManagers\InvitationsRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\RelationManagers\MembersRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\Schemas\TeamForm;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\Tables\TeamsTable;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\MagicStarter;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

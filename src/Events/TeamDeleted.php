@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events;
+namespace AnilcanCakir\MagicStarter\Events;
 
-use FlutterSdk\MagicStarter\Actions\DeleteTeam;
+use AnilcanCakir\MagicStarter\Actions\DeleteTeam;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
 /**

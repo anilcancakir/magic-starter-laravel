@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Notifications;
+namespace AnilcanCakir\MagicStarter\Tests\Notifications;
 
-use FlutterSdk\MagicStarter\Notifications\TrialRefusedNotification;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Notifications\TrialRefusedNotification;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Facades\URL;
 
 /**

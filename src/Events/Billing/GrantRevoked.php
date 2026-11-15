@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Events\Billing;
+namespace AnilcanCakir\MagicStarter\Events\Billing;
 
 /**
  * Fires when an operator ended a manual plan grant before its expiry.

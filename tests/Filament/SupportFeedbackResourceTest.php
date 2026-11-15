@@ -1,17 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportFeedback\Pages\ListSupportFeedback;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportFeedback\SupportFeedbackResource;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Models\SupportFeedback;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportFeedback\Pages\ListSupportFeedback;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportFeedback\SupportFeedbackResource;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Models\SupportFeedback;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
 use Illuminate\Support\Carbon;
 use Livewire\Livewire;
 

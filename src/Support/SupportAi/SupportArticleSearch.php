@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Contracts\SearchesSupportArticles;
-use FlutterSdk\MagicStarter\Enums\SupportAudience;
-use FlutterSdk\MagicStarter\Support\SupportArticleFeed;
+use AnilcanCakir\MagicStarter\Contracts\SearchesSupportArticles;
+use AnilcanCakir\MagicStarter\Enums\SupportAudience;
+use AnilcanCakir\MagicStarter\Support\SupportArticleFeed;
 use Illuminate\Support\Str;
 
 /**

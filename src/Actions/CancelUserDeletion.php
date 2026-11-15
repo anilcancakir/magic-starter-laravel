@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\CancelsUserDeletion;
-use FlutterSdk\MagicStarter\Events\UserDeletionCancelled;
+use AnilcanCakir\MagicStarter\Contracts\CancelsUserDeletion;
+use AnilcanCakir\MagicStarter\Events\UserDeletionCancelled;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;

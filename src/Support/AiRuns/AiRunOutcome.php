@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Support\AiRuns;
+namespace AnilcanCakir\MagicStarter\Support\AiRuns;
 
-use FlutterSdk\MagicStarter\Enums\AiRunStatus;
+use AnilcanCakir\MagicStarter\Enums\AiRunStatus;
 use InvalidArgumentException;
 
 /**

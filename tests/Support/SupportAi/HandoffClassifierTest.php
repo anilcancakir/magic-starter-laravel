@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Tests\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Enums\SupportHandoffReason;
-use FlutterSdk\MagicStarter\Enums\SupportPriority;
-use FlutterSdk\MagicStarter\Support\SupportAi\HandoffClassifier;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\SupportHandoffReason;
+use AnilcanCakir\MagicStarter\Enums\SupportPriority;
+use AnilcanCakir\MagicStarter\Support\SupportAi\HandoffClassifier;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**

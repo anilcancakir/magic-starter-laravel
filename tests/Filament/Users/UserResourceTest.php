@@ -1,27 +1,27 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament\Users;
+namespace AnilcanCakir\MagicStarter\Tests\Filament\Users;
 
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\Billing\RelationManagers\BillingRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\Pages\CreateUser;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\Pages\EditUser;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\Pages\ListUsers;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers\PushDevicesRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers\SocialAccountsRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers\TeamsRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\RelationManagers\TokensRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\UserResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Notifications\VerifyEmailNotification;
+use AnilcanCakir\MagicStarter\Tests\Filament\FilamentTestCase;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
 use Filament\Actions\Action;
 use Filament\Resources\RelationManagers\RelationManager;
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
-use FlutterSdk\MagicStarter\Contracts\UpdatesUserProfiles;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\Billing\RelationManagers\BillingRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\Pages\CreateUser;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\Pages\EditUser;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\Pages\ListUsers;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers\PushDevicesRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers\SocialAccountsRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers\TeamsRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\RelationManagers\TokensRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\UserResource;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Notifications\VerifyEmailNotification;
-use FlutterSdk\MagicStarter\Tests\Filament\FilamentTestCase;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Notifications\RoutesNotifications;
 use Illuminate\Support\Carbon;

@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Actions\RemoveTeamMember;
-use FlutterSdk\MagicStarter\Actions\UpdateTeamMemberRole;
-use FlutterSdk\MagicStarter\Contracts\RemovesTeamMembers;
-use FlutterSdk\MagicStarter\Contracts\UpdatesTeamMemberRoles;
-use FlutterSdk\MagicStarter\Enums\Role;
-use FlutterSdk\MagicStarter\Http\Requests\UpdateTeamMemberRequest;
-use FlutterSdk\MagicStarter\Http\Resources\TeamMemberResource;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Actions\RemoveTeamMember;
+use AnilcanCakir\MagicStarter\Actions\UpdateTeamMemberRole;
+use AnilcanCakir\MagicStarter\Contracts\RemovesTeamMembers;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesTeamMemberRoles;
+use AnilcanCakir\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Http\Requests\UpdateTeamMemberRequest;
+use AnilcanCakir\MagicStarter\Http\Resources\TeamMemberResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Gate;

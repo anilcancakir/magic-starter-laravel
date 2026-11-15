@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\DeletesAiPromptOverrides;
-use FlutterSdk\MagicStarter\Models\AiPromptOverride;
+use AnilcanCakir\MagicStarter\Contracts\DeletesAiPromptOverrides;
+use AnilcanCakir\MagicStarter\Models\AiPromptOverride;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**

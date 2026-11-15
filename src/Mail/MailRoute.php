@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Mail;
+namespace AnilcanCakir\MagicStarter\Mail;
 
 use Closure;
 use Illuminate\Contracts\Config\Repository;

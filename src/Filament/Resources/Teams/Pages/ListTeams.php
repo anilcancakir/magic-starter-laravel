@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Teams\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Teams\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
 use Filament\Resources\Pages\ListRecords;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
 
 class ListTeams extends ListRecords
 {

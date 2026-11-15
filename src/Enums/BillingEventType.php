@@ -1,30 +1,30 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Enums;
+namespace AnilcanCakir\MagicStarter\Enums;
 
-use FlutterSdk\MagicStarter\Events\Billing\BillingOutcomeEvent;
-use FlutterSdk\MagicStarter\Events\Billing\CampaignCodeRefused;
-use FlutterSdk\MagicStarter\Events\Billing\CampaignRedeemed;
-use FlutterSdk\MagicStarter\Events\Billing\CheckoutStarted;
-use FlutterSdk\MagicStarter\Events\Billing\DeliveryRefused;
-use FlutterSdk\MagicStarter\Events\Billing\EntitlementApplied;
-use FlutterSdk\MagicStarter\Events\Billing\EntitlementDropped;
-use FlutterSdk\MagicStarter\Events\Billing\EntitlementSynced;
-use FlutterSdk\MagicStarter\Events\Billing\GrantAdded;
-use FlutterSdk\MagicStarter\Events\Billing\GrantExpired;
-use FlutterSdk\MagicStarter\Events\Billing\GrantRevoked;
-use FlutterSdk\MagicStarter\Events\Billing\InvoiceRefunded;
-use FlutterSdk\MagicStarter\Events\Billing\PortalOpened;
-use FlutterSdk\MagicStarter\Events\Billing\RequestRefused;
-use FlutterSdk\MagicStarter\Events\Billing\SubscriptionCancelled;
-use FlutterSdk\MagicStarter\Events\Billing\SubscriptionResumed;
-use FlutterSdk\MagicStarter\Events\Billing\SubscriptionSwapped;
-use FlutterSdk\MagicStarter\Events\Billing\TrialCancelled;
-use FlutterSdk\MagicStarter\Events\Billing\TrialEnded;
-use FlutterSdk\MagicStarter\Events\Billing\TrialExtended;
-use FlutterSdk\MagicStarter\Events\Billing\TrialRecorded;
-use FlutterSdk\MagicStarter\Events\Billing\TrialRefusalWithdrawn;
-use FlutterSdk\MagicStarter\Events\Billing\TrialRefused;
+use AnilcanCakir\MagicStarter\Events\Billing\BillingOutcomeEvent;
+use AnilcanCakir\MagicStarter\Events\Billing\CampaignCodeRefused;
+use AnilcanCakir\MagicStarter\Events\Billing\CampaignRedeemed;
+use AnilcanCakir\MagicStarter\Events\Billing\CheckoutStarted;
+use AnilcanCakir\MagicStarter\Events\Billing\DeliveryRefused;
+use AnilcanCakir\MagicStarter\Events\Billing\EntitlementApplied;
+use AnilcanCakir\MagicStarter\Events\Billing\EntitlementDropped;
+use AnilcanCakir\MagicStarter\Events\Billing\EntitlementSynced;
+use AnilcanCakir\MagicStarter\Events\Billing\GrantAdded;
+use AnilcanCakir\MagicStarter\Events\Billing\GrantExpired;
+use AnilcanCakir\MagicStarter\Events\Billing\GrantRevoked;
+use AnilcanCakir\MagicStarter\Events\Billing\InvoiceRefunded;
+use AnilcanCakir\MagicStarter\Events\Billing\PortalOpened;
+use AnilcanCakir\MagicStarter\Events\Billing\RequestRefused;
+use AnilcanCakir\MagicStarter\Events\Billing\SubscriptionCancelled;
+use AnilcanCakir\MagicStarter\Events\Billing\SubscriptionResumed;
+use AnilcanCakir\MagicStarter\Events\Billing\SubscriptionSwapped;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialCancelled;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialEnded;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialExtended;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialRecorded;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialRefusalWithdrawn;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialRefused;
 
 /**
  * What happened, as `billing_events.type` stores it.

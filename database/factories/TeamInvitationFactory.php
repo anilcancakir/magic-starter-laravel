@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Database\Factories;
+namespace AnilcanCakir\MagicStarter\Database\Factories;
 
-use FlutterSdk\MagicStarter\Models\TeamInvitation;
+use AnilcanCakir\MagicStarter\Models\TeamInvitation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

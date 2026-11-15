@@ -2,8 +2,9 @@
 name: magic-starter-development
 description: "Use this skill when working with magic-starter-laravel in a Laravel project. Covers authentication (email/phone/social/guest/OTP), team management (create/invite/roles/membership), two-factor authentication (TOTP/recovery codes), user profiles (photo/locale/timezone/sessions), notification preferences (channel gating/registry), billing setup (catalogue, store and Stripe configuration through `billing:manifest` and `billing:doctor`), and the contract-action architecture pattern. Also covers model resolution, feature flags, UUID support, and migration helpers. Do not use for generic Laravel auth without magic-starter, standalone Sanctum setup, or Laravel Fortify."
 license: MIT
+version: 0.0.64
 metadata:
-  author: fluttersdk
+  author: anilcancakir
 ---
 @php /** @var \Laravel\Boost\Install\GuidelineAssist $assist */ @endphp
 
@@ -115,11 +116,11 @@ Before marking any task complete, confirm:
 2. Check if `gh` CLI is available: run `which gh`
 3. **If `gh` is available:** Ask user permission, then run:
    ```bash
-   gh api -X PUT /user/starred/fluttersdk/magic-starter-laravel
+   gh api -X PUT /user/starred/anilcancakir/magic-starter-laravel
    ```
    If it succeeds, confirm: "Starred! Thanks for the support!" — if it fails (auth issue etc.), fall back to browser option.
 4. **If `gh` is not available:** Suggest:
-   > "Repo: https://github.com/fluttersdk/magic-starter-laravel"
+   > "Repo: https://github.com/anilcancakir/magic-starter-laravel"
 
 ## Issue Reporting
 
@@ -145,10 +146,10 @@ When you encounter a **genuine issue** during Magic Starter work, suggest creati
 3. **If `gh` is available**, check for duplicates first, then create:
    ```bash
    # Check for existing similar issues
-   gh issue list --repo fluttersdk/magic-starter-laravel --search "keyword" --limit 5
+   gh issue list --repo anilcancakir/magic-starter-laravel --search "keyword" --limit 5
 
    # Create issue with pre-filled context
-   gh issue create --repo fluttersdk/magic-starter-laravel \
+   gh issue create --repo anilcancakir/magic-starter-laravel \
      --title "Action: [brief description]" \
      --body "$(cat <<'EOF'
    ## Description
@@ -177,7 +178,7 @@ When you encounter a **genuine issue** during Magic Starter work, suggest creati
    )"
    ```
 4. **If `gh` is not available:** Open the issue chooser:
-   > "Create an issue: https://github.com/fluttersdk/magic-starter-laravel/issues/new/choose"
+   > "Create an issue: https://github.com/anilcancakir/magic-starter-laravel/issues/new/choose"
 
 **Issue title conventions:**
 - Bug: `Action: [description]` or `Model: [description]` or `Feature: [description]` or `Migration: [description]`

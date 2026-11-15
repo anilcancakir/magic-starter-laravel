@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support\SupportAi;
+namespace AnilcanCakir\MagicStarter\Tests\Support\SupportAi;
 
-use FlutterSdk\MagicStarter\Enums\SupportAiPool;
-use FlutterSdk\MagicStarter\Enums\SupportConversationSource;
-use FlutterSdk\MagicStarter\Models\SupportConversation;
-use FlutterSdk\MagicStarter\Support\SupportAi\Reservation;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportAiQuota;
-use FlutterSdk\MagicStarter\Support\SupportAi\SupportUsage;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Enums\SupportAiPool;
+use AnilcanCakir\MagicStarter\Enums\SupportConversationSource;
+use AnilcanCakir\MagicStarter\Models\SupportConversation;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Reservation;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportAiQuota;
+use AnilcanCakir\MagicStarter\Support\SupportAi\SupportUsage;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Illuminate\Support\Carbon;
 use ReflectionClass;
 

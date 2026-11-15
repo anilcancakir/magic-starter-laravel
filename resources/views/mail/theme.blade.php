@@ -1,4 +1,4 @@
-@php($brand = \FlutterSdk\MagicStarter\Support\MailBrand::current())
+@php($brand = \AnilcanCakir\MagicStarter\Support\MailBrand::current())
 {{-- Laravel's default.css with the brand's values. The inliner drops every media query from this
      stylesheet, so the responsive and dark rules live in the layout's own style tag instead. --}}
 /* Base */

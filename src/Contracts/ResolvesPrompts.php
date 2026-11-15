@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Contracts;
+namespace AnilcanCakir\MagicStarter\Contracts;
 
-use FlutterSdk\MagicStarter\Support\AiPrompts\ResolvedPrompt;
+use AnilcanCakir\MagicStarter\Support\AiPrompts\ResolvedPrompt;
 use InvalidArgumentException;
 
 /**

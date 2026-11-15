@@ -1,23 +1,23 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Contracts\TranslatesSupportArticles;
+use AnilcanCakir\MagicStarter\Contracts\ValidatesSupportArticleMarkdown;
+use AnilcanCakir\MagicStarter\Enums\SupportArticleVisibility;
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages\CreateSupportArticle;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages\EditSupportArticle;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages\ListSupportArticles;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\SupportArticleResource;
+use AnilcanCakir\MagicStarter\Models\SupportArticle;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\VisibilityRecordingDisk;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Panel;
-use FlutterSdk\MagicStarter\Contracts\TranslatesSupportArticles;
-use FlutterSdk\MagicStarter\Contracts\ValidatesSupportArticleMarkdown;
-use FlutterSdk\MagicStarter\Enums\SupportArticleVisibility;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages\CreateSupportArticle;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages\EditSupportArticle;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages\ListSupportArticles;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\SupportArticleResource;
-use FlutterSdk\MagicStarter\Models\SupportArticle;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\VisibilityRecordingDisk;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;

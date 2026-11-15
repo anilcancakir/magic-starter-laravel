@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\AiRuns\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
 use Filament\Resources\Pages\ListRecords;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
 
 class ListAiRuns extends ListRecords
 {

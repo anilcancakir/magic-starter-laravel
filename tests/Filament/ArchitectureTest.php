@@ -1,12 +1,12 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Filament\Resources\Audits\RelationManagers\AuditsRelationManager;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\UserResource;
-use FlutterSdk\MagicStarter\Testing\AssertsAdminWritesUseContracts;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Filament\Resources\Audits\RelationManagers\AuditsRelationManager;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\UserResource;
+use AnilcanCakir\MagicStarter\Testing\AssertsAdminWritesUseContracts;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -163,7 +163,7 @@ final class ArchitectureTest extends FilamentTestCase
             <?php
 
             use Filament\Resources\Pages\EditRecord;
-            use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
+            use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
 
             class EditThing extends EditRecord
             {

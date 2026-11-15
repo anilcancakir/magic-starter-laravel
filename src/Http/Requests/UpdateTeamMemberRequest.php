@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
-use FlutterSdk\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Enums\Role;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTeamMemberRequest extends FormRequest

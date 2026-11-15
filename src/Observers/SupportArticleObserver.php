@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Observers;
+namespace AnilcanCakir\MagicStarter\Observers;
 
-use FlutterSdk\MagicStarter\Support\SupportArticleFeed;
+use AnilcanCakir\MagicStarter\Support\SupportArticleFeed;
 use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 
 /**

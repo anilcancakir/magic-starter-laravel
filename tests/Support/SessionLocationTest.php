@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Support\SessionLocation;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\SessionLocation;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 
 /**
  * Tests for the SessionLocation support class.
  *
  * These tests are RED by design — `SessionLocation` does not exist yet.
- * Expected failure: `Class "FlutterSdk\MagicStarter\Support\SessionLocation" not found`
+ * Expected failure: `Class "AnilcanCakir\MagicStarter\Support\SessionLocation" not found`
  */
 final class SessionLocationTest extends TestCase
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\TransfersTeamOwnership;
-use FlutterSdk\MagicStarter\Contracts\UpdatesTeamMemberRoles;
-use FlutterSdk\MagicStarter\Enums\Role;
-use FlutterSdk\MagicStarter\Events\TeamOwnershipTransferred;
+use AnilcanCakir\MagicStarter\Contracts\TransfersTeamOwnership;
+use AnilcanCakir\MagicStarter\Contracts\UpdatesTeamMemberRoles;
+use AnilcanCakir\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Events\TeamOwnershipTransferred;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;

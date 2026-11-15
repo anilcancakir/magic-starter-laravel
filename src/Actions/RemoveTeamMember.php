@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\RemovesTeamMembers;
-use FlutterSdk\MagicStarter\Events\TeamMemberRemoved;
-use FlutterSdk\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Contracts\RemovesTeamMembers;
+use AnilcanCakir\MagicStarter\Events\TeamMemberRemoved;
+use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;

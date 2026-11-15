@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
-use FlutterSdk\MagicStarter\Rules\E164Phone;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
+use AnilcanCakir\MagicStarter\Rules\E164Phone;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\DisablesTwoFactorAuthentication;
+use AnilcanCakir\MagicStarter\Contracts\DisablesTwoFactorAuthentication;
 
 class DisableTwoFactorAuthentication implements DisablesTwoFactorAuthentication
 {

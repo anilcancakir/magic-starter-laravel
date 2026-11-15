@@ -1,7 +1,30 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Filament;
+namespace AnilcanCakir\MagicStarter\Tests\Filament;
 
+use AnilcanCakir\MagicStarter\Events\AdminActionPerformed;
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Concerns\WritesThroughContracts;
+use AnilcanCakir\MagicStarter\Filament\MagicStarterPlugin;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Audits\AuditResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\NewsletterSubscribers\NewsletterSubscriberResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Subscriptions\SubscriptionResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportFeedback\SupportFeedbackResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Teams\TeamResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\Users\UserResource;
+use AnilcanCakir\MagicStarter\Filament\Resources\WebhookDeliveries\WebhookDeliveryResource;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Social\SocialSignInRefused;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
 use Filament\Facades\Filament;
 use Filament\Notifications\Notification;
 use Filament\Panel;
@@ -9,29 +32,6 @@ use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Exceptions\Halt;
-use FlutterSdk\MagicStarter\Events\AdminActionPerformed;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Concerns\WritesThroughContracts;
-use FlutterSdk\MagicStarter\Filament\MagicStarterPlugin;
-use FlutterSdk\MagicStarter\Filament\Resources\AiPrompts\AiPromptOverrideResource;
-use FlutterSdk\MagicStarter\Filament\Resources\AiRuns\AiRunResource;
-use FlutterSdk\MagicStarter\Filament\Resources\AppReleases\AppReleaseResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Audits\AuditResource;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Campaigns\CampaignResource;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Filament\Resources\NewsletterSubscribers\NewsletterSubscriberResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Subscriptions\SubscriptionResource;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportConversations\SupportConversationResource;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportFeedback\SupportFeedbackResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Teams\TeamResource;
-use FlutterSdk\MagicStarter\Filament\Resources\Users\UserResource;
-use FlutterSdk\MagicStarter\Filament\Resources\WebhookDeliveries\WebhookDeliveryResource;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Social\SocialSignInRefused;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteAdminUser;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
@@ -111,10 +111,10 @@ class PluginTest extends FilamentTestCase
         config()->set('magic-starter.features', ['teams']);
 
         $panel = Panel::make()->id('bare')->plugin(
-            MagicStarterPlugin::make()->teamResource('FlutterSdk\\MagicStarter\\Missing\\TeamResource'),
+            MagicStarterPlugin::make()->teamResource('AnilcanCakir\\MagicStarter\\Missing\\TeamResource'),
         );
 
-        $this->assertNotContains('FlutterSdk\\MagicStarter\\Missing\\TeamResource', $panel->getResources());
+        $this->assertNotContains('AnilcanCakir\\MagicStarter\\Missing\\TeamResource', $panel->getResources());
     }
 
     public function test_the_billing_authorization_callback_is_kept_on_the_plugin(): void

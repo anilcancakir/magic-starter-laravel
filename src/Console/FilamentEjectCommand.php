@@ -1,6 +1,6 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -83,7 +83,7 @@ class FilamentEjectCommand extends Command
 
     private function copy(Filesystem $files, string $name, string $destination): int
     {
-        $namespace = 'FlutterSdk\\MagicStarter\\Filament\\Resources\\' . $name;
+        $namespace = 'AnilcanCakir\\MagicStarter\\Filament\\Resources\\' . $name;
         $target = 'App\\Filament\\Resources\\' . $name;
         $pattern = '/' . preg_quote($namespace, '/') . '(?![A-Za-z0-9_])/';
 

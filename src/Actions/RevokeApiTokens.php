@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Actions;
+namespace AnilcanCakir\MagicStarter\Actions;
 
-use FlutterSdk\MagicStarter\Contracts\RevokesApiTokens;
+use AnilcanCakir\MagicStarter\Contracts\RevokesApiTokens;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**

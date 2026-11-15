@@ -1,9 +1,9 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Models;
+namespace AnilcanCakir\MagicStarter\Models;
 
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Support\ConditionallyUsesUuids;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Support\ConditionallyUsesUuids;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -98,7 +98,7 @@ class Team extends Model
      * Get the team's profile photo URL, or null when none is stored.
      *
      * Null for the same reason as the user's, in
-     * FlutterSdk\MagicStarter\Traits\HasProfilePhoto: the client draws its own
+     * AnilcanCakir\MagicStarter\Traits\HasProfilePhoto: the client draws its own
      * initials, so a generated third-party image only overrides its theme.
      *
      * @return Attribute<string|null, never>

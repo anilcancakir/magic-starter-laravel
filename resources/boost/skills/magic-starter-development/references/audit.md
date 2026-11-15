@@ -80,7 +80,7 @@ class Monitor extends Model
 ## Recording and Suppressing
 
 ```php
-use FlutterSdk\MagicStarter\Audit\Auditor;
+use AnilcanCakir\MagicStarter\Audit\Auditor;
 
 Auditor::record('admin.user_impersonated', $user, ['reason' => 'support ticket 4411']);
 

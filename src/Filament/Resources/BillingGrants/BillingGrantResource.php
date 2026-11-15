@@ -1,17 +1,17 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\BillingGrants;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\BillingGrants;
 
+use AnilcanCakir\MagicStarter\Filament\AdminNavigationGroup;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingGrants\Pages\ListBillingGrants;
+use AnilcanCakir\MagicStarter\Filament\Resources\MagicStarterResource;
+use AnilcanCakir\MagicStarter\Models\BillingGrant;
+use AnilcanCakir\MagicStarter\Support\BillingCatalogue;
 use BackedEnum;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use FlutterSdk\MagicStarter\Filament\AdminNavigationGroup;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingGrants\Pages\ListBillingGrants;
-use FlutterSdk\MagicStarter\Filament\Resources\MagicStarterResource;
-use FlutterSdk\MagicStarter\Models\BillingGrant;
-use FlutterSdk\MagicStarter\Support\BillingCatalogue;
 use Illuminate\Database\Eloquent\Builder;
 use UnitEnum;
 

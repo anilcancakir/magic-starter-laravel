@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Requests;
+namespace AnilcanCakir\MagicStarter\Http\Requests;
 
-use FlutterSdk\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
+use AnilcanCakir\MagicStarter\Http\Requests\Concerns\NormalizesEmailInput;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ForgotPasswordRequest extends FormRequest

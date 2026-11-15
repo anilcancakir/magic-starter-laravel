@@ -1,13 +1,13 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers\Concerns;
+namespace AnilcanCakir\MagicStarter\Http\Controllers\Concerns;
 
-use FlutterSdk\MagicStarter\Contracts\CancelsUserDeletion;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Http\Resources\UserResource;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Social\StepUpConfirmations;
-use FlutterSdk\MagicStarter\Social\VerifiedIdentity;
+use AnilcanCakir\MagicStarter\Contracts\CancelsUserDeletion;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Resources\UserResource;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Social\StepUpConfirmations;
+use AnilcanCakir\MagicStarter\Social\VerifiedIdentity;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;

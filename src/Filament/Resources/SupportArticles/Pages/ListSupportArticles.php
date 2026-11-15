@@ -1,11 +1,11 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\Pages;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\Pages;
 
+use AnilcanCakir\MagicStarter\Filament\Resources\SupportArticles\SupportArticleResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
-use FlutterSdk\MagicStarter\Filament\Resources\SupportArticles\SupportArticleResource;
 
 class ListSupportArticles extends ListRecords
 {

@@ -1,30 +1,30 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Jobs;
+namespace AnilcanCakir\MagicStarter\Tests\Jobs;
 
+use AnilcanCakir\MagicStarter\Console\ReconcileBillingEntitlements;
+use AnilcanCakir\MagicStarter\Contracts\WritesEntitlement;
+use AnilcanCakir\MagicStarter\Enums\BillingEventType;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\BillingSource;
+use AnilcanCakir\MagicStarter\Enums\TrialRefusalReason;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialCancelled;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialRefusalWithdrawn;
+use AnilcanCakir\MagicStarter\Events\Billing\TrialRefused;
+use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Jobs\CheckTrialCard;
+use AnilcanCakir\MagicStarter\MagicStarter;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\BillingTrial;
+use AnilcanCakir\MagicStarter\Models\Subscription;
+use AnilcanCakir\MagicStarter\Models\SubscriptionItem;
+use AnilcanCakir\MagicStarter\Notifications\TrialRefusedNotification;
+use AnilcanCakir\MagicStarter\Support\BillingEventRecorder;
+use AnilcanCakir\MagicStarter\Support\RevenueCatClient;
+use AnilcanCakir\MagicStarter\Support\TrialCardGateway;
+use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteUser;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 use Closure;
-use FlutterSdk\MagicStarter\Console\ReconcileBillingEntitlements;
-use FlutterSdk\MagicStarter\Contracts\WritesEntitlement;
-use FlutterSdk\MagicStarter\Enums\BillingEventType;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\BillingSource;
-use FlutterSdk\MagicStarter\Enums\TrialRefusalReason;
-use FlutterSdk\MagicStarter\Events\Billing\TrialCancelled;
-use FlutterSdk\MagicStarter\Events\Billing\TrialRefusalWithdrawn;
-use FlutterSdk\MagicStarter\Events\Billing\TrialRefused;
-use FlutterSdk\MagicStarter\Features;
-use FlutterSdk\MagicStarter\Jobs\CheckTrialCard;
-use FlutterSdk\MagicStarter\MagicStarter;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\BillingTrial;
-use FlutterSdk\MagicStarter\Models\Subscription;
-use FlutterSdk\MagicStarter\Models\SubscriptionItem;
-use FlutterSdk\MagicStarter\Notifications\TrialRefusedNotification;
-use FlutterSdk\MagicStarter\Support\BillingEventRecorder;
-use FlutterSdk\MagicStarter\Support\RevenueCatClient;
-use FlutterSdk\MagicStarter\Support\TrialCardGateway;
-use FlutterSdk\MagicStarter\Tests\Fixtures\ConcreteUser;
-use FlutterSdk\MagicStarter\Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -49,7 +49,7 @@ use RuntimeException;
  * keeps, that the refusal is written before the cancel, that a refused
  * duplicate on the same subject leaves the subject's `default` subscription
  * pointing at the survivor, and that a subscription already paying is never
- * touched. {@see \FlutterSdk\MagicStarter\Tests\Support\TrialCardGatewayTest}
+ * touched. {@see \AnilcanCakir\MagicStarter\Tests\Support\TrialCardGatewayTest}
  * pins what the real gateway sends to Stripe.
  *
  * The duplicate scenarios run in BOTH job orders. Two checkouts opened seconds

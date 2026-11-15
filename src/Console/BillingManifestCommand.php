@@ -1,8 +1,8 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Console;
+namespace AnilcanCakir\MagicStarter\Console;
 
-use FlutterSdk\MagicStarter\Support\BillingManifest;
+use AnilcanCakir\MagicStarter\Support\BillingManifest;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 

@@ -1,7 +1,20 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Filament\Resources\Billing\RelationManagers;
+namespace AnilcanCakir\MagicStarter\Filament\Resources\Billing\RelationManagers;
 
+use AnilcanCakir\MagicStarter\Contracts\AdministersBilling;
+use AnilcanCakir\MagicStarter\Enums\BillingProvider;
+use AnilcanCakir\MagicStarter\Enums\PlanStatus;
+use AnilcanCakir\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
+use AnilcanCakir\MagicStarter\Filament\Support\BillingAuthorization;
+use AnilcanCakir\MagicStarter\Filament\Support\BillingFormFields;
+use AnilcanCakir\MagicStarter\Filament\Support\ContractAction;
+use AnilcanCakir\MagicStarter\Models\BillingEvent;
+use AnilcanCakir\MagicStarter\Models\BillingGrant;
+use AnilcanCakir\MagicStarter\Support\BillingLog;
+use AnilcanCakir\MagicStarter\Support\ReadsBillableAttributes;
+use AnilcanCakir\MagicStarter\Support\StoreRailConfiguration;
+use AnilcanCakir\MagicStarter\Support\StripeBillingState;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Closure;
@@ -19,19 +32,6 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\View\PanelsRenderHook;
-use FlutterSdk\MagicStarter\Contracts\AdministersBilling;
-use FlutterSdk\MagicStarter\Enums\BillingProvider;
-use FlutterSdk\MagicStarter\Enums\PlanStatus;
-use FlutterSdk\MagicStarter\Filament\Resources\BillingEvents\BillingEventResource;
-use FlutterSdk\MagicStarter\Filament\Support\BillingAuthorization;
-use FlutterSdk\MagicStarter\Filament\Support\BillingFormFields;
-use FlutterSdk\MagicStarter\Filament\Support\ContractAction;
-use FlutterSdk\MagicStarter\Models\BillingEvent;
-use FlutterSdk\MagicStarter\Models\BillingGrant;
-use FlutterSdk\MagicStarter\Support\BillingLog;
-use FlutterSdk\MagicStarter\Support\ReadsBillableAttributes;
-use FlutterSdk\MagicStarter\Support\StoreRailConfiguration;
-use FlutterSdk\MagicStarter\Support\StripeBillingState;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

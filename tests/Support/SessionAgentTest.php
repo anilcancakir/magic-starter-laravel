@@ -1,15 +1,15 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Tests\Support;
+namespace AnilcanCakir\MagicStarter\Tests\Support;
 
-use FlutterSdk\MagicStarter\Support\SessionAgent;
-use FlutterSdk\MagicStarter\Tests\TestCase;
+use AnilcanCakir\MagicStarter\Support\SessionAgent;
+use AnilcanCakir\MagicStarter\Tests\TestCase;
 
 /**
  * Tests for the SessionAgent support class.
  *
  * These tests are RED by design — `SessionAgent` does not exist yet.
- * Expected failure: `Class "FlutterSdk\MagicStarter\Support\SessionAgent" not found`
+ * Expected failure: `Class "AnilcanCakir\MagicStarter\Support\SessionAgent" not found`
  */
 final class SessionAgentTest extends TestCase
 {

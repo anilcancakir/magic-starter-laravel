@@ -1,10 +1,10 @@
 <?php
 
-namespace FlutterSdk\MagicStarter\Http\Controllers;
+namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
-use FlutterSdk\MagicStarter\Http\Requests\ForgotPasswordRequest;
-use FlutterSdk\MagicStarter\Http\Requests\ResetPasswordRequest;
-use FlutterSdk\MagicStarter\Social\UnconfirmedLinks;
+use AnilcanCakir\MagicStarter\Http\Requests\ForgotPasswordRequest;
+use AnilcanCakir\MagicStarter\Http\Requests\ResetPasswordRequest;
+use AnilcanCakir\MagicStarter\Social\UnconfirmedLinks;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\JsonResponse;
