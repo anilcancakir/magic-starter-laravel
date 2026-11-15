@@ -62,7 +62,7 @@ Write the failing test first, make it pass with the least code, then refactor wi
 - Base class `AnilcanCakir\MagicStarter\Tests\TestCase` (Orchestra Testbench); fixtures in `tests/Fixtures/` (`ConcreteUser`, `ConcreteTeam`, `ConcreteTeamUser`, `ConcreteTeamInvitation`)
 - CI runs PHP 8.2 to 8.4 on Laravel 12, plus legs for Filament, a run without the optional packages and PostgreSQL
 
-## Gotchas
+## Key Gotchas
 
 - Guest users may have a null email and a null password: guard with null checks
 - Call `method_exists()` before optional trait methods on the user model

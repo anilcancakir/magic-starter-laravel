@@ -186,14 +186,16 @@ Models resolve at runtime: `MagicStarter::userModel()` and `teamModel()` pick up
 
 ## Moving from fluttersdk/magic-starter-laravel
 
-The package moved from `fluttersdk/magic-starter-laravel` to `anilcancakir/magic-starter-laravel` and its namespace from `FlutterSdk\MagicStarter\` to `AnilcanCakir\MagicStarter\`; the old package is abandoned in favour of this one.
+The package moved from `fluttersdk/magic-starter-laravel` to `anilcancakir/magic-starter-laravel` and its namespace from `FlutterSdk\MagicStarter\` to `AnilcanCakir\MagicStarter\`; from 1.0.0 the old package is abandoned in favour of this one.
+
+Replace `FlutterSdk\MagicStarter\` with `AnilcanCakir\MagicStarter\` across your app first, including the published `config/magic-starter.php`, models, policies and action stubs, then swap the package in one resolution:
 
 ```bash
-composer remove fluttersdk/magic-starter-laravel
+composer remove fluttersdk/magic-starter-laravel --no-update
 composer require anilcancakir/magic-starter-laravel
 ```
 
-Then replace `FlutterSdk\MagicStarter\` with `AnilcanCakir\MagicStarter\` across your app, including the published `config/magic-starter.php`, models, policies and action stubs. The [migration guide](https://anilcancakir.com/magic-starter-laravel/docs/getting-started/migrating-from-fluttersdk) walks through every step.
+Renaming first matters: Composer boots the application while it removes a package, and a config that still names the old namespace stops it. The [migration guide](https://anilcancakir.com/magic-starter-laravel/docs/getting-started/migrating-from-fluttersdk) walks through every step.
 
 ## Dependencies
 
