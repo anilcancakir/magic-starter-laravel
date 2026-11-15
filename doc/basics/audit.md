@@ -1,7 +1,8 @@
 # Audit Trail
 
-## Table of Contents
+Who changed what, when and from where: every Eloquent create, update and delete, plus explicit events, written to `magic_starter_audits`.
 
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Enabling](#enabling)
 - [What Is Recorded](#what-is-recorded)
@@ -14,8 +15,27 @@
 - [Pruning](#pruning)
 - [Deleting a User](#deleting-a-user)
 - [What Is Not Captured](#what-is-not-captured)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+```php
+// config/magic-starter.php
+'features' => [
+    Features::audit(),
+],
+```
+
+| Item | Value |
+|:-----|:------|
+| Install | `php artisan magic-starter:install --features=audit`, then `php artisan migrate`. |
+| Table | `magic_starter_audits`. |
+| Retention | `magic-starter.audit.retention_days`, 365 by default and never less than one day. |
+| Prune | `php artisan magic-starter:audit:prune`, scheduled daily while the feature is on. |
+| Skip a model | List it in `audit.exclude`, or wrap the write in `Auditor::withoutAuditing()`. |
+| Record a bulk write | Wrap it in `Auditor::record()`. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -132,7 +152,7 @@ class Invoice extends Model
 For something that is not a model change, such as an impersonation or an export:
 
 ```php
-use FlutterSdk\MagicStarter\Audit\Auditor;
+use AnilcanCakir\MagicStarter\Audit\Auditor;
 
 Auditor::record('admin.user_impersonated', $user, [
     'reason' => 'support ticket 4411',
@@ -174,7 +194,7 @@ Only the model listener is silenced, and nested calls are safe. An explicit `Aud
 Add the `HasAudits` trait to a model to get an `audits()` relation:
 
 ```php
-use FlutterSdk\MagicStarter\Audit\HasAudits;
+use AnilcanCakir\MagicStarter\Audit\HasAudits;
 
 class Team extends Model
 {
@@ -223,3 +243,22 @@ A newsletter subscription is covered, but not by the purge: `DeleteUser` deletes
 - Models in `audit.exclude`, and anything inside `Auditor::withoutAuditing()`.
 
 When such a write matters, wrap it in `Auditor::record()`.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Expecting a bulk `update()` or `delete()` to be audited | The query builder fires no model events. Wrap the write in `Auditor::record()`. |
+| Expecting `saveQuietly()` to leave a row | It mutes the events the listener reads. |
+| Counting on a rolled-back change appearing in the trail | A row is inserted after the transaction commits, so a rollback leaves none. |
+| Relying on the trail after deleting a user | Rows about that user are deleted with the account; rows where they acted keep `actor_id` as null. |
+| Expecting the purge to find rows keyed by an email address | It finds rows by user key only, so a team invitation keeps its rows. Delete those yourself if you must. |
+| Expecting old rows to leave without a running scheduler | The package schedules the prune daily, but your application's scheduler has to be running for it to fire. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Admin Panel](./admin-panel.md): the `admin.*` rows and the resource that reads the trail.
+- [Account Deletion](./account-deletion.md): the purge that triggers `Auditor::forgetUser()`.
+- [Configuration](../getting-started/configuration.md): `schedule.audit_prune`.

@@ -1,7 +1,8 @@
 # Notifications
 
-## Table of Contents
+The notification endpoints a signed-in user reads and clears their database notifications with, the per-type and per-channel preference matrix, the OneSignal push channel and the mail branding.
 
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [List Notifications](#list-notifications)
 - [Unread Count](#unread-count)
@@ -13,17 +14,34 @@
   - [Get Preference Matrix](#get-preference-matrix)
   - [Update Preferences](#update-preferences)
 - [HasNotifications Trait](#hasnotifications-trait)
-  - [prefers()](#prefers)
-  - [routeNotificationForOneSignal()](#routenotificationforonesignal)
+  - [`prefers(string $type, string $channel): bool`](#prefers)
+  - [`routeNotificationForOneSignal(): array`](#routenotificationforonesignal)
 - [OneSignal Push Channel (v5 SDK)](#onesignal-push-channel)
 - [NotificationSetting Model](#notificationsetting-model)
 - [Channel Gating via GateNotificationChannels](#channel-gating-via-gatenotificationchannels)
 - [NotificationPreferenceRegistry](#notificationpreferenceregistry)
 - [Mail Branding](#mail-branding)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
 
-## <a name="introduction"></a>Introduction
+Enable `Features::notifications()`. Every endpoint needs `auth:sanctum` and sits under the configured route prefix.
+
+| Method and URI | Does |
+|:---------------|:-----|
+| `GET notifications` | Lists the user's database notifications, paginated. |
+| `GET notifications/unread-count` | Counts the unread ones. |
+| `POST notifications/{id}/read` | Marks one as read. |
+| `POST notifications/read-all` | Marks every one as read. |
+| `DELETE notifications/{id}` | Deletes one. |
+| `POST notifications/push-test` | Sends a test push to the caller. |
+| `GET notification-preferences` | Reads the preference matrix. |
+| `PUT notification-preferences` | Updates one preference or a bulk set. |
+
+<a name="introduction"></a>
+## Introduction
 
 The notifications module is feature-gated behind `Features::notifications()`. All routes described below are only registered when that feature is enabled.
 
@@ -43,7 +61,8 @@ All routes require an authenticated user (Sanctum `auth:sanctum` middleware is a
 
 ---
 
-## <a name="list-notifications"></a>List Notifications
+<a name="list-notifications"></a>
+## List Notifications
 
 **`GET /notifications`**
 
@@ -85,7 +104,8 @@ The response shape follows Laravel's `AnonymousResourceCollection` with standard
 
 ---
 
-## <a name="unread-count"></a>Unread Count
+<a name="unread-count"></a>
+## Unread Count
 
 **`GET /notifications/unread-count`**
 
@@ -105,7 +125,8 @@ Returns the number of unread notifications for the authenticated user.
 
 ---
 
-## <a name="mark-as-read"></a>Mark as Read
+<a name="mark-as-read"></a>
+## Mark as Read
 
 **`POST /notifications/{id}/read`**
 
@@ -132,7 +153,8 @@ The notification is scoped to the authenticated user - attempting to mark anothe
 
 ---
 
-## <a name="mark-all-as-read"></a>Mark All as Read
+<a name="mark-all-as-read"></a>
+## Mark All as Read
 
 **`POST /notifications/read-all`**
 
@@ -151,7 +173,8 @@ Bulk-updates all unread notifications for the authenticated user by setting `rea
 
 ---
 
-## <a name="delete-a-notification"></a>Delete a Notification
+<a name="delete-a-notification"></a>
+## Delete a Notification
 
 **`DELETE /notifications/{id}`**
 
@@ -176,7 +199,8 @@ Permanently deletes a single notification. The notification is scoped to the aut
 
 ---
 
-## <a name="send-a-push-test"></a>Send a Push Test
+<a name="send-a-push-test"></a>
+## Send a Push Test
 
 **`POST /notifications/push-test`**
 
@@ -249,7 +273,8 @@ exists at all from a client that can read the package's own config.
 
 ---
 
-## <a name="notification-preferences"></a>Notification Preferences
+<a name="notification-preferences"></a>
+## Notification Preferences
 
 Notification preferences allow users to opt in or out of specific notification types on specific channels. The available types and channels are declared at boot time via `NotificationPreferenceRegistry::register()`.
 
@@ -337,14 +362,15 @@ Returns the updated preference matrix in the same shape as `GET /notification-pr
 
 ---
 
-## <a name="hasnotifications-trait"></a>HasNotifications Trait
+<a name="hasnotifications-trait"></a>
+## HasNotifications Trait
 
-`FlutterSdk\MagicStarter\Traits\HasNotifications`
+`AnilcanCakir\MagicStarter\Traits\HasNotifications`
 
 Add to your User model to unlock notification preference management and push routing:
 
 ```php
-use FlutterSdk\MagicStarter\Traits\HasNotifications;
+use AnilcanCakir\MagicStarter\Traits\HasNotifications;
 
 class User extends Authenticatable
 {
@@ -390,7 +416,7 @@ public function routeNotificationForOneSignal(): array
 }
 ```
 
-Returns the routing payload for the OneSignal v5 notification channel using alias-based targeting. The `external_id` key maps to an array of alias identifiers that will be passed to the OneSignal SDK's `setIncludeAliases()` method by the package's `FlutterSdk\MagicStarter\Notifications\Channels\OneSignalChannel` driver.
+Returns the routing payload for the OneSignal v5 notification channel using alias-based targeting. The `external_id` key maps to an array of alias identifiers that will be passed to the OneSignal SDK's `setIncludeAliases()` method by the package's `AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel` driver.
 
 A prefix is **required** because OneSignal rejects bare numeric strings like `'0'`, `'1'`, or `'-1'` as external IDs, and because the id has to match the one the Flutter client registered. The client composes its own from `magic_starter.notifications.external_id_prefix`, which defaults to the same `user_`, so the two agree out of the box.
 
@@ -424,9 +450,10 @@ public function routeNotificationForOneSignal(): array
 
 ---
 
-## <a name="onesignal-push-channel"></a>OneSignal Push Channel (v5 SDK)
+<a name="onesignal-push-channel"></a>
+## OneSignal Push Channel (v5 SDK)
 
-The package ships `FlutterSdk\MagicStarter\Notifications\Channels\OneSignalChannel`, a Laravel notification channel driver backed by the official `onesignal/onesignal-php-api: ^5.3` SDK.
+The package ships `AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel`, a Laravel notification channel driver backed by the official `onesignal/onesignal-php-api: ^5.3` SDK.
 
 ### Configuration
 
@@ -524,9 +551,10 @@ A subscription that is disabled is a carrier opt-out (STOP). Neither the reconci
 
 ---
 
-## <a name="notificationsetting-model"></a>NotificationSetting Model
+<a name="notificationsetting-model"></a>
+## NotificationSetting Model
 
-`FlutterSdk\MagicStarter\Models\NotificationSetting`
+`AnilcanCakir\MagicStarter\Models\NotificationSetting`
 
 Stores one row per (notifiable, type, channel) combination. Only explicit overrides are stored - the absence of a row means the registry default applies.
 
@@ -553,9 +581,10 @@ public function notifiable(): MorphTo<Model, $this>
 
 ---
 
-## <a name="channel-gating-via-gatenotificationchannels"></a>Channel Gating via GateNotificationChannels
+<a name="channel-gating-via-gatenotificationchannels"></a>
+## Channel Gating via GateNotificationChannels
 
-`FlutterSdk\MagicStarter\Listeners\GateNotificationChannels`
+`AnilcanCakir\MagicStarter\Listeners\GateNotificationChannels`
 
 This event listener is registered automatically by `MagicStarterServiceProvider` and listens to Laravel's `Illuminate\Notifications\Events\NotificationSending` event. Laravel fires this event once per channel per notifiable - if the listener returns `false`, delivery for that channel is cancelled.
 
@@ -573,12 +602,12 @@ This event listener is registered automatically by `MagicStarterServiceProvider`
 
 ### Bypassing a preference
 
-`FlutterSdk\MagicStarter\Contracts\BypassesNotificationPreferences`
+`AnilcanCakir\MagicStarter\Contracts\BypassesNotificationPreferences`
 
 A notification can ask the gate to deliver a channel to a notifiable even though the person disabled it. The app owns the decision, for example a fallback when a paid channel is unavailable and the person must still hear by another one.
 
 ```php
-use FlutterSdk\MagicStarter\Contracts\BypassesNotificationPreferences;
+use AnilcanCakir\MagicStarter\Contracts\BypassesNotificationPreferences;
 
 class IncidentOpenedNotification extends Notification implements BypassesNotificationPreferences
 {
@@ -597,14 +626,15 @@ The gate asks once per channel per notifiable at `NotificationSending` time. The
 
 ---
 
-## <a name="notificationpreferenceregistry"></a>NotificationPreferenceRegistry
+<a name="notificationpreferenceregistry"></a>
+## NotificationPreferenceRegistry
 
-`FlutterSdk\MagicStarter\NotificationPreferenceRegistry`
+`AnilcanCakir\MagicStarter\NotificationPreferenceRegistry`
 
 A static registry that declares which notification types are preference-managed and what channels they support. Register types in a service provider:
 
 ```php
-use FlutterSdk\MagicStarter\NotificationPreferenceRegistry;
+use AnilcanCakir\MagicStarter\NotificationPreferenceRegistry;
 use App\Notifications\OrderShippedNotification;
 
 NotificationPreferenceRegistry::register([
@@ -735,7 +765,8 @@ This mapping is used by `GateNotificationChannels` to translate the driver chann
 
 ---
 
-## <a name="mail-branding"></a>Mail Branding
+<a name="mail-branding"></a>
+## Mail Branding
 
 The package can brand every markdown mail your app sends from one config block. It is off by default; with it off nothing changes.
 
@@ -823,3 +854,22 @@ resources/views/vendor/mail/html/header.blade.php
 ```
 
 The paths are added once, so `php artisan config:cache` is safe.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Using a user model without Laravel's `Notifiable` trait | The list endpoints call `$user->notifications()`; add `Notifiable`. |
+| Expecting a stored opt-out to silence an unregistered notification | `prefers()` answers `true` for any type missing from the registry, so register the type. |
+| Sending a class name or a slug that the registry does not know | The `type` in a preference update must be the notification class FQCN or its slug; the database stores slugs. |
+| Setting the OneSignal external id prefix on one side only | Set `onesignal.external_id_prefix` here and `magic_starter.notifications.external_id_prefix` in the Flutter app to the same value. A mismatch delivers to nobody and reports success. |
+| Applying the package mail theme and expecting your own to survive | The package replaces the `mail.markdown.theme` you configured while branding is on. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Profile](./profile.md): the newsletter and the sessions that sit next to notifications.
+- [Configuration](../getting-started/configuration.md): `mail.brand.*` and the `onesignal` block.
+- [Models](../architecture/models.md): `NotificationSetting` and the `HasNotifications` trait.
+- [Mail on OneSignal](../guides/mail-onesignal.md): sending mail through OneSignal.

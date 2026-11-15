@@ -1,5 +1,8 @@
 # Support Proposals
 
+How the support AI records a billing change a customer asked for, such as extending a trial, so that a staff member approves or rejects it in the admin panel.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Enabling](#enabling)
 - [Registering the Tool](#registering-the-tool)
@@ -9,8 +12,29 @@
 - [Ordering Guarantee](#ordering-guarantee)
 - [What Staff See](#what-staff-see)
 - [What the Customer Sees](#what-the-customer-sees)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+```php
+// config/magic-starter.php
+'features' => [
+    Features::support(),
+    Features::billing(),
+    Features::supportProposals(),
+],
+```
+
+| Item | Value |
+|:-----|:------|
+| Tool | `propose_billing_change`, registered by your code through `SupportToolRegistry`. |
+| Actions | `extend_trial`, `cancel_at_period_end` and `resume`. |
+| Expiry | `support.proposals.expires_hours`, 72 by default. |
+| Trial cap | `support.proposals.max_trial_extension_days`, 14 by default. |
+| Who asks | The account owner only. |
+| Who decides | Staff the admin panel clears for billing. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -65,8 +89,8 @@ The package ships the tool and never registers it: the [tool registry](support-t
 ```php
 namespace App\Providers;
 
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\ProposeBillingChangeTool;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\ProposeBillingChangeTool;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry;
 use Illuminate\Support\ServiceProvider;
 
 class SupportToolServiceProvider extends ServiceProvider
@@ -196,3 +220,23 @@ The customer never sees a proposal row. The AI tells them in its answer that a p
 | Billing refused the change | We could not apply your request (Extend the trial). A teammate will follow up here. |
 
 The thread refreshes through `SupportConversationUpdated`. A request that fails the re-check at approval, an expired request, an approval left `executing` and a **Mark failed** post no line, because nothing was decided that the customer can act on; staff follow up in the thread.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Listing `support-proposals` alone | It needs `support` and the billing features as well; listed alone it turns nothing on. |
+| Expecting the package to register the tool | It never does. Register `ProposeBillingChangeTool` yourself, behind a switch that defaults to off. |
+| Reading an `executing` row as in progress | After a crash it means the outcome is unknown. Check the account's billing events, then use **Mark applied** or **Mark failed** with a reason. |
+| Calling `DecidesSupportProposals::approve()` inside a database transaction | It refuses, because a rollback would hide a billing call that already happened. |
+| Waiting for a customer's "cancel" to reach the model | The handoff classifier hands billing words to staff first, so such a message never reaches the model. |
+| Letting a team member who is not the owner ask | Only the account owner may ask; others get a sentence pointing them to the owner. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Support AI Tools](./support-tools.md): the registry and the rules every tool follows.
+- [Support Desk](./support.md): the conversations a proposal belongs to.
+- [Billing](./billing.md): the contract an approved proposal runs through.
+- [Admin Panel](./admin-panel.md): the staff gate that decides.

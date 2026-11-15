@@ -1,7 +1,8 @@
 # Action-Contracts Architecture
 
-## Table of Contents
+How every piece of business logic sits behind a contract in `src/Contracts/` with a default action in `src/Actions/`, and how a host application swaps any of them.
 
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [How It Works](#how-it-works)
   - [Controllers](#controllers)
@@ -16,15 +17,35 @@
 - [Override Pattern](#override-pattern)
 - [Published Stubs](#published-stubs)
 - [Action Implementation Guide](#action-implementation-guide)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
 
-## <a name="introduction"></a>Introduction
+```php
+// app/Providers/AppServiceProvider.php
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
+
+public function register(): void
+{
+    $this->app->bind(CreatesUsers::class, \App\Actions\MagicStarter\CreateUser::class);
+}
+```
+
+| To do this | Do this |
+|:-----------|:--------|
+| Replace a default action | Bind the contract to your own class in `AppServiceProvider::register()`. |
+| Start from a stub | `php artisan vendor:publish --tag=magic-starter-stubs`; a published stub throws until you implement it. |
+| Keep the default and add to it | Inject the default action into yours and delegate to it. |
+| Know what a contract must return | The return type of the contract method, exactly. |
+
+<a name="introduction"></a>
+## Introduction
 
 Magic Starter uses a **contract-action pattern** inspired by Laravel Jetstream. Every unit of
 business logic is expressed as a PHP interface (a _contract_) in `src/Contracts/` and shipped with
 a working default implementation (an _action_) in `src/Actions/`. Controllers depend exclusively on
-contracts — they never reference concrete action classes.
+contracts: they never reference concrete action classes.
 
 This separation gives consuming applications full control: swap any action by binding a custom class
 in their own `AppServiceProvider` without touching package source or forking controllers.
@@ -36,7 +57,8 @@ in their own `AppServiceProvider` without touching package source or forking con
 
 ---
 
-## <a name="how-it-works"></a>How It Works
+<a name="how-it-works"></a>
+## How It Works
 
 ### <a name="controllers"></a>Controllers
 
@@ -50,8 +72,7 @@ public function store(RegisterRequest $request): JsonResponse
 }
 ```
 
-No constructor injection, no direct references to `CreateUser::class`. The controller does not know
-— and does not care — which implementation is active.
+No constructor injection, no direct references to `CreateUser::class`. The controller does not know, and does not care, which implementation is active.
 
 ### <a name="default-bindings"></a>Default Bindings
 
@@ -99,7 +120,7 @@ Override any action by calling `bind()` **after** the package provider has run. 
 ```php
 // app/Providers/AppServiceProvider.php
 use App\Actions\MagicStarter\CreateUser;
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
 
 public function register(): void
 {
@@ -113,13 +134,14 @@ public function register(): void
 
 ---
 
-## <a name="all-contracts"></a>All Contracts
+<a name="all-contracts"></a>
+## All Contracts
 
 ### <a name="user-management"></a>User Management
 
 #### `CreatesUsers`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\CreatesUsers`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\CreatesUsers`
 Default action: `Actions\CreateUser`
 
 ```php
@@ -134,7 +156,7 @@ sending email verification when enabled.
 
 #### `CreatesGuestUsers`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\CreatesGuestUsers`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\CreatesGuestUsers`
 Default action: `Actions\CreateGuestUser`
 
 ```php
@@ -142,7 +164,7 @@ public function create(array $input): Authenticatable;
 ```
 
 Creates **or retrieves** a guest user keyed by `device_id`. Guest users have `null` email and
-`null` password. Use `firstOrCreate` semantics — calling this twice with the same device ID must
+`null` password. Use `firstOrCreate` semantics: calling this twice with the same device ID must
 return the same user.
 
 > [!NOTE]
@@ -153,7 +175,7 @@ return the same user.
 
 #### `UpdatesUserProfiles`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\UpdatesUserProfiles`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles`
 Default action: `Actions\UpdateUserProfile`
 
 ```php
@@ -166,7 +188,7 @@ Validates and persists profile changes (name, email, avatar, locale, timezone) f
 
 #### `UpdatesUserPasswords`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\UpdatesUserPasswords`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\UpdatesUserPasswords`
 Default action: `Actions\UpdateUserPassword`
 
 ```php
@@ -180,7 +202,7 @@ password.
 
 #### `DeletesUsers`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\DeletesUsers`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\DeletesUsers`
 Default action: `Actions\DeleteUser`
 
 ```php
@@ -200,7 +222,7 @@ hands a shared team on first (always for an orphan, and for any user with
 
 #### `SchedulesUserDeletion`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\SchedulesUserDeletion`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\SchedulesUserDeletion`
 Default action: `Actions\ScheduleUserDeletion`
 
 ```php
@@ -224,7 +246,7 @@ released and something bills the user; `ProfileController` puts it in the 202 bo
 
 #### `ReleasesUserBilling`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\ReleasesUserBilling`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\ReleasesUserBilling`
 Default action: `Actions\ReleaseUserBilling`
 
 ```php
@@ -274,7 +296,7 @@ controllers for teams are conditionally registered.
 
 #### `CreatesTeams`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\CreatesTeams`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\CreatesTeams`
 Default action: `Actions\CreateTeam`
 
 ```php
@@ -287,7 +309,7 @@ Validates and creates a new team owned by `$user`. Returns the persisted team mo
 
 #### `UpdatesTeams`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\UpdatesTeams`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\UpdatesTeams`
 Default action: `Actions\UpdateTeam`
 
 ```php
@@ -301,7 +323,7 @@ authorization checks.
 
 #### `DeletesTeams`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\DeletesTeams`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\DeletesTeams`
 Default action: `Actions\SubscriptionGuardedDeleteTeam`
 
 ```php
@@ -321,7 +343,7 @@ has to switch to it.
 
 #### `TrashesTeams`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\TrashesTeams`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\TrashesTeams`
 Default action: `Actions\SubscriptionGuardedTrashTeam`
 
 ```php
@@ -342,7 +364,7 @@ class and rebinds the contract.
 
 #### `AddsTeamMembers`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\AddsTeamMembers`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\AddsTeamMembers`
 Default action: `Actions\AddTeamMember`
 
 ```php
@@ -350,13 +372,13 @@ public function add(Authenticatable $user, Model $team, string $email, string $r
 ```
 
 Attaches an existing application user (looked up by `$email`) directly to the team pivot with the
-given `$role`. Does not send an invitation — use `InvitesTeamMembers` for email-based flows.
+given `$role`. Does not send an invitation; use `InvitesTeamMembers` for email-based flows.
 
 ---
 
 #### `RemovesTeamMembers`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\RemovesTeamMembers`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\RemovesTeamMembers`
 Default action: `Actions\RemoveTeamMember`
 
 ```php
@@ -370,7 +392,7 @@ must prevent team owners from removing themselves.
 
 #### `InvitesTeamMembers`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\InvitesTeamMembers`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\InvitesTeamMembers`
 Default action: `Actions\InviteTeamMember`
 
 ```php
@@ -384,7 +406,7 @@ Creates a `TeamInvitation` record with a random token and sends `TeamInvitationN
 
 #### `AcceptsTeamInvitations`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\AcceptsTeamInvitations`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\AcceptsTeamInvitations`
 Default action: `Actions\AcceptTeamInvitation`
 
 ```php
@@ -425,7 +447,7 @@ class CappedAcceptTeamInvitation extends AcceptTeamInvitation
 
 #### `UpdatesTeamMemberRoles`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\UpdatesTeamMemberRoles`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\UpdatesTeamMemberRoles`
 Default action: `Actions\UpdateTeamMemberRole`
 
 ```php
@@ -444,7 +466,7 @@ TOTP secret/QR generation and code verification underneath.
 
 #### `EnablesTwoFactorAuthentication`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\EnablesTwoFactorAuthentication`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\EnablesTwoFactorAuthentication`
 Default action: `Actions\EnableTwoFactorAuthentication`
 
 ```php
@@ -459,7 +481,7 @@ Generates a TOTP secret and recovery codes, stores them on the user (encrypted),
 
 #### `ConfirmsTwoFactorAuthentication`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\ConfirmsTwoFactorAuthentication`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\ConfirmsTwoFactorAuthentication`
 Default action: `Actions\ConfirmTwoFactorAuthentication`
 
 ```php
@@ -473,7 +495,7 @@ confirmed. Throws a validation exception if the code is invalid.
 
 #### `DisablesTwoFactorAuthentication`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\DisablesTwoFactorAuthentication`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\DisablesTwoFactorAuthentication`
 Default action: `Actions\DisableTwoFactorAuthentication`
 
 ```php
@@ -486,7 +508,7 @@ Clears the TOTP secret, recovery codes, and confirmed-at timestamp from the user
 
 #### `GeneratesNewRecoveryCodes`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\GeneratesNewRecoveryCodes`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\GeneratesNewRecoveryCodes`
 Default action: `Actions\GenerateNewRecoveryCodes`
 
 ```php
@@ -500,13 +522,13 @@ plain-text codes to be displayed once to the user.
 
 ### <a name="otp--phone-verification"></a>OTP / Phone Verification
 
-These contracts are **intentionally thin stubs** in the default package — the default
+These contracts are **intentionally thin stubs** in the default package: the default
 implementations log to disk or use a cache. Production deployments must override both contracts with
 real SMS/OTP-service integrations.
 
 #### `SendsOtpCodes`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\SendsOtpCodes`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\SendsOtpCodes`
 Default action: `Actions\LogOtpProvider` _(logs to Laravel log, development only)_
 
 ```php
@@ -520,7 +542,7 @@ SMS gateway.
 
 #### `VerifiesOtpCodes`
 
-Namespace: `FlutterSdk\MagicStarter\Contracts\VerifiesOtpCodes`
+Namespace: `AnilcanCakir\MagicStarter\Contracts\VerifiesOtpCodes`
 Default action: `Actions\CacheOtpVerifier` _(cache-backed, suitable for single-server setups)_
 
 ```php
@@ -537,7 +559,8 @@ verification services.
 
 ---
 
-## <a name="override-pattern"></a>Override Pattern
+<a name="override-pattern"></a>
+## Override Pattern
 
 To replace any action, create your class, implement the corresponding contract, then bind it in
 `AppServiceProvider::register()`:
@@ -549,8 +572,8 @@ namespace App\Providers;
 
 use App\Actions\MagicStarter\CreateUser;
 use App\Actions\MagicStarter\SendsOtpViaTwilio;
-use FlutterSdk\MagicStarter\Contracts\CreatesUsers;
-use FlutterSdk\MagicStarter\Contracts\SendsOtpCodes;
+use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
+use AnilcanCakir\MagicStarter\Contracts\SendsOtpCodes;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -563,7 +586,7 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-Your custom `CreateUser` must implement `FlutterSdk\MagicStarter\Contracts\CreatesUsers` — that
+Your custom `CreateUser` must implement `AnilcanCakir\MagicStarter\Contracts\CreatesUsers`: that
 is the only contract. Method signatures must match exactly.
 
 > [!TIP]
@@ -573,7 +596,8 @@ is the only contract. Method signatures must match exactly.
 
 ---
 
-## <a name="published-stubs"></a>Published Stubs
+<a name="published-stubs"></a>
+## Published Stubs
 
 The package ships pre-generated stub files for the most commonly customized actions. Publish them
 with:
@@ -604,7 +628,8 @@ After publishing, register each stub in `AppServiceProvider::register()` as show
 
 ---
 
-## <a name="action-implementation-guide"></a>Action Implementation Guide
+<a name="action-implementation-guide"></a>
+## Action Implementation Guide
 
 Follow these conventions when writing custom action classes to stay consistent with the package
 patterns.
@@ -697,3 +722,11 @@ $locale = Arr::get($validated, 'locale', 'en');
 
 If the contract declares `array`, return `array`. If it declares `Model`, return a `Model` (or
 subclass). Do not widen or narrow the return type.
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Service Provider](./service-provider.md): where every default binding is registered.
+- [Installation](../getting-started/installation.md): publishing the action stubs.
+- [Account Deletion](../basics/account-deletion.md): the deletion contracts in use.
+- [Teams](../basics/teams.md): the team contracts in use.

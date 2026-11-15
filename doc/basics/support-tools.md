@@ -1,5 +1,8 @@
 # Support AI Tools
 
+How to give the support AI desk read-only tools that look at the customer's own account, without the package importing any AI SDK.
+
+- [Quick Reference](#quick-reference)
 - [Introduction](#introduction)
 - [Writing a Tool](#writing-a-tool)
 - [Registering a Tool](#registering-a-tool)
@@ -7,8 +10,25 @@
 - [Customer Text](#customer-text)
 - [Write Proposals](#write-proposals)
 - [Security Notes](#security-notes)
+- [Gotchas](#gotchas)
+- [Related Documentation](#related-documentation)
 
----
+<a name="quick-reference"></a>
+## Quick Reference
+
+```php
+// In a service provider's boot():
+app(SupportToolRegistry::class)->register(AccountPlan::class);
+```
+
+| Member | Role |
+|:-------|:-----|
+| `SupportTool::name()` | Snake case, at most 64 characters, unique in the registry. |
+| `SupportTool::description()` | Written for the model deciding whether to call the tool. |
+| `SupportTool::schema()` | A JSON-schema `object` your adapter maps to the SDK. |
+| `SupportTool::handle($context, $arguments)` | Returns the string the model reads. Take the team from `$context->team()`, never from an argument. |
+| `UntrustedText::field()`, `UntrustedText::block()` | The one door customer-written text goes through. |
+| `SupportToolRegistry::isEmpty()` | An empty registry is the off switch. |
 
 <a name="introduction"></a>
 ## Introduction
@@ -31,14 +51,14 @@ The registry has no feature flag. An empty registry is the off switch: register 
 <a name="writing-a-tool"></a>
 ## Writing a Tool
 
-Implement `FlutterSdk\MagicStarter\Contracts\SupportTool`:
+Implement `AnilcanCakir\MagicStarter\Contracts\SupportTool`:
 
 ```php
 namespace App\Support\Tools;
 
-use FlutterSdk\MagicStarter\Contracts\SupportTool;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\UntrustedText;
+use AnilcanCakir\MagicStarter\Contracts\SupportTool;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolContext;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\UntrustedText;
 
 class AccountPlan implements SupportTool
 {
@@ -101,7 +121,7 @@ Register every tool in a service provider's `boot()`:
 namespace App\Providers;
 
 use App\Support\Tools\AccountPlan;
-use FlutterSdk\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry;
+use AnilcanCakir\MagicStarter\Support\SupportAi\Tools\SupportToolRegistry;
 use Illuminate\Support\ServiceProvider;
 
 class SupportToolServiceProvider extends ServiceProvider
@@ -193,3 +213,22 @@ A tool never executes a change. The one tool the package ships that writes, `Pro
 
 > [!WARNING]
 > A tool that writes, sends or deletes changes the second note. This core is built for reads; give a write its own review before it joins the registry.
+
+<a name="gotchas"></a>
+## Gotchas
+
+| Mistake | Fix |
+|:--------|:----|
+| Taking the team from a tool argument | Read it from `$context->team()`; a null answer means no account context, so return a short refusal. |
+| Returning a URL or a credential | The model relays what it reads and the customer reads what the model relays. Return neither. |
+| Putting customer text in a result as plain text | Pass it through `UntrustedText::field()` or `UntrustedText::block()`. |
+| Throwing for a data reason | Return a sentence the model can pass on. Only a genuine fault, such as a dead database, may propagate. |
+| Binding a tool, or a stateful dependency, as a singleton or scoped instance | The registry keeps class-strings so one team's lookup never carries into the next turn. Let `resolve()` build fresh instances. |
+| Registering a tool outside `boot()` or with a duplicate or non-snake-case name | `register()` throws an `InvalidArgumentException`, so the mistake fails the boot rather than a customer's turn. |
+
+<a name="related-documentation"></a>
+## Related Documentation
+
+- [Support Desk](./support.md): the AI desk these tools serve.
+- [Support Proposals](./support-proposals.md): the one shipped tool that records a write for staff to decide.
+- [AI Run Log](../guides/ai-runs.md): the record of the model calls a turn makes.
