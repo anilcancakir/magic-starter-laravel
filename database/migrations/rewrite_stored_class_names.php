@@ -19,7 +19,10 @@ use Illuminate\Support\Facades\Schema;
  */
 return new class extends Migration
 {
-    private const OLD_PREFIX = 'FlutterSdk\\MagicStarter\\';
+    // Written in two pieces so the namespace sweep in the upgrade guide, which also
+    // covers `database/`, does not turn this constant into the new prefix and leave
+    // the migration swapping new for new.
+    private const OLD_PREFIX = 'Flutter' . 'Sdk\\MagicStarter\\';
 
     private const NEW_PREFIX = 'AnilcanCakir\\MagicStarter\\';
 
