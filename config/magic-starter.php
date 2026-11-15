@@ -517,8 +517,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | Set the number of minutes until issued tokens expire. It applies to
-    | every token the package issues (login, registration, 2FA, OTP, guest,
-    | social). Null means tokens never expire unless `sanctum.expiration`
+    | authentication token the package issues (login, registration, the token
+    | handed out after a completed 2FA challenge, OTP, guest, social). The 2FA
+    | challenge token itself lives for `two_factor.challenge_token_ttl`. Null means tokens never expire unless `sanctum.expiration`
     | says so. Configure Sanctum's pruning command to clean up expired
     | tokens: php artisan sanctum:prune-expired --hours=24
     |
