@@ -3,7 +3,7 @@ name: magic-starter-development
 description: "Extend a magic-starter-laravel API: override contract actions, resolve models, gate on feature flags."
 when_to_use: "Use when touching auth, teams, two-factor, profiles, notifications, billing setup, admin panel, audit or UUID migrations in a magic-starter-laravel app."
 license: MIT
-version: 1.0.1
+version: 1.0.2
 metadata:
   author: anilcancakir
 ---
