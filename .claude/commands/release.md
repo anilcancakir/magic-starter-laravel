@@ -35,7 +35,7 @@ The tag runs three jobs in order; each starts only when the one before it passed
 | `publish` | Asks Packagist to update `anilcancakir/magic-starter-laravel` |
 | `GitHub Release` | Creates the release `X.Y.Z` with the CHANGELOG section as its notes |
 
-Watch it with `gh run watch $(gh run list --workflow=publish.yml --limit=1 --json databaseId --jq '.[0].databaseId')`.
+Watch the run of this tag, not whichever run is newest: `gh run watch $(gh run list --workflow=publish.yml --branch X.Y.Z --limit=1 --json databaseId --jq '.[0].databaseId')`.
 
 A `Validate` failure published nothing. A re-run builds the original commit, so it cannot pick up a fix: fix the cause through a pull request, then ask before deleting the pushed tag (`git push --delete origin X.Y.Z` and `git tag -d X.Y.Z`; a remote delete is not yours to decide) and tag the new merge commit. A transient failure (a runner or network error) is the only case for **Re-run failed jobs**.
 
