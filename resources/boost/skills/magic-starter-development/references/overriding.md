@@ -1,45 +1,46 @@
-# Overriding & Customization
+# Overriding and Customization
 
 ## Where to Find It
 
-- `src/MagicStarterServiceProvider.php` — 18 `bind()` calls, one per contract
-- `src/Contracts/` — one interface per action; these are the override surface
-- `src/MagicStarter.php` — `useUserModel()`, `useTeamModel()`, `ignoreRoutes()`
-- `config/magic-starter.php` — feature toggles, model class names, auth strategy
+- `src/MagicStarterServiceProvider.php`: `register()` binds every contract to its default action
+- `src/Contracts/`: one interface per action; these are the override surface
+- `src/MagicStarter.php`: `useUserModel()`, `useTeamModel()`, `useMembershipModel()`, `useTeamInvitationModel()`, `ignoreRoutes()`, `serializeUserUsing()`
+- `config/magic-starter.php`: feature flags, model classes, the identity strategy
 
 ## What to Watch For
 
-### Override actions via singleton binding
+### Override an action with a binding
 
-Call `$this->app->singleton(Contract::class, CustomAction::class)` inside `AppServiceProvider::register()`. The package registers actions with `bind()`, so a consumer `singleton()` wins by priority. Only override what differs — leave the rest bound to defaults.
+Call `$this->app->singleton(Contract::class, CustomAction::class)` in `AppServiceProvider::register()`. The package binds its defaults with `bind()` in its own `register()`, and the app's provider registers after it, so the app's binding replaces the default before any `boot()` resolves the contract. Override only what differs and leave the rest on the defaults.
 
-### Override models via config or runtime
+### Override a model through config or at runtime
 
-Set `magic-starter.models.user` in config (or `MAGIC_STARTER_USER_MODEL` env) for the user model. For team, membership, and team-invitation models, use the `models` array keys. Runtime registration (`MagicStarter::useUserModel(CustomUser::class)`) takes precedence over config and is the correct approach in test `setUp()`.
+Set `magic-starter.models.user` (or `MAGIC_STARTER_USER_MODEL`) for the user model; it falls back to `auth.providers.users.model`. The team, membership and team-invitation models use their own `models` keys, and a published `App\Models\Team`, `TeamUser` or `TeamInvitation` is picked up without a config change. A runtime `MagicStarter::useUserModel(CustomUser::class)` (or one of its siblings) wins over config, which makes it the right tool in a test's `setUp()`.
 
-### Disable package routes and register custom
+### Replace the package routes
 
-Call `MagicStarter::ignoreRoutes()` inside `AppServiceProvider::register()` before the package boots. Then define replacement routes in your own route file. The package's rate limiters and middleware remain available.
+Call `MagicStarter::ignoreRoutes()` in `AppServiceProvider::register()`, before the package boots, and define your own routes. The package's named rate limiters (`magic-starter-auth-login` and the others) are registered either way.
 
-### Publish and customize config
+### Publish and edit the config
 
-Run `php artisan vendor:publish --tag=magic-starter-config` to copy the config file. Enable features by uncommenting entries in the `features` array; disable by removing them. Feature flags gate both routes and resource fields — toggling a feature affects the entire layer.
+`php artisan vendor:publish --tag=magic-starter-config` copies the file. Turn a feature on by uncommenting its `Features::*()` line in the `features` array and off by removing it. A flag gates its routes and its resource fields together.
 
-### Consumer pattern: minimal overrides work best
+### Prefer the smallest override
 
-In practice, most apps override nothing. Extend models with domain relations (e.g., `Team` gains `statusPages()`) rather than replacing them. Register custom notification types in `NotificationPreferenceRegistry` from a service provider `boot()`. Override an action only when business rules differ — not to log or decorate; use observers or events for side effects instead.
+Most apps override nothing. Extend a model with your domain relations (a `Team` gaining `statusPages()`, for example) rather than replacing it, and register notification types in `NotificationPreferenceRegistry` from a provider's `boot()`. Override an action when the business rule differs, not to log or decorate; observers and events carry side effects. To expose an extra user column, register it with `MagicStarter::serializeUserUsing()`, which merges its fields into `UserResource`.
 
-## Full Contract Reference
+## Contract Reference
 
-| Contract | Default Action | Method Signature |
+| Contract | Default action | Method signature |
 |---|---|---|
 | `CreatesUsers` | `CreateUser` | `create(array $input): Authenticatable` |
 | `UpdatesUserProfiles` | `UpdateUserProfile` | `update(Authenticatable $user, array $input): void` |
 | `UpdatesUserPasswords` | `UpdateUserPassword` | `update(Authenticatable $user, array $input): void` |
 | `DeletesUsers` | `DeleteUser` | `delete(Authenticatable $user): void` |
+| `SchedulesUserDeletion` | `ScheduleUserDeletion` | `schedule(Authenticatable $user, bool $orphan = false, bool $immediately = false): array` |
 | `CreatesTeams` | `CreateTeam` | `create(Authenticatable $user, array $input): Model` |
 | `UpdatesTeams` | `UpdateTeam` | `update(Authenticatable $user, Model $team, array $input): void` |
-| `DeletesTeams` | `DeleteTeam` | `delete(Model $team): void` |
+| `DeletesTeams` | `SubscriptionGuardedDeleteTeam` | `delete(Model $team): void` |
 | `AddsTeamMembers` | `AddTeamMember` | `add(Authenticatable $user, Model $team, string $email, string $role): void` |
 | `RemovesTeamMembers` | `RemoveTeamMember` | `remove(Authenticatable $user, Model $team, Model $teamMember): void` |
 | `InvitesTeamMembers` | `InviteTeamMember` | `invite(Authenticatable $user, Model $team, string $email, string $role): Model` |
@@ -59,6 +60,8 @@ In practice, most apps override nothing. Extend models with domain relations (e.
 | `DisablesTwoFactorAuthentication` | `DisableTwoFactorAuthentication` | `disable(mixed $user): void` |
 | `GeneratesNewRecoveryCodes` | `GenerateNewRecoveryCodes` | `generate(mixed $user): array` |
 
+`MagicStarterServiceProvider::register()` binds more (social sign-in, sign-in handoff, support, releases, campaigns, billing); read it for the full list.
+
 ### Team owner guards live in the actions
 
-`RemoveTeamMember` refuses the owner (`owner_not_removable`, or `owner_cannot_leave` when the owner asks to go) and `UpdateTeamMemberRole` refuses to change the owner's role (`owner_role_locked`) or to hand out `owner` (`role_not_assignable`), each as a `ValidationException` with that `code`. The HTTP API maps them back to 403 through the public `ensureRemovable()` and `ensureAssignable()`, so the API holds whatever you bind. The admin panel and `PurgeDeletedUsersCommand` call the contracts, so a replacement of either action has to keep the guard (call the static helper from your override). Ownership itself moves only through `TransfersTeamOwnership`.
+`RemoveTeamMember` refuses the owner (`owner_not_removable`, `owner_cannot_leave` when the owner asks to go, or `personal_team_cannot_leave`), and `UpdateTeamMemberRole` refuses to change the owner's role (`owner_role_locked`) or to hand out `owner` (`role_not_assignable`), each as a `ValidationException` carrying that `code`. The HTTP API calls the public static `ensureRemovable()` and `ensureAssignable()` itself before the contract and maps a refusal to 403, so the API holds whatever you bind. The admin panel and `PurgeDeletedUsersCommand` call only the contracts, so a replacement of either action has to keep the guard: call the static helper from your override. Ownership itself moves only through `TransfersTeamOwnership`.

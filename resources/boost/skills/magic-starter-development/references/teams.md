@@ -2,34 +2,34 @@
 
 ## Where to Find It
 
-- Actions: `src/Actions/CreateTeam.php`, `AddTeamMember.php`, `InviteTeamMember.php`, `RemoveTeamMember.php`, `UpdateTeamMemberRole.php`, `DeleteTeam.php`
+- Actions: `src/Actions/CreateTeam.php`, `AddTeamMember.php`, `InviteTeamMember.php`, `AcceptTeamInvitation.php`, `RemoveTeamMember.php`, `UpdateTeamMemberRole.php`, `DeleteTeam.php`, `SubscriptionGuardedDeleteTeam.php`
 - Listener: `src/Listeners/CreatePersonalTeamListener.php`
 - Enum: `src/Enums/Role.php`
 - Model: `src/Models/Team.php`
-- Contracts: `src/Contracts/` — one interface per action
+- Contracts: `src/Contracts/`, one interface per action
 
 ## What to Watch For
 
-### Personal Teams
+### Personal teams
 
-Personal teams are auto-created by `CreatePersonalTeamListener` on the Laravel `Registered` event. The listener uses a raw DB query (not a cached relation) for its idempotency check to avoid race conditions. The team name is localized via `magic-starter::teams.personal_team_name` using the user's `locale` attribute or the app locale as fallback. The `personal_team` boolean column distinguishes personal teams from regular ones — never allow deletion of a personal team from the controller layer.
+`CreatePersonalTeamListener` creates a personal team on Laravel's `Registered` event while the `teams` feature is on. Its idempotency check is a database query rather than the cached relation, so a second dispatch of the event finds the team and stops. The name comes from `magic-starter::teams.personal_team_name`, in the user's `locale` or the app locale. The `personal_team` column marks it: `DELETE teams/{team}` refuses a personal team, and its owner cannot leave it (`personal_team_cannot_leave`).
 
-### Team Creation Flow
+### Team creation
 
-`CreateTeam::create()` follows four steps: validate the name, create the team record with `personal_team = false` via `$user->ownedTeams()->create()`, attach the creator to the pivot with `Role::OWNER`, clear the cached `ownedTeams` and `teams` relations via `unsetRelation()`, then set `current_team_id` on the user. The relation cache clear is required so subsequent Gate checks observe the new team immediately.
+`CreateTeam::create()` validates the name, creates the team through `$user->ownedTeams()->create()` with `personal_team = false`, attaches the creator on the pivot as `Role::OWNER`, clears the cached `ownedTeams` and `teams` relations with `unsetRelation()`, then force-fills the user's `current_team_id`. The relation reset is there so a Gate check right after sees the new team.
 
-### Membership and the Pivot Model
+### Membership and the pivot model
 
-All member relations go through the pivot. `Team::users()` chains `->using(MagicStarter::membershipModel())` and `->withPivot('role')` — never bypass this with a raw `team_user` query. Use `membershipModel()` everywhere, never hardcode `TeamUser`. Role updates use `updateExistingPivot()`. Removal uses `detach()`. Owner detection compares `(string) $team->user_id === (string) $member->id` — the string cast is required for UUID/integer compatibility.
+Every member relation goes through the pivot: `Team::users()` chains `->using(MagicStarter::membershipModel())->withPivot('role')`. Use `membershipModel()` rather than `TeamUser` or a raw `team_user` query, because an app can replace the pivot model. Role changes use `updateExistingPivot()` and removal uses `detach()`. Owner detection compares `(string) $team->user_id === (string) $member->id`; the string cast keeps it right for both UUID and integer keys.
 
 ### Roles
 
-`Role` is a backed enum with four cases: `OWNER`, `ADMIN`, `EDITOR`, `MEMBER`. Only `ADMIN`, `EDITOR`, and `MEMBER` are returned by `Role::assignable()` — owner is determined by team ownership, not by pivot assignment. Use `Role::assignableForValidation()` to build `in:` validation rules. Never accept `owner` as a user-supplied role value.
+`Role` is a backed enum with `OWNER`, `ADMIN`, `EDITOR` and `MEMBER`. `Role::assignable()` returns only `ADMIN`, `EDITOR` and `MEMBER`, because ownership follows `teams.user_id` rather than a pivot assignment, and it moves only through `TransfersTeamOwnership`. Build `in:` rules with `Role::assignableForValidation()`, and do not accept `owner` as a role from a request.
 
 ### Invitations
 
-`InviteTeamMember` creates a `TeamInvitation` record with a 32-char random token and immediately sends `TeamInvitationNotification` via the anonymous mail route. Invitation lookup is email-based. Check `magic-starter.invitation_expiry_days` config for expiry enforcement in custom overrides.
+`InviteTeamMember` lower-cases the email, creates a `TeamInvitation` with a 32-character random token and sends `TeamInvitationNotification` to the address through an anonymous mail route, in the inviter's locale. Lookup is by email. A new invitation has no `expires_at`, so it does not expire; `ResendTeamInvitation` sets `expires_at` to now plus `magic-starter.invitation_expiry_days` (default `7`). `AcceptTeamInvitation` deletes an expired invitation and refuses it.
 
-### Deletion Constraints
+### Deletion
 
-`DeleteTeam::delete()` runs three steps: delete the team photo from the configured storage disk, detach all members and delete all invitations, then delete the team record. Before calling this action, the controller must verify the team is not a `personal_team` and must switch the owner's `current_team_id` if it matches the deleted team.
+`DeletesTeams` is bound to `SubscriptionGuardedDeleteTeam`, which refuses while the team is billed and then runs `DeleteTeam::delete()`: delete the team photo from the team photo disk, detach every member and delete the invitations, delete the team (force-delete on a model that soft deletes), and dispatch `TeamDeleted`. The controller checks `personal_team` before calling it and moves the owner's `current_team_id` off a deleted team. With the `restorable-teams` feature on, `DELETE teams/{team}` trashes through `TrashesTeams` instead.

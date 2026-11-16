@@ -12,7 +12,7 @@
 - Event: `src/Events/AdminActionPerformed.php`
 - Config: `config/magic-starter.php`, `admin` block
 
-The panel is optional. `filament/filament` (`^4.0|^5.0`), `laravel/horizon`, `laravel/pulse` and `laravel/telescope` are `suggest` and `require-dev` entries; nothing requires them at runtime, and the two Filament commands exist only while Filament is installed.
+The panel is optional. `filament/filament` (`^4.13.3|^5.8.3`; older 4.x and 5.x releases are in `conflict`), `laravel/horizon`, `laravel/pulse` and `laravel/telescope` are `suggest` and `require-dev` entries; nothing requires them at runtime, and the two Filament commands exist only while Filament is installed.
 
 ## Install
 
@@ -47,7 +47,7 @@ The command writes `app/Providers/Filament/AdminPanelProvider.php` (panel id `ad
 
 ## Plugin Setters
 
-Set every option BEFORE `->plugin()`: Filament calls `register()` the moment the plugin is passed in, so a setter chained afterwards has no effect.
+Set every option before passing the plugin to `->plugin()`: Filament calls `register()` the moment the plugin is passed in, so a setter chained afterwards has no effect.
 
 ```php
 ->plugin(
@@ -65,7 +65,7 @@ Set every option BEFORE `->plugin()`: Filament calls `register()` the moment the
 |---|---|
 | `userResource(string $class)` | Replace the Users resource |
 | `teamResource(string $class)` | Replace the Teams resource (still behind the teams feature) |
-| `resource(string $key, string $class)` | Register or replace a resource; keys `users`, `teams`, `subscriptions`, `newsletter_subscribers`, `audits` keep their feature gate, any other key is unconditional |
+| `resource(string $key, string $class)` | Register or replace a resource; a key the package ships (`users`, `teams`, `subscriptions`, `audits` and the others in `MagicStarterPlugin::mountedResources()`) keeps its feature gate, any other key is unconditional |
 | `withoutResources(array $keys)` | Never register these keys |
 | `navigationGroup(?string $group)` | Group the package's resources sit under |
 | `authorizeUsing(Closure $callback)` | Replace the allowlist; receives `($user, $panel)`, admits only on `true` |
@@ -80,7 +80,7 @@ Set every option BEFORE `->plugin()`: Filament calls `register()` the moment the
 
 1. It answers only for a panel carrying the plugin; any other panel gets `false`.
 2. With `authorizeUsing()` set, the callback decides alone.
-3. Otherwise the lowercased, trimmed email must be in `magic-starter.admin.emails` and the address must be verified. An empty list admits nobody, and an empty email is refused.
+3. Otherwise a guest is refused, the lowercased, trimmed email must be in `magic-starter.admin.emails` and the address must be verified. An empty list admits nobody, and an empty email is refused.
 
 Sign in asks for the API's TOTP code (or a recovery code) when the `twoFactorAuthentication` feature is on and the user confirmed two-factor: `AnilcanCakir\MagicStarter\Filament\Auth\TwoFactorAuthentication`, a Filament `MultiFactorAuthenticationProvider` over the `TwoFactorAuthenticatable` columns. Codes go through `TwoFactorAuthenticationProvider::verifyOnce()` and `redeemRecoveryCode()`, the same calls as the API challenge, so a code spent on one surface is spent on both. The plugin mounts it only on a panel with no `multiFactorAuthentication()` of its own when the panel is built; an app that configures one lists `TwoFactorAuthentication::make()` itself. It never writes a secret; the Users resource's `reset_two_factor` turns two-factor off and so also lifts the panel challenge.
 

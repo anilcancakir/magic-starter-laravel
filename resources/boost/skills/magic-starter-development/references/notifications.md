@@ -2,49 +2,49 @@
 
 ## Where to Find It
 
-- src/NotificationPreferenceRegistry.php — type registration, channel aliases, slug resolution
-- src/Traits/HasNotifications.php — prefers() method, notificationPreferenceMatrix(), OneSignal routing
-- src/Listeners/GateNotificationChannels.php — NotificationSending listener, channel gating logic
-- src/Models/NotificationSetting.php — per-user/notifiable preference overrides
-- config/magic-starter.php — feature flag for notifications
+- `src/NotificationPreferenceRegistry.php`: type registration, channel aliases, slug resolution
+- `src/Traits/HasNotifications.php`: `prefers()`, `notificationPreferenceMatrix()`, OneSignal routing
+- `src/Listeners/GateNotificationChannels.php`: the `NotificationSending` listener that gates channels
+- `src/Models/NotificationSetting.php`: a notifiable's per-type, per-channel override
+- `config/magic-starter.php`: the `notifications` feature flag
 
 ## What to Watch For
 
-### NotificationPreferenceRegistry centralizes type and channel definitions
+### The registry defines types and channels
 
-- Register notification types in AppServiceProvider boot(): NotificationPreferenceRegistry::register(['ClassName' => ['label' => '...', 'channels' => ['email', 'push'], 'default' => ['email'], 'locked' => []]]).
-- 'label' is passed through __() when the preference matrix is built, so a multi-language app registers a translation KEY rather than a sentence. Register the key, never __('...') itself: boot() runs before any locale middleware, and under Octane it runs once per worker, so a __() there freezes the first request's language in for every later one. A finished sentence still works unchanged, since __() returns an argument it has no line for.
-- Channel aliases map logical names (e.g. 'push') to driver classes via NotificationPreferenceRegistry::channelAliases(['push' => OneSignalChannel::class]).
-- Slugs auto-derive from class basename with Notification suffix stripped and converted to snake_case; override via 'slug' key in registration.
+- Register types from a service provider's `boot()`: `NotificationPreferenceRegistry::register([OrderShipped::class => ['label' => '...', 'channels' => ['email', 'push'], 'default' => ['email'], 'locked' => []]])`. The key is the notification class.
+- `label` goes through `__()` when the matrix is built, so a multi-language app registers a translation key rather than a sentence. Register the key, not `__('...')` itself: `boot()` runs before any locale middleware, and under Octane once per worker, so a `__()` there freezes the first request's language for every later one. A finished sentence still works, since `__()` returns a string it has no line for unchanged.
+- `NotificationPreferenceRegistry::channelAliases(['push' => OneSignalChannel::class])` maps a logical name to a driver channel.
+- A slug is derived from the class basename with the `Notification` suffix stripped, in snake case; a `slug` key in the registration overrides it.
 
-### GateNotificationChannels listener fires on every NotificationSending event
+### `GateNotificationChannels` runs on every `NotificationSending`
 
-- Returns false to cancel delivery for a specific channel when user.prefers() returns false.
-- Checks registry has(notificationClass); if unregistered, allows delivery by default.
-- Skips gating if notifiable lacks prefers() method or if channel is locked — locked channels always deliver regardless of user preference.
-- Resolves logical channel name from driver via resolveLogicalChannel() to handle aliased channels.
-- A notification implementing Contracts\BypassesNotificationPreferences can deliver a channel to a notifiable despite a disabled preference: bypassesPreference($notifiable, $logicalChannel) is asked after the locked check and before prefers().
+- An unregistered notification class is delivered.
+- A notifiable without `prefers()` is delivered.
+- `resolveLogicalChannel()` maps the driver channel back to its logical name, so an aliased channel is gated under its alias. A `broadcast` the type does not register answers to its `database` preference, since it is the live copy of that row.
+- A channel the type does not list in `channels` is delivered.
+- A locked channel is always delivered, whatever the user chose.
+- A notification implementing `Contracts\BypassesNotificationPreferences` is asked `bypassesPreference($notifiable, $logicalChannel)` after the locked check and before `prefers()`; true delivers despite a disabled preference.
+- Otherwise the listener returns `prefers()`, and false cancels that channel.
 
-### HasNotifications trait prefers() uses 3-step fallback
+### `prefers()` falls back in three steps
 
-- Step 1: if type not registered, return true (allow delivery).
-- Step 2: check NotificationSetting table for explicit DB override (type + channel); if found, return override.is_enabled.
-- Step 3: if no override, check registry defaults for this type + channel; return true if channel is in defaults array, false otherwise.
+1. A type that is not registered returns true.
+2. A `NotificationSetting` row for the type and channel returns its `is_enabled`.
+3. Otherwise the channel is enabled when it is in the registered `default` list.
 
-### notificationPreferenceMatrix() builds the settings UI payload
+### `notificationPreferenceMatrix()` builds the settings payload
 
-- Returns nested array: type slug → label + channels → [enabled (bool), locked (bool)].
-- Enabled state respects DB overrides; falls back to registry default if no override.
-- Locked channels cannot be toggled (UI should disable them); locked() call on registry returns list of unchangeable channels per type.
+- It returns type slug to `label` plus `channels`, each channel carrying `enabled` and `locked`.
+- `enabled` follows a stored override and falls back to the registry default.
+- A locked channel cannot be toggled, so the client shows it disabled; `NotificationPreferenceRegistry::locked()` lists them per type.
 
-### OneSignal routing uses alias-based targeting with v5 SDK
+### OneSignal routing targets an alias (SDK v5)
 
-- routeNotificationForOneSignal() returns ['external_id' => [MagicStarter::onesignalExternalIdPrefix() . $this->getKey()]] for OneSignal v5 alias targeting.
-- The prefix is required because OneSignal rejects bare numeric IDs as external_id; must match app-side call Notify.initializePush(prefix + user.id).
-- Channel driver is AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel; notification returned map is passed to \onesignal\client\model\Notification::setIncludeAliases().
+- `routeNotificationForOneSignal()` returns `['external_id' => [MagicStarter::onesignalExternalIdPrefix() . $this->getKey()]]`.
+- The prefix (`magic-starter.onesignal.external_id_prefix`, default `user_`) exists because OneSignal rejects a bare numeric external id, and it has to match the client's `Notify.initializePush(prefix + user.id)`; a mismatch is accepted and delivered to nobody.
+- The driver is `AnilcanCakir\MagicStarter\Notifications\Channels\OneSignalChannel`, which passes the aliases to `\onesignal\client\model\Notification::setIncludeAliases()`.
 
-### Consumer pattern: register types, let GateNotificationChannels filter
+### Consumer pattern
 
-- Define custom notification classes that extend Notification and fire on NotificationSending.
-- Register them in AppServiceProvider with prefers()-aware channels.
-- GateNotificationChannels automatically gates delivery; UI uses notificationPreferenceMatrix() to build preference toggles.
+Write ordinary Laravel notifications, register each type with its channels in the registry, and let `GateNotificationChannels` filter delivery. The settings screen reads `notificationPreferenceMatrix()` through `GET notification-preferences` and writes through `PUT notification-preferences`.

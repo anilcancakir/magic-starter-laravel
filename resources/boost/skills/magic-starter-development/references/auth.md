@@ -2,51 +2,52 @@
 
 ## Where to Find It
 
-- src/Actions/CreateUser.php — registration flow, newsletter, email verification
-- src/Actions/CreateGuestUser.php — guest user creation keyed by device_id
-- src/Actions/LogOtpProvider.php — default OTP sender (logs; override in production)
-- src/Actions/CacheOtpVerifier.php — OTP verifier using cache with one-time pull
-- src/Http/Controllers/Concerns/AuthenticatesUsers.php — token creation and response shape
-- src/Http/Requests/LoginRequest.php — identity-strategy-aware login rules
-- src/Http/Requests/RegisterRequest.php — identity-strategy-aware registration rules
-- src/Features.php — emailIdentity(), phoneIdentity(), all feature flag checks
+- `src/Actions/CreateUser.php`: registration, newsletter consent, the verification mail
+- `src/Actions/CreateGuestUser.php`: guest sign-in keyed by `device_id`
+- `src/Actions/CreateUserFromProvider.php`: social sign-up
+- `src/Actions/LogOtpProvider.php`: the default OTP sender (it only logs; replace it in production)
+- `src/Actions/CacheOtpVerifier.php`: the OTP verifier, a one-time cache pull
+- `src/Http/Controllers/Concerns/AuthenticatesUsers.php`: token creation and the response shape
+- `src/Http/Requests/LoginRequest.php`, `RegisterRequest.php`: rules that follow the identity strategy
+- `src/Features.php`: `emailIdentity()`, `phoneIdentity()` and every feature check
 
 ## What to Watch For
 
-### Identity strategy is config-driven (email, phone, or dual)
+### The identity strategy is config-driven (email, phone, or both)
 
-- Features::emailIdentity() reads magic-starter.auth.email (default true); Features::phoneIdentity() reads magic-starter.auth.phone (default false).
-- Both LoginRequest and RegisterRequest call these methods at rule-build time, so the validation surface changes at runtime based on config — not code.
-- When both are enabled, email uses required_without:phone and phone uses required_without:email; the user must supply at least one.
-- Phone values must pass the E164Phone rule in all cases.
+- `Features::emailIdentity()` reads `magic-starter.auth.email` (default `true`); `Features::phoneIdentity()` reads `magic-starter.auth.phone` (default `false`).
+- `LoginRequest` and `RegisterRequest` call both when they build their rules, so config, not code, decides what a request must carry.
+- With both on, `email` is `required_without:phone` and `phone` is `required_without:email`: the user supplies at least one.
+- A phone value always passes the `E164Phone` rule.
 
-### Guest users have nullable email AND password
+### Guest users have a null email and a null password
 
-- CreateGuestUser hardcodes email: null and password: null in attributes; is_guest is set to true.
-- Lookup is by device_id via firstOrCreate — re-calling with the same device_id returns the existing guest rather than creating a duplicate.
-- Conversion to a full account requires the consumer to supply email (or phone) plus password and call CreatesUsers::create(); guard all email/password reads with null checks.
+- `CreateGuestUser` writes `email: null`, `password: null` and `is_guest: true`.
+- It looks for a user that is still a guest with that `device_id` and returns it, so repeating the call does not create a duplicate. With no such guest it frees the `device_id` from any promoted account that still holds it and creates a new guest, because the device id is an anonymous key that must stop opening an account once it has credentials.
+- A guest becomes a registered account through `UpdatesUserProfiles` or `UpdatesUserPasswords` once it has an email or a phone plus a password (see `profile.md`), not through `CreatesUsers`. Guard every email and password read with a null check.
+- `POST auth/guest/claim` (`ClaimsGuestAccounts`) moves a guest session's rows into an existing account the caller signs in to.
 
 ### One verification mail per registration, guarded by object identity
 
-- MustVerifyEmail::sendEmailVerificationNotification() sends at most once per model INSTANCE; a registration reaches it twice, once from CreateUser and once from the framework listener on Registered.
+- `MustVerifyEmail::sendEmailVerificationNotification()` sends at most once per model instance; a registration reaches it twice, once from `CreateUser` and once from the framework listener on `Registered`.
 - The guard is an instance property, not a static keyed by id: a static would survive between requests under Octane and mute a customer's later resend.
-- The limit follows from that. Binding your own CreatesUsers and then firing event(new Registered($user->fresh())), or reloading the model between the action and the event, hands the listener a different object and sends both mails again with no signal. Pass the same instance through.
-- POST /email/verification-notification is unaffected: its own request, its own instance.
+- That is also its limit. Binding your own `CreatesUsers` and then firing `event(new Registered($user->fresh()))`, or reloading the model between the action and the event, hands the listener a different object and sends both mails again, with no warning. Pass the same instance through.
+- `POST email/verification-notification` is unaffected: its own request, its own instance.
+- With the `email-verification` feature off, the trait sends nothing.
 
-### Social login pre-verifies email
+### Social sign-up and a pre-verified email
 
-- CreateUser accepts email_verified_at as an optional validated field when extended-profile is enabled.
-- Passing a non-null email_verified_at suppresses the sendEmailVerificationNotification() call because the condition requires email_verified_at === null.
-- Social auth controllers set this field before delegating to CreatesUsers, so the verification email is never sent for social registrations.
+- Social sign-up goes through `CreatesUsersFromProvider`, not `CreatesUsers`. It force-creates a passwordless user with `email_verified_at` set to now when the provider vouched for the address, fires `Registered`, and fires `Verified` in that case.
+- `CreateUser` accepts an optional `email_verified_at` when `extended-profile` is on; a non-null value skips `sendEmailVerificationNotification()`, because the send requires `email_verified_at === null`.
 
-### OTP flow uses two separate contracts
+### The OTP flow uses two contracts
 
-- SendsOtpCodes is bound to LogOtpProvider by default; it logs the code via Log::info and does nothing else — override this binding for any real SMS/push delivery.
-- VerifiesOtpCodes is bound to CacheOtpVerifier; it calls Cache::pull('otp_' . $phone), which consumes the entry on first read, making codes single-use by design.
-- The OTP TTL is controlled by however long the code lives in cache before CacheOtpVerifier reads it; the verifier itself does not set the TTL.
+- `SendsOtpCodes` is bound to `LogOtpProvider`, which writes the code with `Log::info()` and does nothing else; bind your own for real SMS or push delivery.
+- `VerifiesOtpCodes` is bound to `CacheOtpVerifier`, which calls `Cache::pull('otp_' . $phone)`: the first read consumes the code, so a code works once.
+- The verifier sets no TTL; the code lives as long as whoever cached it decided.
 
-### Auth response pattern (AuthenticatesUsers trait)
+### The auth response (`AuthenticatesUsers`)
 
-- createAuthToken() calls $user->createToken('auth_token'), with an expires_at of now plus token_expiration_minutes (or remember_me_expiration_minutes when $remember is true and that is set) when the lifetime is a positive number, and then force-fills ip_address and user_agent onto the resulting PersonalAccessToken — requires the custom token model with those columns.
-- authenticatedResponse() sets the user resolver on both the injected $request and the container-resolved app('request') so that nested resources (e.g. TeamResource) can call $request->user() before Sanctum middleware has run.
-- The JSON envelope is always {data: {user, token}, message}; no variations exist.
+- `createAuthToken()` calls `$user->createToken('auth_token')`. When `token_expiration_minutes` (or `remember_me_expiration_minutes` for a `remember_me` sign-in) is a positive number, the token gets that expiry; then `ip_address` and `user_agent` are force-filled onto the package's `PersonalAccessToken`, which carries those columns.
+- `authenticatedResponse()` sets the user resolver on both the injected `$request` and `app('request')`, so a nested resource (`TeamResource`, for example) can call `$request->user()` before Sanctum's middleware has run.
+- The envelope is `{data: {user, token}, message}`, plus `data.deletion_cancelled: true` when the sign-in cancelled a scheduled account deletion. A user with confirmed two-factor gets `{two_factor: true, two_factor_token}` instead (see `two-factor.md`).

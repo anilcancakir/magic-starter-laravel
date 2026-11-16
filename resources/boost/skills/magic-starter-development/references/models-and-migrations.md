@@ -1,37 +1,33 @@
-# Models & Migrations
+# Models and Migrations
 
 ## Where to Find It
 
-- `src/Support/ConditionallyUsesUuids.php`: runtime UUID/integer PK switching trait
-- `src/Support/MigrationHelper.php`: primaryKey(), foreignKey(), morphColumns()
-- `src/Models/`: Team, PersonalAccessToken (both use ConditionallyUsesUuids)
-- `src/Traits/`: HasProfilePhoto, HasNotifications, HasTeams, HasGuestSupport, TwoFactorAuthenticatable
-- `config/magic-starter.php`: use_uuids toggle, profile_photo_disk
+- `src/Support/ConditionallyUsesUuids.php`: runtime UUID or integer keys
+- `src/Support/MigrationHelper.php`: `primaryKey()`, `foreignKey()`, `morphColumns()`
+- `src/Models/`: the package models (`Team`, `TeamUser`, `TeamInvitation`, `PersonalAccessToken` and the rest), all on `ConditionallyUsesUuids`
+- `src/Traits/`: `HasProfilePhoto`, `HasNotifications`, `HasTeams`, `HasGuestSupport`, `TwoFactorAuthenticatable` and the other user traits
+- `config/magic-starter.php`: `use_uuids`, `profile_photo_disk`
 
 ## What to Watch For
 
-### All models use ConditionallyUsesUuids trait
+### Every package model uses `ConditionallyUsesUuids`
 
-Every model in the package applies ConditionallyUsesUuids. When config('magic-starter.use_uuids') is true, the trait sets $incrementing=false and $keyType='string' on instantiation, and auto-generates ordered UUIDs on create. When false, standard auto-incrementing integers apply with no special behavior. PHPDoc @property annotations are required for every column; @property-read for accessors and computed attributes.
+With `magic-starter.use_uuids` true (the default), the trait sets `$incrementing = false` and `$keyType = 'string'` when a model is built and writes an ordered UUID on create; a route key that is not a UUID then resolves to a missing model (404) instead of a query error. With it false, keys are ordinary auto-increment integers. Give every column a `@property` annotation, and accessors and computed attributes `@property-read`.
 
-### Dynamic relation resolution prevents class hardcoding
+### Relations resolve their classes at runtime
 
-Relations never reference App\Models\* directly. All model classes are resolved via MagicStarter::userModel(), MagicStarter::teamModel(), MagicStarter::membershipModel(), and MagicStarter::teamInvitationModel(). BelongsToMany relations to users must chain ->using(MagicStarter::membershipModel())->withPivot('role'). Casts are defined via the casts() method (Laravel 11+ syntax), not the $casts property. Use $fillable arrays, not $guarded. No soft deletes — use cascadeOnDelete() on foreign keys instead.
+A relation never names `App\Models\*`. Model classes come from `MagicStarter::userModel()`, `teamModel()`, `membershipModel()` and `teamInvitationModel()`, and a `BelongsToMany` to users chains `->using(MagicStarter::membershipModel())->withPivot('role')`. Define casts in the `casts()` method and use `$fillable` rather than `$guarded`. The package's own models do not soft delete; the team model may opt in for the `restorable-teams` feature, and every place that touches a trashed team checks `SoftDeletingTeams::usedBy()` first.
 
-### Five user traits provide optional functionality
+### The user traits
 
-HasProfilePhoto exposes getProfilePhotoUrlAttribute(), resolving the configured disk URL when profile_photo_path is set, and null when none is stored, so the client draws its own initials.
+- `HasProfilePhoto`: `getProfilePhotoUrlAttribute()` returns the configured disk's URL when `profile_photo_path` is set, and null otherwise, so the client draws its own initials.
+- `HasNotifications`: `notificationSettings()` (a `MorphMany<NotificationSetting, $this>`), `prefers()` with its three-step fallback (an unregistered type allows, a stored override wins, then the registry defaults), and `routeNotificationForOneSignal()` returning `['external_id' => [MagicStarter::onesignalExternalIdPrefix() . $this->getKey()]]` for the `OneSignalChannel` driver.
+- `HasTeams`: `ownedTeams()`, `teams()` (with the pivot), `personalTeam()`, `allTeams()`, `currentTeam()`, `getCurrentTeamOrPersonal()`, `belongsToTeam()`, `ownsTeam()` and `hasTeamRole()`, which reads `pivot->role`.
+- `HasGuestSupport`: `isGuest()` reads `is_guest`; `isRegistered()` is true for a non-guest with an email and password or a phone and password. A guest may have a null email and a null password, so guard both.
+- `TwoFactorAuthenticatable`: `two_factor_secret` and `two_factor_recovery_codes` are encrypted; `twoFactorSecret()` and `recoveryCodes()` decrypt them. Check `hasEnabledTwoFactorAuthentication()` (a non-null `two_factor_confirmed_at`) before you rely on a secret.
 
-HasNotifications provides morphMany notificationSettings() returning MorphMany<NotificationSetting, $this>, a prefers() method with a 3-step fallback (registry miss defaults to true, DB override wins, then registry default channels), and routeNotificationForOneSignal() returning ['external_id' => [MagicStarter::onesignalExternalIdPrefix() . $this->getKey()]] for OneSignal v5 alias targeting via OneSignalChannel driver.
+### `MigrationHelper` handles both key types
 
-HasTeams provides ownedTeams(), teams() (with pivot), allTeams() (merge + sort), currentTeam() BelongsTo, getCurrentTeamOrPersonal(), belongsToTeam(), ownsTeam(), and hasTeamRole() reading pivot->role.
+`MigrationHelper::primaryKey($table)` emits `uuid('id')->primary()` or `id()`, `MigrationHelper::foreignKey($table, 'user_id')` emits `foreignUuid()` or `foreignId()`, and `MigrationHelper::morphColumns($table, 'notifiable')` emits `uuidMorphs()` or `morphs()`, all from `use_uuids`. Use them instead of a raw `$table->id()`, `$table->uuid('id')` or `$table->morphs()`, so the same migration builds matching keys in either mode.
 
-HasGuestSupport provides isGuest() reading the is_guest flag and isRegistered() checking for non-guest with a valid email+password or phone+password pair. Guest users may have null email AND null password — always guard with null checks.
-
-TwoFactorAuthenticatable stores two_factor_secret and two_factor_recovery_codes as encrypted columns. twoFactorSecret() and recoveryCodes() call decrypt() internally. Always check hasEnabledTwoFactorAuthentication() (confirmed_at not null) before reading secrets.
-
-### MigrationHelper handles UUID/integer dual support
-
-MigrationHelper::primaryKey($table) emits uuid('id')->primary() or id() based on config. MigrationHelper::foreignKey($table, 'col') emits foreignUuid or foreignId. MigrationHelper::morphColumns($table, 'name') emits uuidMorphs or morphs. Never use raw $table->id(), $table->uuid('id'), or $table->morphs() directly in package migrations.
-
-Additional conventions: anonymous class syntax (return new class extends Migration), idempotency via if (! Schema::hasTable('table_name')), explicit string lengths (profile_photo_path: 2048, phone_country: char(2)), and $table->timestamps() on every entity table.
+Package migrations also follow these conventions: an anonymous class (`return new class extends Migration`), a `Schema::hasTable()` or `Schema::hasColumn()` guard so a rerun is harmless, explicit string lengths (`profile_photo_path` 2048, `phone_country` `char(2)`), and `$table->timestamps()` on every entity table.
