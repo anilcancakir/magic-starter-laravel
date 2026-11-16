@@ -37,7 +37,9 @@ The tag runs three jobs in order; each starts only when the one before it passed
 
 Watch it with `gh run watch $(gh run list --workflow=publish.yml --limit=1 --json databaseId --jq '.[0].databaseId')`.
 
-On a failure, fix the cause, then use **Re-run failed jobs**, never **Re-run all jobs**: re-running everything repeats the Packagist update and the release step, and `gh release create` refuses a release that already exists. A `Validate` failure published nothing; fix it through a pull request and ask before moving or deleting a pushed tag.
+A `Validate` failure published nothing. A re-run builds the original commit, so it cannot pick up a fix: fix the cause through a pull request, then ask before deleting the pushed tag (`git push --delete origin X.Y.Z` and `git tag -d X.Y.Z`; a remote delete is not yours to decide) and tag the new merge commit. A transient failure (a runner or network error) is the only case for **Re-run failed jobs**.
+
+When `publish` succeeded and only `GitHub Release` failed, use **Re-run failed jobs**, never **Re-run all jobs**: re-running everything repeats the Packagist update, and `gh release create` refuses a release that already exists. Or create the release by hand: `gh release create X.Y.Z --title X.Y.Z --latest --verify-tag --notes-file <file>`. A version Packagist has accepted is final: fix forward with the next version.
 
 ## 5. Verify
 
