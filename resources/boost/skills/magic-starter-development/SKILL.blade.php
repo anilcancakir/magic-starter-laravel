@@ -21,7 +21,7 @@ magic-starter-laravel is a JSON API backend (Sanctum tokens, API resources, no v
 4. Bind an override in `AppServiceProvider::register()`: the app's provider registers after the package's, so its binding replaces the default before any `boot()` resolves the contract.
 5. A new package action implements one contract from `src/Contracts/` and is bound in `MagicStarterServiceProvider::register()`, so an app can replace it like the others.
 6. Build migrations with `MigrationHelper::primaryKey()`, `foreignKey()` and `morphColumns()` instead of `$table->id()`, `foreignId()` or `morphs()`, because `magic-starter.use_uuids` switches every key between UUID and integer and a raw column breaks the foreign keys in the other mode.
-7. Give every team `BelongsToMany` the pivot table and keys (`team_user`, `user_id`, `team_id`) and chain `->using(MagicStarter::membershipModel())->withPivot('role')`, because Eloquent derives the table from the model class names (a renamed user model would look for another table) and the member's role lives on that pivot.
+7. Give every team `BelongsToMany` the pivot table `team_user` and both keys, the owning side first (`user_id`, `team_id` from a user; `team_id`, `user_id` from a team), and chain `->using(MagicStarter::membershipModel())->withPivot('role')`, because Eloquent derives the table from the model class names (a renamed user model would look for another table) and the member's role lives on that pivot.
 8. Null-check `email` and `password` on a user: a guest has neither, and a social sign-up has no password.
 
 ## Recipes
