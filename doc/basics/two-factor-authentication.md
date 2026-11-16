@@ -427,7 +427,7 @@ All 2FA settings live under the `two_factor` key in `config/magic-starter.php`.
 |------------------------|--------------|----------------------------------------------------------------------------------------------------------------|
 | `company_name`         | `APP_NAME`   | Issuer name shown in the authenticator app next to the account entry. Falls back to `config('app.name')`.     |
 | `recovery_codes_count` | `8`          | Number of recovery codes generated when 2FA is enabled or regenerated.                                        |
-| `geoip_db_path`        | `null`       | Absolute path to a MaxMind GeoIP2 `.mmdb` file. Only the sessions list reads it, to show the city and country of each session; the challenge itself does not use it. Set to `null` to disable geo-resolution. |
+| `geoip_db_path`        | `null`       | Absolute path to a MaxMind GeoIP2 `.mmdb` file. Only the sessions list reads it, to show the city and country of each session whose address resolves; the challenge itself does not use it. Set to `null` to disable geo-resolution. |
 | `challenge_token_ttl`  | `5`          | Minutes before the `two_factor_token` issued at login expires. Users must complete the challenge within this window. |
 
 > [!NOTE]

@@ -28,7 +28,7 @@ Every member relation goes through the pivot: `Team::users()` chains `->using(Ma
 
 ### Invitations
 
-`InviteTeamMember` lower-cases the email, creates a `TeamInvitation` with a 32-character random token and sends `TeamInvitationNotification` to the address through an anonymous mail route, in the inviter's locale. Lookup is by email. A new invitation has no `expires_at`, so it does not expire; `ResendTeamInvitation` sets `expires_at` to now plus `magic-starter.invitation_expiry_days` (default `7`). `AcceptTeamInvitation` deletes an expired invitation and refuses it.
+`InviteTeamMember` lower-cases the email, creates a `TeamInvitation` with a 32-character random token and sends `TeamInvitationNotification` to the address through an anonymous mail route, in the inviter's locale. Lookup is by email. A new invitation gets `expires_at` set to now plus `magic-starter.invitation_expiry_days` (default `7`), and `ResendTeamInvitation` restarts that window; a host action bound over `InvitesTeamMembers` has to set `expires_at` itself, or its invitations never expire. `AcceptTeamInvitation` deletes an expired invitation and refuses it.
 
 ### Deletion
 

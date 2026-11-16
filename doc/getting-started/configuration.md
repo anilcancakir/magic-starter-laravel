@@ -433,11 +433,11 @@ When the `two-factor-authentication` feature is enabled, the following settings 
 |:----|:------------|
 | `company_name` | Displayed in the user's authenticator app as the issuer. Defaults to your `APP_NAME`. |
 | `recovery_codes_count` | Number of one-time recovery codes generated when a user enables 2FA. Each code can be used once to bypass the TOTP challenge. |
-| `geoip_db_path` | Absolute path to a MaxMind GeoIP2 `.mmdb` database file. When set, each entry of the sessions list carries the city and country of its IP address (needs `geoip2/geoip2`). Set to `null` to disable. |
+| `geoip_db_path` | Absolute path to a MaxMind GeoIP2 `.mmdb` database file. When set, each entry of the sessions list carries the city and country of its IP address when one resolves (needs `geoip2/geoip2`). Set to `null` to disable. |
 | `challenge_token_ttl` | Number of minutes a 2FA challenge token remains valid. Users must complete the challenge within this window. |
 
 > [!TIP]
-> To use GeoIP location resolution, download a MaxMind GeoLite2-City database and set the `geoip_db_path` to its absolute path on disk. The database is not included with the package.
+> To use GeoIP location resolution, download a MaxMind GeoLite2-City database and set the `geoip_db_path` to its absolute path on disk. The database is not included with the package. A location is optional even then: a session from a private or loopback address, a missing `geoip2/geoip2` reader or database file, or a failed lookup shows no city and country.
 
 <a name="billing"></a>
 ## Billing
