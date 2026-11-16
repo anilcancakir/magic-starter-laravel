@@ -41,7 +41,7 @@ jobs:
         env:
           TAG: ${{ github.ref_name }}
         run: |
-          skill_file='resources/boost/skills/magic-starter-development/SKILL.blade.php'
+          skill_file='resources/boost/skills/magic-starter-development/SKILL.md'
           if [ ! -f "$skill_file" ]; then
             echo "::error::$skill_file is missing; the Boost skill carries the version stamp." >&2
             exit 1
