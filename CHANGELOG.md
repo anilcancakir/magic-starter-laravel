@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-16
+
 ### Changed
 
 - **The Boost skill is plain Markdown.** `resources/boost/skills/magic-starter-development/SKILL.blade.php` is now `SKILL.md`, with the three `@boostsnippet` blocks written as bold titles over fenced code. Laravel Boost reads either file (`SKILL.blade.php` first, then `SKILL.md`), so `boost:install` and `boost:update` still install the skill. A host app that does not use Boost can link the directory into `.claude/skills/` and an agent reads it directly, which a Blade template could not offer. Nothing changes for an app that installed the skill through Boost; one that kept a copy of the template should delete it. (`resources/boost/skills/magic-starter-development/SKILL.md`, `.github/workflows/publish.yml`, `.claude/commands/release.md`, `tests/BoostSkillTest.php`)
