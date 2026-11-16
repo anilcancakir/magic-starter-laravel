@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -200,6 +201,44 @@ final class EmailVerificationControllerTest extends TestCase
 
         $this->getJson($unsignedUrl)
             ->assertStatus(403);
+    }
+
+    public function test_verify_returns_404_for_a_malformed_id_without_querying_users(): void
+    {
+        config(['magic-starter.use_uuids' => true]);
+
+        $url = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            [
+                'id' => 'not-a-key',
+                'hash' => sha1('nobody@example.test'),
+            ],
+        );
+
+        DB::enableQueryLog();
+
+        $this->getJson($url)->assertStatus(404);
+
+        foreach (DB::getQueryLog() as $entry) {
+            $this->assertStringNotContainsString('users', $entry['query'], 'The users table was queried.');
+        }
+    }
+
+    public function test_verify_returns_404_for_a_well_formed_unknown_id(): void
+    {
+        config(['magic-starter.use_uuids' => true]);
+
+        $url = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            [
+                'id' => '00000000-0000-7000-8000-000000000000',
+                'hash' => sha1('nobody@example.test'),
+            ],
+        );
+
+        $this->getJson($url)->assertStatus(404);
     }
 
     public function test_verify_fires_verified_event(): void

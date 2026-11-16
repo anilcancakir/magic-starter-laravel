@@ -2,6 +2,7 @@
 
 namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\FindsRecords;
 use AnilcanCakir\MagicStarter\MagicStarter;
 use AnilcanCakir\MagicStarter\Social\UnconfirmedLinks;
 use Illuminate\Http\JsonResponse;
@@ -15,6 +16,8 @@ use Illuminate\Http\Request;
  */
 class EmailVerificationController
 {
+    use FindsRecords;
+
     /**
      * Send an email verification notification to the authenticated user.
      *
@@ -58,7 +61,7 @@ class EmailVerificationController
         UnconfirmedLinks $unconfirmedLinks,
     ): JsonResponse {
         // 1. Resolve the user by ID — 404 if not found.
-        $user = app(MagicStarter::userModel())->findOrFail($id);
+        $user = $this->findUser($id);
 
         // 2. Validate the hash to ensure the link matches the current email.
         if (! hash_equals(sha1($user->getEmailForVerification()), $hash)) {
@@ -77,5 +80,15 @@ class EmailVerificationController
         }
 
         return response()->json(['message' => __('magic-starter::auth.verification.verified')], 200);
+    }
+
+    /**
+     * Find a user by their ID.
+     */
+    private function findUser(string $id): mixed
+    {
+        $modelClass = MagicStarter::userModel();
+
+        return $this->findOrNotFound($modelClass::query(), $id);
     }
 }
