@@ -74,7 +74,7 @@ Write the failing test first, make it pass with the least code, then refactor wi
 
 ## Release
 
-Run `/release` (`.claude/commands/release.md`). The stamps are the `[Unreleased]` promotion in `CHANGELOG.md` and the skill `version:`; the tag is the bare version (`1.0.1`, no `v`) on the merge commit. A failed `Validate` published nothing but a re-run builds the original commit, so fix it on a pull request and, with the owner's approval, delete the tag and tag the new merge commit. Use "Re-run failed jobs" for a transient failure (a runner or network error) or when only `GitHub Release` failed after `publish`, never "Re-run all jobs". A version Packagist accepted is final.
+Run `/release` (`.claude/commands/release.md`). The stamps are the `[Unreleased]` promotion in `CHANGELOG.md` and the skill `version:`; the tag is the bare version (`1.0.1`, no `v`) on the merge commit. The Packagist webhook can import a pushed tag before `Validate` finishes, so after a failed `Validate` check Packagist first: a listed version is final. Otherwise a re-run builds the original commit, so fix it on a pull request and, with the owner's approval, delete the tag and tag the new merge commit. Use "Re-run failed jobs" for a transient failure (a runner or network error) or when only `GitHub Release` failed after `publish`, never "Re-run all jobs". A version Packagist accepted is final.
 
 ## CI
 

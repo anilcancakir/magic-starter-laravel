@@ -35,9 +35,9 @@ The tag runs three jobs in order; each starts only when the one before it passed
 | `publish` | Asks Packagist to update `anilcancakir/magic-starter-laravel` |
 | `GitHub Release` | Creates the release `X.Y.Z` with the CHANGELOG section as its notes |
 
-Watch the run of this tag, not whichever run is newest: `gh run watch $(gh run list --workflow=publish.yml --branch X.Y.Z --limit=1 --json databaseId --jq '.[0].databaseId')`.
+Watch the run of this commit, not whichever run is newest: `gh run watch $(gh run list --workflow=publish.yml --commit "$(git rev-parse 'X.Y.Z^{commit}')" --limit=1 --json databaseId --jq '.[0].databaseId')`. Retry once if the list is empty, since a new run takes a moment to appear.
 
-A `Validate` failure published nothing. A re-run builds the original commit, so it cannot pick up a fix: fix the cause through a pull request, then ask before deleting the pushed tag (`git push --delete origin X.Y.Z` and `git tag -d X.Y.Z`; a remote delete is not yours to decide) and tag the new merge commit. A transient failure (a runner or network error) is the only case for **Re-run failed jobs**.
+A `Validate` failure stops the `publish` job, but the repository's Packagist webhook reacts to the pushed tag on its own, so check https://packagist.org/packages/anilcancakir/magic-starter-laravel first: a version it lists is final, fix forward with the next version. If it does not list the tag, a re-run builds the original commit and cannot pick up a fix: fix the cause through a pull request, then ask before deleting the pushed tag (`git push --delete origin X.Y.Z` and `git tag -d X.Y.Z`; a remote delete is not yours to decide) and tag the new merge commit. A transient failure (a runner or network error) is the only case for **Re-run failed jobs**.
 
 When `publish` succeeded and only `GitHub Release` failed, use **Re-run failed jobs**, never **Re-run all jobs**: re-running everything repeats the Packagist update, and `gh release create` refuses a release that already exists. Or create the release by hand: `gh release create X.Y.Z --title X.Y.Z --latest --verify-tag --notes-file <file>`. A version Packagist has accepted is final: fix forward with the next version.
 
