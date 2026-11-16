@@ -597,8 +597,8 @@ return [
         |--------------------------------------------------------------------------
         |
         | The absolute path to the MaxMind GeoIP2 database file (.mmdb) used to
-        | resolve location data for 2FA challenge attempts. Set to null to
-        | disable location resolution.
+        | resolve the city and country shown for each session in the sessions
+        | list. Set to null to disable location resolution.
         |
         */
 

@@ -33,6 +33,7 @@ class InviteTeamMember implements InvitesTeamMembers
             'email' => $email,
             'role' => $role,
             'token' => Str::random(32),
+            'expires_at' => now()->addDays((int) config('magic-starter.invitation_expiry_days', 7)),
         ]);
 
         // The recipient is an anonymous notifiable with no locale of its own, so the

@@ -172,7 +172,7 @@ Every key available in `config/magic-starter.php`:
 | `auth.phone` | `false` | Whether phone-based authentication is accepted for login and registration |
 | `two_factor.company_name` | `env('APP_NAME', 'Laravel')` | Company name displayed in authenticator apps (Google Authenticator, Authy, etc.) |
 | `two_factor.recovery_codes_count` | `8` | Number of recovery codes generated when a user enables 2FA |
-| `two_factor.geoip_db_path` | `null` | Absolute path to MaxMind GeoIP2 `.mmdb` database file; `null` disables location resolution |
+| `two_factor.geoip_db_path` | `null` | Absolute path to MaxMind GeoIP2 `.mmdb` database file; read only for the location shown in the sessions list, and `null` disables it |
 | `two_factor.challenge_token_ttl` | `5` | Minutes until a two-factor challenge token expires |
 | `billing.billable` | `'user'` | What is billed: `'user'` or `'team'`. `'team'` needs the teams feature |
 | `billing.package_subscription_models` | `env('MAGIC_STARTER_PACKAGE_SUBSCRIPTION_MODELS', true)` | Hand Cashier the package's `Subscription` and `SubscriptionItem`, keyed by `use_uuids`. Set `false` when the subscription tables came from Cashier's own migrations |
@@ -433,7 +433,7 @@ When the `two-factor-authentication` feature is enabled, the following settings 
 |:----|:------------|
 | `company_name` | Displayed in the user's authenticator app as the issuer. Defaults to your `APP_NAME`. |
 | `recovery_codes_count` | Number of one-time recovery codes generated when a user enables 2FA. Each code can be used once to bypass the TOTP challenge. |
-| `geoip_db_path` | Absolute path to a MaxMind GeoIP2 `.mmdb` database file. When set, 2FA challenge attempts include location data. Set to `null` to disable. |
+| `geoip_db_path` | Absolute path to a MaxMind GeoIP2 `.mmdb` database file. When set, each entry of the sessions list carries the city and country of its IP address (needs `geoip2/geoip2`). Set to `null` to disable. |
 | `challenge_token_ttl` | Number of minutes a 2FA challenge token remains valid. Users must complete the challenge within this window. |
 
 > [!TIP]
