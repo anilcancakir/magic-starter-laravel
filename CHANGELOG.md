@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-16
+
 ### Added
 
 - **`POST auth/login` accepts `remember_me`.** An optional boolean; `true` gives the token the new `remember_me_expiration_minutes` lifetime (`MAGIC_STARTER_REMEMBER_ME_EXPIRATION`, default null, which falls back to `token_expiration_minutes`), and a value that is not a boolean answers 422. The 2FA challenge token carries the flag, so a remembered sign-in through `POST auth/two-factor-challenge` keeps its lifetime; a challenge token minted before this release reads as not remembered. `AuthenticatesUsers::createAuthToken()` and `signInResponse()` take a trailing `bool $remember = false`. (`src/Http/Requests/LoginRequest.php`, `src/Http/Controllers/Concerns/AuthenticatesUsers.php`, `src/Http/Controllers/TwoFactorChallengeController.php`, `config/magic-starter.php`, `doc/basics/authentication.md`)
