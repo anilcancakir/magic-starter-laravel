@@ -5,6 +5,7 @@ namespace AnilcanCakir\MagicStarter\Http\Controllers;
 use AnilcanCakir\MagicStarter\Contracts\AcceptsTeamInvitations;
 use AnilcanCakir\MagicStarter\Contracts\InvitesTeamMembers;
 use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\FindsRecords;
 use AnilcanCakir\MagicStarter\Http\Requests\StoreTeamInvitationRequest;
 use AnilcanCakir\MagicStarter\Http\Resources\TeamInvitationResource;
 use AnilcanCakir\MagicStarter\MagicStarter;
@@ -22,6 +23,8 @@ use Illuminate\Support\Str;
  */
 class TeamInvitationController
 {
+    use FindsRecords;
+
     /**
      * The domain Sign in with Apple hands out when a person hides their address.
      */
@@ -101,7 +104,7 @@ class TeamInvitationController
         Gate::forUser($user)->authorize('manageInvitations', $teamModel);
 
         $invitationModelClass = MagicStarter::teamInvitationModel();
-        $invitationModel = $invitationModelClass::query()->findOrFail($invitation);
+        $invitationModel = $this->findOrNotFound($invitationModelClass::query(), $invitation);
         if ((string) $invitationModel->team_id !== (string) $teamModel->getKey()) {
             abort(404);
         }
@@ -250,6 +253,6 @@ class TeamInvitationController
     {
         $modelClass = MagicStarter::teamModel();
 
-        return $modelClass::query()->findOrFail($id);
+        return $this->findOrNotFound($modelClass::query(), $id);
     }
 }
