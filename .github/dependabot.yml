@@ -1,17 +1,58 @@
-version: 2
-updates:
-  - package-ecosystem: "composer"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-    open-pull-requests-limit: 5
+# Dependabot (REPO_SPEC.md Appendix B). Minor and patch updates roll up into one
+# pull request per ecosystem and week; a major opens its own pull request and
+# waits for review. The ecosystem's own packages are excluded from the group:
+# raising the floor of a sibling is a release decision, so each bump opens its
+# own pull request, which is never armed for auto-merge.
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+version: 2
+
+updates:
+  - package-ecosystem: composer
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Istanbul
+    open-pull-requests-limit: 5
     labels:
-      - "ci"
-    open-pull-requests-limit: 3
+      - dependencies
+      - composer
+    assignees:
+      - anilcancakir
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "anilcancakir/*"
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Istanbul
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+    assignees:
+      - anilcancakir
+    commit-message:
+      prefix: ci
+      include: scope
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
