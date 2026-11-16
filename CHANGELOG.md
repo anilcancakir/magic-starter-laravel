@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-11-16
+
 ### Fixed
 
 - **`GET email/verify/{id}/{hash}` answers 404, not 500, for a malformed id.** The controller looked the user up from the raw route segment, so a validly signed URL with an id the key column cannot hold reached PostgreSQL, which refused it with a 500 (the SQL is in the body under `APP_DEBUG`). It now uses `FindsRecords::findOrNotFound()`, so such an id is a missing user before any query. (`src/Http/Controllers/EmailVerificationController.php`)
