@@ -3,9 +3,12 @@
 namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
 use AnilcanCakir\MagicStarter\Http\Resources\NotificationResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Support\Str;
 
 /**
  * Manages database notifications for the authenticated user.
@@ -43,7 +46,7 @@ class NotificationController
      */
     public function markAsRead(Request $request, string $id): JsonResponse
     {
-        $notification = $request->user()->notifications()->findOrFail($id);
+        $notification = $this->findNotification($request, $id);
 
         $notification->markAsRead();
 
@@ -73,7 +76,7 @@ class NotificationController
      */
     public function destroy(Request $request, string $id): JsonResponse
     {
-        $notification = $request->user()->notifications()->findOrFail($id);
+        $notification = $this->findNotification($request, $id);
 
         $notification->delete();
 
@@ -81,5 +84,20 @@ class NotificationController
             'data' => null,
             'message' => __('magic-starter::notifications.deleted'),
         ]);
+    }
+
+    /**
+     * Find one of the user's notifications by its id.
+     *
+     * The table keys on a uuid whatever `use_uuids` says, and PostgreSQL rejects a malformed value against a uuid
+     * column, so an id that is not one is a missing notification before any query.
+     */
+    private function findNotification(Request $request, string $id): DatabaseNotification
+    {
+        if (! Str::isUuid($id)) {
+            throw (new ModelNotFoundException)->setModel(DatabaseNotification::class, $id);
+        }
+
+        return $request->user()->notifications()->findOrFail($id);
     }
 }

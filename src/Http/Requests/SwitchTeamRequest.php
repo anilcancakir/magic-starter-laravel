@@ -4,6 +4,7 @@ namespace AnilcanCakir\MagicStarter\Http\Requests;
 
 use AnilcanCakir\MagicStarter\MagicStarter;
 use AnilcanCakir\MagicStarter\Support\MigrationHelper;
+use AnilcanCakir\MagicStarter\Support\TeamKey;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
@@ -15,8 +16,14 @@ class SwitchTeamRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        $teamId = $this->input('team_id');
+
+        if (! (\is_string($teamId) || \is_int($teamId)) || ! TeamKey::looksLikeOne((string) $teamId)) {
+            return false;
+        }
+
         $teamModel = MagicStarter::teamModel();
-        $team = $teamModel::find($this->input('team_id'));
+        $team = $teamModel::find($teamId);
 
         if (! $team) {
             return false;

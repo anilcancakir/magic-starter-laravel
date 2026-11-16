@@ -2,6 +2,7 @@
 
 namespace AnilcanCakir\MagicStarter\Http\Controllers;
 
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\FindsRecords;
 use AnilcanCakir\MagicStarter\Http\Requests\UpdateTeamPhotoRequest;
 use AnilcanCakir\MagicStarter\Http\Resources\TeamResource;
 use AnilcanCakir\MagicStarter\MagicStarter;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Gate;
  */
 class TeamPhotoController
 {
+    use FindsRecords;
+
     /**
      * Update the specified team's profile photo.
      */
@@ -70,6 +73,6 @@ class TeamPhotoController
     {
         $modelClass = MagicStarter::teamModel();
 
-        return $modelClass::query()->findOrFail($id);
+        return $this->findOrNotFound($modelClass::query(), $id);
     }
 }

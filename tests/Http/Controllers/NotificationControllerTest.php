@@ -171,6 +171,25 @@ final class NotificationControllerTest extends TestCase
             ->assertStatus(404);
     }
 
+    public function test_a_malformed_id_is_not_found_without_a_query(): void
+    {
+        $user = NotifControllerTestUser::query()->create([
+            'name' => 'Notif User',
+            'email' => 'notif@example.test',
+        ]);
+
+        // PostgreSQL rejects a value that is not a uuid against the uuid column; SQLite does not, so the query log
+        // is what shows the id never reached the database.
+        \call_user_func('app', 'db')->enableQueryLog();
+
+        $this->actingAs($user)->postJson('/notifications/not-a-uuid/read')->assertNotFound();
+        $this->actingAs($user)->deleteJson('/notifications/not-a-uuid')->assertNotFound();
+
+        foreach (\call_user_func('app', 'db')->getQueryLog() as $entry) {
+            $this->assertNotContains('not-a-uuid', $entry['bindings'], 'The malformed id reached a query: ' . $entry['query']);
+        }
+    }
+
     /**
      * Insert a notification record and return its UUID.
      */

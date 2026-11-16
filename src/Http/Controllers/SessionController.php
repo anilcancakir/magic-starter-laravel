@@ -5,6 +5,7 @@ namespace AnilcanCakir\MagicStarter\Http\Controllers;
 use AnilcanCakir\MagicStarter\Http\Requests\ConfirmPasswordRequest;
 use AnilcanCakir\MagicStarter\Http\Requests\DestroyOtherSessionsRequest;
 use AnilcanCakir\MagicStarter\Http\Resources\SessionResource;
+use AnilcanCakir\MagicStarter\Support\TeamKey;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -29,10 +30,9 @@ class SessionController
      */
     public function destroy(ConfirmPasswordRequest $request, string $tokenId): JsonResponse
     {
-        $token = $request->user()
-            ->tokens()
-            ->where('id', $tokenId)
-            ->first();
+        $token = TeamKey::looksLikeOne($tokenId)
+            ? $request->user()->tokens()->where('id', $tokenId)->first()
+            : null;
 
         if (! $token) {
             abort(404, (string) __('magic-starter::auth.sessions.not_found'));

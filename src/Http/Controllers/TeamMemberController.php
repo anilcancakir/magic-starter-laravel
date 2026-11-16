@@ -7,6 +7,7 @@ use AnilcanCakir\MagicStarter\Actions\UpdateTeamMemberRole;
 use AnilcanCakir\MagicStarter\Contracts\RemovesTeamMembers;
 use AnilcanCakir\MagicStarter\Contracts\UpdatesTeamMemberRoles;
 use AnilcanCakir\MagicStarter\Enums\Role;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\FindsRecords;
 use AnilcanCakir\MagicStarter\Http\Requests\UpdateTeamMemberRequest;
 use AnilcanCakir\MagicStarter\Http\Resources\TeamMemberResource;
 use AnilcanCakir\MagicStarter\MagicStarter;
@@ -25,6 +26,8 @@ use Illuminate\Validation\ValidationException;
  */
 class TeamMemberController
 {
+    use FindsRecords;
+
     /**
      * List all members of the specified team.
      */
@@ -125,7 +128,7 @@ class TeamMemberController
     {
         $modelClass = MagicStarter::teamModel();
 
-        return $modelClass::query()->findOrFail($id);
+        return $this->findOrNotFound($modelClass::query(), $id);
     }
 
     /**
@@ -135,6 +138,6 @@ class TeamMemberController
     {
         $modelClass = MagicStarter::userModel();
 
-        return $modelClass::query()->findOrFail($id);
+        return $this->findOrNotFound($modelClass::query(), $id);
     }
 }

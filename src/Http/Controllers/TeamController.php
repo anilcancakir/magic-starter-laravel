@@ -7,6 +7,7 @@ use AnilcanCakir\MagicStarter\Contracts\DeletesTeams;
 use AnilcanCakir\MagicStarter\Contracts\TrashesTeams;
 use AnilcanCakir\MagicStarter\Contracts\UpdatesTeams;
 use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\Concerns\FindsRecords;
 use AnilcanCakir\MagicStarter\Http\Requests\StoreTeamRequest;
 use AnilcanCakir\MagicStarter\Http\Requests\UpdateTeamRequest;
 use AnilcanCakir\MagicStarter\Http\Resources\TeamResource;
@@ -23,6 +24,8 @@ use Illuminate\Validation\ValidationException;
  */
 class TeamController
 {
+    use FindsRecords;
+
     /**
      * List all teams for the authenticated user with pagination.
      */
@@ -187,6 +190,6 @@ class TeamController
             $query->withTrashed();
         }
 
-        return $query->findOrFail($id);
+        return $this->findOrNotFound($query, $id);
     }
 }

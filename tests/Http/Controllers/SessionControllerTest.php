@@ -167,6 +167,27 @@ final class SessionControllerTest extends TestCase
             ->assertStatus(404);
     }
 
+    public function test_destroy_returns_404_for_a_malformed_session_id_without_a_query(): void
+    {
+        $user = SessionControllerTestUser::query()->create([
+            'name' => 'Session User',
+            'email' => 'session@example.test',
+            'password' => \Illuminate\Support\Facades\Hash::make('password'),
+        ]);
+
+        // PostgreSQL rejects a value that is not a uuid against the uuid column; SQLite does not, so the query log
+        // is what shows the id never reached the database.
+        \Illuminate\Support\Facades\DB::enableQueryLog();
+
+        $this->actingAs($user)
+            ->deleteJson('/sessions/not-a-uuid', ['password' => 'password'])
+            ->assertNotFound();
+
+        foreach (\Illuminate\Support\Facades\DB::getQueryLog() as $entry) {
+            $this->assertNotContains('not-a-uuid', $entry['bindings'], 'The malformed id reached a query: ' . $entry['query']);
+        }
+    }
+
     public function test_destroy_requires_password(): void
     {
         $user = SessionControllerTestUser::query()->create([
