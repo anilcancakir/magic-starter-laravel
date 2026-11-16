@@ -3,6 +3,7 @@
 namespace AnilcanCakir\MagicStarter\Tests\Actions;
 
 use AnilcanCakir\MagicStarter\Contracts\CancelsTeamInvitations;
+use AnilcanCakir\MagicStarter\Contracts\InvitesTeamMembers;
 use AnilcanCakir\MagicStarter\Contracts\ResendsTeamInvitations;
 use AnilcanCakir\MagicStarter\Notifications\TeamInvitationNotification;
 use AnilcanCakir\MagicStarter\Tests\Fixtures\ConcreteTeam;
@@ -70,6 +71,19 @@ final class TeamInvitationAdminTest extends TestCase
             'token' => 'a-token',
             'expires_at' => now()->subDay(),
         ]);
+    }
+
+    public function test_a_new_invitation_carries_the_configured_expiry(): void
+    {
+        config(['magic-starter.invitation_expiry_days' => 3]);
+        $this->freezeSecond();
+        $team = ConcreteTeam::query()->firstOrFail();
+
+        $created = app(InvitesTeamMembers::class)->invite($this->owner, $team, 'New@Test.dev', 'member');
+
+        $invitation = ConcreteTeamInvitation::query()->findOrFail($created->getKey());
+        $this->assertNotNull($invitation->expires_at, 'The first invitation lapses too, not only a resend.');
+        $this->assertTrue($invitation->expires_at->equalTo(now()->addDays(3)));
     }
 
     public function test_cancel_deletes_the_invitation(): void

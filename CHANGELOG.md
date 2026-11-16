@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- **A new team invitation now expires after `invitation_expiry_days`.** The key (`MAGIC_STARTER_INVITATION_EXPIRY_DAYS`, 7 by default) was documented as the number of days until an invitation expires, but only a resend applied it, so the first invitation had no `expires_at` and never lapsed. `InviteTeamMember::invite()` now stamps `expires_at` that many days ahead; invitations already stored with a null `expires_at` keep not expiring until they are resent. The `geoip_db_path` comment and docs now say what the code does: only the sessions list reads it, not the 2FA challenge. (`src/Actions/InviteTeamMember.php`, `config/magic-starter.php`, `doc/getting-started/configuration.md`, `doc/basics/two-factor-authentication.md`)
 - **`token_expiration_minutes` now sets the lifetime of every token.** The key (`MAGIC_STARTER_TOKEN_EXPIRATION`) was documented as the token lifetime but read by nothing, so a host that set it got tokens without expiry. Every authentication token the package issues (login, registration, the token handed out once a 2FA challenge is completed, OTP, guest, social) now carries `expires_at` set that many minutes ahead; null or 0 keeps today's tokens without their own expiry, and `sanctum.expiration` still applies on top. A guest claim refuses a guest token past its own `expires_at`, as Sanctum's guard does. (`src/Http/Controllers/Concerns/AuthenticatesUsers.php`, `doc/getting-started/configuration.md`)
 
 ## [0.0.64] - 2026-11-10
