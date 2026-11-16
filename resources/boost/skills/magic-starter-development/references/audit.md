@@ -27,7 +27,7 @@ Audit is opt-in. Add `Features::audit()` to `magic-starter.features` (or `php ar
 A wildcard listener on `eloquent.created`, `eloquent.updated` and `eloquent.deleted` records every model in the application, not only the starter's. Each row in `magic_starter_audits` holds the event (`created`, `updated`, `deleted`, or an explicit name), the subject (`auditable_type`, `auditable_id`), the actor, `related_user_id`, `old_values`, `new_values` and a `context` (`ip`, `user_agent`, `url` without its query string, `route`).
 
 - Key columns are strings, so integer and UUID keys share one column whatever `use_uuids` says.
-- An update stores only the changed keys, with the RAW values they held before (`getRawOriginal()`), so an encrypted cast never leaks plaintext into `old_values`.
+- An update stores only the changed keys, with the raw values they held before (`getRawOriginal()`), so an encrypted cast never leaks plaintext into `old_values`.
 - A row is inserted through `DB::afterCommit()`: a rolled-back change leaves nothing, and outside a transaction the row lands at once.
 - `related_user_id` is the subject's key when the subject is the user model, otherwise its raw `user_id` attribute.
 - Admin panel writes are recorded as `admin.<event>` (for example `admin.user.updated`) through `AdminActionPerformed`, with the panel user as actor.
@@ -75,7 +75,7 @@ class Monitor extends Model
 - `audit.ignore` maps a model class (subclasses included, matched like `exclude`) to attributes; the model's `$auditIgnore` property adds to it (`Redactor::ignoredKeys()`).
 - An update whose changes are all ignored, apart from `updated_at`, writes no row. A mixed update is recorded without the ignored keys.
 - A model with no ignore list is audited in full, including a bare `touch()`. On a model with one, the skip needs an ignored key to have moved, so its bare `touch()` is recorded too.
-- Credential columns (`Redactor::ALWAYS`) are dropped from any ignore list: their change is always recorded, redacted.
+- The built-in credential columns (`password`, `remember_token`, `two_factor_secret`, `two_factor_recovery_codes`, `token`, `device_id`) are dropped from any ignore list: their change is always recorded, redacted.
 
 ## Recording and Suppressing
 
@@ -95,7 +95,7 @@ Auditor::withoutAuditing(function () use ($team): void {
 
 ## Pruning
 
-`magic-starter:audit:prune` deletes rows older than `audit.retention_days` (365 by default, never less than one day) in chunks of 1000 keys. The service provider schedules it daily with `withoutOverlapping()` while the feature is on; the application's scheduler must run for it to fire.
+`magic-starter:audit:prune` deletes rows older than `audit.retention_days` (365 by default, never less than one day) in chunks of 1000 keys. The service provider schedules it with `withoutOverlapping()` while the feature is on, daily by default; the application's scheduler must run for it to fire.
 
 ## Deleting a User (GDPR)
 

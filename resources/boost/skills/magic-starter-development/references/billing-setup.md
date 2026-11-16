@@ -136,7 +136,7 @@ php artisan billing:doctor --json --remote
 
 `trial_days` on a subscription product (`0`, or `2` and above) starts a free trial on the web rail only. It never reaches App Store Connect, Play Console or RevenueCat: a store (intro offer) trial is configured there by a person, and is separate from the web one. Nothing in the manifest carries it.
 
-- Eligibility is `TrialEligibility::allows($user, $billable)`: not a guest, no `billing_trials` row for the user or the billable, and no `default` Cashier subscription on the billable in any status. An ineligible caller buys with no trial, and `GET billing/plans` shows them `trial_days: 0`.
+- Eligibility is `app(TrialEligibility::class)->allows($user, $billable)` (an instance method): not a guest, no `billing_trials` row for the user or the billable, and no `default` Cashier subscription on the billable in any status. An ineligible caller buys with no trial, and `GET billing/plans` shows them `trial_days: 0`.
 - Checkout always sends `payment_method_collection=always`. The `customer.subscription.created` webhook records a `billing_trials` row and queues `CheckTrialCard`, which reads the card fingerprint and, among trials sharing a person, a subject or a card, keeps the earliest and cancels later ones still trialing (no proration, no invoice).
 - The table needs `create_billing_trials_table.php`: a fresh `magic-starter:install --features=billing` publishes it; for an existing application copy it from `vendor/anilcancakir/magic-starter-laravel/database/migrations/` into `database/migrations/` under a later timestamp and run `php artisan migrate`. `billing:doctor` reports a missing table as `schema.billing_trials`.
 - A refused trial whose card had already trialed mails `TrialRefusedNotification`; `magic-starter.billing.trial_refused_notification` (`MAGIC_STARTER_TRIAL_REFUSED_NOTIFICATION`, default `true`) switches it off.
@@ -157,7 +157,7 @@ Every billing outcome leaves an append-only `billing_events` row (`type`, `sourc
 
 ## Admin panel billing
 
-With the admin panel mounted, the billable's edit page has a Billing tab with eight operator actions (grant, revoke, extend trial, end trial, cancel, resume, refund, sync now), all through `Contracts\AdministersBilling` and each leaving a `billing_events` row with source `admin`. Refusals are `request_refused` rows (source `admin`) and survive the panel's halt.
+With the admin panel mounted, the billable's edit page has a Billing tab with the operator actions (grant, revoke, extend trial, end trial, cancel, resume, refund, sync now), all through `Contracts\AdministersBilling` and each leaving a `billing_events` row with source `admin`. Refusals are `request_refused` rows (source `admin`) and survive the panel's halt.
 
 - A grant is refused (`paid_rail_active`) while a paid rail grants: a plan record on Stripe or a store, or a granting local Stripe subscription. One open grant per billable, stamped `plan_product_id` `grant:{id}`; a new one supersedes it. Revoke ends only a manual grant or a store record with no production subscription (`not_manual` otherwise).
 - `magic-starter:billing:expire-grants` runs hourly: it revokes an expired grant, closes a moved-off one as `superseded`, and re-projects the paid rails. The scheduler must run.
