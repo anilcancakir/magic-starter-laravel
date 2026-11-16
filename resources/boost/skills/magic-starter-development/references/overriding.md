@@ -23,7 +23,7 @@ Call `MagicStarter::ignoreRoutes()` in `AppServiceProvider::register()`, before 
 
 ### Publish and edit the config
 
-`php artisan vendor:publish --tag=magic-starter-config` copies the file. Turn a feature on by uncommenting its `Features::*()` line in the `features` array and off by removing it. A flag gates its routes and its resource fields together.
+`php artisan vendor:publish --tag=magic-starter-config` copies the file. Turn a feature on by uncommenting its `Features::*()` line in the `features` array and off by removing it. A flag gates its routes; resource fields are not always gated with it (`UserResource` returns `profile_photo_url` with `profile-photos` off, for example), so check the resource before relying on a field's absence.
 
 ### Prefer the smallest override
 

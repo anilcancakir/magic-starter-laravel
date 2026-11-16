@@ -38,7 +38,7 @@
 ### Social sign-up and a pre-verified email
 
 - Social sign-up goes through `CreatesUsersFromProvider`, not `CreatesUsers`. It force-creates a passwordless user with `email_verified_at` set to now when the provider vouched for the address, fires `Registered`, and fires `Verified` in that case.
-- `CreateUser` accepts an optional `email_verified_at` when `extended-profile` is on; a non-null value skips `sendEmailVerificationNotification()`, because the send requires `email_verified_at === null`.
+- `CreateUser` accepts an optional `email_verified_at` when `extended-profile` is on and passes it to `create()`, so it is mass-assigned. The published `User` stub does not list `email_verified_at` in `$fillable`, so with the stub the value is dropped and the verification mail still goes out. A non-null value skips `sendEmailVerificationNotification()` only when the app's user model lists `email_verified_at` in `$fillable`, because the send requires `email_verified_at === null`.
 
 ### The OTP flow uses two contracts
 
@@ -50,4 +50,4 @@
 
 - `createAuthToken()` calls `$user->createToken('auth_token')`. When `token_expiration_minutes` (or `remember_me_expiration_minutes` for a `remember_me` sign-in) is a positive number, the token gets that expiry; then `ip_address` and `user_agent` are force-filled onto the package's `PersonalAccessToken`, which carries those columns.
 - `authenticatedResponse()` sets the user resolver on both the injected `$request` and `app('request')`, so a nested resource (`TeamResource`, for example) can call `$request->user()` before Sanctum's middleware has run.
-- The envelope is `{data: {user, token}, message}`, plus `data.deletion_cancelled: true` when the sign-in cancelled a scheduled account deletion. A user with confirmed two-factor gets `{two_factor: true, two_factor_token}` instead (see `two-factor.md`).
+- The envelope is `{data: {user, token}, message}`, plus `data.deletion_cancelled: true` when the sign-in cancelled a scheduled account deletion. On a password login, a social sign-in or a sign-in handoff, a user with confirmed two-factor gets `{two_factor: true, two_factor_token}` instead (see `two-factor.md`); registration, guest sign-in and `POST auth/otp/verify` issue the token directly.

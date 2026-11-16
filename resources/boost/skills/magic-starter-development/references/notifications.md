@@ -12,9 +12,9 @@
 
 ### The registry defines types and channels
 
-- Register types from a service provider's `boot()`: `NotificationPreferenceRegistry::register([OrderShipped::class => ['label' => '...', 'channels' => ['email', 'push'], 'default' => ['email'], 'locked' => []]])`. The key is the notification class.
+- Register types from a service provider's `boot()`: `NotificationPreferenceRegistry::register([OrderShipped::class => ['label' => '...', 'channels' => ['mail', 'push'], 'default' => ['mail'], 'locked' => []]])`. The key is the notification class. Name mail `mail`, the channel Laravel reports on `NotificationSending`: there is no built-in alias from `email`, and a channel the type does not list is delivered whatever the user chose.
 - `label` goes through `__()` when the matrix is built, so a multi-language app registers a translation key rather than a sentence. Register the key, not `__('...')` itself: `boot()` runs before any locale middleware, and under Octane once per worker, so a `__()` there freezes the first request's language for every later one. A finished sentence still works, since `__()` returns a string it has no line for unchanged.
-- `NotificationPreferenceRegistry::channelAliases(['push' => OneSignalChannel::class])` maps a logical name to a driver channel.
+- `NotificationPreferenceRegistry::channelAliases(['push' => 'onesignal'])` maps a logical name to a driver channel name, the name the channel was registered under, not its class. With the `onesignal` feature on, the package registers the `onesignal` and `onesignal-sms` drivers and the aliases `push` and `sms` for them itself.
 - A slug is derived from the class basename with the `Notification` suffix stripped, in snake case; a `slug` key in the registration overrides it.
 
 ### `GateNotificationChannels` runs on every `NotificationSending`
@@ -47,4 +47,4 @@
 
 ### Consumer pattern
 
-Write ordinary Laravel notifications, register each type with its channels in the registry, and let `GateNotificationChannels` filter delivery. The settings screen reads `notificationPreferenceMatrix()` through `GET notification-preferences` and writes through `PUT notification-preferences`.
+List `Features::notifications()` in `magic-starter.features` first: without it `GateNotificationChannels` is not registered, so preferences are ignored, and the `notifications` and `notification-preferences` routes do not exist. Then write ordinary Laravel notifications, register each type with its channels in the registry, and let `GateNotificationChannels` filter delivery. The settings screen reads `notificationPreferenceMatrix()` through `GET notification-preferences` and writes through `PUT notification-preferences`.

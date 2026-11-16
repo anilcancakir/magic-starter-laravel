@@ -95,7 +95,7 @@ Both are optional. Read `references/admin-panel.md` and `references/audit.md` of
 1. **Guest users**: `email` and `password` may both be `null`; null-check before using either.
 2. **Optional trait methods**: check `method_exists($user, 'methodName')` before calling a method from an optional trait (`HasTeams`, `HasGuestSupport`, `TwoFactorAuthenticatable`), because the app's user model may not use it.
 3. **Stale Composer classmap**: `resolveConcreteModel()` wraps `class_exists()` in a try/catch and falls back to the package model, so run `composer dump-autoload` after publishing or deleting model stubs.
-4. **Team membership is a pivot model**: use `->using(MagicStarter::membershipModel())` on every team `BelongsToMany`; a plain pivot loses the role.
+4. **Team membership is a pivot model**: give every team `BelongsToMany` the table and keys (`'team_user', 'user_id', 'team_id'`) and `->using(MagicStarter::membershipModel())`, as `HasTeams::teams()` does; a plain pivot loses the role, and a renamed model derives another table name.
 5. **Sanctum migrations are ignored**: the package calls `Sanctum::ignoreMigrations()` and ships its own `personal_access_tokens` table with device columns (`ip_address`, `user_agent`), so do not run Sanctum's own migration as well.
 6. **Password reset URL**: the package sets it with `ResetPassword::createUrlUsing()` in its `boot()`. A second `createUrlUsing()` in the app replaces it without a warning, so set `magic-starter.frontend_url` instead.
 7. **Request user resolver**: a controller that issues a token and serializes the user in the same response has to set the user resolver itself; `AuthenticatesUsers::authenticatedResponse()` does it on both `$request` and `app('request')`.

@@ -12,11 +12,11 @@
 
 ### Every package model uses `ConditionallyUsesUuids`
 
-With `magic-starter.use_uuids` true (the default), the trait sets `$incrementing = false` and `$keyType = 'string'` when a model is built and writes an ordered UUID on create; a route key that is not a UUID then resolves to a missing model (404) instead of a query error. With it false, keys are ordinary auto-increment integers. Give every column a `@property` annotation, and accessors and computed attributes `@property-read`.
+With `magic-starter.use_uuids` true (the default), the trait sets `$incrementing = false` and `$keyType = 'string'` when a model is built and writes an ordered UUID on create. Under implicit route-model binding, a route key that is not a UUID resolves to a missing model (404) instead of a query error. A lookup that skips the binding does not get that guard: `TeamController` takes `{team}` as a `string` and calls `findOrFail()`, so a malformed id reaches the database there. With it false, keys are ordinary auto-increment integers. Give every column a `@property` annotation, and accessors and computed attributes `@property-read`.
 
 ### Relations resolve their classes at runtime
 
-A relation never names `App\Models\*`. Model classes come from `MagicStarter::userModel()`, `teamModel()`, `membershipModel()` and `teamInvitationModel()`, and a `BelongsToMany` to users chains `->using(MagicStarter::membershipModel())->withPivot('role')`. Define casts in the `casts()` method and use `$fillable` rather than `$guarded`. The package's own models do not soft delete; the team model may opt in for the `restorable-teams` feature, and every place that touches a trashed team checks `SoftDeletingTeams::usedBy()` first.
+A relation never names `App\Models\*`. Model classes come from `MagicStarter::userModel()`, `teamModel()`, `membershipModel()` and `teamInvitationModel()`, and a team `BelongsToMany` names the pivot table and keys (`team_user`, `user_id`, `team_id`) and chains `->using(MagicStarter::membershipModel())->withPivot('role')`, as `HasTeams::teams()` and `Team::users()` do. Define casts in the `casts()` method and use `$fillable` rather than `$guarded`. The package's own models do not soft delete; the team model may opt in for the `restorable-teams` feature, and every place that touches a trashed team checks `SoftDeletingTeams::usedBy()` first.
 
 ### The user traits
 

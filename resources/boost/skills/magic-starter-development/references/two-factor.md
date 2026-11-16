@@ -29,7 +29,7 @@
 
 ### The challenge uses a short-lived encrypted token
 
-When the user has confirmed two-factor, a sign-in returns `{two_factor: true, two_factor_token}` instead of a token. The `two_factor_token` encrypts `user_id`, `expires_at` (now plus `two_factor.challenge_token_ttl` minutes, default `5`) and `remember` (the sign-in's `remember_me`). `POST auth/two-factor-challenge` decrypts it, checks the expiry, resolves the user and accepts either a TOTP `code` (through `verifyOnce()`, so an observed code cannot sign in twice) or a `recovery_code`. On success it calls `createAuthToken()` with `remember` (a token without the key reads as false) and returns the usual authenticated response.
+When the user has confirmed two-factor, a password login, a social sign-in or a sign-in handoff returns `{two_factor: true, two_factor_token}` instead of a token. `POST auth/otp/verify` is the exception: it issues a token without the challenge. The `two_factor_token` encrypts `user_id`, `expires_at` (now plus `two_factor.challenge_token_ttl` minutes, default `5`) and `remember` (the sign-in's `remember_me`). `POST auth/two-factor-challenge` decrypts it, checks the expiry, resolves the user and accepts either a TOTP `code` (through `verifyOnce()`, so an observed code cannot sign in twice) or a `recovery_code`. On success it calls `createAuthToken()` with `remember` (a token without the key reads as false) and returns the usual authenticated response.
 
 ### Config and storage
 
