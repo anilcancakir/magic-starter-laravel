@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-11-16
+
 ### Fixed
 
 - **A malformed id in a route answers 404, not 500, on the team, session and notification endpoints.** The 0.0.46 guard covers a route key that Laravel binds, but these controllers look their records up from the raw route segment, so `GET /teams/not-a-uuid`, `PUT /teams/not-a-uuid`, `DELETE /teams/not-a-uuid/leave`, the member, invitation and profile photo routes under it, `PUT /teams/{team}/members/not-a-uuid`, `DELETE /teams/{team}/invitations/not-a-uuid`, `DELETE /sessions/not-a-uuid` and `POST /notifications/not-a-uuid/read` reached PostgreSQL, which refused the value against the key column with a 500 that also exposed the SQL. `PUT /user/current-team` did the same from `SwitchTeamRequest::authorize()` and now answers 403, as it does for a team that does not exist. An id the deployment's key type cannot hold (`TeamKey::looksLikeOne()`: a uuid under uuid keys, digits under integer keys; always a uuid for notifications) is a missing record before any query. (`src/Http/Controllers/Concerns/FindsRecords.php`, `src/Http/Controllers/Team*Controller.php`, `src/Http/Controllers/SessionController.php`, `src/Http/Controllers/NotificationController.php`, `src/Http/Requests/SwitchTeamRequest.php`)
