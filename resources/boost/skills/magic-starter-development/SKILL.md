@@ -7,7 +7,6 @@ version: 1.0.0
 metadata:
   author: anilcancakir
 ---
-@php /** @var \Laravel\Boost\Install\GuidelineAssist $assist */ @endphp
 
 # Magic Starter Development
 
@@ -26,7 +25,9 @@ magic-starter-laravel is a JSON API backend (Sanctum tokens, API resources, no v
 
 ## Recipes
 
-@boostsnippet("Controller: validate with a FormRequest, call the contract, return the resource", "php")
+**Controller: validate with a FormRequest, call the contract, return the resource**
+
+```php
 use AnilcanCakir\MagicStarter\Contracts\UpdatesUserProfiles;
 use AnilcanCakir\MagicStarter\Http\Requests\UpdateProfileRequest;
 use AnilcanCakir\MagicStarter\Http\Resources\UserResource;
@@ -39,9 +40,11 @@ public function update(UpdateProfileRequest $request): UserResource
 
     return new UserResource($user->fresh());
 }
-@endboostsnippet
+```
 
-@boostsnippet("Override a contract binding in AppServiceProvider::register()", "php")
+**Override a contract binding in AppServiceProvider::register()**
+
+```php
 use AnilcanCakir\MagicStarter\Contracts\CreatesUsers;
 use App\Actions\CreateUser;
 
@@ -49,9 +52,11 @@ public function register(): void
 {
     $this->app->singleton(CreatesUsers::class, CreateUser::class);
 }
-@endboostsnippet
+```
 
-@boostsnippet("Team relation through the membership pivot, and a runtime model override", "php")
+**Team relation through the membership pivot, and a runtime model override**
+
+```php
 use AnilcanCakir\MagicStarter\MagicStarter;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -66,7 +71,7 @@ public function teams(): BelongsToMany
 // In a test setUp() or a service provider; wins over config.
 MagicStarter::useUserModel(\App\Models\User::class);
 MagicStarter::useTeamModel(\App\Models\Team::class);
-@endboostsnippet
+```
 
 ## Feature flags
 

@@ -15,7 +15,7 @@ Release `anilcancakir/magic-starter-laravel` X.Y.Z to Packagist and GitHub Relea
 1. `git checkout -b release/X.Y.Z`.
 2. Stamp the two version files, which `publish.yml` checks against the tag:
    - `CHANGELOG.md`: rename `## [Unreleased]` to `## [X.Y.Z] - YYYY-MM-DD` (today's date) and add a fresh empty `## [Unreleased]` above it. The section's body becomes the GitHub Release notes.
-   - `resources/boost/skills/magic-starter-development/SKILL.blade.php`: set the top-level `version: X.Y.Z` line in the frontmatter.
+   - `resources/boost/skills/magic-starter-development/SKILL.md`: set the top-level `version: X.Y.Z` line in the frontmatter.
 3. `git commit -am "release: X.Y.Z"`, `git push -u origin release/X.Y.Z`, then `gh pr create --base master --title "release: X.Y.Z" --body "Release X.Y.Z."`.
 4. Wait for every required check to pass, then `gh pr merge <number> --merge`. Never `--squash` and never `--rebase`: the tag has to sit on the merge commit of a reviewed history.
 
