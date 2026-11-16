@@ -1,0 +1,101 @@
+# magic-starter-laravel
+
+> A Laravel package that serves authentication, two-factor, social sign-in, profile, teams, notifications, billing and a support desk as Sanctum-token JSON routes (under `api/v1` by default), each behind an opt-in feature toggle and each action replaceable through a contract binding. It is the backend of the Flutter starter `magic_starter`, which calls these routes one to one.
+
+**Stack**: PHP ^8.2 (`ext-gd`, `ext-exif`) · Laravel `illuminate/*` ^12.32|^13.0 · Runtime deps: `laravel/sanctum`, `laravel/socialite` (+ `socialiteproviders/apple`, `socialiteproviders/microsoft`), `laravel/cashier`, `stripe/stripe-php`, `onesignal/onesignal-php-api`, `pragmarx/google2fa`, `bacon/bacon-qr-code`, `firebase/php-jwt`, `sebastian/diff`. Optional: Filament ^4.13.3|^5.8.3, Horizon, Pulse, Telescope, `geoip2/geoip2`.
+
+**Setup**:
+
+```bash
+composer require anilcancakir/magic-starter-laravel
+php artisan magic-starter:install --features=teams --features=two-factor-authentication
+php artisan migrate
+```
+
+```php
+namespace App\Providers;
+
+use AnilcanCakir\MagicStarter\Contracts\CreatesTeams;
+use App\Actions\MagicStarter\CreateTeam; // the host's implementation of CreatesTeams
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        // Replace the default action; the API and the admin panel both call the contract.
+        $this->app->bind(CreatesTeams::class, CreateTeam::class);
+    }
+}
+```
+
+`magic-starter:install` options: `--all`, `--features=<key>` (repeatable; an unknown key is dropped silently), `--uuid`, `--no-uuid`, `--route-prefix=`, `--frontend-url=`, `--force`. Passing `--all`, `--features`, `--route-prefix` or `--frontend-url`, or `--no-interaction`, turns every prompt off, the migrate prompt included. It publishes `config/magic-starter.php`, ordered migrations, a `User` model with the package traits (a customised one is kept unless `--force`), the `Team` models and `TeamPolicy` with `teams`, language files and a `UserFactory`.
+
+## API
+
+- `AnilcanCakir\MagicStarter\MagicStarterServiceProvider`: auto-discovered; binds the `Contracts\*` interfaces to their `Actions\*` defaults, loads the routes with each one gated by its feature, registers the named rate limiters (`magic-starter-auth-login` and the rest) and the console commands.
+- `Features`: the toggle keys (`teams()`, `twoFactorAuthentication()`, `socialLogin()`, `billing()`, `support()`, ...), `enabled(string)` and one `has...Features()` check per key. Keys live in `config('magic-starter.features')`.
+- `MagicStarter`: model resolution `userModel()`, `teamModel()`, `membershipModel()`, `teamInvitationModel()`, `socialAccountModel()`, `billableModel()`, which pick up a published `App\Models\*`; overrides `useUserModel()`, `useTeamModel()`; `ignoreRoutes()`; `serializeUserUsing()`.
+- `Contracts\*`: one interface per action (`CreatesUsers`, `UpdatesUserProfiles`, `CreatesTeams`, `InvitesTeamMembers`, `SchedulesUserDeletion`, `SendsOtpCodes`, `WritesEntitlement`, ...). `RespondsToSupport`, `AssistsSupportStaff`, `DescribesSupportPage` and `ReportsUsage` ship unbound and switch their feature path on when the host binds them.
+- Traits for the user model: `HasTeams`, `HasGuestSupport`, `HasProfilePhoto`, `HasNotifications`, `TwoFactorAuthenticatable`, `MustVerifyEmail`, `HasSocialAccounts`, `HasEntitlement`; `Support\ConditionallyUsesUuids` for UUID-optional keys.
+- `Support\MigrationHelper`: `usesUuids()`, `primaryKey()`, `foreignKey()`, `morphColumns()`, which follow `magic-starter.use_uuids`.
+- `NotificationPreferenceRegistry`: the per-type, per-channel preference matrix that gates notification channels.
+- Support AI: `Support\SupportAi\Tools\SupportToolRegistry`, the `SupportTool` contract, `UntrustedText`, `ProposeBillingChangeTool`.
+- AI prompts and runs: `Support\AiPrompts\PromptRegistry`, the `ResolvesPrompts` and `RecordsAiRuns` contracts.
+- Admin panel: `Filament\MagicStarterPlugin` (`horizon()`, `pulse()`, `telescope()`), `Filament\Concerns\AuthorizesAdminPanel`.
+- Routes: `src/routes/api.php` (the contract with `magic_starter`), `support.php`, `social.php`, `newsletter.php`, `webhooks.php` (Stripe and RevenueCat).
+- Commands: `magic-starter:install`, `magic-starter:purge-deleted-users`, `magic-starter:purge-trashed-teams`, `magic-starter:mail:doctor`, `magic-starter:mail:prune-sends`; with their feature `magic-starter:audit:prune`, `magic-starter:ai-runs:prune`, `billing:manifest`, `billing:doctor`, `billing:reconcile`, `magic-starter:billing:prune`, `magic-starter:billing:expire-grants`, `magic-starter:support:sweep`, `magic-starter:support:doctor`, `magic-starter:support-articles:prune-images`; with Filament `magic-starter:filament:install`, `magic-starter:filament:eject`.
+
+## Platforms
+
+- PHP ^8.2 with `ext-gd` and `ext-exif`; Laravel 12.32 or later, or 13. CI runs Laravel 12 on PHP 8.2, 8.3 and 8.4, the Filament 4 and 5 legs, a leg without Filament, Horizon, Pulse and Telescope, and the support tests on PostgreSQL.
+- Filament, Horizon, Pulse and Telescope are optional; their commands and panel tools exist only where the package is installed.
+
+## Rules for agents
+
+- Import from `AnilcanCakir\MagicStarter\`; use `Features`, `MagicStarter`, the contracts, traits and `MigrationHelper` as the public surface.
+- Gate code on `Features::enabled()` or a `has...Features()` check: a feature that is off registers none of its routes or commands, so its endpoints answer 404.
+- Change behaviour by binding your class to a `Contracts\*` interface in a service provider's `register()`; do not edit the package's actions or controllers. `vendor:publish --tag=magic-starter-stubs` copies skeletons that throw until implemented.
+- Resolve models through `MagicStarter::userModel()`, `teamModel()` and `billableModel()`, never a hard-coded class.
+- Build columns that reference package tables with `MigrationHelper`, never `$table->id()` or `foreignId()`.
+- The package routes join no middleware group; list the host's middleware in `magic-starter.route_middleware` (empty by default).
+- Change `src/routes/api.php` and the `magic_starter` client together; the request and response shapes are a shared contract.
+- Keep `MAGIC_STARTER_EXTERNAL_ID_PREFIX` (default `user_`) equal to the client's `magic_starter.notifications.external_id_prefix`: OneSignal accepts a mismatch and delivers to nobody.
+- Bind `SendsOtpCodes` before `phone-otp` serves real users: the default `LogOtpProvider` only logs the code.
+- Schedule `magic-starter:purge-deleted-users`, and `magic-starter:purge-trashed-teams` with `restorable-teams`: the package registers them and schedules neither.
+- Never run `vendor:publish --tag=cashier-migrations`: they target `users` with integer keys. The package's replacements follow `billing.billable` (`user` or `team`) and `use_uuids`.
+- Laravel Boost installs the `magic-starter-development` skill from `resources/boost/skills/magic-starter-development`; read it before extending the package.
+
+## Docs
+
+- [Installation](https://anilcancakir.com/magic-starter-laravel/docs/getting-started/installation.md): the install command, its options and what it publishes.
+- [Configuration](https://anilcancakir.com/magic-starter-laravel/docs/getting-started/configuration.md): every config key and the feature toggles.
+- [Authentication](https://anilcancakir.com/magic-starter-laravel/docs/basics/authentication.md): login, registration, password reset, guest, OTP, email verification.
+- [Social login](https://anilcancakir.com/magic-starter-laravel/docs/basics/social-login.md): the ID token and browser flows, connect and disconnect.
+- [Sign-in handoff](https://anilcancakir.com/magic-starter-laravel/docs/basics/sign-in-handoff.md): minting and exchanging a one-time sign-in code.
+- [Two-factor authentication](https://anilcancakir.com/magic-starter-laravel/docs/basics/two-factor-authentication.md): enrolment, confirmation, recovery codes, the challenge.
+- [Profile](https://anilcancakir.com/magic-starter-laravel/docs/basics/profile.md): profile, password, photos, sessions.
+- [Account deletion](https://anilcancakir.com/magic-starter-laravel/docs/basics/account-deletion.md): scheduling, the grace period, the purge.
+- [Teams](https://anilcancakir.com/magic-starter-laravel/docs/basics/teams.md): teams, invitations, roles, restorable delete.
+- [Notifications](https://anilcancakir.com/magic-starter-laravel/docs/basics/notifications.md): listing, read state, preferences, push.
+- [Billing](https://anilcancakir.com/magic-starter-laravel/docs/basics/billing.md): the catalogue, both rails, trials, campaigns, the agent commands.
+- [Releases](https://anilcancakir.com/magic-starter-laravel/docs/basics/releases.md): release notes and the public endpoint.
+- [Support desk](https://anilcancakir.com/magic-starter-laravel/docs/basics/support.md): conversations, the AI desk, the knowledge base.
+- [Support AI tools](https://anilcancakir.com/magic-starter-laravel/docs/basics/support-tools.md): writing and registering a support tool.
+- [Support proposals](https://anilcancakir.com/magic-starter-laravel/docs/basics/support-proposals.md): subscription changes staff approve.
+- [Admin panel](https://anilcancakir.com/magic-starter-laravel/docs/basics/admin-panel.md): the Filament plugin, the gate, ejecting a resource.
+- [Audit trail](https://anilcancakir.com/magic-starter-laravel/docs/basics/audit.md): recording, redaction, pruning.
+- [AI run log](https://anilcancakir.com/magic-starter-laravel/docs/guides/ai-runs.md): recording model calls, cost, masking, pruning.
+- [AI prompt overrides](https://anilcancakir.com/magic-starter-laravel/docs/guides/ai-prompts.md): registering prompts and the admin workbench.
+- [Mail on OneSignal](https://anilcancakir.com/magic-starter-laravel/docs/guides/mail-onesignal.md): the transports, routing a mail class, the doctor.
+- [Action contracts](https://anilcancakir.com/magic-starter-laravel/docs/architecture/action-contracts.md): overriding business logic.
+- [Models](https://anilcancakir.com/magic-starter-laravel/docs/architecture/models.md): dynamic resolution, UUID support, traits.
+- [Service provider](https://anilcancakir.com/magic-starter-laravel/docs/architecture/service-provider.md): bindings, routes, rate limiters.
+
+## Links
+
+- [README](https://github.com/anilcancakir/magic-starter-laravel/blob/master/README.md): install, every capability, the agent rules table.
+- [Packagist](https://packagist.org/packages/anilcancakir/magic-starter-laravel): versions and install stats.
+- [Changelog](https://github.com/anilcancakir/magic-starter-laravel/blob/master/CHANGELOG.md): what changed in each version.
+- [Source](https://github.com/anilcancakir/magic-starter-laravel): issues and pull requests.
+- [magic_starter](https://pub.dev/packages/magic_starter): the Flutter client of these routes.
