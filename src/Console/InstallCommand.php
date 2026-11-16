@@ -99,6 +99,9 @@ class InstallCommand extends Command
         'add_deletion_columns_to_users_table.php',
         'lowercase_user_emails.php',
         'create_magic_starter_mail_sends_table.php',
+        // Spans several features' tables and skips each one that is absent, so it
+        // ships with every install. On a fresh one it finds nothing to rewrite.
+        'rewrite_stored_class_names.php',
     ];
 
     /** @var array<string, list<string>> Feature key → associated migration files. */
