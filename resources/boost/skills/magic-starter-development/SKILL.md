@@ -82,6 +82,7 @@ MagicStarter::useTeamModel(\App\Models\Team::class);
 | Sessions | `Features::hasSessionFeatures()` | `sessions` |
 | Social login | `Features::hasSocialLoginFeatures()` | `social-login` |
 | Newsletter | `Features::hasNewsletterSubscriptionFeatures()` | `newsletter-subscription` |
+| Analytics preference | `Features::hasAnalyticsPreferenceFeatures()` | `analytics-preference` |
 | Extended profile | `Features::hasExtendedProfileFeatures()` | `extended-profile` |
 | Notifications | `Features::hasNotificationFeatures()` | `notifications` |
 | Two-factor auth | `Features::hasTwoFactorAuthenticationFeatures()` | `two-factor-authentication` |

@@ -72,6 +72,7 @@ Features follow a toggle pattern inspired by Jetstream. Enable features by addin
     \AnilcanCakir\MagicStarter\Features::sessions(),
     \AnilcanCakir\MagicStarter\Features::socialLogin(),
     \AnilcanCakir\MagicStarter\Features::newsletterSubscription(),
+    \AnilcanCakir\MagicStarter\Features::analyticsPreference(),
     \AnilcanCakir\MagicStarter\Features::extendedProfile(),
     \AnilcanCakir\MagicStarter\Features::notifications(),
     \AnilcanCakir\MagicStarter\Features::twoFactorAuthentication(),
@@ -94,6 +95,7 @@ The main features and their toggle methods:
 | `sessions` | `Features::sessions()` | `Features::hasSessionFeatures()` | Active session listing and revocation |
 | `social-login` | `Features::socialLogin()` | `Features::hasSocialLoginFeatures()` | OAuth-based social login via Socialite |
 | `newsletter-subscription` | `Features::newsletterSubscription()` | `Features::hasNewsletterSubscriptionFeatures()` | Newsletter opt-in subscription management |
+| `analytics-preference` | `Features::analyticsPreference()` | `Features::hasAnalyticsPreferenceFeatures()` | Account-level analytics opt-out at `GET`/`PUT user/analytics` ([details](../basics/profile.md#analytics-preference)) |
 | `extended-profile` | `Features::extendedProfile()` | `Features::hasExtendedProfileFeatures()` | Extended profile fields (phone, timezone, language, locale) |
 | `notifications` | `Features::notifications()` | `Features::hasNotificationFeatures()` | Notification preference management |
 | `two-factor-authentication` | `Features::twoFactorAuthentication()` | `Features::hasTwoFactorAuthenticationFeatures()` | TOTP-based two-factor authentication with recovery codes |
@@ -121,6 +123,7 @@ Features::hasProfilePhotoFeatures();                 // bool
 Features::hasSessionFeatures();                      // bool
 Features::hasSocialLoginFeatures();                  // bool
 Features::hasNewsletterSubscriptionFeatures();       // bool
+Features::hasAnalyticsPreferenceFeatures();          // bool
 Features::hasExtendedProfileFeatures();              // bool
 Features::hasNotificationFeatures();                 // bool
 Features::hasTwoFactorAuthenticationFeatures();      // bool

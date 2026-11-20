@@ -66,6 +66,14 @@ class Features
     }
 
     /**
+     * Enable the analytics preference feature: an account-level opt-out from usage analytics.
+     */
+    public static function analyticsPreference(): string
+    {
+        return 'analytics-preference';
+    }
+
+    /**
      * Enable the extended profile feature (phone, timezone, language, locale).
      */
     public static function extendedProfile(): string
@@ -287,6 +295,14 @@ class Features
     public static function hasNewsletterSubscriptionFeatures(): bool
     {
         return static::enabled(static::newsletterSubscription());
+    }
+
+    /**
+     * Determine whether the analytics preference feature is enabled.
+     */
+    public static function hasAnalyticsPreferenceFeatures(): bool
+    {
+        return static::enabled(static::analyticsPreference());
     }
 
     /**

@@ -50,6 +50,7 @@ Each flag is a static method on `Features` returning its string; list it in `con
 | `Features::phoneOtp()` | `'phone-otp'` | `Features::hasPhoneOtpFeatures()` |
 | `Features::emailVerification()` | `'email-verification'` | `Features::hasEmailVerificationFeatures()` |
 | `Features::newsletterSubscription()` | `'newsletter-subscription'` | `Features::hasNewsletterSubscriptionFeatures()` |
+| `Features::analyticsPreference()` | `'analytics-preference'` | `Features::hasAnalyticsPreferenceFeatures()` |
 | `Features::timezones()` | `'timezones'` | `Features::hasTimezoneFeatures()` |
 | `Features::billing()` | `'billing'` | `Features::hasBillingFeatures()` |
 | `Features::audit()` | `'audit'` | `Features::hasAuditFeatures()` |

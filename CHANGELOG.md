@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- **An `analytics-preference` feature stores an account-level analytics opt-out.** With `Features::analyticsPreference()` on, `GET user/analytics` answers `{"opted_out": bool}` from the new `users.analytics_opt_out` column (null reads false), and `PUT user/analytics` takes a required boolean `opted_out`, stores it and answers in the same shape (422 for a missing or non-boolean value, 401 without a session). The package only records the choice; the client decides what to stop sending. The `add_analytics_opt_out_to_users_table` migration is offered by `magic-starter:install` and skips an application that already has the column. (`src/Features.php`, `src/Http/Controllers/AnalyticsPreferenceController.php`, `src/routes/api.php`, `src/Console/InstallCommand.php`, `database/migrations/add_analytics_opt_out_to_users_table.php`, `config/magic-starter.php`, `doc/`)
+
 ## [1.0.3] - 2026-11-16
 
 ### Fixed

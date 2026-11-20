@@ -1,6 +1,6 @@
 # Profile Management
 
-The JSON endpoints a signed-in user manages their own profile with: details, password, photo, account deletion, email verification, sessions and the newsletter, plus the public settings API.
+The JSON endpoints a signed-in user manages their own profile with: details, password, photo, account deletion, email verification, sessions, the newsletter and the analytics opt-out, plus the public settings API.
 
 - [Quick Reference](#quick-reference)
 - [Update Profile](#update-profile)
@@ -16,6 +16,7 @@ The JSON endpoints a signed-in user manages their own profile with: details, pas
   - [One-Click Unsubscribe](#newsletter-unsubscribe)
   - [Marketing Audience](#newsletter-audience)
   - [Email Changes and Deletion](#newsletter-email-changes)
+- [Analytics Preference](#analytics-preference)
 - [Session Management](#session-management)
 - [Extended Profile](#extended-profile)
 - [Publishing Your Own Columns](#publishing-your-own-columns)
@@ -37,6 +38,7 @@ All endpoints are JSON-only (no views or redirects) and sit under the configured
 | `POST email/verification-notification` | `email-verification` | Sends a new verification link. |
 | `GET settings` | no auth | The public settings the client reads before sign-in. |
 | `GET user/newsletter`, `PUT user/newsletter` | `newsletter-subscription` | Reads or changes the subscription. |
+| `GET user/analytics`, `PUT user/analytics` | `analytics-preference` | Reads or changes the analytics opt-out. |
 | `GET sessions`, `DELETE sessions/{token}`, `DELETE sessions/other` | `sessions` | Lists and revokes sessions. |
 
 <a name="update-profile"></a>
@@ -527,6 +529,30 @@ The package sends no campaigns itself.
 The subscription follows its user. When a user's email changes through the profile action, any `$user->update()` or the admin panel's user form, the row's address is rewritten to match. Deleting the account deletes the row with its audit rows, see [Account Deletion](account-deletion.md).
 
 A row written by address alone, as the previous release did, is claimed by the user whose address matches the first time that user reads or changes their subscription, and keeps working while old and new code run side by side during a deploy.
+
+---
+
+<a name="analytics-preference"></a>
+## Analytics Preference
+
+Available when the `analytics-preference` feature is enabled. It stores one boolean on the user's own row, `users.analytics_opt_out`, so the choice follows the account across devices. The package only records the choice: the client decides what to stop sending.
+
+| Method and URI | Controller |
+|:---------------|:-----------|
+| `GET user/analytics` | `AnalyticsPreferenceController@show` |
+| `PUT user/analytics` | `AnalyticsPreferenceController@update` |
+
+Both answer `200` with the same shape, and `401` without a session:
+
+```json
+{
+    "opted_out": false
+}
+```
+
+`PUT` takes a required boolean `opted_out` and answers `422` for a missing or non-boolean value. A `null` column reads as `false`.
+
+The `add_analytics_opt_out_to_users_table` migration adds the column with a default of `false`. It checks for the column first, so an application that already has `analytics_opt_out` on `users` keeps its own definition and data. The update writes the column with `forceFill()`, so the host's `User` model does not have to list it in `$fillable`.
 
 ---
 
