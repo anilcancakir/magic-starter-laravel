@@ -18,14 +18,13 @@ return new class extends Migration
         });
     }
 
+    /**
+     * Leaves the column in place: up() skips a column the application already had, so a rollback
+     * cannot tell the application's column from this migration's, and dropping it would delete
+     * the application's data. A re-run of up() finds the column and changes nothing.
+     */
     public function down(): void
     {
-        if (! Schema::hasColumn('users', 'analytics_opt_out')) {
-            return;
-        }
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('analytics_opt_out');
-        });
+        //
     }
 };
