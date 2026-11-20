@@ -10,6 +10,7 @@
 
 use AnilcanCakir\MagicStarter\Contracts\ReportsUsage;
 use AnilcanCakir\MagicStarter\Features;
+use AnilcanCakir\MagicStarter\Http\Controllers\AnalyticsPreferenceController;
 use AnilcanCakir\MagicStarter\Http\Controllers\AuthController;
 use AnilcanCakir\MagicStarter\Http\Controllers\BillingController;
 use AnilcanCakir\MagicStarter\Http\Controllers\EmailVerificationController;
@@ -288,6 +289,11 @@ Route::prefix((string) config('magic-starter.route_prefix', ''))
             if (Features::hasNewsletterSubscriptionFeatures()) {
                 Route::get('user/newsletter', [NewsletterController::class, 'show']);
                 Route::put('user/newsletter', [NewsletterController::class, 'update']);
+            }
+
+            if (Features::hasAnalyticsPreferenceFeatures()) {
+                Route::get('user/analytics', [AnalyticsPreferenceController::class, 'show']);
+                Route::put('user/analytics', [AnalyticsPreferenceController::class, 'update']);
             }
 
             if (Features::hasBillingFeatures()) {

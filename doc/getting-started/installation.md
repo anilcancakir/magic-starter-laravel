@@ -126,7 +126,7 @@ php artisan magic-starter:install \
 | `--frontend-url=` | Frontend application URL for email links |
 | `--force` | Overwrite existing published files |
 
-The `--features` option accepts: `two-factor-authentication`, `teams`, `profile-photos`, `sessions`, `social-login`, `newsletter-subscription`, `extended-profile`, `notifications`, `guest-auth`, `phone-otp`, `email-verification`, `timezones`, `billing`, `audit`, `support`, `releases`, `campaigns`, `ai-runs`, `ai-prompts`. A name outside that list is dropped silently.
+The `--features` option accepts: `two-factor-authentication`, `teams`, `profile-photos`, `sessions`, `social-login`, `newsletter-subscription`, `analytics-preference`, `extended-profile`, `notifications`, `guest-auth`, `phone-otp`, `email-verification`, `timezones`, `billing`, `audit`, `support`, `releases`, `campaigns`, `ai-runs`, `ai-prompts`. A name outside that list is dropped silently.
 
 When `--all` is passed, every feature is enabled regardless of `--features`. With neither flag and no terminal to prompt on, every feature is enabled as well.
 

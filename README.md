@@ -75,6 +75,7 @@ Every feature is off until its key is in the `features` array of `config/magic-s
 | `social-login` | Google, Apple, GitHub and Microsoft sign-in, connect and disconnect | yes |
 | `sign-in-handoff` | A single-use code that moves a signed-in session to another origin | no, uncomment it |
 | `newsletter-subscription` | The caller's newsletter toggle and a public unsubscribe link | yes |
+| `analytics-preference` | The caller's account-level analytics opt-out, read and set at `user/analytics` | yes |
 | `extended-profile` | Phone, timezone and locale on the profile | yes |
 | `notifications` | Listing, unread count, mark read, delete and the preference matrix | yes |
 | `onesignal` | The OneSignal push channel, and with `notifications` the device push-state routes | no, uncomment it |

@@ -44,6 +44,7 @@ return [
         // \AnilcanCakir\MagicStarter\Features::socialLogin(),
         // \AnilcanCakir\MagicStarter\Features::signInHandoff(),
         // \AnilcanCakir\MagicStarter\Features::newsletterSubscription(),
+        // \AnilcanCakir\MagicStarter\Features::analyticsPreference(),
         // \AnilcanCakir\MagicStarter\Features::extendedProfile(),
         // \AnilcanCakir\MagicStarter\Features::notifications(),
         // \AnilcanCakir\MagicStarter\Features::onesignal(),

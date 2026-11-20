@@ -31,7 +31,7 @@ class InstallCommand extends Command
      */
     protected $signature = 'magic-starter:install
         {--all : Install all features without prompting}
-        {--features=* : Features to install (teams, profile-photos, sessions, social-login, newsletter-subscription, extended-profile, notifications, email-verification, guest-auth, phone-otp, timezones, billing, audit, ai-runs, ai-prompts)}
+        {--features=* : Features to install (teams, profile-photos, sessions, social-login, newsletter-subscription, analytics-preference, extended-profile, notifications, email-verification, guest-auth, phone-otp, timezones, billing, audit, ai-runs, ai-prompts)}
         {--uuid : Use UUID primary keys}
         {--no-uuid : Use auto-incrementing integer primary keys}
         {--route-prefix= : Route prefix for package routes}
@@ -53,6 +53,7 @@ class InstallCommand extends Command
         'sessions' => 'Session management (device tracking)',
         'social-login' => 'Social login (OAuth via Socialite, routes only)',
         'newsletter-subscription' => 'Newsletter subscription',
+        'analytics-preference' => 'Analytics preference (account-level usage data opt-out)',
         'extended-profile' => 'Extended profile (phone, timezone, locale)',
         'notifications' => 'Notification preferences',
         'guest-auth' => 'Guest authentication (anonymous users)',
@@ -76,6 +77,7 @@ class InstallCommand extends Command
         'sessions' => 'sessions',
         'social-login' => 'socialLogin',
         'newsletter-subscription' => 'newsletterSubscription',
+        'analytics-preference' => 'analyticsPreference',
         'extended-profile' => 'extendedProfile',
         'notifications' => 'notifications',
         'guest-auth' => 'guestAuth',
@@ -169,6 +171,9 @@ class InstallCommand extends Command
         'newsletter-subscription' => [
             'create_newsletter_subscribers_table.php',
             'add_consent_to_newsletter_subscribers_table.php',
+        ],
+        'analytics-preference' => [
+            'add_analytics_opt_out_to_users_table.php',
         ],
         'timezones' => [
             'add_timezone_to_users_table.php',
