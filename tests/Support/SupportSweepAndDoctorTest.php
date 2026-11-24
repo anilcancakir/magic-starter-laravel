@@ -26,6 +26,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * The two commands that keep the AI desk honest: the sweeper that hands a
@@ -114,15 +115,68 @@ class SupportSweepAndDoctorTest extends TestCase
 
     public function test_the_provider_schedules_the_sweeper_every_minute(): void
     {
-        $event = collect(app(Schedule::class)->events())->first(
-            fn (ScheduledEvent $event): bool => str_contains(
-                (string) $event->command,
-                SweepSupportConversationsCommand::NAME,
-            ),
-        );
+        $event = $this->scheduledSweeper();
 
         $this->assertNotNull($event);
         $this->assertSame('* * * * *', $event->expression);
+    }
+
+    public function test_the_scheduled_sweeper_runs_only_while_a_stranded_turn_waits(): void
+    {
+        $event = $this->scheduledSweeper();
+
+        $this->assertFalse($event->filtersPass(app()), 'An empty desk spawns no process.');
+
+        Carbon::setTestNow('2026-10-13 10:00:00');
+        $this->pendingConversation(answered: true);
+        $stale = $this->pendingConversation();
+        Carbon::setTestNow('2026-10-13 10:04:00');
+
+        $this->assertFalse($event->filtersPass(app()), 'A turn younger than the threshold is not stranded yet.');
+
+        Carbon::setTestNow('2026-10-13 10:06:00');
+
+        $this->assertTrue($event->filtersPass(app()), 'A stranded turn lets the sweep run.');
+
+        $this->artisan(SweepSupportConversationsCommand::NAME)->assertSuccessful();
+
+        $this->assertSame(SupportConversationStatus::OPEN, $stale->refresh()->status);
+        $this->assertFalse($event->filtersPass(app()), 'Once handed off, nothing waits.');
+    }
+
+    public function test_the_scheduled_sweeper_reads_the_same_threshold_as_the_command(): void
+    {
+        config()->set('magic-starter.support.ai.sweep_after_minutes', 30);
+        Carbon::setTestNow('2026-10-13 10:00:00');
+        $this->pendingConversation();
+        Carbon::setTestNow('2026-10-13 10:29:00');
+
+        $this->assertFalse($this->scheduledSweeper()->filtersPass(app()));
+
+        Carbon::setTestNow('2026-10-13 10:30:00');
+
+        $this->assertTrue($this->scheduledSweeper()->filtersPass(app()));
+    }
+
+    public function test_the_scheduled_sweeper_is_skipped_while_the_ai_columns_are_not_migrated(): void
+    {
+        $this->artisan('migrate:rollback', [
+            '--path' => __DIR__ . '/../../database/migrations/add_ai_columns_to_support_tables.php',
+            '--realpath' => true,
+        ]);
+
+        $this->assertFalse(Schema::hasColumn('support_conversations', 'last_customer_message_id'));
+        $this->assertFalse($this->scheduledSweeper()->filtersPass(app()));
+    }
+
+    public function test_the_scheduled_sweeper_runs_when_the_guard_cannot_read_the_desk(): void
+    {
+        Schema::drop('support_messages');
+
+        $this->assertTrue(
+            $this->scheduledSweeper()->filtersPass(app()),
+            'A failed read must not abort schedule:run; the sweep reports its own failure.',
+        );
     }
 
     public function test_the_doctor_passes_when_no_responder_is_bound(): void
@@ -200,6 +254,16 @@ class SupportSweepAndDoctorTest extends TestCase
                 return SupportAiPool::FREE;
             }
         });
+    }
+
+    private function scheduledSweeper(): ?ScheduledEvent
+    {
+        return collect(app(Schedule::class)->events())->first(
+            fn (ScheduledEvent $event): bool => str_contains(
+                (string) $event->command,
+                SweepSupportConversationsCommand::NAME,
+            ),
+        );
     }
 
     private function pendingConversation(bool $answered = false): SupportConversation
