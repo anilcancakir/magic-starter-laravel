@@ -247,7 +247,7 @@ With the defaults: `retry_after` above 120, `lock_seconds` 120, supervisor `time
 
 ### Sweep and Doctor
 
-`php artisan magic-starter:support:sweep` hands every pending conversation whose newest customer message is still unanswered after `support.ai.sweep_after_minutes` to staff as `unavailable`, so a job that died or never reached a worker strands nobody. The package schedules it every minute while support is on, and the scheduler spawns the command only while a stranded turn waits: a quiet desk costs one read in the scheduler's own process and no PHP process. Run by hand, the command always checks. It skips with a line when the AI columns are not migrated.
+`php artisan magic-starter:support:sweep` hands every pending conversation whose newest customer message is still unanswered after `support.ai.sweep_after_minutes` to staff as `unavailable`, so a job that died or never reached a worker strands nobody. The package schedules it every minute while support is on, and the scheduler spawns the command only while a stranded turn waits: a quiet desk costs two cheap reads in the scheduler's own process and no PHP process. Run by hand, the command always checks. It skips with a line when the AI columns are not migrated.
 
 `php artisan magic-starter:support:doctor` fails when the responder is bound and no Horizon supervisor in any environment lists `support.ai.queue`. A supervisor's options are its environment entry over the `horizon.defaults` entry of the same name, and `queue` may be a list or a comma-separated string. With nothing bound it reports that the AI desk is off. Run it after every deploy.
 

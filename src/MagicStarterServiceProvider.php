@@ -1016,7 +1016,7 @@ class MagicStarterServiceProvider extends ServiceProvider
      * one conversation; the handoff is idempotent anyway, so a fleet that
      * cannot share a lock only repeats an update that changes nothing.
      *
-     * `when()` keeps the minute-by-minute cost at one indexed read: the command
+     * `when()` keeps the minute-by-minute cost at two cheap reads: the command
      * is spawned as its own PHP process, about half a second of CPU each time,
      * so it is spawned only while
      * {@see SweepSupportConversationsCommand::hasStranded()} finds a turn to

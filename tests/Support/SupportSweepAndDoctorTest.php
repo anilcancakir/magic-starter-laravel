@@ -165,6 +165,7 @@ class SupportSweepAndDoctorTest extends TestCase
             '--realpath' => true,
         ]);
 
+        $this->assertFalse(Schema::hasColumn('support_conversations', 'last_customer_message_id'));
         $this->assertFalse($this->scheduledSweeper()->filtersPass(app()));
     }
 
