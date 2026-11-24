@@ -12,6 +12,7 @@ use DateTimeInterface;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 
 /**
@@ -25,7 +26,10 @@ use Illuminate\Support\Facades\Schema;
  * that answers the turn while the sweep runs keeps its answer and the sweep
  * changes nothing.
  *
- * Scheduled every minute by the provider while support is on. A host that has
+ * Scheduled every minute by the provider while support is on, behind
+ * {@see self::hasStranded()}: the scheduler spawns a PHP process for the
+ * command only when a stranded turn waits, because on a quiet desk that process
+ * costs about half a second of CPU a minute and finds nothing. A host that has
  * not run the AI columns migration yet is skipped with a line.
  */
 class SweepSupportConversationsCommand extends Command
@@ -52,16 +56,15 @@ class SweepSupportConversationsCommand extends Command
      */
     public function handle(SupportHandoff $desk): int
     {
-        if (! Schema::hasColumn((new SupportConversation)->getTable(), 'last_customer_message_id')) {
+        if (! self::aiColumnsMigrated()) {
             $this->components->info('Skipped the support sweep: the AI desk columns are not migrated.');
 
             return self::SUCCESS;
         }
 
-        $cutoff = now()->subMinutes((int) config('magic-starter.support.ai.sweep_after_minutes', 5));
         $handedOff = 0;
 
-        $this->stranded($cutoff)
+        self::stranded(self::cutoff())
             ->lazyById(self::CHUNK_SIZE)
             ->each(function (SupportConversation $conversation) use ($desk, &$handedOff): void {
                 $won = $desk->handoff(
@@ -79,11 +82,39 @@ class SweepSupportConversationsCommand extends Command
     }
 
     /**
+     * Whether a stranded turn waits right now: the gate the schedule puts in front of the command.
+     *
+     * Reads the same columns and the same cutoff the command hands off by, so
+     * the gate never skips a turn the command would take. It runs inside
+     * `schedule:run` itself, where an exception would end the tick for every
+     * task after it; a database error therefore lets the command run, and the
+     * command reports the failure in its own process.
+     */
+    public static function hasStranded(): bool
+    {
+        try {
+            return self::aiColumnsMigrated() && self::stranded(self::cutoff())->exists();
+        } catch (QueryException) {
+            return true;
+        }
+    }
+
+    private static function aiColumnsMigrated(): bool
+    {
+        return Schema::hasColumn((new SupportConversation)->getTable(), 'last_customer_message_id');
+    }
+
+    private static function cutoff(): DateTimeInterface
+    {
+        return now()->subMinutes((int) config('magic-starter.support.ai.sweep_after_minutes', 5));
+    }
+
+    /**
      * Pending conversations whose unanswered newest customer message is older than the cutoff.
      *
      * @return Builder<SupportConversation>
      */
-    private function stranded(DateTimeInterface $cutoff): Builder
+    private static function stranded(DateTimeInterface $cutoff): Builder
     {
         $conversations = (new SupportConversation)->getTable();
         $messages = (new SupportMessage)->getTable();

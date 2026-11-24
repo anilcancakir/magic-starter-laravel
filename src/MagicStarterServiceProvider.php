@@ -1015,6 +1015,13 @@ class MagicStarterServiceProvider extends ServiceProvider
      * minutes. `withoutOverlapping()` and `onOneServer()` keep two sweeps off
      * one conversation; the handoff is idempotent anyway, so a fleet that
      * cannot share a lock only repeats an update that changes nothing.
+     *
+     * `when()` keeps the minute-by-minute cost at one indexed read: the command
+     * is spawned as its own PHP process, about half a second of CPU each time,
+     * so it is spawned only while
+     * {@see SweepSupportConversationsCommand::hasStranded()} finds a turn to
+     * hand off. The gate runs in the scheduler's own process and shares the
+     * command's predicate, so it cannot skip a turn the command would take.
      */
     private function scheduleSupportSweep(): void
     {
@@ -1022,6 +1029,7 @@ class MagicStarterServiceProvider extends ServiceProvider
             $schedule->command(SweepSupportConversationsCommand::NAME)
                 ->name(SweepSupportConversationsCommand::NAME)
                 ->everyMinute()
+                ->when(static fn (): bool => SweepSupportConversationsCommand::hasStranded())
                 ->withoutOverlapping()
                 ->onOneServer();
         });
